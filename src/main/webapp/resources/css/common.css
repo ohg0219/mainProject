@@ -7,11 +7,15 @@ body {
 li {
 	list-style: none;
 }
+ul{
+	padding: 0;
+}
 
 .menu li, .condition li {
 	text-align: center;
 	width: 90px;
 }
+
 
 li a {
 	text-decoration: none;

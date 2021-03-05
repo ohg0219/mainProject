@@ -10,10 +10,25 @@ public class UserController {
 	 * 메인페이지로 이동
 	 * @return
 	 */
-	@RequestMapping(value = {"/{page}.do"})
-	public String mainView(@PathVariable String page) {
-		System.out.println(page+"로");
-		return "/user/"+page;
+	@RequestMapping(value = {"main.do"})
+	public String mainView() {
+		return "/user/main";
+	}
+	/**
+	 * 로그인페이지로 이동
+	 * @return
+	 */
+	@RequestMapping(value = {"/login.do"})
+	public String loginView() {
+		return "/user/login";
+	}
+	/**
+	 * 회원가입페이지로 이동
+	 * @return
+	 */
+	@RequestMapping(value = {"/register.do"})
+	public String registerView() {
+		return "/user/register";
 	}
 	/**
 	 * 상품 리스트 페이지로 이동

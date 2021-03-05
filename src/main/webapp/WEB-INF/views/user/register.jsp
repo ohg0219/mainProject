@@ -53,7 +53,7 @@
 	padding: 7px 8px;
 	font-weight: normal;
 }
-.address{
+.address_{
 	all:unset;
 	margin-bottom: 5px;
 	width: 100%;
@@ -116,6 +116,8 @@
 		$(".address_btn").on("click",function(e){
 			e.preventDefault();
 		});
+		$("input[name=id]").focus();
+		
 	});
 
 </script>
@@ -126,7 +128,7 @@
 		<div class="content">
 			<div class="register_wrap">
 				<div class="register" >
-					<form action="register.do" method="post">
+					<form action="regist.do" method="post">
 						<p class="box_title">SIGN UP</p>
 						<ul>
 							<li>ID *</li>
@@ -148,8 +150,8 @@
 								<input class="zipcode" type="text" name="zipcode">
 								<button class="address_btn" >우편번호</button>	
 							</li>
-							<li><input class="address" type="text" name="address1"></li>
-							<li style="height: 60px;"><input class="address" type="text" name="address2"></li>
+							<li><input class="address_" type="text" name="address1"></li>
+							<li style="height: 60px;"><input class="address_" type="text" name="address2"></li>
 							<li>휴대전화 *</li>
 							<li class="input_li">
 								<select class="input_tel" name="phone1">
