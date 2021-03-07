@@ -1,4 +1,4 @@
-package com.one.thisisthat.user.controller;
+package com.thisisthat.user.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +40,7 @@ public class UserController {
 		System.out.println(category);
 		return "/user/itemList/"+category;
 	}
+	
 	
 	
 	

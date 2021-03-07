@@ -4,11 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.one.thisisthat.user.vo.UserVO" alias="UserVO"/>		
+		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>		
 	</typeAliases>
 	
 	<mappers>
 		<!-- 매퍼파일 -->
-		<mapper resource="mappings/user-mapping.xml" />
+		<mapper resource="mappings/user/user-mapping.xml" />
+		<mapper resource="mappings/user/user-register-mapping.xml"/>
 	</mappers>
 </configuration>

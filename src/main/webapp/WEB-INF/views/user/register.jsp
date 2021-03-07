@@ -24,7 +24,7 @@
 	font-weight: bold;
 }
 .input_li{
-	height: 60px;
+	height: 70px;
 }
 .input{
 	all:unset;
@@ -40,6 +40,7 @@
 .register_comment{
 	color: red;
 	font-weight: normal;
+	display: block;
 }
 .zipcode{
 	all:unset;
@@ -112,13 +113,91 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".inputId").focus();
 		$(".address_btn").on("click",function(e){
 			e.preventDefault();
 		});
 		$("input[name=id]").focus();
 		
-	});
+		$(".register_btn").on("click",function(){
+			if($("input[name=id]").val().trim() == ''){
+				$("input[name=id]").focus();
+				alert("아이디를 입력해주세요");
+				return false;
+			}
+			if($("input[name=password]").val().trim() == ''){
+				$("input[name=password]").focus();
+				alert("비밀번호를 입력해주세요");
+				return false;
+			}
+			if($("input[name=comfirmPassword]").val().trim() == ''){
+				$("input[name=comfirmPassword]").focus();
+				alert("비밀번호 확인을 입력해주세요");
+				return false;
+			}
+			if($("input[name=name]").val().trim() == ''){
+				$("input[name=name]").focus();
+				alert("이름을 입력해주세요");
+				return false;
+			}
+			if($("input[name=nickName]").val().trim() == ''){
+				$("input[name=nickName]").focus();
+				alert("닉네임을 입력해주세요");
+				return false;
+			}
+			if($("input[name=phone2]").val().trim() == ''){
+				$("input[name=phone2]").focus();
+				alert("전화번호를 입력해주세요");
+				return false;
+			}
+			if($("input[name=phone3]").val().trim() == ''){
+				$("input[name=phone3]").focus();
+				alert("전화번호를 입력해주세요");
+				return false;
+			}
+			if($("input[name=email]").val().trim() == ''){
+				$("input[name=email]").focus();
+				alert("이메일을 입력해주세요");
+				return false;
+			}
+			if($("input[name=phone2]").val().trim() == ''){
+				$("input[name=phone2]").focus();
+				alert("전화번호를 입력해주세요");
+				return false;
+			}
+			if($("input[name=terms]").is(":checked")==false){
+				alert("이용약관에 대한 동의를 해주세요");
+				return false;
+			}
+			if($("input[name=privacyPolicy]").is(":checked")==false){
+				alert("개인정보 수집 및 이용에 대한 동의를 해주세요");
+				return false;
+			}
+			return true;
+		});//end regist check
+		
+		// 아이디 유효성 검사(1 = 중복 / 1 != 중복x)
+		$("input[name=id]").blur(function() {
+			var user_id = $('input[name=id]').val();
+			$.ajax({
+				url : '/user/idCheck.do?userId='+ user_id,
+				type : 'get',
+				success : function(data) {
+					console.log("1 = 중복o / 0 = 중복x : "+ data);							
+					if (data==1) {
+						$("input[name=id]").focus();
+						$("#idCheck").text("사용중인 아이디입니다");
+						$("#idCheck").css("color", "black");
+					} else {
+						$("#idCheck").text("");
+					}
+				},
+				error : function(data) {
+						console.log("실패");
+				}
+			});
+		});//end idCheck
+		
+	});//end document ready function
 
 </script>
 </head>
@@ -128,13 +207,14 @@
 		<div class="content">
 			<div class="register_wrap">
 				<div class="register" >
-					<form action="regist.do" method="post">
+					<form action="regist.do" method="post" id="registerForm">
 						<p class="box_title">SIGN UP</p>
 						<ul>
 							<li>ID *</li>
 							<li class="input_li">
 								<input class="input" type="text" name="id">
 								<span class="register_comment">아이디 제약사항</span>
+								<span id="idCheck"></span>
 							</li>
 							<li>PASSWORD *</li>
 							<li class="input_li">
@@ -142,9 +222,14 @@
 								<span class="register_comment">비번 제약사항</span>
 							</li>
 							<li>PASSWORD 확인 *</li>
-							<li class="input_li"><input class="input" type="password" name="comfirmPassword"></li>
+							<li class="input_li">
+								<input class="input" type="password" name="comfirmPassword">
+								<span id="passwordCheck">check</span>
+							</li>
 							<li>이름 *</li>
 							<li class="input_li"><input class="input" type="text" name="name"></li>
+							<li>닉네임 *</li>
+							<li class="input_li"><input class="input" type="text" name="nickName"></li>
 							<li>주소</li>
 							<li>
 								<input class="zipcode" type="text" name="zipcode">
@@ -171,13 +256,13 @@
 							<li class="input_li"><input class="input" type="email" name="email"></li>
 							<li class="input_li">
 								<p>이용약관에 대한 동의</p>
-								<input type="checkbox" style="vertical-align: -2px;"><label style="font-weight: normal;">동의함</label>
+								<input type="checkbox" style="vertical-align: -2px;" name="terms"><label style="font-weight: normal;">동의함</label>
 							</li>
 							<li class="input_li">
 								<p>개인정보 수집 및 이용에 대한 동의</p>
-								<input type="checkbox" style="vertical-align: -2px;"><label style="font-weight: normal;">동의함</label>
+								<input type="checkbox" style="vertical-align: -2px;" name="privacyPolicy"><label style="font-weight: normal;">동의함</label>
 							</li>
-							<li><input class="register_btn" type="submit" value="가입하기"></li>
+							<li><input id="registBtn" class="register_btn" type="submit" value="가입하기"></li>
 						</ul>
 					</form>	
 				</div>

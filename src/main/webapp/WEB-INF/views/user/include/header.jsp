@@ -1,8 +1,9 @@
+
 <div class="header">
 	<nav class="top_nav">
 		<ul class="menu">
 			<li><a href="/main.do"><img alt="" src="<%=request.getContextPath() %>/resources/image/mainlogo.png"></a></li>
-			<li><a href="/shop/list/all.do" class="category">SHOP</a>
+			<li class="categoryMenu"><a href="/shop/list/all.do" class="category">SHOP</a>
 				<ul class="sub_category">
 					<li><a href="/shop/list/all.do"><p>ALL</p></a></li>
 					<li><a href="/shop/list/new.do"><p>NEW</p></a></li>
@@ -18,6 +19,9 @@
 		</ul>
 		<div class="condition">
 			<ul>
+				<c:if test="">
+					
+				</c:if>
 				<li><a href="/login.do">LOGIN</a></li>
 				<li><a href="#">ORDERS</a></li>
 				<li><a href="#">BAG</a></li>

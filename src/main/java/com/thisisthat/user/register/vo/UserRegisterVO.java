@@ -1,8 +1,8 @@
-package com.one.thisisthat.user.vo;
+package com.thisisthat.user.register.vo;
 
 import java.sql.Date;
 
-public class UserVO {
+public class UserRegisterVO {
 	private String user_id; 
 	private String user_pass; 
 	private String nick_name;
