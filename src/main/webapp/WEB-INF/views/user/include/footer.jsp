@@ -3,7 +3,7 @@
 <div id="footer">
 	<div class="inner">
 		<ul class="utilMenu">
-			<li><a href="#">notice</a></li>
+			<li><a href="/notice.do">notice</a></li>
 			<!-- 공지사항 -->
 			<li><a href="#">q &amp; a</a></li>
 			<!-- Q & A -->

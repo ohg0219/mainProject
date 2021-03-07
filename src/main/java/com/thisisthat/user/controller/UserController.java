@@ -40,8 +40,14 @@ public class UserController {
 		System.out.println(category);
 		return "/user/itemList/"+category;
 	}
-	
-	
+	/**
+	 * 공지사항 페이지로 이동
+	 * @return
+	 */
+	@RequestMapping("/notice.do")
+	public String noticeView() {
+		return "/user/notice";
+	}
 	
 	
 }

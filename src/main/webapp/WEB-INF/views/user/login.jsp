@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>thisisthat® 디스이즈댓</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/common.css">
+<link rel="stylesheet" href="/resources/user/css/common.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+<script src="/resources/user/js/common.js"></script>
 <style type="text/css">
 .loginwrap {
 	height: 480px;
