@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>JACKETS</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/common.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/item_list.css">
+<link rel="stylesheet" href="/resources/user/css/common.css">
+<link rel="stylesheet" href="/resources/user/css/item_list.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
+<script src="/resources/user/js/common.js"></script>ipt>
 </head>
 <body>
 	<div class="wrap">
@@ -20,7 +20,7 @@
 					<li>
 						<a href="#" class="item">
 							<ul>
-								<li><img alt="" src="<%=request.getContextPath() %>/resources/image/jackets_ex.jpg"></li>
+								<li><img alt="" src="/resources/image/jackets_ex.jpg"></li>
 								<li><p>상품명</p></li>
 								<li><p>판매가</p></li>
 								<li><p>Status</p></li>
@@ -30,7 +30,7 @@
 					<li>
 						<a href="#" class="item">
 							<ul>
-								<li><img alt="" src="<%=request.getContextPath() %>/resources/image/jackets_ex.jpg"></li>
+								<li><img alt="" src="/resources/image/jackets_ex.jpg"></li>
 								<li><p>상품명</p></li>
 								<li><p>판매가</p></li>
 								<li><p>Status</p></li>
@@ -40,7 +40,7 @@
 					<li>
 						<a href="#" class="item">
 							<ul>
-								<li><img alt="" src="<%=request.getContextPath() %>/resources/image/jackets_ex.jpg"></li>
+								<li><img alt="" src="/resources/image/jackets_ex.jpg"></li>
 								<li><p>상품명</p></li>
 								<li><p>판매가</p></li>
 								<li><p>Status</p></li>
@@ -50,7 +50,7 @@
 					<li>
 						<a href="#" class="item">
 							<ul>
-								<li><img alt="" src="<%=request.getContextPath() %>/resources/image/jackets_ex.jpg"></li>
+								<li><img alt="" src="/resources/image/jackets_ex.jpg"></li>
 								<li><p>상품명</p></li>
 								<li><p>판매가</p></li>
 								<li><p>Status</p></li>
@@ -60,7 +60,7 @@
 					<li>
 						<a href="#" class="item">
 							<ul>
-								<li><img alt="" src="<%=request.getContextPath() %>/resources/image/jackets_ex.jpg"></li>
+								<li><img alt="" src="/resources/image/jackets_ex.jpg"></li>
 								<li><p>상품명</p></li>
 								<li><p>판매가</p></li>
 								<li><p>Status</p></li>
@@ -70,7 +70,7 @@
 					<li>
 						<a href="#" class="item">
 							<ul>
-								<li><img alt="" src="<%=request.getContextPath() %>/resources/image/jackets_ex.jpg"></li>
+								<li><img alt="" src="/resources/image/jackets_ex.jpg"></li>
 								<li><p>상품명</p></li>
 								<li><p>판매가</p></li>
 								<li><p>Status</p></li>
@@ -80,7 +80,7 @@
 					<li>
 						<a href="#" class="item">
 							<ul>
-								<li><img alt="" src="<%=request.getContextPath() %>/resources/image/jackets_ex.jpg"></li>
+								<li><img alt="" src="/resources/image/jackets_ex.jpg"></li>
 								<li><p>상품명</p></li>
 								<li><p>판매가</p></li>
 								<li><p>Status</p></li>
@@ -90,7 +90,7 @@
 					<li>
 						<a href="#" class="item">
 							<ul>
-								<li><img alt="" src="<%=request.getContextPath() %>/resources/image/jackets_ex.jpg"></li>
+								<li><img alt="" src="/resources/image/jackets_ex.jpg"></li>
 								<li><p>상품명</p></li>
 								<li><p>판매가</p></li>
 								<li><p>Status</p></li>

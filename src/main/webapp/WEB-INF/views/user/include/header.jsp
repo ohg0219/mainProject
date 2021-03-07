@@ -1,8 +1,8 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="header">
 	<nav class="top_nav">
 		<ul class="menu">
-			<li><a href="/main.do"><img alt="" src="<%=request.getContextPath() %>/resources/image/mainlogo.png"></a></li>
+			<li><a href="/main.do"><img alt="" src="/resources/user/image/mainlogo.png"></a></li>
 			<li class="categoryMenu"><a href="/shop/list/all.do" class="category">SHOP</a>
 				<ul class="sub_category">
 					<li><a href="/shop/list/all.do"><p>ALL</p></a></li>
@@ -19,10 +19,18 @@
 		</ul>
 		<div class="condition">
 			<ul>
-				<c:if test="">
+				<!--
+				<c:if test=""> 로그인하지않은 사용자 
+					<li><a href="/login.do">LOGIN</a></li>
 					
 				</c:if>
-				<li><a href="/login.do">LOGIN</a></li>
+				-->
+				<c:if test=""><!-- 로그인한 사용자 -->
+				</c:if>
+					<li><a href="/logout.do">LOGOUT</a></li>
+					<li><a href="/mypage.do">MYPAGE</a></li>						
+				
+				
 				<li><a href="#">ORDERS</a></li>
 				<li><a href="#">BAG</a></li>
 			</ul>
