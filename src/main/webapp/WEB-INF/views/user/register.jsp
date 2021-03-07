@@ -129,8 +129,8 @@
 				alert("비밀번호를 입력해주세요");
 				return false;
 			}
-			if($("input[name=comfirmPassword]").val().trim() == ''){
-				$("input[name=comfirmPassword]").focus();
+			if($("input[name=confirmPassword]").val().trim() == ''){
+				$("input[name=confirmPassword]").focus();
 				alert("비밀번호 확인을 입력해주세요");
 				return false;
 			}
@@ -196,6 +196,20 @@
 				}
 			});
 		});//end idCheck
+		// 비밀번호 유효성 검사
+	    $("input[name=password]").keyup(function(){
+	      $("#passwordCheck").text("");
+	    });
+
+	    $("input[name=confirmPassword]").keyup(function(){
+	        if($('input[name=password]').val() != $('input[name=confirmPassword]').val()){
+	          $('#passwordCheck').text('비밀번호 일치하지 않음');
+	          $("#passwordCheck").css("color", "red");
+	        } else{
+	          $('#passwordCheck').text('비밀번호 일치함');
+	          $("#passwordCheck").css("color", "black");
+	        }
+	    });//end passwordCheck
 		
 	});//end document ready function
 
@@ -223,8 +237,8 @@
 							</li>
 							<li>PASSWORD 확인 *</li>
 							<li class="input_li">
-								<input class="input" type="password" name="comfirmPassword">
-								<span id="passwordCheck">check</span>
+								<input class="input" type="password" name="confirmPassword">
+								<span id="passwordCheck"></span>
 							</li>
 							<li>이름 *</li>
 							<li class="input_li"><input class="input" type="text" name="name"></li>
