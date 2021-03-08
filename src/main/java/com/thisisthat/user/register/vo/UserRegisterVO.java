@@ -15,4 +15,12 @@ public class UserRegisterVO {
 	private int user_role; 
 	private Date life;
 	private Date life_date;
+	@Override
+	public String toString() {
+		return "UserRegisterVO [user_id=" + user_id + ", user_pass=" + user_pass + ", nick_name=" + nick_name
+				+ ", name=" + name + ", phone=" + phone + ", email=" + email + ", zipcode=" + zipcode
+				+ ", first_address=" + first_address + ", last_address=" + last_address + ", user_role=" + user_role
+				+ ", life=" + life + ", life_date=" + life_date + "]";
+	}
+	
 }
