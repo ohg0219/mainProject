@@ -15,26 +15,26 @@
 		<div class="content">
 			<div class="main_image_area">
 				<a href="#">
-					<div class="main_image"><img alt="" src="/resources/image/i-22yi.jpg"></div>
+					<div class="main_image"><img alt="" src="/resources/user/image/i-22yi.jpg"></div>
 					<div class="main_image_text"><p>thisisthat®  SP21</p></div>
 				</a>
 			</div>
 			<div class="sub_image_area">
 				<a href="#">
 					<div class="sub_image_text"><p>SUB 1</p></div>
-					<div class="sub_image"><img alt="" src="/resources/image/sub_1.jpg"></div>
+					<div class="sub_image"><img alt="" src="/resources/user/image/sub_1.jpg"></div>
 				</a>
 				<a href="#">
 					<div class="sub_image_text"><p>SUB 2</p></div>
-					<div class="sub_image"><img alt="" src="/resources/image/sub_2.jpg"></div>
+					<div class="sub_image"><img alt="" src="/resources/user/image/sub_2.jpg"></div>
 				</a>
 				<a href="#">
 					<div class="sub_image_text"><p>SUB 3</p></div>
-					<div class="sub_image"><img alt="" src="/resources/image/sub_3.jpg"></div>
+					<div class="sub_image"><img alt="" src="/resources/user/image/sub_3.jpg"></div>
 				</a>
 				<a href="#">
 					<div class="sub_image_text"><p>SUB 4</p></div>
-					<div class="sub_image"><img alt="" src="/resources/image/sub_4.jpg"></div>
+					<div class="sub_image"><img alt="" src="/resources/user/image/sub_4.jpg"></div>
 				</a>
 			</div>
 		</div><!-- end Content -->

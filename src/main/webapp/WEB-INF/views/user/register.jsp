@@ -6,118 +6,25 @@
 <meta charset="UTF-8">
 <title>thisisthat® 디스이즈댓</title>
 <link rel="stylesheet" href="/resources/user/css/common.css">
+<link rel="stylesheet" href="/resources/user/css/register.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
-<style type="text/css">
-.register{ 
-	padding-top : 100px;
-}
-.register form{
-	margin: 0 auto;
-	width: 250px;
-}
-
-.register form ul {
-	padding: 0;
-}
-.register form>ul>li{
-	font-weight: bold;
-}
-.input_li{
-	height: 70px;
-}
-.input{
-	all:unset;
-	width: 100%;
-	border: 1px solid black;
-	border-collapse:collapse;
-	box-shadow: none;
-	border-radius: 0;
-	overflow: visible;
-	font-weight: normal;
-	padding: 7px 8px;
-}
-.register_comment{
-	color: red;
-	font-weight: normal;
-	display: block;
-}
-.zipcode{
-	all:unset;
-	margin-bottom: 5px;
-	width: 30%;
-	border: 1px solid black;
-	border-collapse:collapse;
-	box-shadow: none;
-	border-radius: 0;
-	overflow: visible;
-	padding: 7px 8px;
-	font-weight: normal;
-}
-.address_{
-	all:unset;
-	margin-bottom: 5px;
-	width: 100%;
-	border: 1px solid black;
-	border-collapse:collapse;
-	box-shadow: none;
-	border-radius: 0;
-	overflow: visible;
-	padding: 7px 8px;
-	font-weight: normal;
-}
-.address_btn{
-	all:unset;
-	border: 1px solid black; 
-	padding: 7px;
-	background-color: black;
-	color: white;
-	cursor: pointer;
-}
-.input_tel{
-	border: none;
-	font-size: 11px;
-	width: 60px;
-	height: 22px;
-}
-.input_phone{
-	all:unset;
-	margin-bottom: 5px;
-	border: 1px solid black;
-	border-collapse:collapse;
-	box-shadow: none;
-	border-radius: 0;
-	overflow: visible;
-	padding: 7px 8px;
-	font-weight: normal;
-	width: 20%;
-	
-}
-.register_btn{
-	all:unset;
-	padding: 0px 8px;
-	margin-bottom: 20px;
-	width: 100%;
-	border-collapse:collapse;
-	box-shadow: none;
-	border-radius: 0;
-	overflow: visible;
-	height: 25px;
-	border: 1px solid black;
-	background: black;
-	cursor: pointer;
-	text-align: center;
-	color: white;
-	width: 100%;
-}
-</style>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+	var registerBtn = document.getElementById("registBtn");
+	function btn_off(){
+		registerBtn.disabled="disabled";
+	}
+	function btn_on(){
+		registerBtn.disabled=false;
+	}
 	$(document).ready(function(){
+		btn_off();
+		$("input[name=id]").focus();
 		$(".address_btn").on("click",function(e){
 			e.preventDefault();
+			DaumPostcode();
 		});
-		$("input[name=id]").focus();
-		
 		$(".register_btn").on("click",function(){
 			if($("input[name=id]").val().trim() == ''){
 				$("input[name=id]").focus();
@@ -174,33 +81,48 @@
 			}
 			return true;
 		});//end regist check
-		
 		// 아이디 유효성 검사(1 = 중복 / 1 != 중복x)
 		$("input[name=id]").blur(function() {
 			var user_id = $('input[name=id]').val();
-			$.ajax({
-				url : '/user/idCheck.do?userId='+ user_id,
-				type : 'get',
-				success : function(data) {
-					console.log("1 = 중복o / 0 = 중복x : "+ data);							
-					if (data==1) {
-						$("input[name=id]").focus();
-						$("#idCheck").text("사용중인 아이디입니다");
-						$("#idCheck").css("color", "black");
-					} else {
-						$("#idCheck").text("");
+			var regType1 =/^[A-za-z0-9]{4,16}/g;
+			if (!regType1.test(user_id)) { 
+				$("#idCheck").text("영문 대,소문자/숫자  4~16자로 입력해 주세요.");
+				$("#idCheck").css("color", "black");
+				$("input[name=id]").focus();
+			}else{
+				$.ajax({
+					url : '/user/idCheck.do?userId='+ user_id,
+					type : 'get',
+					success : function(data) {
+						if (data==1) {
+							$("input[name=id]").focus();
+							$("#idCheck").text("사용중인 아이디입니다");
+							$("#idCheck").css("color", "black");
+						} else {
+							$("#idCheck").text("");
+							flag = true;
+						}
+					},
+					error : function(data) {
+							console.log("실패");
 					}
-				},
-				error : function(data) {
-						console.log("실패");
-				}
-			});
+				});
+			}
 		});//end idCheck
 		// 비밀번호 유효성 검사
-	    $("input[name=password]").keyup(function(){
-	      $("#passwordCheck").text("");
+		
+	    $("input[name=password]").on("keyup blur",function(){
+	        var password = $("input[name=password]").val();
+	        var regType2 = /^[A-za-z0-9]{8,16}/g;
+	        if(!regType2.test(password)){
+	            $('#passwordRegChk').text('영문 대,소문자/숫자  8~16자로 입력해 주세요.');
+	            $("#passwordRegChk").css("color", "red");
+	            $("input[name=password]").focus();
+	        }else{
+	            $("#passwordRegChk").text("");	
+	        }
 	    });
-
+	    
 	    $("input[name=confirmPassword]").keyup(function(){
 	        if($('input[name=password]').val() != $('input[name=confirmPassword]').val()){
 	          $('#passwordCheck').text('비밀번호 일치하지 않음');
@@ -212,7 +134,35 @@
 	    });//end passwordCheck
 		
 	});//end document ready function
-
+	//다음 주소 api
+	function DaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = '';
+                var extraAddr = '';
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
+                }
+                if(data.userSelectedType === 'R'){
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                }
+                document.getElementById('zipcode').value = data.zonecode;
+                document.getElementById("address1").value = addr + extraAddr;
+                document.getElementById("address2").focus();
+            }
+        }).open();
+    }//end postcode function
+    
 </script>
 </head>
 <body>
@@ -227,13 +177,14 @@
 							<li>ID *</li>
 							<li class="input_li">
 								<input class="input" type="text" name="id">
-								<span class="register_comment">아이디 제약사항</span>
+								<span class="register_comment">영문 대,소문자/숫자, 4~16자</span>
 								<span id="idCheck"></span>
 							</li>
 							<li>PASSWORD *</li>
 							<li class="input_li">
 								<input class="input" type="password" name="password">
-								<span class="register_comment">비번 제약사항</span>
+								<span class="register_comment">영문 대,소문자/숫자, 8~16자</span>
+								<span id="passwordRegChk"></span>
 							</li>
 							<li>PASSWORD 확인 *</li>
 							<li class="input_li">
@@ -246,11 +197,13 @@
 							<li class="input_li"><input class="input" type="text" name="nickName"></li>
 							<li>주소</li>
 							<li>
-								<input class="zipcode" type="text" name="zipcode">
-								<button class="address_btn" >우편번호</button>	
+								<input class="zipcode" type="text" name="zipcode" id="zipcode">
+								<button class="address_btn">우편번호</button>	
 							</li>
-							<li><input class="address_" type="text" name="address1"></li>
-							<li style="height: 60px;"><input class="address_" type="text" name="address2"></li>
+							<li><input class="address_" type="text" name="address1" id="address1"></li>
+							<li style="height: 60px;">
+								<input class="address_" type="text" name="address2" id="address2">
+							</li>
 							<li>휴대전화 *</li>
 							<li class="input_li">
 								<select class="input_tel" name="phone1">
