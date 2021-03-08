@@ -14,4 +14,6 @@ public class UserRegisterDAO {
 		int result = userRegisterTemplate.selectOne("UserRegister.idCheck",userId);
 		return result;
 	}
+	
+	
 }
