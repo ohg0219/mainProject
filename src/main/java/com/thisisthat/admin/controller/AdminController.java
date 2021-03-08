@@ -39,7 +39,12 @@ public class AdminController {
 		}
 		model.addAttribute("articleList",voList);
 		model.addAttribute("where", where);
-		return "redirect:/articleList.mdo?where="+where;
+		return "/admin/articleList";
+	}
+	@GetMapping("articleGate.mdo")
+	public String articleGate(@RequestParam(value="where")String where) {
+		
+		return "redirect:articleList.mdo?where="+where;
 	}
 	@GetMapping("insertArticle.mdo")
 	public String insertArticle() {

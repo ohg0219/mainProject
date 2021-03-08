@@ -98,8 +98,8 @@
                 </a>
                 <div id="collapseBoards" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/articleList.mdo?where=공지사항">공지사항</a>
-                        <a class="collapse-item" href="/articleList.mdo?where=이벤트">이벤트</a>
+                        <a class="collapse-item" href="/articleGate.mdo?where=notice">공지사항</a>
+                        <a class="collapse-item" href="/articleGate.mdo?where=event">이벤트</a>
                         <a class="collapse-item" href="404.html">상품문의관리</a>
                         <a class="collapse-item" href="blank.html">후기관리</a>
                     </div>
