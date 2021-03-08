@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 공지사항</title>
+<title>thisisthat - ${where }</title>
 
 <%@include file="include/css.jsp"%>
 <%@include file="include/js.jsp"%>
