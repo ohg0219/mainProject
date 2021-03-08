@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/resources/user/css/common.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style type="text/css">
 .loginwrap {
 	height: 480px;
@@ -69,6 +70,10 @@
 	margin-bottom: 30px; 
 	font-weight: bold;
 }
+#kakao-login-btn{
+	width: 50%;
+	height: 50%;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -91,6 +96,28 @@
 							<li><input class="inputPw" type="password" name="password"></li>
 							<li><input class="loginBtn" type="submit" value="로그인"></li>
 							<li style="text-align: right;"><a href="#">FORGET YOUR PASSWORD?</a></li>
+							<li> 　	</li>
+							<li class="kakao-login-panel">
+								<a id="kakao-login-btn"></a>
+							    <a href="http://developers.kakao.com/logout"></a>
+							    <script type='text/javascript'>
+							        //<![CDATA[
+							        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+							        Kakao.init('b8667344f8a6f436b0827f2076f388f0');
+							        // 카카오 로그인 버튼을 생성합니다.
+							        Kakao.Auth.createLoginButton({
+							            container: '#kakao-login-btn',
+							            success: function (authObj) {
+							                alert(JSON.stringify(authObj));
+							                console.log(JSON.stringify(authObj));
+							            },
+							            fail: function (err) {
+							                alert(JSON.stringify(err));
+							            }
+							        });
+							      	//]]>
+   								</script>
+							</li>
 						</ul>
 					</form>	
 				</div>

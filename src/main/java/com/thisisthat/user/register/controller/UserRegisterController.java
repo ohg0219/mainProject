@@ -25,7 +25,6 @@ public class UserRegisterController {
 		//회원가입 로직 처리
 		return "redirect:main.do";
 	}
-	
 	/**
 	 * 아이디 중복 실시간 체크 
 	 * @param userId
@@ -36,4 +35,7 @@ public class UserRegisterController {
 	public String idCheck(@RequestParam("userId") String userId) {
 		return String.valueOf(userRegisterService.idCheck(userId));
 	}
+	
+	
+	
 }

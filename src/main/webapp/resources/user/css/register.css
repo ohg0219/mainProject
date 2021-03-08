@@ -1,0 +1,102 @@
+@charset "UTF-8";
+.register{ 
+	padding-top : 100px;
+}
+.register form{
+	margin: 0 auto;
+	width: 250px;
+}
+
+.register form ul {
+	padding: 0;
+}
+.register form>ul>li{
+	font-weight: bold;
+}
+.input_li{
+	height: 70px;
+}
+.input{
+	all:unset;
+	width: 100%;
+	border: 1px solid black;
+	border-collapse:collapse;
+	box-shadow: none;
+	border-radius: 0;
+	overflow: visible;
+	font-weight: normal;
+	padding: 7px 8px;
+}
+.register_comment{
+	color: red;
+	font-weight: normal;
+	display: block;
+}
+.zipcode{
+	all:unset;
+	margin-bottom: 5px;
+	width: 30%;
+	border: 1px solid black;
+	border-collapse:collapse;
+	box-shadow: none;
+	border-radius: 0;
+	overflow: visible;
+	padding: 7px 8px;
+	font-weight: normal;
+}
+.address_{
+	all:unset;
+	margin-bottom: 5px;
+	width: 100%;
+	border: 1px solid black;
+	border-collapse:collapse;
+	box-shadow: none;
+	border-radius: 0;
+	overflow: visible;
+	padding: 7px 8px;
+	font-weight: normal;
+}
+.address_btn{
+	all:unset;
+	border: 1px solid black; 
+	padding: 7px;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+.input_tel{
+	border: none;
+	font-size: 11px;
+	width: 60px;
+	height: 22px;
+}
+.input_phone{
+	all:unset;
+	margin-bottom: 5px;
+	border: 1px solid black;
+	border-collapse:collapse;
+	box-shadow: none;
+	border-radius: 0;
+	overflow: visible;
+	padding: 7px 8px;
+	font-weight: normal;
+	width: 20%;
+	
+}
+.register_btn{
+	all:unset;
+	padding: 0px 8px;
+	margin-bottom: 20px;
+	width: 100%;
+	border-collapse:collapse;
+	box-shadow: none;
+	border-radius: 0;
+	overflow: visible;
+	height: 25px;
+	border: 1px solid black;
+	background: black;
+	cursor: pointer;
+	text-align: center;
+	color: white;
+	width: 100%;
+}
