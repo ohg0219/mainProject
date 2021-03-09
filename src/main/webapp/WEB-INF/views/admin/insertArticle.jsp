@@ -45,11 +45,11 @@
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>
-										<input type="text" name="title" class="form-control mt-4 mb-2"
+										<input type="text" name="board_title" class="form-control mt-4 mb-2"
 											placeholder="제목을 입력해주세요." required
 										>
 										<div class="form-group">
-											<textarea class="form-control" rows="20" name="content"
+											<textarea class="form-control" rows="20" name="board_content"
 												placeholder="내용을 입력해주세요" required
 											></textarea>
 										</div>

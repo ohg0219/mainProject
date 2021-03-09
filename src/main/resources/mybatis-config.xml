@@ -11,5 +11,7 @@
 		<!-- 매퍼파일 -->
 		<mapper resource="mappings/user/user-mapping.xml" />
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-mapping.xml" />
+		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
 	</mappers>
 </configuration>
