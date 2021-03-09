@@ -6,27 +6,27 @@
 		<id property="id" column="user_id"/>
 		<id property="password" column="user_pass"/>
 		<id property="nickName" column="nick_name"/>
-		<id property="name" column="name"/>
-		<id property="phone" column="phone"/>
-		<id property="email" column="email"/>
-		<id property="zipcode" column="zipcode"/>
+		<id property="name" column="user_name"/>
+		<id property="phone" column="user_phone"/>
+		<id property="email" column="user_email"/>
+		<id property="zipcode" column="zip_code"/>
 		<id property="address1" column="first_address"/>
 		<id property="address2" column="last_address"/>
 		<id property="user_role" column="user_role"/>
-		<id property="life" column="life"/>
-		<id property="life_date" column="life_date"/>
+		<id property="inDate" column="in_date"/>
+		<id property="outDate" column="out_date"/>
 	</resultMap>
 	<select id="idCheck" parameterType="String" resultType="int" >
-		select count(user_id) from usertest where user_id = #{userId}
+		select count(user_id) from this_user where user_id = #{userId}
 	</select>
 	<select id="nickNameCheck" parameterType="String" resultType="int" >
-		select count(nick_name) from usertest where nick_name = #{nickName}
+		select count(nick_name) from this_user where nick_name = #{nickName}
 	</select>
 	<insert id="insertUser" parameterType="com.thisisthat.user.register.vo.UserRegisterVO" >
-		insert into usertest values(
+		insert into this_user values(
 		#{id},#{password},#{nickName},#{name},
 		#{phone},#{email},#{zipcode},
-		#{address1},#{address2},#{user_role},#{life},#{life_date}); 
+		#{address1},#{address2}); 
 	</insert>
 	
 </mapper>

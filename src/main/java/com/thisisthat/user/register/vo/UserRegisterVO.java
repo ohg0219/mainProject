@@ -1,6 +1,6 @@
 package com.thisisthat.user.register.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class UserRegisterVO {
 	private String id; 
@@ -13,15 +13,14 @@ public class UserRegisterVO {
 	private String address1; 
 	private String address2; 
 	private int user_role; 
-	private Date life;
-	private Date life_date;
+	private Date inDate;
+	private Date outDate;
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	
 	public String getPassword() {
 		return password;
 	}
@@ -76,19 +75,18 @@ public class UserRegisterVO {
 	public void setUser_role(int user_role) {
 		this.user_role = user_role;
 	}
-	public Date getLife() {
-		return life;
+	public Date getInDate() {
+		return inDate;
 	}
-	public void setLife(Date life) {
-		this.life = life;
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
 	}
-	public Date getLife_date() {
-		return life_date;
+	public Date getOutDate() {
+		return outDate;
 	}
-	public void setLife_date(Date life_date) {
-		this.life_date = life_date;
+	public void setOutDate(Date outDate) {
+		this.outDate = outDate;
 	}
-	
 	
 	
 }

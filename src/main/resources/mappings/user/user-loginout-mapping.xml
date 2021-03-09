@@ -4,6 +4,6 @@
 
 <mapper namespace="UserLogin">
 	<select id="loginCheck" parameterType="String" resultType="String">
-		select user_pass from usertest where user_id=#{userId}
+		select user_pass from this_user where user_id=#{userId}
 	</select>
 </mapper>
