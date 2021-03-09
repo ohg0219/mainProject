@@ -41,7 +41,7 @@
 											<option value="notice">공지사항</option>
 											<option value="">100</option>
 										</select>
-										<button type="button" class="btn-check:checked pull-right" id="searchBtn" >
+										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>
@@ -62,8 +62,10 @@
 			</div>
 		</div>
 	</div>
-				
+<script>
 
+</script>
 <%@include file="include/js.jsp"%>
+
 </body>
 </html>

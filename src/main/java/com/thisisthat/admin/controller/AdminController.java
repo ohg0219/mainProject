@@ -1,20 +1,28 @@
 package com.thisisthat.admin.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.thisisthat.admin.notice.service.NoticeService;
+import com.thisisthat.admin.notice.vo.NoticeVO;
 import com.thisisthat.user.register.vo.TestVO;
 
 @Controller
 public class AdminController {
 
+
+	
+	
 	@RequestMapping("/main.mdo")
 	public String mainView() {
 		return "/admin/main";
@@ -48,9 +56,9 @@ public class AdminController {
 	}
 	@GetMapping("insertArticle.mdo")
 	public String insertArticle() {
-		
 		return "/admin/insertArticle";
 	}
+	
 	@GetMapping("userManagement.mdo")
 	public String userManagement() {
 		
