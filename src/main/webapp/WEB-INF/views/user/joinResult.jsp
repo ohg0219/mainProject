@@ -42,28 +42,13 @@
 	width: 250px;
 }
 
-.oneOne {
-	float: left;
+.resultTag {
 	font-size: 10px;
+	display:inline-block;
+	width:50%;
 	z-index: 99;
 	text-transform: uppercase;
-	font-weight: 700 !important;
-}
-
-.twoOne {
-	float: left;
-	font-size: 10px;
-	z-index: 99;
-	text-transform: uppercase;
-	font-weight: 700 !important;
-}
-
-.threeOne {
-	float: left;
-	font-size: 10px;
-	z-index: 99;
-	text-transform: uppercase;
-	font-weight: 700 !important;
+	font-weight: 700;
 }
 
 .loginBtn {
@@ -78,7 +63,10 @@
 }
 .resultText{
 	text-align: left;
+	display: inline-block;
+	width: 40%;
 }
+
 
 </style>
 </head>
@@ -89,7 +77,7 @@
 		<div class="content">
 			<div class="register">
 				<div id="container"> 
-					<div align="center" class="register_welcome">			
+					<div class="register_welcome">			
 						<form action="login.do" method="post" id="register_welcome">
 							<div class="info">
 								<div class="hello">
@@ -99,21 +87,21 @@
 								</div>
 								<ul>
 									<li>
-										<div class="oneOne">ID</div>
+										<div class="resultTag">ID</div>
 										<div class="resultText">
 											<span>dpwls2136</span>
 										</div>
 									</li>
 									<br>
 									<li>
-										<div class="twoOne">이름</div>
+										<div class="resultTag">이름</div>
 										<div class="resultText">
 											<span>양예진</span>
 										</div>
 									</li>
 									<br>
 									<li>
-										<div class="threeOne">E-MAIL</div>
+										<div class="resultTag">E-MAIL</div>
 										<div class="resultText">
 											<sapn>dpwls2136@naver.com</sapn>
 										</div>	
