@@ -1,4 +1,4 @@
-package com.thisisthat.user.register.dao;
+package com.thisisthat.user.login.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thisisthat.user.register.service.UserLoginOutService;
+import com.thisisthat.user.login.service.UserLoginOutService;
 
 @Controller
 public class UserLoginOutController {

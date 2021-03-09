@@ -41,7 +41,7 @@ public class UserRegisterController {
 		return String.valueOf(userRegisterService.nickNameCheck(nickName));
 	}
 	/**
-	 * 회원가입 처리후 메인 페이지이동
+	 * 회원가입 처리후 웰컴 페이지이동
 	 * @return
 	 */
 	@PostMapping("/regist.do")
@@ -54,7 +54,7 @@ public class UserRegisterController {
 		vo.setPhone(phone1+phone2+phone3);
 		vo.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 		userRegisterService.insertUser(vo);
-		return "redirect:/user/joinResult";
+		return "/user/joinResult";
 	}
 	
 	

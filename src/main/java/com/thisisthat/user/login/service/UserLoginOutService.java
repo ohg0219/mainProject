@@ -1,4 +1,4 @@
-package com.thisisthat.user.register.service;
+package com.thisisthat.user.login.service;
 
 public interface UserLoginOutService {
 	String userLogin(String userId);
