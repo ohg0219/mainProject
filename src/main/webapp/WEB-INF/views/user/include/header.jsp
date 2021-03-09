@@ -19,16 +19,14 @@
 		</ul>
 		<div class="condition">
 			<ul>
-				<!--
-				<c:if test=""> 로그인하지않은 사용자 
-					<li><a href="/login.do">LOGIN</a></li>
-					
+				
+				<c:if test="${sessionScope.userId == null }"> 
+					<li><a href="/login.do">LOGIN</a></li>					
 				</c:if>
-				-->
-				<c:if test=""><!-- 로그인한 사용자 -->
-				</c:if>
+				<c:if test="${sessionScope.userId != null }"><!-- 로그인한 사용자 -->
 					<li><a href="/logout.do">LOGOUT</a></li>
 					<li><a href="/mypage.do">MYPAGE</a></li>						
+				</c:if>
 				
 				
 				<li><a href="#">ORDERS</a></li>

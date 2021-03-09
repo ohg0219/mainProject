@@ -54,7 +54,7 @@ public class UserRegisterController {
 		vo.setPhone(phone1+phone2+phone3);
 		vo.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 		userRegisterService.insertUser(vo);
-		return "forward:/user/joinResult";
+		return "redirect:/user/joinResult";
 	}
 	
 	

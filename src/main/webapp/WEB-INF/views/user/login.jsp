@@ -87,7 +87,7 @@
 		<div class="content">
 			<div class="loginwrap">
 				<div class="login" >
-					<form action="login.do" method="post">
+					<form action="loginCheck.do" method="post">
 						<p class="box_title">LOG IN</p>
 						<ul>
 							<li>ID</li>
