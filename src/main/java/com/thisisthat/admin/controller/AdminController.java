@@ -44,4 +44,9 @@ public class AdminController {
 		
 		return "/admin/insertArticle";
 	}
+	@GetMapping("userManagement.mdo")
+	public String userManagement() {
+		
+		return "/admin/userManagement";
+	}
 }

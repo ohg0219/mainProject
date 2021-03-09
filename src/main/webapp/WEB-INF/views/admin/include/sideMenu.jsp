@@ -34,7 +34,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">회원정보</a>
+                        <a class="collapse-item" href="userManagement.mdo">회원정보</a>
                         <a class="collapse-item" href="cards.html">회원적립금관리</a>
                         <a class="collapse-item" href="cards.html">쿠폰생성</a>
                         <a class="collapse-item" href="cards.html">회원쿠폰부여</a>
