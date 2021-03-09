@@ -2,9 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserRegister">
+	<resultMap type="UserRegisterVO" id="registerVO">
+		<id property="id" column="user_id"/>
+		<id property="password" column="user_pass"/>
+		<id property="nickName" column="nick_name"/>
+		<id property="name" column="name"/>
+		<id property="phone" column="phone"/>
+		<id property="email" column="email"/>
+		<id property="zipcode" column="zipcode"/>
+		<id property="address1" column="first_address"/>
+		<id property="address2" column="last_address"/>
+		<id property="user_role" column="user_role"/>
+		<id property="life" column="life"/>
+		<id property="life_date" column="life_date"/>
+	</resultMap>
 	<select id="idCheck" parameterType="String" resultType="int" >
 		select count(user_id) from usertest where user_id = #{userId}
 	</select>
-	
+	<select id="nickNameCheck" parameterType="String" resultType="int" >
+		select count(nick_name) from usertest where nick_name = #{nickName}
+	</select>
+	<insert id="insertUser" parameterType="com.thisisthat.user.register.vo.UserRegisterVO" >
+		insert into usertest values(
+		#{id},#{password},#{nickName},#{name},
+		#{phone},#{email},#{zipcode},
+		#{address1},#{address2},#{user_role},#{life},#{life_date}); 
+	</insert>
 	
 </mapper>
