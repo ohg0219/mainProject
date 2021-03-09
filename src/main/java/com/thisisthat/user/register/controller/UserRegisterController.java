@@ -2,6 +2,8 @@ package com.thisisthat.user.register.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thisisthat.user.register.service.UserRegisterService;
+import com.thisisthat.user.register.vo.UserRegisterVO;
 
 @Controller
 public class UserRegisterController {
@@ -17,17 +20,17 @@ public class UserRegisterController {
 	UserRegisterService userRegisterService;
 	
 	/**
-	 * 회원가입 처리후 메인 페이지이동
+	 * �쉶�썝媛��엯 泥섎━�썑 硫붿씤 �럹�씠吏��씠�룞
 	 * @return
 	 */
-	@PostMapping("/regist.do")
-	public String regist() {
-		//회원가입 로직 처리
-		return "redirect:main.do";
+	@RequestMapping("/joinResult.do") 
+	public String register() { //Model model, UserRegisterVO registerVO) {
+//		userRegisterService.
+		return "/user/joinResult";
 	}
 	
 	/**
-	 * 아이디 중복 실시간 체크 
+	 * �븘�씠�뵒 以묐났 �떎�떆媛� 泥댄겕 
 	 * @param userId
 	 * @return
 	 */

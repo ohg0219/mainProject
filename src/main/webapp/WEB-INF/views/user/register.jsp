@@ -220,8 +220,8 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="register_wrap">
-				<div class="register" >
-					<form action="regist.do" method="post" id="registerForm">
+			 	<div class="register" > 
+					<form action="register.do" method="post" id="registerForm">
 						<p class="box_title">SIGN UP</p>
 						<ul>
 							<li>ID *</li>
@@ -279,7 +279,7 @@
 							<li><input id="registBtn" class="register_btn" type="submit" value="가입하기"></li>
 						</ul>
 					</form>	
-				</div>
+			 	</div> 
 				
 			</div>
 		</div><!-- end Content -->
