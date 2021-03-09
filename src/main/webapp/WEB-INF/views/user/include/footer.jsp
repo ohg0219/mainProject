@@ -29,7 +29,7 @@
 					</ul>
 					<ul class="cp_info">
 						<li><span class="f_t1">company</span><span class="adrs_2">제이케이앤디주식회사</span></li>
-						<li><span class="f_t1">owner</span><span class="adrs_2">오형균 조용일 한나라 박진수 양예진</span>
+						<li><span class="f_t1">owner</span><span class="adrs_2">오형균 박진수 양예진 조용일 한나라 </span>
 						</li>
 					</ul>
 				</div>

@@ -28,7 +28,6 @@ public class UserRegisterController {
 //		userRegisterService.
 		return "/user/joinResult";
 	}
-	
 	/**
 	 * �븘�씠�뵒 以묐났 �떎�떆媛� 泥댄겕 
 	 * @param userId
@@ -39,4 +38,7 @@ public class UserRegisterController {
 	public String idCheck(@RequestParam("userId") String userId) {
 		return String.valueOf(userRegisterService.idCheck(userId));
 	}
+	
+	
+	
 }
