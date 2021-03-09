@@ -5,7 +5,6 @@ import com.thisisthat.user.register.vo.UserRegisterVO;
 public interface UserRegisterService {
 
 	int idCheck(String userId);
-	
-	void welCome(UserRegisterVO registerVO);
-	
+	int nickNameCheck(String nickName);
+	void insertUser(UserRegisterVO vo);
 }

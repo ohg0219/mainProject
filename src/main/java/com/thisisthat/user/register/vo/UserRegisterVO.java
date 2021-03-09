@@ -3,36 +3,36 @@ package com.thisisthat.user.register.vo;
 import java.sql.Date;
 
 public class UserRegisterVO {
-	private String user_id; 
-	private String user_pass; 
-	private String nick_name;
+	private String id; 
+	private String password; 
+	private String nickName;
 	private String name; 
-	private int phone; 
+	private String phone; 
 	private String email; 
 	private int zipcode; 
-	private String first_address; 
-	private String last_address; 
+	private String address1; 
+	private String address2; 
 	private int user_role; 
 	private Date life;
 	private Date life_date;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	
-	public String getUser_id() {
-		return user_id;
+	public String getPassword() {
+		return password;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getUser_pass() {
-		return user_pass;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setUser_pass(String user_pass) {
-		this.user_pass = user_pass;
-	}
-	public String getNick_name() {
-		return nick_name;
-	}
-	public void setNick_name(String nick_name) {
-		this.nick_name = nick_name;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	public String getName() {
 		return name;
@@ -40,10 +40,10 @@ public class UserRegisterVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getEmail() {
@@ -58,17 +58,17 @@ public class UserRegisterVO {
 	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getFirst_address() {
-		return first_address;
+	public String getAddress1() {
+		return address1;
 	}
-	public void setFirst_address(String first_address) {
-		this.first_address = first_address;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
 	}
-	public String getLast_address() {
-		return last_address;
+	public String getAddress2() {
+		return address2;
 	}
-	public void setLast_address(String last_address) {
-		this.last_address = last_address;
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
 	public int getUser_role() {
 		return user_role;
@@ -90,12 +90,5 @@ public class UserRegisterVO {
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "UserRegisterVO [user_id=" + user_id + ", user_pass=" + user_pass + ", nick_name=" + nick_name
-				+ ", name=" + name + ", phone=" + phone + ", email=" + email + ", zipcode=" + zipcode
-				+ ", first_address=" + first_address + ", last_address=" + last_address + ", user_role=" + user_role
-				+ ", life=" + life + ", life_date=" + life_date + "]";
-	}
-
+	
 }

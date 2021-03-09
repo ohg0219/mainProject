@@ -17,13 +17,14 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 	}
 
 	@Override
-	public void welCome(UserRegisterVO registerVO) {
-	//	userRegisterDAO.wel
-		
+	public int nickNameCheck(String nickName) {
+		return userRegisterDAO.nickNameCheck(nickName);
 	}
-	
-	
-	
+
+	@Override
+	public void insertUser(UserRegisterVO vo) {
+		userRegisterDAO.insertUser(vo);
+	}
 	
 	
 }
