@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 공지사항</title>
+<title>thisisthat - 회원관리</title>
 
 <%@include file="include/css.jsp"%>
 <%@include file="include/js.jsp"%>
@@ -46,7 +44,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+                    <h1 class="h3 mb-2 text-gray-800">회원관리</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -60,26 +58,24 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>제목</th>
-                                            <th>작성자</th>
-                                            <th>날짜</th>
-                                            <th>조회수</th>
+                                            <th>아이디</th>
+                                            <th align="center">성명</th>
+                                            <th>휴대폰</th>
+                                            <th>가입일</th>
+                                            <th>계정관리</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
-                                    	
                                     
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
                                     	<c:if test="${not empty articleList}" >
 	                                        <c:forEach var="article" items="${articleList}">
 		                                        <tr>
-			                                        <td width="45">${article.seq}</td>
+			                                        <td width="55">${article.seq}</td>
 			                                        <td width="295"><a href="getNotice.mdo?seq=${article.seq }" style="">${article.title }<!--댓글수--> </a></td>
 			                                        <td width="140">${article.writer }</td>
 			                                        <td width="115"><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="45">${article.cnt }</td>
+			                                        <td width="65">${article.cnt }</td>
 			                                    </tr>
 	                                        </c:forEach>
                                         
