@@ -18,7 +18,7 @@
 		<div class="content">
 			<div class="register_wrap">
 			 	<div class="register" > 
-					<form action="register.do" method="post" id="registerForm">
+					<form action="regist.do" method="post" id="registerForm">
 						<p class="box_title">SIGN UP</p>
 						<ul>
 							<li>ID *</li>

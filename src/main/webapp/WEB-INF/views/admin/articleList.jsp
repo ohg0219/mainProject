@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 공지사항</title>
+<title>thisisthat - ${where }</title>
 
 <%@include file="include/css.jsp"%>
 <%@include file="include/js.jsp"%>
@@ -46,7 +46,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+                    <h1 class="h3 mb-2 text-gray-800">${where}</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->

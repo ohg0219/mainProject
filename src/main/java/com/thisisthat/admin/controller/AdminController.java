@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.user.register.vo.TestVO;
 
@@ -24,8 +25,8 @@ public class AdminController {
 		return "/admin/login";
 	}
 
-	@GetMapping("notice.mdo")
-	public String notice(Model model) {
+	@GetMapping("articleList.mdo")
+	public String notice(Model model,@RequestParam(value="where")String where) {
 		List<TestVO> voList = new ArrayList<TestVO>();
 		for(int i = 1; i<=10; i++) {
 			TestVO vo = new TestVO();
@@ -37,7 +38,13 @@ public class AdminController {
 			voList.add(vo);
 		}
 		model.addAttribute("articleList",voList);
-		return "/admin/notice";
+		model.addAttribute("where", where);
+		return "/admin/articleList";
+	}
+	@GetMapping("articleGate.mdo")
+	public String articleGate(@RequestParam(value="where")String where) {
+		
+		return "redirect:articleList.mdo?where="+where;
 	}
 	@GetMapping("insertArticle.mdo")
 	public String insertArticle() {

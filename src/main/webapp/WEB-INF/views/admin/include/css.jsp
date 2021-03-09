@@ -8,5 +8,5 @@
 <link href="/resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="/resources/admin/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap core JavaScript-->
-<script src="/resources/admin/vendor/jquery/jquery.min.js"></script>
-<script src="/resources/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/resources/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/resources/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
