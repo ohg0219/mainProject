@@ -18,7 +18,6 @@ public class noticeController {
 
 	@Autowired
 	private NoticeService noticeService;
-	private NoticeVO noticeVO;
 	
 
 	@PostMapping("insertArticle.mdo")
@@ -27,13 +26,23 @@ public class noticeController {
 		return "redirect:articleList.mdo?where=notice";
 	}
 	
+	
+	
 	@GetMapping("articleList.mdo")
-	public String notice(Model model,@RequestParam(value="where")String where) {
-		List<NoticeVO> noticeList = noticeService.articleList();
-
+	public String getNoticeList(Model model,@RequestParam(value="where")String where) {
+		NoticeVO noticeVO = new NoticeVO();
+		noticeVO.setBoard_group(where);
+		List<NoticeVO> noticeList = noticeService.noticeList(noticeVO);
+		
 		model.addAttribute("articleList",noticeList);
 		model.addAttribute("where", where);
 		return "/admin/articleList";
+	}
+	
+	@GetMapping("articleGate.mdo")
+	public String articleGate(@RequestParam(value="where")String where) {
+		
+		return "redirect:articleList.mdo?where="+where;
 	}
 
 }

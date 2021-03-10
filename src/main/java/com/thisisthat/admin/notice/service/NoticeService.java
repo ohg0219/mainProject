@@ -12,7 +12,7 @@ public interface NoticeService {
 	
 	void deleteNotice(NoticeVO noticeVO);
 	
-	NoticeVO getNotice(NoticeVO noticeVO);
+	NoticeVO Article(NoticeVO noticeVO);
 	
-	List<NoticeVO> articleList();
+	List<NoticeVO> noticeList(NoticeVO noticeVO);
 }

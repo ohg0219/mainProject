@@ -35,7 +35,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
                             		<td colspan="2">
-	                            		<select name="example_length" aria-controls="example" class="">
+	                            		<select name="board_group" aria-controls="example" class="">
 											<option value="noSelect">---선택---</option>
 											<option value="event">이벤트</option>
 											<option value="notice">공지사항</option>

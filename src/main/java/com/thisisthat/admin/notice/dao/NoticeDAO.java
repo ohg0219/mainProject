@@ -26,13 +26,13 @@ public class NoticeDAO {
 		mybatis.delete("NoticeDAO.deleteNotice", noticeVO);
 	}
 	
-	public NoticeVO getNotice(NoticeVO noticeVO) {
+	public NoticeVO Article(NoticeVO noticeVO) {
 		mybatis.update("NoticeDAO.updatecnt", noticeVO);
-		return (NoticeVO) mybatis.selectOne("NoticeDAO.getNotice", noticeVO);
+		return (NoticeVO) mybatis.selectOne("NoticeDAO.Article", noticeVO);
 	}
 	
-	public List<NoticeVO> articleList(){
-		return mybatis.selectList("NoticeDAO.articleList");
+	public List<NoticeVO> noticeList(NoticeVO noticeVO){
+		return mybatis.selectList("NoticeDAO.noticeList",noticeVO);
 	}
 	
 	
