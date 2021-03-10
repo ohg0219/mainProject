@@ -8,16 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.thisisthat.admin.usermanagement.vo.userVO;
+import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 @Controller
 public class UserManagementController {
 
 	@GetMapping("userList.mdo")
 	public String userManagement(Model model) {
-		List<userVO> user = new ArrayList<userVO>();
+		List<UserVO> user = new ArrayList<UserVO>();
 		for (int i=1; i<=10; i++) {
-			userVO vo = new userVO();
+			UserVO vo = new UserVO();
 			vo.setUserId("yejin" + i);
 			vo.setUserName("예진" + i);
 			vo.setUserPhone("01030671121" + i);

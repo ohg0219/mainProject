@@ -2,7 +2,7 @@ package com.thisisthat.admin.usermanagement.vo;
 
 import java.util.Date;
 
-public class userVO {
+public class UserVO {
 
 	private String userId;
 	private String userName;

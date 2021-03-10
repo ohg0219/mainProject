@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thisisthat.admin.usermanagement.vo.userVO;
+import com.thisisthat.admin.usermanagement.vo.UserVO;
 import com.thisisthat.user.register.vo.TestVO;
 
 @Controller
