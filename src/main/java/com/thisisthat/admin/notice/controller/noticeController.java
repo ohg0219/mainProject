@@ -21,9 +21,9 @@ public class noticeController {
 	
 
 	@PostMapping("insertArticle.mdo")
-	public String insertNotice(NoticeVO noticeVO)throws IOException{
+	public String insertNotice(NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
 		noticeService.insertNotice(noticeVO);
-		return "redirect:articleList.mdo?where=notice";
+		return "redirect:articleList.mdo?where="+board_group;
 	}
 	
 	

@@ -95,8 +95,8 @@
                                 <div>	
 									<select name="example_length" aria-controls="example" class="">
 										<option value="all">전체</option>
-										<option value="writer">작성자</option>
-										<option value="title">제목</option>
+										<option value="board_writer">작성자</option>
+										<option value="board_title">제목</option>
 										<option value="writerContent">제목 + 내용</option>
 									</select>
 										                                    		

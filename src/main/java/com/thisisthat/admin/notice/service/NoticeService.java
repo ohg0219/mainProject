@@ -16,3 +16,5 @@ public interface NoticeService {
 	
 	List<NoticeVO> noticeList(NoticeVO noticeVO);
 }
+
+

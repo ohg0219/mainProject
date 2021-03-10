@@ -29,11 +29,7 @@ public class AdminController {
 	}
 	
 	
-//	@GetMapping("articleGate.mdo")
-//	public String articleGate(@RequestParam(value="where")String where) {
-//		
-//		return "redirect:articleList.mdo?where="+where;
-//	}
+
 	@GetMapping("insertArticle.mdo")
 	public String insertArticle() {
 		return "/admin/insertArticle";
