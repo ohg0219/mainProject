@@ -6,6 +6,7 @@ public class UserVO {
 
 	private String userId;
 	private String userName;
+	private String nickName;
 	private String userPhone;
 	private String userEmail;
 	private String firstAddress;
@@ -13,8 +14,20 @@ public class UserVO {
 	private int userRole;
 	private Date inDate;
 	private Date outDate;
+	private String userImg;
 	
-	
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getUserImg() {
+		return userImg;
+	}
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
 	public String getUserId() {
 		return userId;
 	}
