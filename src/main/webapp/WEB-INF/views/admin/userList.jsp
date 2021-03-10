@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 회원관리</title>
+<title>thisisthat - 회원목록</title>
 
 <%@include file="include/css.jsp"%>
 <%@include file="include/js.jsp"%>
@@ -44,7 +46,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">회원관리</h1>
+                    <h1 class="h3 mb-2 text-gray-800">회원목록</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -68,22 +70,26 @@
                                     <tbody>
                                     
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                    	<c:if test="${not empty articleList}" >
-	                                        <c:forEach var="article" items="${articleList}">
+                                    	<c:if test="${not empty userInfo}" >
+	                                        <c:forEach var="user" items="${userInfo}">
 		                                        <tr>
-			                                        <td width="55">${article.seq}</td>
-			                                        <td width="295"><a href="getNotice.mdo?seq=${article.seq }" style="">${article.title }<!--댓글수--> </a></td>
-			                                        <td width="140">${article.writer }</td>
-			                                        <td width="115"><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="65">${article.cnt }</td>
+			                                        <td width="85">${user.userId}</td>
+			                                        <td width="95"><a href="getUser.mdo?userId=${user.userId}">${user.userName}</a></td>
+			                                        <td width="160">${user.userPhone}</td>
+			                                        <td width="95"><fmt:formatDate value="${user.inDate}" pattern="yyyy-MM-dd"/></td>
+			                                        	<c:if test="${not empty user.outDate}">
+			                                        		<td width="75">탈퇴</td>
+			                                        	</c:if>
+			                                        	<c:if test="${empty user.outDate }">
+			                                        		<td width="75">회원</td>
+			                                        	</c:if>
 			                                    </tr>
 	                                        </c:forEach>
-                                        
                                         </c:if>
-                                        <c:if test="${empty articleList }">
+                                        <c:if test="${empty userInfo}">
                                         	<tr>
                                         		<td colspan="5" align="center">
-                                        		<h1> 게시글이 없어요</h1>
+                                        		<h3> 회원이 없어요</h3>
                                         		</td>
                                         	</tr>
                                         </c:if>
@@ -104,10 +110,6 @@
 										검색버튼
 									</button>
 
-									<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#logoutModal" id="insertArticle">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										글쓰기
-									</button>
 									<br>
 									<div align="center">
 									<a href="#">1</a>
@@ -125,8 +127,6 @@
                             </div>
                         </div>
                     </div>
-
-                
 				</div>
 			</div>
 		</div>
@@ -146,8 +146,5 @@
 		});
 	
 	</script>
-				
-	
-
 </body>
 </html>

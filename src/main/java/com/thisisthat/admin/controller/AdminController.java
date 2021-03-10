@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.thisisthat.admin.usermanagement.vo.userVO;
 import com.thisisthat.user.register.vo.TestVO;
 
 @Controller
@@ -41,19 +42,18 @@ public class AdminController {
 		model.addAttribute("where", where);
 		return "/admin/articleList";
 	}
+	
 	@GetMapping("articleGate.mdo")
 	public String articleGate(@RequestParam(value="where")String where) {
-		
 		return "redirect:articleList.mdo?where="+where;
 	}
+	
 	@GetMapping("insertArticle.mdo")
 	public String insertArticle() {
-		
 		return "/admin/insertArticle";
 	}
-	@GetMapping("userManagement.mdo")
-	public String userManagement() {
-		
-		return "/admin/userManagement";
-	}
+	
+	
+	
+	
 }
