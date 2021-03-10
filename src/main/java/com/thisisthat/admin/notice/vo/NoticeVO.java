@@ -8,7 +8,7 @@ public class NoticeVO {
 	private String board_content;
 	private String board_writer;
 	private Date regDate;
-	private Long cnt;
+	private Long board_cnt;
 	private String board_group;
 	private String board_img;
 	private boolean board_view;
@@ -42,11 +42,11 @@ public class NoticeVO {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public Long getCnt() {
-		return cnt;
+	public Long getBoard_cnt() {
+		return board_cnt;
 	}
-	public void setCnt(Long cnt) {
-		this.cnt = cnt;
+	public void setBoard_cnt(Long board_cnt) {
+		this.board_cnt = board_cnt;
 	}
 	public String getBoard_group() {
 		return board_group;
@@ -69,9 +69,14 @@ public class NoticeVO {
 	@Override
 	public String toString() {
 		return "NoticeVO [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
-				+ ", board_writer=" + board_writer + ", regDate=" + regDate + ", cnt=" + cnt + ", board_group="
-				+ board_group + ", board_img=" + board_img + ", board_view=" + board_view + "]";
+				+ ", board_writer=" + board_writer + ", regDate=" + regDate + ", board_cnt=" + board_cnt
+				+ ", board_group=" + board_group + ", board_img=" + board_img + ", board_view=" + board_view + "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 	

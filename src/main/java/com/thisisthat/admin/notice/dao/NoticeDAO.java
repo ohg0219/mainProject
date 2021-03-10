@@ -31,8 +31,8 @@ public class NoticeDAO {
 		return (NoticeVO) mybatis.selectOne("NoticeDAO.getNotice", noticeVO);
 	}
 	
-	public List<NoticeVO> getNoticeList(NoticeVO noticeVO){
-		return mybatis.selectList("NoticeVO.getNoticeList", noticeVO);
+	public List<NoticeVO> articleList(){
+		return mybatis.selectList("NoticeDAO.articleList");
 	}
 	
 	

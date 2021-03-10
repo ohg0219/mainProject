@@ -75,11 +75,11 @@
                                     	<c:if test="${not empty articleList}" >
 	                                        <c:forEach var="article" items="${articleList}">
 		                                        <tr>
-			                                        <td width="45">${article.seq}</td>
-			                                        <td width="295"><a href="getNotice.mdo?seq=${article.seq }" style="">${article.title }<!--댓글수--> </a></td>
-			                                        <td width="140">${article.writer }</td>
+			                                        <td width="45">${article.board_no}</td>
+			                                        <td width="295"><a href="getNotice.mdo?board_no=${article.board_no }" style="">${article.board_title }<!--댓글수--> </a></td>
+			                                        <td width="140">${article.board_writer }</td>
 			                                        <td width="115"><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="45">${article.cnt }</td>
+			                                        <td width="45">${article.board_cnt }</td>
 			                                    </tr>
 	                                        </c:forEach>
                                         

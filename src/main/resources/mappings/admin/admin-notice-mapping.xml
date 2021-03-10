@@ -19,7 +19,7 @@
 	<select id="getNotice">
 		select * from notice_board where board_no=#{board_no}
 	</select>
-	<select id="getNoticeList">
+	<select id="articleList" resultType="com.thisisthat.admin.notice.vo.NoticeVO">
 		select * from notice_board order by board_no desc
 	</select>
 	

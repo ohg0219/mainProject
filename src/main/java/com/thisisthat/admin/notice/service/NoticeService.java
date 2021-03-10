@@ -14,5 +14,5 @@ public interface NoticeService {
 	
 	NoticeVO getNotice(NoticeVO noticeVO);
 	
-	List<NoticeVO> getNoticeList(NoticeVO noticeVO);
+	List<NoticeVO> articleList();
 }
