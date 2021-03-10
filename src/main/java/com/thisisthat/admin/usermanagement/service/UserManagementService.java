@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.thisisthat.admin.usermanagement.vo.UserVO;
 
-public interface Service {
+public interface UserManagementService {
 
-//	List<userVO> getuserList(userVO);
+	List<UserVO> getUserList(UserVO vo);
 	
 }

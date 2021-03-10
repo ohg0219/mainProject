@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserL">
+<mapper namespace="UserManagementDAO">
+	
+	<select id="getUserList" resultType="UserVO">
+		select * from this_user order by in_date desc 
+		
+	</select>	
+	
+	
 	
 </mapper>
