@@ -97,12 +97,13 @@
                                         </c:if>
                                     </tbody>
                                 </table>
+                                
                                 <div>	
 									<select name="example_length" aria-controls="example" class="">
 										<option value="all">전체</option>
-										<option value="writer">작성자</option>
-										<option value="title">제목</option>
-										<option value="writerContent">제목 + 내용</option>
+										<option value="id">아이디</option>
+										<option value="name">이름</option>
+										<option value="nickname">닉네임</option>
 									</select>
 										                                    		
 									<input type="text" id="search">
@@ -140,10 +141,6 @@
 				var search = $('#search').val();
 				location.href="/notice.mdo?search="+search;
 				console.log(search);
-			});
-			//-------------------검색하는 함수end			
-			$("#insertArticle").click(function(){
-				location.href="/insertArticle.mdo"
 			});
 		});
 	

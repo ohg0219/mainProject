@@ -49,7 +49,8 @@
                     <span>직원관리</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded">                    	
+                        <a class="collapse-item" href="staffList.mdo">직원정보</a>
                         <a class="collapse-item" href="utilities-color.html">신규직원등록</a>
                         <a class="collapse-item" href="utilities-border.html">직원정보수정</a>
                         <a class="collapse-item" href="utilities-animation.html">권한관리</a>

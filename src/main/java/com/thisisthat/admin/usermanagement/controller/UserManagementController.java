@@ -58,23 +58,31 @@ public class UserManagementController {
 		UserVO uservo = userService.UserManagement(id);
 		if(uservo.getUserPhone() !=null) {
 			StringBuffer temp = new StringBuffer();
-//			String 공일공 = uservo.getUserPhone().substring(0,3);
-//			temp.append(공일공);
 			temp.append(uservo.getUserPhone().substring(0, 3));
 			temp.append("-");
-//			String 중간 = uservo.getUserPhone().substring(3,7);
-//			temp.append(중간);
 			temp.append(uservo.getUserPhone().substring(3, 7));
 			temp.append("-");
-//			String 끝 = uservo.getUserPhone().substring(7,11);
-//			temp.append(끝);
 			temp.append(uservo.getUserPhone().substring(7, 11));
+			/*
+			String 공일공 = uservo.getUserPhone().substring(0,3);
+			temp.append(공일공);
+			String 중간 = uservo.getUserPhone().substring(3,7);
+			temp.append(중간);
+			String 끝 = uservo.getUserPhone().substring(7,11);
+			temp.append(끝);
+			 */
 			uservo.setUserPhone(temp.toString());
 		}
 		model.addAttribute("user", uservo);
 		return "/admin/getUser";
 	}
 
+	
+	
+	
+	
+	
+	
 
 
 }
