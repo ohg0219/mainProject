@@ -33,19 +33,17 @@
 				<!-- Topbar -->
 				<%@include file="include/navbar.jsp"%>
 				<div class="container-fluid">
-					<form action="insertArticle.mdo" method="post">
+					<form action="updateGate.mdo?board_no=${article.board_no }" method="get">
+					<input type="hidden" name="board_no" value="${article.board_no }" >
 						<div class="table-responsive">
 							<table class="table table-bordered" id="dataTable" width="100%"
 								cellspacing="0">
 								<tr>
 									<td colspan="2">
-										<select name="board_group" aria-controls="example" class="">
-											<option value="noSelect">---선택---</option>
-											<option value="event">이벤트</option>
-											<option value="notice">공지사항</option>
-										</select>
+										 <h1 class="h3 mb-2 text-gray-800">${article.board_group}</h1>
 										<button type="submit" class="btn-check:checked pull-right"
 											id="updateArticle">
+											
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i> 수정하기
 										</button> 
 										<input type="text" value="${article.board_title }" name="board_title"  class="form-control mt-4 mb-2" disabled></input>

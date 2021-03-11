@@ -43,7 +43,21 @@ public class noticeController {
 		
 		model.addAttribute("article", article);
 		model.addAttribute("board_no", board_no);
-		return "/admin/article";
+		return "/admin/article";			
+	}
+	
+	@GetMapping("updateGate.mdo")
+	public String updateGate(@RequestParam(value="board_no")String board_no) {
+		return "redirect:updateArticle.mdo?board_no="+board_no;
+	}
+	
+	@GetMapping("updateArticle.mdo")
+	public String updateArticle(Model model,@RequestParam(value="board_no")Long board_no,NoticeVO noticeVO) {
+		NoticeVO article  = noticeService.notice(noticeVO);
+		
+		model.addAttribute("article", article);
+		model.addAttribute("board_no", board_no);
+		return "/admin/updateArticle";
 				
 	}
 	
