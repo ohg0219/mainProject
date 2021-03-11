@@ -12,6 +12,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -29,6 +31,9 @@
 			<div id="content">
 				<!-- Topbar -->
 				<%@include file="include/navbar.jsp"%>
+				
+				
+				
 				<div class="container-fluid">
 					<form action="insertArticle.mdo" method="post">
 						 <div class="table-responsive">
