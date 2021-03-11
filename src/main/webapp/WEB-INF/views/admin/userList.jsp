@@ -62,6 +62,7 @@
                                         <tr>
                                             <th>아이디</th>
                                             <th align="center">성명</th>
+                                            <th>닉네임</th>
                                             <th>휴대폰</th>
                                             <th>가입일</th>
                                             <th>계정관리</th>
