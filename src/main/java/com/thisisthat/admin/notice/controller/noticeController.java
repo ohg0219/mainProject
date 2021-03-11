@@ -19,6 +19,21 @@ public class noticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@GetMapping("deleteGate.mdo")
+	public String deleteGate(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam(value="board_group")String board_group) {
+		
+		noticeVO.setBoard_group(board_group);
+		noticeService.deleteNotice(noticeVO);
+		
+		
+		return "redirect:articleList.mdo?where="+board_group;
+	}
+	
+	@GetMapping("updateNotice.mdo")
+	public String updateNotice(NoticeVO noticeVO,String board_group)throws IOException{
+		noticeService.updateNotice(noticeVO);
+		return "redirect:articleList.mdo?where="+board_group;
+	}
 
 	@PostMapping("insertArticle.mdo")
 	public String insertNotice(NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
@@ -32,7 +47,7 @@ public class noticeController {
 	}
 	
 	@GetMapping("noticeGate.mdo")
-	public String noticeGate(@RequestParam(value="board_no")String board_no) {
+	public String noticeGate(@RequestParam(value="board_no")Long board_no) {
 		return "redirect:article.mdo?board_no="+board_no;
 	}
 	
@@ -47,7 +62,7 @@ public class noticeController {
 	}
 	
 	@GetMapping("updateGate.mdo")
-	public String updateGate(@RequestParam(value="board_no")String board_no) {
+	public String updateGate(@RequestParam(value="board_no")Long board_no) {
 		return "redirect:updateArticle.mdo?board_no="+board_no;
 	}
 	

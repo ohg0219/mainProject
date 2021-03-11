@@ -46,6 +46,7 @@
 											
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i> 수정하기
 										</button> 
+										<a href="deleteGate.mdo?board_no=${board_no }&board_group=${board_group}"><button type="button" class="btn-check:checked pull-right" ><input type="hidden" name="board_group" value="${articel.board_group }"/>삭제하기</button></a>
 										<input type="text" value="${article.board_title }" name="board_title"  class="form-control mt-4 mb-2" disabled></input>
 										
 										<div class="form-group">
