@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 public class UserLoginOutDAO {
 
 	@Autowired
-	SqlSessionTemplate userLoginTemplate;
+	private SqlSessionTemplate userLoginOutTemplate;
 	
 	public String userLogin(String userId) {
-		String result = userLoginTemplate.selectOne("UserLogin.loginCheck",userId);
+		String result = userLoginOutTemplate.selectOne("UserLogin.loginCheck",userId);
 		return result;
 	}
 }

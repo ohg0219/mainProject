@@ -25,6 +25,6 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 	public void insertUser(UserRegisterVO vo) {
 		userRegisterDAO.insertUser(vo);
 	}
-	
+
 	
 }
