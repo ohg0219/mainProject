@@ -5,17 +5,45 @@ import java.util.Date;
 public class UserVO {
 
 	private String userId;
+	private String userPw;
 	private String userName;
 	private String nickName;
 	private String userPhone;
 	private String userEmail;
+	private String zipCode;
 	private String firstAddress;
 	private String lastAddress;
 	private int userRole;
 	private Date inDate;
 	private Date outDate;
 	private String userImg;
+	private String social;
 	
+	@Override
+	public String toString() {
+		return "UserVO [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", nickName=" + nickName
+				+ ", userPhone=" + userPhone + ", userEmail=" + userEmail + ", zipCode=" + zipCode + ", firstAddress="
+				+ firstAddress + ", lastAddress=" + lastAddress + ", userRole=" + userRole + ", inDate=" + inDate
+				+ ", outDate=" + outDate + ", userImg=" + userImg + ", social=" + social + "]";
+	}
+	public String getUserPw() {
+		return userPw;
+	}
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
+	}
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+	public String getSocial() {
+		return social;
+	}
+	public void setSocial(String social) {
+		this.social = social;
+	}
 	public String getNickName() {
 		return nickName;
 	}

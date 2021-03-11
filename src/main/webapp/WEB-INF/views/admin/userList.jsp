@@ -76,7 +76,7 @@
 		                                        <tr>
 			                                        <td width="85">${user.userId}</td>
 			                                        <td width="95"><a href="getUser.mdo?userId=${user.userId}">${user.userName}</a></td>
-			                                        <td width="85">${user.nickName }</td>
+			                                        <td width="85">${user.nickName}</td>
 			                                        <td width="160">${user.userPhone}</td>
 			                                        <td width="95"><fmt:formatDate value="${user.inDate}" pattern="yyyy-MM-dd"/></td>
 			                                        	<c:if test="${not empty user.outDate}">

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -8,7 +8,8 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -17,10 +18,24 @@
 <%@include file="include/css.jsp"%>
 <%@include file="include/js.jsp"%>
 <style type="text/css">
- a:link { color: red; text-decoration: none;}
- a:visited { color: blue; text-decoration: none;}
- a:hover { color: red; text-decoration: underline;}
- a {color:black;}
+a:link {
+	color: red;
+	text-decoration: none;
+}
+
+a:visited {
+	color: blue;
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+	text-decoration: underline;
+}
+
+a {
+	color: black;
+}
 </style>
 
 <meta charset="UTF-8">
@@ -45,106 +60,88 @@
 				<%@include file="include/navbar.jsp"%>
 				<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">회원관리</h1>
-                    <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
+					<!-- Page Heading -->
+					<h1 class="h3 mb-2 text-gray-800">회원정보</h1>
+					<p class="mb-4">
+						<!-- 쓸 말 있으면 쓰는 곳 -->
+					</p>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                       <!--   <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
-                        </div>
-                        -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th align="center">성명</th>
-                                            <th>휴대폰</th>
-                                            <th>가입일</th>
-                                            <th>계정관리</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    
-                                    <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                    	<c:if test="${not empty userInfo}" >
-	                                        <c:forEach var="user" items="${userInfo}">
-		                                        <tr>
-			                                        <td width="85">${user.userId}</td>
-			                                        <td width="95"><a href="getUser.mdo?userId=${user.userId}">${user.userName}</a></td>
-			                                        <td width="160">${user.userPhone}</td>
-			                                        <td width="95"><fmt:formatDate value="${user.inDate}" pattern="yyyy-MM-dd"/></td>
-			                                        	<c:if test="${not empty user.outDate}">
-			                                        		<td width="75">탈퇴</td>
-			                                        	</c:if>
-			                                        	<c:if test="${empty user.outDate }">
-			                                        		<td width="75">회원</td>
-			                                        	</c:if>
-			                                    </tr>
-	                                        </c:forEach>
-                                        </c:if>
-                                        <c:if test="${empty userInfo}">
-                                        	<tr>
-                                        		<td colspan="5" align="center">
-                                        		<h3> 회원이 없어요</h3>
-                                        		</td>
-                                        	</tr>
-                                        </c:if>
-                                    </tbody>
-                                </table>
-                                <div>	
-									<select name="example_length" aria-controls="example" class="">
-										<option value="all">전체</option>
-										<option value="writer">작성자</option>
-										<option value="title">제목</option>
-										<option value="writerContent">제목 + 내용</option>
-									</select>
-										                                    		
-									<input type="text" id="search">
+					<!-- DataTales Example -->
+				
+					<div class="card shadow mb-4">
 
-									<button type="button" class="btn btn-dark" id="searchBtn">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										검색버튼
-									</button>
-
-									<br>
-									<div align="center">
-									<a href="#">1</a>
-									<a href="#">2</a>
-									<a href="#">3</a>
-									<a href="#">4</a>
-									<a href="#">5</a>
-									<a href="#">6</a>
-									<a href="#">7</a>
-									<a href="#">8</a>
-									<a href="#">9</a>
-									<a href="#">10</a>
+						<div class="card-body">
+							<div class="table-responsive">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h3 class="panel-title">[${user.userId}]님의 프로필 정보</h3>
 									</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+									<div class="panel-body">
+									
+										<div class="row">
+											<!-- 사진 -->
+											<div class="col-md-3 col-lg-3 " align="center">
+												<img alt="User Picture" width="250" height="200"
+													src="/resources/admin/img/apeach.jpeg"
+													class="img-circle img-responsive">
+												
+											</div>
+											<!-- 정보 -->
+											<div class=" col-md-9 col-lg-9 ">
+												<table class="table table-user-information">
+													<tbody>
+														<tr>
+															<td>아이디:</td>
+															<td>${user.userId}</td>
+														</tr>
+														<tr>
+															<td>성명:</td>
+															<td>${user.userName}</td>
+														</tr>
+														<tr>
+															<td>닉네임:</td>
+															<td>${user.nickName}</td>
+														</tr>
+														<tr>
+															<td>번호:</td>
+															<td>${user.userPhone}</td>
+														</tr>
+														<tr>
+															<td>가입일:</td>
+															<td><fmt:formatDate value="${user.inDate}" pattern="yyyy-MM-dd"/></td>
+														</tr>
+														<tr>
+															<td>이메일:</td>
+															<td>${user.userEmail}</td>
+														</tr>	
+														<tr>
+															<td>회원상태:</td>
+															<td>
+															<label><input type="radio" name="state" value="ok">일반회원</label>&nbsp;&nbsp;
+															<label><input type="radio" name="state" value="stop">정지회원</label>
+															</td>
+														</tr>
+															
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									
+									
+							
+
+								</div>
+							</div>
+						</div>
+					</div>
+		
+
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-	//--------------------검색하는 함수
-		$(function(){
-			$("#searchBtn").click(function(){
-				var search = $('#search').val();
-				location.href="/notice.mdo?search="+search;
-				console.log(search);
-			});
-			//-------------------검색하는 함수end			
-			$("#insertArticle").click(function(){
-				location.href="/insertArticle.mdo"
-			});
-		});
-	
-	</script>
+
 </body>
 </html>

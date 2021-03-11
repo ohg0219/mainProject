@@ -1,4 +1,4 @@
-package com.thisisthat.admin.usermanagement.Protocol;
+package com.thisisthat.admin.usermanagement.protocol;
 
 public class RoleProtocol {
 	final static int NORMAL_USER = 100; //일반유저
