@@ -40,14 +40,14 @@
                                             <img src="/resources/admin/img/mainlogo.png" style="width: 100%;" alt="">
                                         </h1>
                                     </div>
-                                    <form class="user" >
+                                    <form class="user" action="login.mdo" method="post" >
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="id" aria-describedby="emailHelp"
+                                            <input type="text" class="form-control form-control-user"
+                                                id="id" aria-describedby="emailHelp" name="userId"
                                                 placeholder="ID">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input name="userPw" type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
@@ -57,9 +57,9 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="main.mdo" class="btn btn-dark btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <input type="submit" value="Login" class="btn btn-dark btn-user btn-block">
+                                            
+                                        
                                     </form>
                                     <hr>
                                     <div class="text-center">
@@ -89,4 +89,15 @@
     <script src="/resources/admin/js/sb-admin-2.min.js"></script>
 
 </body>
+<script type="text/javascript">
+	var msg = "${msg}";
+	if(msg === "pwFail"){
+		alert("아이디, 비밀번호를 확인해 주세요");
+	}
+	if(msg === "roleFail"){
+		alert("권한이 없습니다")
+		location.href="/main.do"
+	}
+	
+</script>
 </html>

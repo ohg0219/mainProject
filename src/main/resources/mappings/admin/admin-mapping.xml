@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="AdminDAO">
+<mapper namespace="UserManagementDAO">
 	<resultMap type="UserVO" id="resultUser">
 		<id property="userId" column="user_id"></id>
 		<result property="userName" column="user_name"/>
@@ -20,9 +20,12 @@
 		<result property="social" column="social_login"/>		
 	</resultMap>
 	
-	<select id="getUser" resultType="UserVO" parameterType="String" resultMap="resultUser">
-		select * from this_user where user_id = #{userId}
+	<select id="getUserList" resultType="UserVO" parameterType="UserVO" resultMap="resultUser">
+		select * from this_user order by in_date desc 
 	</select>	
 	
+	<select id="getUser" resultMap="resultUser" parameterType="String">
+		select * from this_user where user_id=#{id}
+	</select>
 	
 </mapper>

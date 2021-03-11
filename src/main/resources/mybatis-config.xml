@@ -14,6 +14,7 @@
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
 		<mapper resource="mappings/user/user-loginout-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-management-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-mapping.xml"/>
 		
 	</mappers>
 </configuration>
