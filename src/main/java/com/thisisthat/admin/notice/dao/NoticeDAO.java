@@ -26,9 +26,8 @@ public class NoticeDAO {
 		mybatis.delete("NoticeDAO.deleteNotice", noticeVO);
 	}
 	
-	public NoticeVO Article(NoticeVO noticeVO) {
-		mybatis.update("NoticeDAO.updatecnt", noticeVO);
-		return (NoticeVO) mybatis.selectOne("NoticeDAO.Article", noticeVO);
+	public NoticeVO notice(NoticeVO noticeVO) {
+		return (NoticeVO) mybatis.selectOne("NoticeDAO.notice", noticeVO);
 	}
 	
 	public List<NoticeVO> noticeList(NoticeVO noticeVO){

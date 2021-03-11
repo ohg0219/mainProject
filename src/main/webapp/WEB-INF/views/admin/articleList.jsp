@@ -75,7 +75,7 @@
 	                                        <c:forEach var="article" items="${articleList}">
 		                                        <tr>
 			                                        <td width="45">${article.board_no}</td>
-			                                        <td width="295"><a href="Article.mdo?board_no=${article.board_no }" style="">${article.board_title }<!--댓글수--> </a></td>
+			                                        <td width="295"><a href="noticeGate.mdo?board_no=${article.board_no }" style="">${article.board_title }<!--댓글수--> </a></td>
 			                                        <td width="140">${article.board_writer }</td>
 			                                        <td width="115"><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 			                                        <td width="45">${article.board_cnt }</td>

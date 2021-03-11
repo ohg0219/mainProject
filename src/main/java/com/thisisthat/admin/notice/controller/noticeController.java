@@ -26,7 +26,26 @@ public class noticeController {
 		return "redirect:articleList.mdo?where="+board_group;
 	}
 	
+	@GetMapping("insertArticle.mdo")
+	public String insertArticle() {
+		return "/admin/insertArticle";
+	}
 	
+	@GetMapping("noticeGate.mdo")
+	public String noticeGate(@RequestParam(value="board_no")String board_no) {
+		return "redirect:article.mdo?board_no="+board_no;
+	}
+	
+	
+	@GetMapping("article.mdo")
+	public String getNotice(Model model,@RequestParam(value="board_no")Long board_no,NoticeVO noticeVO) {
+		NoticeVO article  = noticeService.notice(noticeVO);
+		
+		model.addAttribute("article", article);
+		model.addAttribute("board_no", board_no);
+		return "/admin/article";
+				
+	}
 	
 	@GetMapping("articleList.mdo")
 	public String getNoticeList(Model model,@RequestParam(value="where")String where) {
@@ -44,5 +63,8 @@ public class noticeController {
 		
 		return "redirect:articleList.mdo?where="+where;
 	}
+	
+	
+	
 
 }

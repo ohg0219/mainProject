@@ -30,10 +30,7 @@ public class AdminController {
 	
 	
 
-	@GetMapping("insertArticle.mdo")
-	public String insertArticle() {
-		return "/admin/insertArticle";
-	}
+
 	
 	@GetMapping("userManagement.mdo")
 	public String userManagement() {

@@ -30,8 +30,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public NoticeVO Article(NoticeVO noticeVO) {
-		return noticeDAO.Article(noticeVO);
+	public NoticeVO notice(NoticeVO noticeVO) {
+		return noticeDAO.notice(noticeVO);
 	}
 
 	@Override

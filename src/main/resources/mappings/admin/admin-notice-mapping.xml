@@ -16,7 +16,7 @@
 	<delete id="deleteNotice">
 		delete from notice_board board_no=#{board_no}
 	</delete>
-	<select id="getNotice">
+	<select id="notice" resultType="com.thisisthat.admin.notice.vo.NoticeVO">
 		select * from notice_board where board_no=#{board_no}
 	</select>
 	<select id="noticeList" resultType="com.thisisthat.admin.notice.vo.NoticeVO">

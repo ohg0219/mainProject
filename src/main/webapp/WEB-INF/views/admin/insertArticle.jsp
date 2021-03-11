@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <%@include file="include/css.jsp"%>
-<title>Insert title here</title>
+<title>thisisthat - 새글 등록</title>
 </head>
 <body>
 <body id="page-top">
@@ -39,15 +39,13 @@
 											<option value="noSelect">---선택---</option>
 											<option value="event">이벤트</option>
 											<option value="notice">공지사항</option>
-											<option value="">100</option>
 										</select>
 										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>
 										<input type="text" name="board_title" class="form-control mt-4 mb-2"
-											placeholder="제목을 입력해주세요." required
-										>
+											placeholder="제목을 입력해주세요." required>
 										<div class="form-group">
 											<textarea class="form-control" rows="20" name="board_content"
 												placeholder="내용을 입력해주세요" required
