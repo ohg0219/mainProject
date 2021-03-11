@@ -62,7 +62,6 @@
                                         <tr>
                                             <th>아이디</th>
                                             <th align="center">성명</th>
-                                            <th>닉네임</th>
                                             <th>휴대폰</th>
                                             <th>가입일</th>
                                             <th>계정관리</th>
@@ -76,7 +75,6 @@
 		                                        <tr>
 			                                        <td width="85">${user.userId}</td>
 			                                        <td width="95"><a href="getUser.mdo?userId=${user.userId}">${user.userName}</a></td>
-			                                        <td width="85">${user.nickName }</td>
 			                                        <td width="160">${user.userPhone}</td>
 			                                        <td width="95"><fmt:formatDate value="${user.inDate}" pattern="yyyy-MM-dd"/></td>
 			                                        	<c:if test="${not empty user.outDate}">
