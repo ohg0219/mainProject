@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <%@include file="include/css.jsp"%>
-<title>thisisthat - 새글 등록</title>
+<title>thisisthat - 글 수정</title>
 </head>
 <body>
-
-
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -31,30 +30,22 @@
 			<div id="content">
 				<!-- Topbar -->
 				<%@include file="include/navbar.jsp"%>
-				
-				
-				
 				<div class="container-fluid">
-					<form action="insertArticle.mdo" method="post">
+					<form action="updateNotice.mdo" method="post">
+					 <input type="hidden" name="board_no" value="${article.board_no }" >
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
                             		<td colspan="2">
-	                            		<select name="board_group" aria-controls="example" class="">
-											<option value="noSelect">---선택---</option>
-											<option value="event">이벤트</option>
-											<option value="notice">공지사항</option>
-										</select>
+	                            	 <h1 class="h3 mb-2 text-gray-800">${article.board_group}</h1>
 										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>
 										<input type="text" name="board_title" class="form-control mt-4 mb-2"
-											placeholder="제목을 입력해주세요." required>
+											value="${article.board_title } " >
 										<div class="form-group">
-											<textarea class="form-control" rows="20" name="board_content"
-												placeholder="내용을 입력해주세요" required
-											></textarea>
+											<textarea class="form-control" rows="20" name="board_content" >${article.board_content }</textarea>
 										</div>
 									</td>
                             	</tr>
