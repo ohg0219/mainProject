@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>		
+		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>
+		<typeAlias type="com.thisisthat.user.notice.vo.UserNoticeVO" alias="UserNoticeVO"/>
 	</typeAliases>
 	
 	<mappers>
@@ -12,5 +13,6 @@
 		<mapper resource="mappings/user/user-mapping.xml" />
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
 		<mapper resource="mappings/user/user-loginout-mapping.xml"/>
+		<mapper resource="mappings/user/user-notice-mapping.xml"/>
 	</mappers>
 </configuration>
