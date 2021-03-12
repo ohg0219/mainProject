@@ -7,11 +7,17 @@ public class NoticeVO {
 	private String board_title;
 	private String board_content;
 	private String board_writer;
-	private Date regDate;
+	private Date reg_Date;
 	private Long board_cnt;
 	private String board_group;
 	private String board_img;
 	private boolean board_view;
+	@Override
+	public String toString() {
+		return "NoticeVO [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
+				+ ", board_writer=" + board_writer + ", reg_Date=" + reg_Date + ", board_cnt=" + board_cnt
+				+ ", board_group=" + board_group + ", board_img=" + board_img + ", board_view=" + board_view + "]";
+	}
 	public Long getBoard_no() {
 		return board_no;
 	}
@@ -36,11 +42,11 @@ public class NoticeVO {
 	public void setBoard_writer(String board_writer) {
 		this.board_writer = board_writer;
 	}
-	public Date getRegDate() {
-		return regDate;
+	public Date getReg_Date() {
+		return reg_Date;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setReg_Date(Date reg_Date) {
+		this.reg_Date = reg_Date;
 	}
 	public Long getBoard_cnt() {
 		return board_cnt;
@@ -66,17 +72,6 @@ public class NoticeVO {
 	public void setBoard_view(boolean board_view) {
 		this.board_view = board_view;
 	}
-	@Override
-	public String toString() {
-		return "NoticeVO [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
-				+ ", board_writer=" + board_writer + ", regDate=" + regDate + ", board_cnt=" + board_cnt
-				+ ", board_group=" + board_group + ", board_img=" + board_img + ", board_view=" + board_view + "]";
-	}
-	
-	
-	
-	
-	
 	
 	
 	

@@ -32,9 +32,8 @@
 				<!-- Topbar -->
 				<%@include file="include/navbar.jsp"%>
 				<div class="container-fluid">
-					<form action="updateNotice.mdo" method="get">
+					<form action="updateNotice.mdo" method="post">
 					 <input type="hidden" name="board_no" value="${article.board_no }" >
-					 <input type="hidden" name="board_group" value="${article.board_group }" >
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
@@ -45,9 +44,9 @@
 											작성하기
 										</button>
 										<input type="text" name="board_title" class="form-control mt-4 mb-2"
-											value="${article.board_title } " required>
+											value="${article.board_title } " >
 										<div class="form-group">
-											<textarea class="form-control" rows="20" name="board_content" required>${article.board_content }</textarea>
+											<textarea class="form-control" rows="20" name="board_content" >${article.board_content }</textarea>
 										</div>
 									</td>
                             	</tr>

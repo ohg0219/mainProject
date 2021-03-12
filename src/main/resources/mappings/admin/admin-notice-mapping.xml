@@ -8,12 +8,9 @@
 		values(#{board_title},#{board_content},#{board_group})
 	</insert>
 	<update id="updateNotice" parameterType="com.thisisthat.admin.notice.vo.NoticeVO">
-		update notice_board set board_title=#{board_title},board_content=#{board_content} where board_no={board_no}
+		update notice_board set board_title=#{board_title}, board_content=#{board_content} where board_no=${board_no}
 	</update>
-	<update id="updatecnt">
-		update notice_board set board_cnt=board_cnt+1 where board_no=#{board_no}";
-	</update>
-	<delete id="deleteNotice">
+	<delete id="deleteNotice" parameterType="com.thisisthat.admin.notice.vo.NoticeVO">
 		delete from notice_board where board_no=#{board_no}
 	</delete>
 	<select id="notice" resultType="com.thisisthat.admin.notice.vo.NoticeVO">

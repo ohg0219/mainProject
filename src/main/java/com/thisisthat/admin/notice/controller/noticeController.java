@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.thisisthat.admin.notice.service.NoticeService;
 import com.thisisthat.admin.notice.vo.NoticeVO;
@@ -19,20 +20,26 @@ public class noticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	
 	@GetMapping("deleteGate.mdo")
-	public String deleteGate(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam(value="board_group")String board_group) {
+	public String deleteGate(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_group")String board_group) {
+		String group="";
+		if(board_group.equals("notice")) {
+			group="notice";
+		}else if(board_group.equals("event")) {
+			group="event";
+		}
 		
-		noticeVO.setBoard_group(board_group);
 		noticeService.deleteNotice(noticeVO);
+		noticeVO.setBoard_group(group);
 		
-		
-		return "redirect:articleList.mdo?where="+board_group;
+		return "redirect:articleList.mdo?where="+group;
 	}
 	
-	@GetMapping("updateNotice.mdo")
-	public String updateNotice(NoticeVO noticeVO,String board_group)throws IOException{
+	@PostMapping("updateNotice.mdo")
+	public String updateNotice(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_title")String board_title,@RequestParam("board_content")String board_content)throws IOException{
 		noticeService.updateNotice(noticeVO);
-		return "redirect:articleList.mdo?where="+board_group;
+		return "redirect:articleList.mdo?where=notice";
 	}
 
 	@PostMapping("insertArticle.mdo")
