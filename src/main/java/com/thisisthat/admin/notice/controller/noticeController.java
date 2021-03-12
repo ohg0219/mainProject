@@ -19,21 +19,21 @@ public class noticeController {
 
 	@Autowired
 	private NoticeService noticeService;
-	
+
 	
 	@GetMapping("deleteGate.mdo")
 	public String deleteGate(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_group")String board_group) {
-		String group="";
+		
 		if(board_group.equals("notice")) {
-			group="notice";
+			noticeService.deleteNotice(noticeVO);
+			return "redirect:articleList.mdo?where=notice";
+		
 		}else if(board_group.equals("event")) {
-			group="event";
+			noticeService.deleteNotice(noticeVO);
+			return "redirect:articleList.mdo?where=event";
+		
 		}
-		
-		noticeService.deleteNotice(noticeVO);
-		noticeVO.setBoard_group(group);
-		
-		return "redirect:articleList.mdo?where="+group;
+		return null;
 	}
 	
 	@PostMapping("updateNotice.mdo")
