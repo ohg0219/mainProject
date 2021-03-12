@@ -134,7 +134,7 @@ $(document).ready(function(){
             btn_on();
         }
     });
-    
+    // 비밀번호 와 비밀번호 확인 일치확인
     $("input[name=confirmPassword]").keyup(function(){
         if($('input[name=password]').val() != $('input[name=confirmPassword]').val()){
           $('#passwordCheck').text('비밀번호 일치하지 않음');
@@ -146,6 +146,48 @@ $(document).ready(function(){
           btn_on();
         }
     });//end passwordCheck
+	//핸드폰번호 정규표현식 체크
+	$("input[name=phone2]").on("keyup",function(){
+		var regType3 = /^[0-9]{4,4}/g;
+		var phone2 = $("input[name=phone2]").val();
+		if(!regType3.test(phone2) || phone2.length!=4){
+			$('#phoneCheck').text('정확한 핸드폰번호를 입력하세요.');
+			$("#phoneCheck").css("color", "red");
+			$("input[name=phone2]").focus();
+			btn_off();
+		}else{
+			btn_on();
+			$('#phoneCheck').text('');
+		}
+	});
+	$("input[name=phone3]").on("keyup",function(){
+		var regType4 = /^[0-9]{4,4}/g;
+		var phone3 = $("input[name=phone3]").val();
+		if(!regType4.test(phone3) || phone3.length!=4){
+			$('#phoneCheck').text('정확한 핸드폰번호를 입력하세요.');
+			$("#phoneCheck").css("color", "red");
+			$("input[name=phone3]").focus();
+			btn_off();
+		}else{
+			btn_on();
+			$('#phoneCheck').text('');
+		}
+	});
+	$("input[name=email]").on("blur",function(){
+		var regType5 = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var email = $("input[name=email]").val();
+		if(!regType5.test(email)){
+			$("#emailCheck").text("정확한 이메일을 입력하세요.");
+			$("#emailCheck").css("color","red");
+			$("input[name=email]").focus();
+			btn_off();
+		}else{
+			btn_on();
+			$("#emailCheck").text("");
+		}
+	});
+
+
 });//end document ready function
 //다음 주소 api
 function DaumPostcode() {

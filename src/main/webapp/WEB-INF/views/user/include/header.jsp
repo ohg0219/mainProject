@@ -19,18 +19,35 @@
 		</ul>
 		<div class="condition">
 			<ul>
-				<!--
-				<c:if test=""> 로그인하지않은 사용자 
-					<li><a href="/login.do">LOGIN</a></li>
-					
+				<c:if test="${sessionScope.userId == null && sessionScope.kakaoUserId == null && sessionScope.naverUserId == null && sessionScope.googleUserId == null}"> 
+					<li><a href="/login.do">LOGIN</a></li>					
 				</c:if>
-				-->
-				<c:if test=""><!-- 로그인한 사용자 -->
+				<c:if test="${sessionScope.userId != null || sessionScope.kakaoUserId != null || sessionScope.naverUserId != null || sessionScope.googleUserId != null}"><!-- 로그인한 사용자 -->
+					<c:if test="${sessionScope.googleUserId != null }">
+						<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+						<meta name="google-signin-client_id" content="619294176541-km5g9ed08619ijmirsaj6i4bsqife0dm.apps.googleusercontent.com">
+						<li><a href="#" onclick="signOut();">Sign out</a></li>
+						<script type="text/javascript">
+						function signOut() {
+						    var auth2 = gapi.auth2.getAuthInstance();
+						    auth2.signOut().then(function () {
+						      console.log('User signed out.');
+						    });
+						    window.location.href="http://localhost:8080/googlelogout.do";
+						  }
+						function onLoad() {
+						      gapi.load('auth2', function() {
+						        gapi.auth2.init();
+						      });
+						    }
+						
+						</script>
+					</c:if>
+					<c:if test="${sessionScope.userId != null || sessionScope.kakaoUserId != null || sessionScope.naverUserId != null }">
+						<li><a href="/logout.do">LOGOUT</a></li>
+					</c:if>
+					<li><a href="/mypage.do">MYPAGE</a></li>	
 				</c:if>
-					<li><a href="/logout.do">LOGOUT</a></li>
-					<li><a href="/mypage.do">MYPAGE</a></li>						
-				
-				
 				<li><a href="#">ORDERS</a></li>
 				<li><a href="#">BAG</a></li>
 			</ul>

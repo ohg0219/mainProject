@@ -34,7 +34,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="userManagement.mdo">회원정보</a>
+                        <a class="collapse-item" href="userList.mdo">회원정보</a>
                         <a class="collapse-item" href="cards.html">회원적립금관리</a>
                         <a class="collapse-item" href="cards.html">쿠폰생성</a>
                         <a class="collapse-item" href="cards.html">회원쿠폰부여</a>
@@ -49,7 +49,8 @@
                     <span>직원관리</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded">                    	
+                        <a class="collapse-item" href="staffList.mdo">직원정보</a>
                         <a class="collapse-item" href="utilities-color.html">신규직원등록</a>
                         <a class="collapse-item" href="utilities-border.html">직원정보수정</a>
                         <a class="collapse-item" href="utilities-animation.html">권한관리</a>

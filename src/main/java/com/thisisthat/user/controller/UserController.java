@@ -1,6 +1,9 @@
 package com.thisisthat.user.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,14 +22,17 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = {"/login.do"})
-	public String loginView() {
+	public String loginView(HttpSession session) {
+		if(session.getAttribute("userId")!=null || session.getAttribute("kakaoUserId") != null) {
+			return "redirect:/main.do";
+		}
 		return "/user/login";
 	}
 	/**
 	 * 회원가입페이지로 이동
 	 * @return
 	 */
-	@RequestMapping(value = {"/register.do"})
+	@GetMapping(value = {"/register.do"})
 	public String registerView() {
 		return "/user/register";
 	}
