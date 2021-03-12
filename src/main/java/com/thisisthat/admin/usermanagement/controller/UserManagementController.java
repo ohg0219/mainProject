@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -42,7 +43,6 @@ public class UserManagementController {
 			if(userTemp.getUserPhone() !=null) {
 				temp.append(userTemp.getUserPhone().substring(0, 3));
 				temp.append("-****-");
-				System.out.println(userTemp.getUserPhone()+" : "+userTemp.getUserPhone().length());
 				temp.append(userTemp.getUserPhone().substring(userTemp.getUserPhone().length()-6, userTemp.getUserPhone().length()-2));
 				userTemp.setUserPhone(temp.toString());
 			}
@@ -85,16 +85,16 @@ public class UserManagementController {
 	@PostMapping("/pwCheck.mdo")
 	public String pwCheck(@RequestParam("userId")String userId,
 						  @RequestParam("userPw")String userPw, HttpSession session,
-						  Model model) {
+						  RedirectAttributes model) {
 		System.out.println(userId);
 		System.out.println(userPw);
 		UserVO sessionUser = (UserVO)session.getAttribute("userId");
-		System.out.println(sessionUser.getUserPw());
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
 			return "redirect:/admin/getUser.mdo?userId="+userId;
 		}else {
-			model.addAttribute("msg","fail");
-			return "/admin/userList.mdo";
+			model.addFlashAttribute("msg","fail");
+			model.addFlashAttribute("failId",userId);
+			return "redirect:/admin/userList.mdo";
 		}
 
 		

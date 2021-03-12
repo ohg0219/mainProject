@@ -111,7 +111,7 @@ a {
 										</c:if>
 										<c:if test="${empty userInfo}">
 											<tr>
-												<td colspan="5" align="center">
+												<td colspan="6" align="center">
 													<h3>회원이 없어요</h3>
 												</td>
 											</tr>
@@ -162,17 +162,20 @@ a {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">로그아웃하시겠습니까?</h5>
+					<h5 class="modal-title" id="exampleModalLabel">비밀번호를 입력해 주세요</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
+				<div class="modal-content">
+					<input type="password" name="userPw" placeholder="비밀번호">
+					
+				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
 						data-dismiss="modal">Cancel</button>
-					<input type="submit" class="btn btn-primary" id="modalInput" value="확인">
-					<input type="password" name="userPw" placeholder="비밀번호">
+					<input type="submit" class="btn btn-primary" id="modalInput" value="확인">					
 					<input type="hidden" id="userId" name="userId">
 				</div>
 			</div>
@@ -182,6 +185,13 @@ a {
 
 	<script>
 	//--------------------검색하는 함수
+	var msg = '${msg}';
+	var failId = '${failId}';
+	if(msg==='fail'){
+		console.log(failId);
+		document.getElementById(failId).click();
+		alert('비밀번호를 확인해 주세요');
+	}
 		$(function(){
 			$("#searchBtn").click(function(){
 				var search = $('#search').val();
@@ -189,10 +199,9 @@ a {
 				console.log(search);
 			});
 			
+			//--getUser전 비밀번호 체크
 			$('.who').click(function(){
-				var user = $('#userid').val();
 				document.getElementById("userId").value = $(this).attr('id'); 
-					
 			})	
 		});
 		
