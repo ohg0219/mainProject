@@ -48,7 +48,7 @@ public class AdminController {
 			
 		}else if(BCrypt.checkpw(vo.getUserPw(), user.getUserPw())) {
 			if(user.getUserRole()<21) {
-				session.setAttribute("userId", vo);
+				session.setAttribute("userId", user);
 				return "/admin/main";
 			}else {
 				System.out.println("권한없음");
@@ -87,7 +87,9 @@ public class AdminController {
 	public String insertArticle() {
 		return "/admin/insertArticle";
 	}
-
+	
+	
+	
 
 
 
