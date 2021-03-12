@@ -23,7 +23,8 @@ public class UserController {
 	 */
 	@RequestMapping(value = {"/login.do"})
 	public String loginView(HttpSession session) {
-		if(session.getAttribute("userId")!=null || session.getAttribute("kakaoUserId") != null) {
+		if(session.getAttribute("userId")!=null || session.getAttribute("kakaoUserId") != null || 
+				session.getAttribute("naverUserId") != null || session.getAttribute("googleUserId") != null) {
 			return "redirect:/main.do";
 		}
 		return "/user/login";
