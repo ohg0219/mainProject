@@ -21,5 +21,6 @@
 		<mapper resource="mappings/admin/admin-management-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-category-mapping.xml"/>
 	</mappers>
 </configuration>

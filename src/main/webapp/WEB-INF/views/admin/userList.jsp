@@ -31,7 +31,7 @@ a:visited {
 a:hover {
 	color: red;
 	text-decoration: underline;
-	font-size: 17px;
+	cursor: pointer;
 }
 
 a {

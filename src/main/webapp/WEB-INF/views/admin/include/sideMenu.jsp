@@ -4,13 +4,9 @@
 	<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-<<<<<<< HEAD
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/main.mdo">
-                <img style="height: 100%;" alt="" src="/resources/admin/img/mainlogo.png">
-=======
+
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <img style="height: 100%;" alt="" src="https://thisisthat.s3.ap-northeast-2.amazonaws.com/img/mainlogo.png">
->>>>>>> d1a315cd3c3063ffbff02384c039f35455a71263
             </a>
 
             <!-- Divider -->
