@@ -63,7 +63,20 @@ a {
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-2 text-gray-800">Q&A게시판</h1>
-					<div style="float: right;">
+					
+						<p class="mb-4">
+						<!-- 쓸 말 있으면 쓰는 곳 -->
+					</p>
+
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<!--   <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
+                        </div>
+                        -->
+                        
+						<div class="card-body">
+						<div style="float: right;">
 						<select id="cntPerPage" name="sel" onchange="selChange()">
 							<option value="5"
 								<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
@@ -75,18 +88,8 @@ a {
 								<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
 						</select>
 					</div>
-						<p class="mb-4">
-						<!-- 쓸 말 있으면 쓰는 곳 -->
-					</p>
-
-					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
-						<!--   <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
-                        </div>
-                        -->
-						<div class="card-body">
 							<div class="table-responsive">
+							
 								<table class="table table-bordered" id="dataTable" width="100%"
 									cellspacing="0">
 									<thead>
@@ -187,23 +190,23 @@ a {
 									<br>
 									
 									<div style="display: block; text-align: center;">		
-		<c:if test="${paging.startPage != 1 }">
-			<a href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-		</c:if>
-		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-			<c:choose>
-				<c:when test="${p == paging.nowPage }">
-					<b>${p }</b>
-				</c:when>
-				<c:when test="${p != paging.nowPage }">
-					<a href="/admin/answerBoardList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${paging.endPage != paging.lastPage}">
-			<a href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-		</c:if>
-	</div>	
+									<c:if test="${paging.startPage != 1 }">
+										<a href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+									</c:if>
+									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage }">
+												<b>${p }</b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="/admin/answerBoardList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${paging.endPage != paging.lastPage}">
+										<a href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+									</c:if>
+								</div>	
 
 								</div>
 							</div>
