@@ -97,22 +97,18 @@
                                         </c:if>
                                     </tbody>
                                 </table>
-                                
-                                <div>	
-									<select name="example_length" aria-controls="example" class="">
-										<option value="all">전체</option>
+                                		
+                                <div>
+									<select id="search_select" aria-controls="example" class="">
 										<option value="id">아이디</option>
-										<option value="name">이름</option>
 										<option value="nickname">닉네임</option>
 									</select>
-										                                    		
 									<input type="text" id="search">
 
 									<button type="button" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										검색버튼
 									</button>
-
 									<br>
 									<div align="center">
 									<a href="#">1</a>
@@ -139,11 +135,28 @@
 		$(function(){
 			$("#searchBtn").click(function(){
 				var search = $('#search').val();
-				location.href="/notice.mdo?search="+search;
+				var select = document.getElementById("search_select");
+				var val;
+
+				for(i=0; i<select.options.length; i++) {
+				    if(select.options[i].selected == true) {
+				        val = select.options[i].value;
+				        break;
+				    }
+				}location.href="userList.mdo?search="+search+"&select="+val;
 				console.log(search);
+				console.log(select);
+				console.log(val);
 			});
+			$('#search').keypress(function(event){
+			     if ( event.which == 13 ) {
+			         $('#searchBtn').click();
+			         return false;
+			     }
+			});
+			
+			
 		});
-	
 	</script>
 </body>
 </html>

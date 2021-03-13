@@ -17,15 +17,61 @@ public class UserManagementServiceImpl implements UserManagementService{
 	
 	@Override
 	public List<UserVO> getUserList(UserVO vo) {
-		System.out.println("임플");
 		return userDAO.getUserList(vo);
 	}
 
-
 	@Override
-	public UserVO UserManagement(String id) {
+	public UserVO userManagement(String id) {
 		return userDAO.getUser(id);
 	}
+	
+	@Override
+	public List<UserVO> staffList(UserVO vo) {
+		return userDAO.getStaffList(vo);
+	}
+	
+	@Override
+	public UserVO staffManagement(String id) {
+		return userDAO.getStaff(id);
+	}
+
+	@Override
+	public void userUpdate(UserVO vo) {
+		userDAO.getUserUpdate(vo);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 }

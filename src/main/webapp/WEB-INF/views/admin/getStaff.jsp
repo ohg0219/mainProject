@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 회원관리</title>
+<title>thisisthat - 직원관리</title>
 
 <%@include file="include/css.jsp"%>
 <%@include file="include/js.jsp"%>
@@ -39,7 +39,7 @@ a {
 </style>
 
 <meta charset="UTF-8">
-<title>회원관리 페이지</title>
+<title>직원관리 페이지</title>
 </head>
 <body id="page-top">
 
@@ -61,7 +61,7 @@ a {
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">회원정보</h1>
+					<h1 class="h3 mb-2 text-gray-800">직원정보</h1>
 					<p class="mb-4">
 						<!-- 쓸 말 있으면 쓰는 곳 -->
 					</p>
@@ -92,7 +92,7 @@ a {
 													<tbody>
 														<tr>
 															<td>아이디:</td>
-															<td id="userId">${user.userId}</td>
+															<td>${user.userId}</td>
 														</tr>
 														<tr>
 															<td>성명:</td>
@@ -115,38 +115,36 @@ a {
 															<td>${user.userEmail}</td>
 														</tr>	
 														<tr>
-															<td>회원상태:</td>
+															<td>직원상태:</td>
 															<td>
-															<c:if test="${user.userRole == 100}">
-																<label><input type="radio" name="state" value="100" checked="checked">일반회원</label>&nbsp;&nbsp;
-																<label><input type="radio" name="state" value="110">정지회원</label>&nbsp;&nbsp;
-																<label><input type="radio" name="state" value="120" disabled="disabled">탈퇴회원</label>
+															<c:if test="${user.userRole < 51}">
+																<label><input type="radio" name="state" value="hi" checked="checked">일반직원</label>&nbsp;&nbsp;
+																<label><input type="radio" name="state" value="bye" disabled="disabled">퇴사</label>
 															</c:if>
-															<c:if test="${user.userRole == 110 }">
-																<label><input type="radio" name="state" value="100">일반회원</label>&nbsp;&nbsp;
-																<label><input type="radio" name="state" value="110" checked="checked">정지회원</label>&nbsp;&nbsp;
-																<label><input type="radio" name="state" value="120" disabled="disabled">탈퇴회원</label>
-															</c:if>
-															<c:if test="${user.userRole == 120 }">
-																<label><input type="radio" name="state" value="100" disabled="disabled">일반회원</label>&nbsp;&nbsp;
-																<label><input type="radio" name="state" value="110" disabled="disabled">정지회원</label>&nbsp;&nbsp;
-																<label><input type="radio" name="state" value="120" checked="checked">탈퇴회원</label>
+															<c:if test="${user.userRole == 60 }">
+																<label><input type="radio" name="state" value="hi" disabled="disabled">일반회원</label>&nbsp;&nbsp;
+																<label><input type="radio" name="state" value="bye" checked="checked">퇴사</label>
 															</c:if>
 															</td>
 														</tr>
 													</tbody>
 												</table>
-											</div>
-												<div align="center">
-													<button type="button" class="btn btn-warning" id="modifyBtn" style="margin-right: 20px;">
+												
+													
+												
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												<button type="button" class="btn btn-warning" id="modifyBtn">
 													<i class="fa fa-pencil fa-fw mr-2 text-white-400"></i>
 													수정
 												</button>
-												<button type="button" onclick="location.href='userList.mdo'" class="btn btn-dark" id="listBtn">
+												&nbsp; &nbsp; &nbsp;
+												<button type="button" onclick="location.href='staffList.mdo'" class="btn btn-dark" id="listBtn">
 													<i class="fa fa-pencil fa-fw mr-2 text-white-400"></i>
 													목록가기
 												</button>
-												</div>
+										
+												
+											</div>
 										</div>
 									</div>
 								</div>
@@ -157,18 +155,6 @@ a {
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		$(function() {
-			$("#modifyBtn").click(function(){
-				 var state = $("input[name=state]:checked").val();
-				 var userId = $("#userId").text();
-				 window.location.href="/getUserUpdate.mdo?state="+state+"&userId="+userId;
-				 alert("수정되었습니다.")
-				 
-			});
-		});
-	});
-	</script>
+
 </body>
 </html>
