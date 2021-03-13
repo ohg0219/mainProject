@@ -18,6 +18,8 @@ public class UserVO {
 	private Date outDate;
 	private String userImg;
 	private String social;
+	private String search;
+	private String select;
 	
 	@Override
 	public String toString() {
@@ -26,6 +28,23 @@ public class UserVO {
 				+ firstAddress + ", lastAddress=" + lastAddress + ", userRole=" + userRole + ", inDate=" + inDate
 				+ ", outDate=" + outDate + ", userImg=" + userImg + ", social=" + social + "]";
 	}
+	
+	public String getSearch() {
+		return search;
+	}
+	
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	
+	public String getSelect() {
+		return select;
+	}
+	
+	public void setSelect(String select) {
+		this.select = select;
+	}
+	
 	public String getUserPw() {
 		return userPw;
 	}
