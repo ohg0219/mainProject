@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminCategory">
+	<resultMap type="com.thisisthat.admin.category.vo.AdminCategoryVO" id="adminCategoryVO">
+		<id property="categorySeq" column="category_no"/>
+		<result property="categoryName" column="category_name"/>
+		<result property="categoryProduct" column="category_product"/>
+		<result property="categoryUsed" column="category_used"/>
+	</resultMap>
+	<select id="getCategoryList" resultMap="adminCategoryVO">
+		select * from category order by category_no asc
+	</select>
+	<select id="getCategory" resultMap="adminCategoryVO">
+		select * from category where category_no = #{categorySeq}
+	</select>
+	<insert id="insertCategory">
+		insert into category (category_name) values (#{categoryName})
+	</insert>
+	<update id="updateCategory">
+		update category set category_name = #{categoryName},category_used = #{categoryUsed} where category_no = #{categorySeq}
+	</update>
+	<delete id="deleteCategory">
+		delete from category where category_no = #{categorySeq} 
+	</delete>
+</mapper>

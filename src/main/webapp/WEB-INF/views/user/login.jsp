@@ -77,6 +77,9 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".inputId").focus();
+		$(".loginBtn").on("click",function(){
+			
+		});
 	});
 </script>
 </head>
@@ -129,7 +132,7 @@
 					</form>	
 				</div>
 				<div class="register">
-					<form action="/register.do" method="post">
+					<form action="/register.do" method="get">
 						<p class="box_title">REGISTER</p>
 						<ul>
 							<li><p>회원으로 가입하시면 여러가지 혜택과 함께<br>더 편리하게 사이트를 이용하실 수 있습니다.</p></li>

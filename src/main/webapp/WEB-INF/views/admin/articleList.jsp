@@ -23,8 +23,7 @@
  a {color:black;}
 </style>
 
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 </head>
 <body id="page-top">
 
@@ -75,11 +74,11 @@
                                     	<c:if test="${not empty articleList}" >
 	                                        <c:forEach var="article" items="${articleList}">
 		                                        <tr>
-			                                        <td width="45">${article.seq}</td>
-			                                        <td width="295"><a href="getNotice.mdo?seq=${article.seq }" style="">${article.title }<!--댓글수--> </a></td>
-			                                        <td width="140">${article.writer }</td>
-			                                        <td width="115"><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="45">${article.cnt }</td>
+			                                        <td width="45">${article.board_no}</td>
+			                                        <td width="295"><a href="noticeGate.mdo?board_no=${article.board_no }" style="">${article.board_title }<!--댓글수--> </a></td>
+			                                        <td width="140">${article.board_writer }</td>
+			                                        <td width="115"><fmt:formatDate value="${article.reg_Date}" pattern="yyyy-MM-dd HH:mm"/></td>
+			                                        <td width="45">${article.board_cnt }</td>
 			                                    </tr>
 	                                        </c:forEach>
                                         
@@ -96,8 +95,8 @@
                                 <div>	
 									<select name="example_length" aria-controls="example" class="">
 										<option value="all">전체</option>
-										<option value="writer">작성자</option>
-										<option value="title">제목</option>
+										<option value="board_writer">작성자</option>
+										<option value="board_title">제목</option>
 										<option value="writerContent">제목 + 내용</option>
 									</select>
 										                                    		

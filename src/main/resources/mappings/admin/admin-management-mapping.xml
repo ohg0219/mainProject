@@ -22,7 +22,53 @@
 	
 	<select id="getUser" resultType="UserVO" parameterType="String" resultMap="resultUser">
 		select * from this_user where user_id = #{userId}
+	</select>
+	<select id="getUserList" parameterType="UserVO" resultMap="resultUser">
+		select * from this_user where <![CDATA[ user_role > 99  ]]>
+		<if test="select=='id'">
+			and user_id like '%'||#{search}||'%'
+		</if>
+		<if test="select=='nickname'">
+			and nick_name like '%'||#{search}||'%'
+		</if>
+		order by in_date desc 
 	</select>	
+	
+	
+	<select id="getStaffList" resultMap="resultUser" resultType="UserVO" parameterType="UserVO">
+		select * from this_user where <![CDATA[ user_role < 51 order by in_date desc ]]>
+	</select>
+	
+	<select id="getStaff" resultType="UserVO" parameterType="UserVO" resultMap="resultUser">
+		select * from this_user where user_id=#{id}
+	</select>
+	
+	<update id="getUserUpdate" parameterType="UserVO">
+		update this_user set user_role=#{userRole} where user_id=#{userId}	
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 </mapper>

@@ -2,7 +2,7 @@
 <div class="header">
 	<nav class="top_nav">
 		<ul class="menu">
-			<li><a href="/main.do"><img alt="" src="/resources/user/image/mainlogo.png"></a></li>
+			<li><a href="/main.do"><img alt="" src="https://thisisthat.s3.ap-northeast-2.amazonaws.com/img/mainlogo.png"></a></li>
 			<li class="categoryMenu"><a href="/shop/list/all.do" class="category">SHOP</a>
 				<ul class="sub_category">
 					<li><a href="/shop/list/all.do"><p>ALL</p></a></li>

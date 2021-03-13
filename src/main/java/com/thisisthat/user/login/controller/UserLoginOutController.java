@@ -28,6 +28,7 @@ public class UserLoginOutController {
 			@RequestParam("id")String id,
 			@RequestParam("password")String password,
 			HttpSession session) {
+		
 		String dbPass = userLoginOutService.userLogin(id);
 		if(dbPass==null) {//아이디없음
 			System.out.println("로그인 실패");

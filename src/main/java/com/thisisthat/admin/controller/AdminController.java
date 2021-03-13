@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.thisisthat.admin.notice.service.NoticeService;
+import com.thisisthat.admin.notice.vo.NoticeVO;
 import com.thisisthat.admin.service.AdminService;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
 import com.thisisthat.user.register.vo.TestVO;
@@ -24,7 +26,10 @@ import com.thisisthat.user.register.vo.TestVO;
 @Controller
 
 public class AdminController {
-
+	
+	
+	
+	
 	@Autowired
 	AdminService dao;
 
@@ -105,9 +110,11 @@ public class AdminController {
 		return "/admin/insertArticle";
 	}
 	
+
 	
-	
-
-
-
+	@GetMapping("userManagement.mdo")
+	public String userManagement() {
+		
+		return "/admin/userManagement";
+	}
 }
