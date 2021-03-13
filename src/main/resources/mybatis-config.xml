@@ -5,7 +5,9 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>		
-			<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>	
+		<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>
+		<typeAlias type="com.thisisthat.admin.board.vo.AnswerBoardVO" alias="answerVO"/>
+		
 	</typeAliases>
 	
 	<mappers>
@@ -15,6 +17,7 @@
 		<mapper resource="mappings/user/user-loginout-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-management-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
 		
 	</mappers>
 </configuration>

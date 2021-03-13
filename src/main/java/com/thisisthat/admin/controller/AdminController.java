@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -35,20 +37,34 @@ public class AdminController {
 	public String loginView() {
 		return "/admin/login";
 	}
-	@RequestMapping("/admin/login.mdo")
-	public String removeSession(HttpSession session) {
+	@RequestMapping("/admin/logout.mdo")
+	public String removeSession(HttpSession session, HttpServletResponse response) {
+		Cookie cookie = new Cookie("userVO", null);
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		response.addCookie(cookie);
 		session.invalidate();
 		return "/admin/login";
 	}
 
 	@PostMapping("/login.mdo")
-	public String loginCheck(UserVO vo, HttpSession session,Model model) {
+	public String loginCheck(UserVO vo, HttpSession session,Model model,
+			@RequestParam(value="autoLogin",defaultValue= "false")boolean autoLogin,
+			HttpServletResponse response) {
 		UserVO user = dao.idCheck(vo.getUserId());
+		System.out.println(autoLogin);
 		if(user == null) {
 			
 		}else if(BCrypt.checkpw(vo.getUserPw(), user.getUserPw())) {
 			if(user.getUserRole()<21) {
 				session.setAttribute("userId", user);
+				if(autoLogin) {
+					System.out.println("쿠키");
+					Cookie cookie = new Cookie("userVO", user.getUserId());
+					cookie.setMaxAge(60*60*24*30);//한달설정
+					cookie.setPath("/");
+					response.addCookie(cookie);
+				}
 				return "/admin/main";
 			}else {
 				System.out.println("권한없음");
@@ -56,6 +72,7 @@ public class AdminController {
 				return "/admin/login";
 			}
 		}
+		
 		System.out.println("로그인 실패");
 		model.addAttribute("msg","pwFail");
 		return "/admin/login";
