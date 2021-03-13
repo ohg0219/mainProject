@@ -9,11 +9,11 @@ import com.thisisthat.user.login.dao.UserLoginOutDAO;
 public class UserLoginOutServiceImpl implements UserLoginOutService {
 
 	@Autowired
-	private UserLoginOutDAO userLoginDAO;
+	private UserLoginOutDAO userLoginOutDAO;
 	
 	@Override
 	public String userLogin(String userId) {
-		return userLoginDAO.userLogin(userId);
+		return userLoginOutDAO.userLogin(userId);
 	}
 
 	
