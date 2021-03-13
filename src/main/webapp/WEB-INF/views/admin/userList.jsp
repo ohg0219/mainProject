@@ -81,7 +81,7 @@ a {
                             <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
                         </div>
                         -->
-<<<<<<< HEAD
+
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%"
@@ -130,63 +130,16 @@ a {
 								</table>
 
 								<div>
-									<select name="example_length" aria-controls="example" class="">
+									<select name="example_length" id="search_select" aria-controls="example" class="">
 										<option value="all">전체</option>
-=======
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th align="center">성명</th>
-                                            <th>닉네임</th>
-                                            <th>휴대폰</th>
-                                            <th>가입일</th>
-                                            <th>계정관리</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    
-                                    <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                    	<c:if test="${not empty userInfo}" >
-	                                        <c:forEach var="user" items="${userInfo}">
-		                                        <tr>
-			                                        <td width="85">${user.userId}</td>
-			                                        <td width="95"><a href="getUser.mdo?userId=${user.userId}">${user.userName}</a></td>
-			                                        <td width="85">${user.nickName}</td>
-			                                        <td width="160">${user.userPhone}</td>
-			                                        <td width="95"><fmt:formatDate value="${user.inDate}" pattern="yyyy-MM-dd"/></td>
-			                                        	<c:if test="${not empty user.outDate}">
-			                                        		<td width="75">탈퇴</td>
-			                                        	</c:if>
-			                                        	<c:if test="${empty user.outDate }">
-			                                        		<td width="75">회원</td>
-			                                        	</c:if>
-			                                    </tr>
-	                                        </c:forEach>
-                                        </c:if>
-                                        <c:if test="${empty userInfo}">
-                                        	<tr>
-                                        		<td colspan="5" align="center">
-                                        		<h3> 회원이 없어요</h3>
-                                        		</td>
-                                        	</tr>
-                                        </c:if>
-                                    </tbody>
-                                </table>
-                                		
-                                <div>
-									<select id="search_select" aria-controls="example" class="">
->>>>>>> d1a315cd3c3063ffbff02384c039f35455a71263
 										<option value="id">아이디</option>
 										<option value="nickname">닉네임</option>
-<<<<<<< HEAD
-									</select> <input type="text" id="search">
-=======
 									</select>
-									<input type="text" id="search">
->>>>>>> d1a315cd3c3063ffbff02384c039f35455a71263
+                        
+                                		
+                                <div>
+									 <input type="text" id="search">
+									
 
 									<button type="button" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i> 검색버튼
@@ -275,17 +228,17 @@ a {
 			     }
 			});
 			
-<<<<<<< HEAD
+
 			//--getUser전 비밀번호 체크
 			$('.who').click(function(){
 				document.getElementById("userId").value = $(this).attr('id'); 
 			})	
 		});
 		
-=======
+
 			
-		});
->>>>>>> d1a315cd3c3063ffbff02384c039f35455a71263
+		
+
 	</script>
 </body>
 </html>

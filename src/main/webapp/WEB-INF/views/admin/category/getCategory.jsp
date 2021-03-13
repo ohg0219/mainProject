@@ -62,7 +62,7 @@
                         </div>
                         -->
                         <div class="card-body">
-                            <form action="updateCategory.mdo" method="post">
+                            <form action="/admin/updateCategory.mdo" method="post">
       							<input type="hidden" name="categorySeq" value="${category.categorySeq }">
 							 	<div class="table-responsive">
 	                           		<table class="table table-bordered" id="dataTable" >
@@ -87,9 +87,9 @@
                     					</tr>
                     					<tr>
                     						<td colspan="2" align="center">
-	                    						<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/categoryList.mdo'">
+	                    						<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/categoryList.mdo'">
 	                    						<input value="수정" type="submit" class="btn btn-dark">
-	                    						<input value="삭제" type="button" class="btn btn-dark" onclick="location.href='/deleteCategory.mdo?categorySeq=${category.categorySeq}'">
+	                    						<input value="삭제" type="button" class="btn btn-dark" onclick="location.href='/admin/deleteCategory.mdo?categorySeq=${category.categorySeq}'">
                     						</td>
                     					</tr>
                     				</table>
