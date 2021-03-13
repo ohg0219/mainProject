@@ -24,6 +24,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style type="text/css">
  a:link { color: red; text-decoration: none;}
  a:visited { color: blue; text-decoration: none;}
@@ -38,8 +39,117 @@
 				alert("카테고리명을 입력하세요");
 				return false;
 			}
-		})
+		});
 	});
+	$(document).ready(function (e){
+		$("#mainUploadFile").change(function(e){
+			//div 내용 비워주기
+			$('#main-preview').empty();
+			var files = e.target.files;
+			var arr =Array.prototype.slice.call(files);
+			//업로드 가능 파일인지 체크
+			for(var i=0;i<files.length;i++){
+				if(!checkExtension(files[i].name,files[i].size)){
+					return false;
+				}
+			}
+			preview(arr);
+	    });//file change
+	    function checkExtension(fileName,fileSize){
+	      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	      var maxSize = 20971520;  //20MB
+	      if(fileSize >= maxSize){
+	        alert('파일 사이즈 초과');
+	        $("mainUploadFile").val("");  //파일 초기화
+	        return false;
+	      }
+	      if(regex.test(fileName)){
+	        alert('업로드 불가능한 파일이 있습니다.');
+	        $("mainUploadFile").val("");  //파일 초기화
+	        return false;
+	      }
+	      return true;
+	    }
+	    function preview(arr){
+	      arr.forEach(function(f){
+	        //파일명이 길면 파일명...으로 처리
+	        var fileName = f.name;
+	        if(fileName.length > 10){
+	          fileName = fileName.substring(0,7)+"...";
+	        }
+	        //div에 이미지 추가
+	        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
+	        str += '<span>'+fileName+'</span><br>';
+	        //이미지 파일 미리보기
+	        if(f.type.match('image.*')){
+	          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=100 height=100 />';
+	            str += '</li></div>';
+	            $(str).appendTo('#main-preview');
+	          } 
+	          reader.readAsDataURL(f);
+	        }
+	      });//arr.forEach
+	    }
+	    
+	    
+	});
+	
+	$(document).ready(function (e){
+		$("#subUploadFile").change(function(e){
+			//div 내용 비워주기
+			$('#sub-preview').empty();
+			var files = e.target.files;
+			var arr =Array.prototype.slice.call(files);
+			//업로드 가능 파일인지 체크
+			for(var i=0;i<files.length;i++){
+				if(!checkExtension(files[i].name,files[i].size)){
+					return false;
+				}
+			}
+			preview(arr);
+	    });//file change
+	    function checkExtension(fileName,fileSize){
+	      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	      var maxSize = 20971520;  //20MB
+	      if(fileSize >= maxSize){
+	        alert('파일 사이즈 초과');
+	        $("subUploadFile").val("");  //파일 초기화
+	        return false;
+	      }
+	      if(regex.test(fileName)){
+	        alert('업로드 불가능한 파일이 있습니다.');
+	        $("subUploadFile").val("");  //파일 초기화
+	        return false;
+	      }
+	      return true;
+	    }
+	    function preview(arr){
+	      arr.forEach(function(f){
+	        //파일명이 길면 파일명...으로 처리
+	        var fileName = f.name;
+	        if(fileName.length > 10){
+	          fileName = fileName.substring(0,7)+"...";
+	        }
+	        //div에 이미지 추가
+	        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
+	        str += '<span>'+fileName+'</span><br>';
+	        //이미지 파일 미리보기
+	        if(f.type.match('image.*')){
+	          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=100 height=100 />';
+	            str += '</li></div>';
+	            $(str).appendTo('#sub-preview');
+	          } 
+	          reader.readAsDataURL(f);
+	        }
+	      });//arr.forEach
+	    }
+	});
+	
+	
 </script>
 </head>
 <body id="page-top">
@@ -69,9 +179,9 @@
                     <div class="card shadow mb-4">
                        
                         <div class="card-body">
-                            <form action="insertProduct.mdo" method="post">
+                            <form action="insertProduct.mdo" method="post" enctype="multipart/form-data">
 							 	<div class="table-responsive">
-	                           		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                           		<table class="table table-bordered" id="dataTable">
                     					<tr>
                     						<td>카테고리</td>
                     						<td>
@@ -111,8 +221,24 @@
                     					</tr>
                     					<tr>
                     						<td colspan="2">
-                    						<p>이미지</p>
-												                    						
+    	                						<p>메인이미지</p>
+                    							<div class="col-lg-12">
+                    								<input type="file" name="mainUploadFile" id="mainUploadFile">
+                    							</div>
+                    							<div id="main-preview">
+                    							
+                    							</div>
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td colspan="2">
+    	                						<p>상세이미지</p>
+                    							<div class="col-lg-12">
+                    								<input type="file" name="subUploadFile" id="subUploadFile" multiple>
+                    							</div>
+                    							<div id="sub-preview">
+                    							
+                    							</div>
                     						</td>
                     					</tr>
                     					<tr>
@@ -167,13 +293,6 @@
     <!-- Custom scripts for all pages-->
     <script src="/resources/admin/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/resources/admin/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/resources/admin/js/demo/chart-area-demo.js"></script>
-    <script src="/resources/admin/js/demo/chart-pie-demo.js"></script>
-	
 
 </body>
 </html>
