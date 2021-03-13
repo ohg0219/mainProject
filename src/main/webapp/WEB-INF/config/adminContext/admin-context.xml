@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 
@@ -14,5 +16,13 @@
 	<context:component-scan base-package="com.thisisthat.admin" />
 
 	<!-- 관리자용 추가 컨텍스트 필요시 추가 -->
+	
+	<bean id="AdminInterceptor" class="com.thisisthat.admin.security.AdminSecurity"></bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<ref bean="AdminInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 </beans>
