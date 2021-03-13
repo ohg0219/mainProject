@@ -2,6 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="AdminDAO">
+
+
+
+<mapper namespace="UserManagementDAO">
+	<resultMap type="UserVO" id="resultUser">
+		<id property="userId" column="user_id"></id>
+		<result property="userName" column="user_name"/>
+		<result property="nickName" column="nick_name"/>
+		<result property="userPw" column="user_pass"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="userEmail" column="user_email"/>
+		<result property="zipCode" column="zip_code"/>
+		<result property="firstAddress" column="first_address"/>
+		<result property="lastAddress" column="last_address"/>
+		<result property="userRole" column="user_role"/>
+		<result property="inDate" column="in_date"/>
+		<result property="outDate" column="out_date"/>
+		<result property="userImg" column="user_img"/>
+		<result property="social" column="social_login"/>		
+	</resultMap>
+	
+	<select id="getUserList" resultType="UserVO" parameterType="UserVO" resultMap="resultUser">
+		select * from this_user order by in_date desc 
+	</select>	
+	
+	<select id="getUser" resultMap="resultUser" parameterType="String">
+		select * from this_user where user_id=#{id}
+	</select>
+
 	
 </mapper>

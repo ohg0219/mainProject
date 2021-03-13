@@ -88,7 +88,7 @@ a {
 											</div>
 											<!-- 정보 -->
 											<div class=" col-md-9 col-lg-9 ">
-												<table class="table table-user-information">
+												<table class="table table-user-information" >
 													<tbody>
 														<tr>
 															<td>아이디:</td>

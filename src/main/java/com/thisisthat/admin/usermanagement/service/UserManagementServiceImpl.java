@@ -17,7 +17,6 @@ public class UserManagementServiceImpl implements UserManagementService{
 	
 	@Override
 	public List<UserVO> getUserList(UserVO vo) {
-		System.out.println("임플");
 		return userDAO.getUserList(vo);
 	}
 

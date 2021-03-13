@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 회원목록</title>
+<title>thisisthat - Q&A</title>
 
 <%@include file="include/css.jsp"%>
 <%@include file="include/js.jsp"%>
@@ -62,8 +62,20 @@ a {
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">회원목록</h1>
-					<p class="mb-4">
+					<h1 class="h3 mb-2 text-gray-800">Q&A게시판</h1>
+					<div style="float: right;">
+						<select id="cntPerPage" name="sel" onchange="selChange()">
+							<option value="5"
+								<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
+							<option value="10"
+								<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
+							<option value="15"
+								<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
+							<option value="20"
+								<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
+						</select>
+					</div>
+						<p class="mb-4">
 						<!-- 쓸 말 있으면 쓰는 곳 -->
 					</p>
 
@@ -79,41 +91,81 @@ a {
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>아이디</th>
-											<th align="center">성명</th>
-											<th>닉네임</th>
-											<th>휴대폰</th>
-											<th>가입일</th>
-											<th>계정관리</th>
+											<th>번호</th>
+											<th>질문타입</th>
+											<th>이미지</th>
+											<th align="center">제목</th>
+											<th>작성자</th>
+											<th>등록일</th>
+											<th>처리날짜</th>
+											<th>상태</th>
+											
 										</tr>
 									</thead>
 									<tbody>
 
 										<!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-										<c:if test="${not empty userInfo}">
-											<c:forEach var="user" items="${userInfo}">
+										<c:if test="${not empty answerList}">
+											<c:forEach var="answer" items="${answerList}">
 												<tr>
-													<td width="85">${user.userId}</td>
-													<td width="95"><a
-														id = "${user.userId }" class="who"
-														data-toggle="modal" data-target="#getUserModal">${user.userName}</a></td>
-													<td width="85">${user.nickName}</td>
-													<td width="160">${user.userPhone}</td>
-													<td width="95"><fmt:formatDate value="${user.inDate}"
-															pattern="yyyy-MM-dd" /></td>
-													<c:if test="${not empty user.outDate}">
-														<td width="75">탈퇴</td>
+													<td width="20">${answer.boardNo}</td>
+													<td width="20">${answer.boardType }</td>
+													<td width="50">													
+													<!-- 이미지 Start -->
+													<c:if test="${not empty answer.boardImg1 }">
+														<img alt="이미지를 불러오지 못했습니다" width="50" height="50"
+													src="${answer.boardImg1 }"
+													class="img-circle img-responsive">													
+													
 													</c:if>
-													<c:if test="${empty user.outDate }">
-														<td width="75">회원</td>
+													<c:if test="${empty answer.boardImg1 }">
+														<a href="/admin/getAnswer.mdo?no=${answer.boardNo}">
+															<img alt="이미지를 불러오지 못했습니다" width="50" height="50"
+														src="/resources/admin/img/noimg.jpg"
+														class="img-circle img-responsive">
+														</a>													
 													</c:if>
+													</td>
+													<!-- 이미지 end -->
+													<td width="160"><a href=""/admin/getAnswer.mdo?no=${answer.boardNo}">${answer.boardTitle}</a>
+														<c:if test="${answer.boardSecret}">
+															<img alt="이미지를 불러오지 못했습니다" width="50" height="50"
+															src="/resources/admin/icon/lock.png"
+															class="img-circle img-responsive">
+														</c:if>
+														<c:if test="${not empty adminAnswerList }">
+															<c:forEach var="ans" items="${adminAnswerList}">
+																<c:if test="${answer.boardNo == ans.resultNo }">
+																 <br>&nbsp;&nbsp;&nbsp;└<a href="/admin/getAnswer.mdo?no=${ans.boardNo}">${ans.boardTitle }</a>
+																</c:if>
+															</c:forEach>
+														</c:if>
+													</td>
+													<td width="85">${answer.boardWriter}</td>
+													<td width="100" ><fmt:formatDate value="${answer.regDate}"
+															pattern="yyyy-MM-dd" /><br>
+															<fmt:formatDate value="${answer.regDate}"
+															pattern="HH:mm" />
+															</td>
+													<c:if test="${not empty answer.updateDate}">
+														<td width="75">
+															<fmt:formatDate value="${answer.updateDate}"
+															pattern="yyyy-MM-dd" /><br>
+															<fmt:formatDate value="${answer.updateDate}"
+															pattern="HH:mm" />
+														</td>
+													</c:if>
+													<c:if test="${empty answer.updateDate}">
+														<td width="75">처리중 입니다</td>
+													</c:if>
+													<td width="50">${answer.boardState }</td>
 												</tr>
 											</c:forEach>
 										</c:if>
-										<c:if test="${empty userInfo}">
+										<c:if test="${empty answerList}">
 											<tr>
 												<td colspan="6" align="center">
-													<h3>회원이 없어요</h3>
+													<h3>등록된 글이 없습니다.</h3>
 												</td>
 											</tr>
 										</c:if>
@@ -133,12 +185,26 @@ a {
 									</button>
 
 									<br>
-									<div align="center">
-										<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
-											href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a
-											href="#">7</a> <a href="#">8</a> <a href="#">9</a> <a
-											href="#">10</a>
-									</div>
+									
+									<div style="display: block; text-align: center;">		
+		<c:if test="${paging.startPage != 1 }">
+			<a href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="/admin/answerBoardList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>	
+
 								</div>
 							</div>
 						</div>
@@ -185,6 +251,11 @@ a {
 	</form>
 
 	<script>
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href="/admin/answerBoardList.mdo?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
+	
 	//--------------------검색하는 함수
 	var msg = '${msg}';
 	var failId = '${failId}';
