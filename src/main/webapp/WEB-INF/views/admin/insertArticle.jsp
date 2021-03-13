@@ -45,6 +45,7 @@
 											<option value="event">이벤트</option>
 											<option value="notice">공지사항</option>
 										</select>
+										<input type="hidden" name="board_writer" value="조용일">
 										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기

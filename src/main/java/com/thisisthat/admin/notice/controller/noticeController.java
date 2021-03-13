@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.thisisthat.admin.notice.service.NoticeService;
 import com.thisisthat.admin.notice.vo.NoticeVO;
@@ -21,13 +21,13 @@ public class noticeController {
 	private NoticeService noticeService;
 
 	
+	
 	@GetMapping("deleteGate.mdo")
 	public String deleteGate(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_group")String board_group) {
 		
 		if(board_group.equals("notice")) {
 			noticeService.deleteNotice(noticeVO);
 			return "redirect:articleList.mdo?where=notice";
-		
 		}else if(board_group.equals("event")) {
 			noticeService.deleteNotice(noticeVO);
 			return "redirect:articleList.mdo?where=event";
@@ -37,12 +37,18 @@ public class noticeController {
 	}
 	
 	@PostMapping("updateNotice.mdo")
-	public String updateNotice(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_title")String board_title,@RequestParam("board_content")String board_content)throws IOException{
-		noticeService.updateNotice(noticeVO);
-		return "redirect:articleList.mdo?where=notice";
+	public String updateNotice(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_title")String board_title,@RequestParam("board_content")String board_content,@RequestParam("board_group")String board_group)throws IOException{
+		if(board_group.equals("notice")) {
+			noticeService.updateNotice(noticeVO);
+			return "redirect:articleList.mdo?where=notice";
+		}else if(board_group.equals("event")) {
+			noticeService.updateNotice(noticeVO);
+			return "redirect:articleList.mdo?where=event";
+		}
+		return null;
 	}
 
-	@PostMapping("insertArticle.mdo")
+	@RequestMapping("insertArticle.mdo")
 	public String insertNotice(NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
 		noticeService.insertNotice(noticeVO);
 		return "redirect:articleList.mdo?where="+board_group;
@@ -83,24 +89,23 @@ public class noticeController {
 				
 	}
 	
-	@GetMapping("articleList.mdo")
-	public String getNoticeList(Model model,@RequestParam(value="where")String where) {
-		NoticeVO noticeVO = new NoticeVO();
-		noticeVO.setBoard_group(where);
-		List<NoticeVO> noticeList = noticeService.noticeList(noticeVO);
-		
-		model.addAttribute("articleList",noticeList);
-		model.addAttribute("where", where);
-		return "/admin/articleList";
-	}
-	
 	@GetMapping("articleGate.mdo")
 	public String articleGate(@RequestParam(value="where")String where) {
 		
 		return "redirect:articleList.mdo?where="+where;
 	}
 	
+	@GetMapping("articleList.mdo")
+	public String getNoticeList(Model model,@RequestParam(value="where")String where) {
+		NoticeVO noticeVO = new NoticeVO();
+		noticeVO.setBoard_group(where);
+		List<NoticeVO> noticeList = noticeService.noticeList(noticeVO);
+			
+		
+		model.addAttribute("articleList",noticeList);
+		model.addAttribute("where", where);
+		return "/admin/articleList";
+	}
 	
 	
-
-}
+}//end class
