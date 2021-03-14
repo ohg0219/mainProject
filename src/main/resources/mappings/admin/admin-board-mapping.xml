@@ -21,8 +21,19 @@
 		<result column="board_type" property="boardType"/>
 	</resultMap>
 	
-	<select id="getAnswerList" resultMap="answerResult" resultType="answerVO">
-		select * from answer_board where board_state != '답글' order by board_no desc OFFSET #{start} limit #{cntPerPage} ;
+	<select id="getAnswerList" resultMap="answerResult" resultType="answerVO"  parameterType="hashmap" >
+		select * from answer_board where board_state != '답글' and board_type like #{type}
+			<if test="searchType != '선택없음'">
+			and
+			<if test="searchType == '아이디'">
+					board_writer
+			</if>		
+			<if test="searchType == '제목'">
+					board_title	
+			</if>		
+			like '%'||#{parameter}||'%'
+		</if>
+		 order by board_no desc OFFSET #{start} limit #{cntPerPage} ;
 		
 	</select>
 	
@@ -30,7 +41,18 @@
 		select * from answer_board where board_no = #{boardNo};		
 	</select>
 	<select id="getCount" resultType="Integer" >
-		select count(*) from answer_board where board_state != '답글';		
+		select count(*) from answer_board where board_state != '답글' and board_type like #{type}
+		<if test="searchType != '선택없음'">
+			and
+			<if test="searchType == '아이디'">
+					board_writer
+			</if>		
+			<if test="searchType == '제목'">
+					board_title	
+			</if>		
+			like '%'||#{parameter}||'%'
+		</if>
+		
 	</select>
 	
 </mapper>

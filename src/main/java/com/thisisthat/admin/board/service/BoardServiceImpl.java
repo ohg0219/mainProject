@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.thisisthat.admin.board.dao.BoardDAO;
 import com.thisisthat.admin.board.vo.AnswerBoardVO;
+import com.thisisthat.admin.board.vo.SearchVO;
 import com.thisisthat.util.PagingVO;
 
 @Service
@@ -16,9 +17,9 @@ public class BoardServiceImpl implements BoardService {
 	BoardDAO dao;
 	
 	@Override
-	public List<AnswerBoardVO> getAnswerList(PagingVO vo) {
+	public List<AnswerBoardVO> getAnswerList(PagingVO vo,SearchVO search) {
 		
-		return dao.getAnswerList(vo);
+		return dao.getAnswerList(vo, search);
 	}
 
 	@Override
@@ -34,8 +35,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int countAnswer() {
-		return dao.getCount();
+	public int countAnswer(SearchVO search) {
+		return dao.getCount(search);
 	}
 
 }

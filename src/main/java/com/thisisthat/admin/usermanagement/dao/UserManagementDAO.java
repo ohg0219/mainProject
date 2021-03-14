@@ -15,11 +15,11 @@ public class UserManagementDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public List<UserVO> getUserList(UserVO vo) {
-		return mybatis.selectList("UserManagementDAO.getUserList1", vo);
+		return mybatis.selectList("UserManagementDAO.getUserList", vo);
 	}
 	
 	public UserVO getUser(String id) {
-		return mybatis.selectOne("UserManagementDAO.getUser1", id);
+		return mybatis.selectOne("UserManagementDAO.getUser", id);
 	}
 	
 	public List<UserVO> getStaffList(UserVO vo) {
