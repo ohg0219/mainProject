@@ -31,7 +31,7 @@ a:visited {
 a:hover {
 	color: red;
 	text-decoration: underline;
-	font-size: 17px;
+	cursor: pointer;
 }
 
 a {
@@ -159,16 +159,7 @@ a {
 			</div>
 		</div>
 	</div>
-	<ul class="navbar-nav ml-auto">
-		<!-- Nav Item - User Information -->
-		<li class="nav-item dropdown no-arrow">
-			<button type="button" class="btn btn-dark" data-toggle="modal"
-				data-target="#getUserModal">
-				<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-				Logout
-			</button>
-		</li>
-	</ul>
+	
 	<form action="/admin/pwCheck.mdo" method="post">
 	<div class="modal fade" id="getUserModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">

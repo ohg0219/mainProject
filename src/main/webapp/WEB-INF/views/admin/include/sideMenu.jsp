@@ -5,9 +5,9 @@
 
             <!-- Sidebar - Brand -->
 
+
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/main.mdo">
                 <img style="height: 100%;" alt="" src="/resources/admin/img/mainlogo.png">
-
             </a>
 
             <!-- Divider -->
