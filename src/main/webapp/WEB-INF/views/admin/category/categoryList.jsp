@@ -78,7 +78,7 @@
 	                                    	<c:forEach items="${categoryList }" var="category">
 	                                    		<tr>
 													<td>${category.categorySeq }</td>
-													<td><a href="/getCategory.mdo?categorySeq=${category.categorySeq }">${category.categoryName }</a></td>
+													<td><a href="/admin/getCategory.mdo?categorySeq=${category.categorySeq }">${category.categoryName }</a></td>
 													<td>${category.categoryProduct }</td>
 													<td>${category.categoryUsed }</td>
 													
@@ -95,7 +95,7 @@
                                     </tbody>
                                 </table>
                                 <div>	
-									<button type="button" class="btn btn-dark" onclick="location.href='/insertCategory.mdo'">
+									<button type="button" class="btn btn-dark" onclick="location.href='/admin/insertCategory.mdo'">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										신규등록
 									</button>

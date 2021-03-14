@@ -34,9 +34,9 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#insert").on("click",function(){
-			if($("input[name=categoryName]").val().trim()==''){
-				$("input[name=categoryName]").focus();
-				alert("카테고리명을 입력하세요");
+			if($("#category").val()=='----카테고리 선택----'){
+				$("#category").focus();
+				alert("카테고리를 선택하세요");
 				return false;
 			}
 		});
@@ -185,7 +185,7 @@
                     					<tr>
                     						<td>카테고리</td>
                     						<td>
-                    							<select>
+                    							<select id="category" name="product_category">
                     								<option>----카테고리 선택----</option>
 	                    							<c:forEach items="${categoryList }" var="category">
 	                    								<option>${category.categoryName }</option>
@@ -195,28 +195,32 @@
                     					</tr>
                     					<tr>
                     						<td width="150px">상품명</td>
-                    						<td><input style="width: 100%" type="text" name="productName"></td>
+                    						<td><input style="width: 100%" type="text" id="productName" name="product_name"></td>
                     					</tr>
                     					<tr>
                     						<td>소비자가</td>
-                    						<td><input type="text" name="productPrice"></td>
+                    						<td><input type="text" id="productPrice" name="product_price"></td>
                     					</tr>
                     					<tr>
                     						<td>소재정보</td>
-                    						<td><textarea style="width: 100%"></textarea></td>
+                    						<td><textarea style="width: 100%" id="materialInfo" name="material_info"></textarea></td>
                     					</tr>
                     					<tr>
                     						<td>원산지</td>
-                    						<td><input style="width: 100%" type="text" name="materialInfo"></td>
+                    						<td><input style="width: 100%" type="text" id="origin" name="origin"></td>
                     					</tr>
                     					<tr>
                     						<td>상품설명</td>
-                    						<td><textarea style="width: 100%"></textarea></td>
+                    						<td><textarea style="width: 100%" id="productInfo" name="product_info"></textarea></td>
                     					</tr>
                     					<tr>
                     						<td>적립포인트</td>
                     						<td>
-												
+												<select id="productPoint" name="product_point">
+													<option value="0">0%</option>
+													<option value="5">5%</option>
+													<option value="10">10%</option>
+												</select>
 											</td>
                     					</tr>
                     					<tr>
@@ -243,7 +247,7 @@
                     					</tr>
                     					<tr>
                     						<td colspan="2" align="center">
-                    							<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/categoryList.mdo'">
+                    							<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/productList.mdo'">
                     							<input id="insert" type="submit" class="btn btn-dark" value="등록">
                     						</td>
                     					</tr>

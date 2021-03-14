@@ -92,30 +92,34 @@
                                     <thead>
                                         <tr>
                                             <th>상품번호</th>
-                                            <th align="center">카테고리</th>
+                                            <th>카테고리</th>
                                             <th>상품명</th>
-                                            <th>이미지</th>
+                                            <th>메인이미지</th>
                                             <th>소비자가</th>
                                             <th>총재고</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                    	
-		                                        <tr>
-			                                        <td>productNo</td>
-			                                        <td>jackets</td>
-			                                        <td><a href="/getProduct.mdo">L-Logo Cargo Pant Grey Green</a></td>
-			                                        <td align="center"><img style="width: 70px" alt="" src="/resources/admin/productImage/jackets_ex.jpg"> </td>
-			                                        <td align="right">109,000</td>
-			                                        <td align="right">1000</td>
-			                                    </tr>
-                                        	<tr>
-                                        		<td colspan="6" align="center">
-                                        		<h3> 상품이 없어요</h3>
-                                        		</td>
-                                        	</tr>
+                                   	<c:if test="${productList ne null }">
+	                                    <c:forEach items="${productList}" var="product">
+	                                   	    <tr>
+		                                        <td>${product.product_no }</td>
+		                                        <td>${product.product_category }</td>
+		                                        <td><a href="/admin/getProduct.mdo?productNo=${product.product_no }">${product.product_name }</a></td>
+		                                        <td align="center"><img style="width: 70px" alt="" src="${product.upload_path }"> </td>
+		                                        <td align="right">${product.product_price }</td>
+		                                        <td align="right">${product.product_stock_total }</td>
+		                                    </tr>
+	                                    </c:forEach>
+	                                </c:if>
+	                                <c:if test="${productList eq null }">
+	                                       	<tr>
+	                                       		<td colspan="6" align="center">
+	                                       		<h3> 상품이 없어요</h3>
+	                                       		</td>
+	                                       	</tr>
+	                                </c:if>
                                     </tbody>
                                 </table>
                                 
@@ -133,7 +137,7 @@
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										검색
 									</button>
-									<button type="button" class="btn btn-dark" onclick="location.href='/insertProduct.mdo'">
+									<button type="button" class="btn btn-dark" onclick="location.href='/admin/insertProduct.mdo'">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										등록
 									</button>

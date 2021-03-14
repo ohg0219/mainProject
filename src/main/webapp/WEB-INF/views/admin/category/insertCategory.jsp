@@ -77,7 +77,7 @@
                     					</tr>
                     					<tr>
                     						<td>
-                    							<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/categoryList.mdo'">
+                    							<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/categoryList.mdo'">
                     							<input id="insert" type="submit" class="btn btn-dark" value="등록">
                     						</td>
                     					</tr>

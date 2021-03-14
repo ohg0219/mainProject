@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminProduct">
+	<resultMap type="com.thisisthat.admin.category.vo.AdminCategoryVO" id="adminCategoryVO">
+		<id property="categorySeq" column="category_no"/>
+		<result property="categoryName" column="category_name"/>
+		<result property="categoryProduct" column="category_product"/>
+		<result property="categoryUsed" column="category_used"/>
+	</resultMap>
+	<resultMap type="com.thisisthat.admin.product.vo.AdminProductListVO" id="adminProductListVO">
+		<result property="product_no" column="product_no"/>
+		<result property="product_category" column="product_category"/>
+		<result property="product_name" column="product_name"/>
+		<result property="upload_path" column="upload_path"/>
+		<result property="product_price" column="product_price"/>
+		<result property="product_stock_total" column="product_stock_total"/>
+	</resultMap>
+	<insert id="insertProduct" parameterType="com.thisisthat.admin.product.vo.AdminProductVO" useGeneratedKeys="true" keyProperty="product_no">
+		<selectKey keyProperty="product_no" resultType="int" order="BEFORE">
+			select nextval('product_no_seq')
+		</selectKey>
+		insert into product values
+		(#{product_no},#{product_category},#{product_name},#{product_price},#{material_info},#{origin},#{product_info},#{product_point})
+	</insert>
+	<select id="getSeq" resultType="int">
+		select currval('product_no_seq')
+	</select>
+	<insert id="insertProductImage" parameterType="com.thisisthat.admin.product.vo.AdminProductImageVO">
+		insert into product_image values
+		(#{product_no},#{upload_path},#{image_name},#{main_image})
+	</insert>
+	
+	<insert id="insertProductStock" parameterType="int">
+		insert into product_stock values (#{product_no})
+	</insert>
+	
+	<update id="updateCategoryProduct" parameterType="String">
+		update category set category_product = 
+		(
+			select category_product from category where category_name = #{category_name}
+		)+1
+		where category_name = #{category_name}
+	</update>
+	
+	<select id="getCategoryList" resultMap="adminCategoryVO">
+		select * from category where category_used = 1 order by category_no asc 
+	</select>
+	
+	<select id="getProductList" resultMap="adminProductListVO">
+		select 
+		pro.product_no as product_no,
+		pro.product_category as product_category, 
+		pro.product_name as product_name,
+		image.upload_path as upload_path,
+		pro.product_price as product_price,
+		(select xs+s+m+l+xl+free as product_stock_total from product_stock where product_no = pro.product_no)
+		from product as pro , product_image as image
+		where pro.product_no = image.product_no
+		and image.main_image = 1
+	</select>
+	
+	
+</mapper>
