@@ -14,7 +14,7 @@ import com.thisisthat.admin.category.service.AdminCategoryService;
 import com.thisisthat.admin.category.vo.AdminCategoryVO;
 
 @Controller
-@RequestMapping("/admin/")
+@RequestMapping("/admin")
 public class AdminCategoryController {
 
 	@Autowired

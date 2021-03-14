@@ -62,7 +62,7 @@
                         </div>
                         -->
                         <div class="card-body">
-                            <form action="updateCategory.mdo" method="post">
+                            <form action="/admin/updateCategory.mdo" method="post">
       							<input type="hidden" name="categorySeq" value="${category.categorySeq }">
 							 	<div class="table-responsive">
 	                           		<table class="table table-bordered" id="dataTable" >

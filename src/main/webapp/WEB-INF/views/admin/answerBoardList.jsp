@@ -63,18 +63,7 @@ a {
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-2 text-gray-800">Q&A게시판</h1>
-					<div style="float: right;">
-						<select id="cntPerPage" name="sel" onchange="selChange()">
-							<option value="5"
-								<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
-							<option value="10"
-								<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
-							<option value="15"
-								<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
-							<option value="20"
-								<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
-						</select>
-					</div>
+					
 						<p class="mb-4">
 						<!-- 쓸 말 있으면 쓰는 곳 -->
 					</p>
@@ -85,14 +74,38 @@ a {
                             <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
                         </div>
                         -->
+                        
 						<div class="card-body">
+						
+						<div style="float: right;">
+						<select id="cntPerPage" name="sel" onchange="selChange()">
+							<option value="5"
+								<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
+							<option value="10"
+								<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
+							<option value="15"
+								<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
+							<option value="20"
+								<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
+						</select>
+						</div>
 							<div class="table-responsive">
+							
 								<table class="table table-bordered" id="dataTable" width="100%"
 									cellspacing="0">
 									<thead>
 										<tr>
 											<th>번호</th>
-											<th>질문타입</th>
+											<th><select id="type" name="sel" onchange="Change()">
+							<option value="all"
+								<c:if test="${type == 'all'}">selected</c:if>>질문타입</option>
+							<option value="product"
+								<c:if test="${type == 'product'}">selected</c:if>>상품문의</option>
+							<option value="delivery"
+								<c:if test="${type == 'delivery'}">selected</c:if>>배송문의</option>
+							<option value="other"
+								<c:if test="${type == other}">selected</c:if>>기타문의</option>
+						</select></th>
 											<th>이미지</th>
 											<th align="center">제목</th>
 											<th>작성자</th>
@@ -113,10 +126,11 @@ a {
 													<td width="50">													
 													<!-- 이미지 Start -->
 													<c:if test="${not empty answer.boardImg1 }">
+													<a href="/admin/getAnswer.mdo?no=${answer.boardNo}">
 														<img alt="이미지를 불러오지 못했습니다" width="50" height="50"
-													src="${answer.boardImg1 }"
-													class="img-circle img-responsive">													
-													
+														src="${answer.boardImg1 }"
+														class="img-circle img-responsive">													
+														</a>
 													</c:if>
 													<c:if test="${empty answer.boardImg1 }">
 														<a href="/admin/getAnswer.mdo?no=${answer.boardNo}">
@@ -164,7 +178,7 @@ a {
 										</c:if>
 										<c:if test="${empty answerList}">
 											<tr>
-												<td colspan="6" align="center">
+												<td colspan="8" align="center">
 													<h3>등록된 글이 없습니다.</h3>
 												</td>
 											</tr>
@@ -173,11 +187,9 @@ a {
 								</table>
 
 								<div>
-									<select name="example_length" aria-controls="example" class="">
-										<option value="all">전체</option>
-										<option value="id">아이디</option>
-										<option value="name">이름</option>
-										<option value="nickname">닉네임</option>
+									<select id="searchSelect" aria-controls="example" class="">
+										<option value="아이디">아이디</option>
+										<option value="이름">이름</option>
 									</select> <input type="text" id="search">
 
 									<button type="button" class="btn btn-dark" id="searchBtn">
@@ -187,23 +199,25 @@ a {
 									<br>
 									
 									<div style="display: block; text-align: center;">		
-		<c:if test="${paging.startPage != 1 }">
-			<a href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-		</c:if>
-		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-			<c:choose>
-				<c:when test="${p == paging.nowPage }">
-					<b>${p }</b>
-				</c:when>
-				<c:when test="${p != paging.nowPage }">
-					<a href="/admin/answerBoardList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${paging.endPage != paging.lastPage}">
-			<a href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-		</c:if>
-	</div>	
+									<c:if test="${paging.startPage != 1 }">
+										<a href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+									</c:if>
+									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage }">
+												<b>${p }</b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="/admin/answerBoardList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}&type=${type}
+												&searchType=${search.searchType}&parameter=${search.parameter}">${p }</a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${paging.endPage != paging.lastPage}">
+										<a href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}&type=${type}
+										&searchType=${search.searchType}&parameter=${search.parameter}">&gt;</a>
+									</c:if>
+								</div>	
 
 								</div>
 							</div>
@@ -253,21 +267,29 @@ a {
 	<script>
 	function selChange() {
 		var sel = document.getElementById('cntPerPage').value;
-		location.href="/admin/answerBoardList.mdo?nowPage=${paging.nowPage}&cntPerPage="+sel;
+		var type = document.getElementById('type').value;
+		location.href="/admin/answerBoardList.mdo?nowPage=${paging.nowPage}&cntPerPage="+sel+"&type="+type;
+		
+	}
+	function Change() {
+		var sel = document.getElementById('cntPerPage').value;
+		var type = document.getElementById('type').value;
+		location.href="/admin/answerBoardList.mdo?type="+type;
+		
 	}
 	
 	//--------------------검색하는 함수
 	var msg = '${msg}';
 	var failId = '${failId}';
-	if(msg==='fail'){
-		console.log(failId);
-		document.getElementById(failId).click();
-		alert('비밀번호를 확인해 주세요');
-	}
+	
 		$(function(){
 			$("#searchBtn").click(function(){
-				var search = $('#search').val();
-				location.href="/notice.mdo?search="+search;
+				var sel = document.getElementById('cntPerPage').value;
+				var type = document.getElementById('type').value;
+				var parameter = $('#search').val();
+				var searchType = document.getElementById('searchSelect').value;
+				location.href="/admin/answerBoardList.mdo?cntPerPage="+sel+"&type="+type
+						+"&searchType="+searchType+"&parameter="+parameter;
 				console.log(search);
 			});
 			
