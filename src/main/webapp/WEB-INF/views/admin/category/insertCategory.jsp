@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat</title>
+<title>thisisthat - 카테고리 신규등록</title>
 
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>

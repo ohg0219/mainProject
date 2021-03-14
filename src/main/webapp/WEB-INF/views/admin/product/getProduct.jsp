@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 카테고리 수정</title>
+<title>thisisthat - 상품 상세</title>
 
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
@@ -24,26 +24,13 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style type="text/css">
  a:link { color: red; text-decoration: none;}
  a:visited { color: blue; text-decoration: none;}
  a:hover { color: red; text-decoration: underline;}
  a {color:black;}
 </style>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#deleteBtn").on("click",function(){
-			var productCount = $("#productCount").text();
-			var categorySeq = $("#categorySeq").val();
-			if(productCount!=0){
-				alert("등록된 상품이 있어 삭제할수 없습니다.");
-				return false;
-			}else{
-				location.href="/admin/deleteCategory.mdo?categorySeq="+categorySeq;
-			}
-		});
-	});
-</script>
 </head>
 <body id="page-top">
 
@@ -65,54 +52,96 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">카테고리 수정</h1>
+                    <h1 class="h3 mb-2 text-gray-800">상품 상세</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                       <!--   <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
-                        </div>
-                        -->
+                       
                         <div class="card-body">
-                            <form action="/admin/updateCategory.mdo" method="post">
-      							<input id="categorySeq" type="hidden" name="categorySeq" value="${category.categorySeq }">
+                           
 							 	<div class="table-responsive">
-	                           		<table class="table table-bordered" id="dataTable" >
+	                           		<table class="table table-bordered" id="dataTable">
                     					<tr>
-                    						<td>카테고리명</td>
-                    						<td><input type="text" name="categoryName" value="${category.categoryName }"></td>
-                    					</tr>
-                    					<tr>
-                    						<td>사용유무</td>
+                    						<td>카테고리</td>
                     						<td>
-                   								<select name="categoryUsed">
-	                    							<c:if test="${category.categoryUsed == 1}">
-		                    							<option value="1" selected="selected">사용</option>
-		                    							<option value="0">미사용</option>
-	                    							</c:if>
-	                    							<c:if test="${category.categoryUsed == 0}">
-		                    							<option value="1">사용</option>
-		                    							<option value="0" selected="selected">미사용</option>
-	                    							</c:if>
-                    							</select>
+                    							${productInfo.product_category }
                     						</td>
                     					</tr>
                     					<tr>
-                    						<td>등록된 상품 갯수</td>
-                    						<td id="productCount">${category.categoryProduct }</td>
+                    						<td width="150px">상품명</td>
+                    						<td>
+                    							${productInfo.product_name }
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td>소비자가</td>
+                    						<td>
+                    							<fmt:formatNumber maxFractionDigits="3" value="${productInfo.product_price }"></fmt:formatNumber>원
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td>소재정보</td>
+                    						<td>
+                    							${productInfo.material_info }
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td>원산지</td>
+                    						<td>
+                    							${productInfo.origin }
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td>상품설명</td>
+                    						<td>
+                    							${productInfo.product_info }
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td>적립율</td>
+                    						<td>
+												${productInfo.product_point }%
+											</td>
+                    					</tr>
+                    					<tr>
+                    						<td colspan="2">
+    	                						<p>메인이미지</p>
+                    							<div id="main-preview">
+                    								<div style="display: inline-flex; padding: 10px;">
+                    									<li>
+		                    								<span>${mainImage.image_name }</span><br>
+		                    								<img src="${mainImage.upload_path }" width=100 height=100 />
+	                    								</li>
+                    								</div>
+                    							</div>
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td colspan="2">
+    	                						<p>상세이미지</p>
+                    							<div id="sub-preview">
+                    								<c:forEach items="${subImage }" var="image">
+                    								<div style="display: inline-flex; padding: 10px;">
+	                    								<li>
+		                    								<span>${image.image_name }</span><br>
+		                    								<img src="${image.upload_path }" width=100 height=100 />
+	                    								</li>
+                    								</div>
+                    								</c:forEach>
+                    							</div>
+                    						</td>
                     					</tr>
                     					<tr>
                     						<td colspan="2" align="center">
-	                    						<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/categoryList.mdo'">
-	                    						<input value="수정" type="submit" class="btn btn-dark">
-	                    						<input id="deleteBtn" value="삭제" type="button" class="btn btn-dark" >
+                    							<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/productList.mdo'">
+                    							<input id="update" type="submit" class="btn btn-dark" value="수정">
                     						</td>
                     					</tr>
                     				</table>
                     				
                     			</div>
-                    		</form>
+                    		
                         </div>
                     </div>
 				</div>
@@ -145,23 +174,8 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/resources/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   
 
-    <!-- Core plugin JavaScript-->
-    <script src="/resources/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/resources/admin/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="/resources/admin/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/resources/admin/js/demo/chart-area-demo.js"></script>
-    <script src="/resources/admin/js/demo/chart-pie-demo.js"></script>
-	
 
 </body>
 </html>

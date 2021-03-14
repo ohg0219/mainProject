@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat</title>
+<title>thisisthat - 카테고리 관리</title>
 
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
@@ -52,7 +52,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">상품 카테고리 관리</h1>
+                    <h1 class="h3 mb-2 text-gray-800">카테고리 관리</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -80,8 +80,14 @@
 													<td>${category.categorySeq }</td>
 													<td><a href="/admin/getCategory.mdo?categorySeq=${category.categorySeq }">${category.categoryName }</a></td>
 													<td>${category.categoryProduct }</td>
-													<td>${category.categoryUsed }</td>
-													
+													<td>
+														<c:if test="${category.categoryUsed == 0 }">
+															미사용
+														</c:if>
+														<c:if test="${category.categoryUsed == 1 }">
+															사용
+														</c:if>
+													</td>
 												</tr>
 	                                    	</c:forEach>
                							</c:if>

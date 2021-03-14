@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>This is that</title>
+    <title>thisisthat - 상품 관리</title>
 
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
@@ -66,7 +66,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">
-                    	상품목록
+                    	상품 관리
                     </h1>
                     	<div>
                     		<span>카테고리 선택 : </span>
@@ -108,7 +108,7 @@
 		                                        <td>${product.product_category }</td>
 		                                        <td><a href="/admin/getProduct.mdo?productNo=${product.product_no }">${product.product_name }</a></td>
 		                                        <td align="center"><img style="width: 70px" alt="" src="${product.upload_path }"> </td>
-		                                        <td align="right">${product.product_price }</td>
+		                                        <td align="right"><fmt:formatNumber maxFractionDigits="3" value="${product.product_price }"></fmt:formatNumber>원</td>
 		                                        <td align="right">${product.product_stock_total }</td>
 		                                    </tr>
 	                                    </c:forEach>

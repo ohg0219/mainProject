@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.thisisthat.admin.product.service.AdminProductService;
@@ -38,8 +39,9 @@ public class AdminProductController {
 		model.addAttribute("categoryList",productService.getCategoryList());
 		return "/admin/product/insertProduct";
 	}
+	
 	@PostMapping("/insertProduct.mdo")
-	public void insertProduct(MultipartFile mainUploadFile,MultipartFile[] subUploadFile, Model model,AdminProductVO vo) {
+	public String insertProduct(MultipartFile mainUploadFile,MultipartFile[] subUploadFile, Model model,AdminProductVO vo) {
 		String uploadFolder = "https://thisisthat.s3.ap-northeast-2.amazonaws.com/";
 		List<AdminProductImageVO> imageList = new ArrayList<AdminProductImageVO>();
 		//메인 이미지 가져오기
@@ -77,8 +79,28 @@ public class AdminProductController {
 			}
 		}
 		productService.insertProduct(vo, imageList);
+		return "redirect:/admin/productList.mdo";
 	}
 	
+	@GetMapping("/getProduct.mdo")
+	public String getProduct(@RequestParam("productNo")String product_no,Model model) {
+		int productNo = Integer.parseInt(product_no);
+		model.addAttribute("productInfo",productService.getProduct(productNo));
+		List<AdminProductImageVO> imageList = productService.getProductImage(productNo);
+		AdminProductImageVO mainImage = new AdminProductImageVO();
+		List<AdminProductImageVO> subImage = new ArrayList<AdminProductImageVO>();
+		for(AdminProductImageVO image : imageList) {
+			if(image.getMain_image()==1) {
+				mainImage = image;
+			}else {
+				subImage.add(image);
+			}
+		}
+		model.addAttribute("mainImage",mainImage);
+		model.addAttribute("subImage",subImage);
+		
+		return "/admin/product/getProduct";
+	}
 	
 	
 	

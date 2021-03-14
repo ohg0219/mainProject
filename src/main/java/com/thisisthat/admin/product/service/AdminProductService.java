@@ -12,4 +12,6 @@ public interface AdminProductService {
 	void insertProduct(AdminProductVO vo,List<AdminProductImageVO> imageList);
 	List<AdminCategoryVO> getCategoryList();
 	List<AdminProductListVO> getProductList();
+	AdminProductVO getProduct(long productNo);
+	List<AdminProductImageVO> getProductImage(long productNo);
 }

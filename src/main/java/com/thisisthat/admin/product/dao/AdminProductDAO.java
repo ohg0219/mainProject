@@ -27,14 +27,21 @@ public class AdminProductDAO {
 			productTemplate.insert("AdminProduct.insertProductImage",image);
 		}
 		productTemplate.insert("AdminProduct.insertProductStock",result);
-		productTemplate.update("AdminProduct.updateCategoryProduct",vo.getProduct_category());
-		
 	}
+	
 	public List<AdminCategoryVO> getCategoryList(){
 		return productTemplate.selectList("AdminProduct.getCategoryList");
 	}
 	
 	public List<AdminProductListVO> getProductList(){
 		return productTemplate.selectList("AdminProduct.getProductList");
+	}
+	
+	public AdminProductVO getProduct(long productNo) {
+		return (AdminProductVO) productTemplate.selectOne("AdminProduct.getProduct",productNo);
+	}
+	
+	public List<AdminProductImageVO> getProductImage(long productNo){
+		return productTemplate.selectList("AdminProduct.getProductImage",productNo);
 	}
 }

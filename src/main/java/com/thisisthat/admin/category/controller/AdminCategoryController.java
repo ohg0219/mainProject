@@ -54,8 +54,9 @@ public class AdminCategoryController {
 	}
 	
 	@RequestMapping("/deleteCategory.mdo")
-	public String deleteCategory(@RequestParam("categorySeq")int categorySeq) {
-		categoryService.deleteCategory(categorySeq);
+	public String deleteCategory(@RequestParam("categorySeq")String categorySeq) {
+		int categorySeqInt = Integer.parseInt(categorySeq);
+		categoryService.deleteCategory(categorySeqInt);
 		return "redirect:/admin/categoryList.mdo";
 	}
 	

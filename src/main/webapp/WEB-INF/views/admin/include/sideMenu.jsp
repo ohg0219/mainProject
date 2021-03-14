@@ -74,7 +74,7 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/admin/categoryList.mdo">상품 카테고리 관리</a>
+                        <a class="collapse-item" href="/admin/categoryList.mdo">카테고리 관리</a>
                         <a class="collapse-item" href="/admin/productList.mdo">상품 관리</a>
                         <a class="collapse-item" href="register.html">상품수정/삭제</a>
                         <a class="collapse-item" href="forgot-password.html">상품재고관리</a>

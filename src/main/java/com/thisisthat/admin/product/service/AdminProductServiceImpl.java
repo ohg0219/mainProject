@@ -32,6 +32,17 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return productDAO.getProductList();
 	}
 
+	@Override
+	public AdminProductVO getProduct(long productNo) {
+		return productDAO.getProduct(productNo);
+	}
+
+	@Override
+	public List<AdminProductImageVO> getProductImage(long productNo) {
+		return productDAO.getProductImage(productNo);
+	}
+
+	
 	
 
 	
