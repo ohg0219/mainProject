@@ -50,7 +50,21 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h6>공지사항</h6>
+				<h3>공지사항</h3>
+				<form action="event.jsp" method="post">
+				<table class="noticeTable">
+					<tr>
+						<td align="right">
+							<select name="searchCondition">
+								<option value="board_title">제목
+								<option value="board_content">내용
+							</select>
+							<input type="text" name="searchKeyword"/>
+							<input type="submit" value="검색"/>
+						</td>
+					</tr>
+				</table>
+				</form>
 				<table class="noticeTable">
 					<tr>
 						<th width="60px">번호</th>

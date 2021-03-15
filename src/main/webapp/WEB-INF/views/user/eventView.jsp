@@ -50,7 +50,7 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h6>공지사항</h6>
+				<h3>이벤트</h3>
 				<table align="left" class="noticeTable">
 					<tr>
 						<th>글번호 : ${event.board_no}</th>
@@ -65,11 +65,11 @@
 						<fmt:formatDate value="${event.reg_date}" pattern=" hh:mm:ss "/></th>
 					</tr>
 					<tr>
-						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="50" readonly="readonly">${notice.board_content}</textarea></td>
+						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="20" readonly="readonly">${notice.board_content}</textarea></td>
 					</tr>
 					<tr>
 						<td>
-							<a href="notice.do"><strong>목록으로</strong></a>
+							<a href="event.do"><strong>List</strong></a>
 						</td>
 					</tr>
 				</table>

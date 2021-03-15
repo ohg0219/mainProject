@@ -36,5 +36,4 @@ public class UserNoticeServiceImpl implements UserNoticeService{
 		userNoticeDAO.plusCnt(board_no);
 	}
 
-
 }

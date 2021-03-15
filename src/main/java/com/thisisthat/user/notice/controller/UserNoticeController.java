@@ -31,20 +31,18 @@ public class UserNoticeController {
 	}
 
 	@GetMapping("/noticeView.do")
-	public String getNotice(@RequestParam("board_no") int boardNo, UserNoticeVO vo, Model model) {
-		
-		userNoticeService.plusCnt(boardNo);
-		
-		vo.setBoard_no(boardNo);
+	public String getNotice(@RequestParam("board_no") int board_no, UserNoticeVO vo, Model model) {
+		userNoticeService.plusCnt(board_no);
+		vo.setBoard_no(board_no);
 		UserNoticeVO noticeVO = userNoticeService.getNotice(vo);
 		model.addAttribute("notice", noticeVO);
 		return "/user/noticeView";
 	}
 
 	@GetMapping("/eventView.do")
-	public String getEvent(@RequestParam("board_no") int boardNo, UserNoticeVO vo, Model model) {
-		userNoticeService.plusCnt(boardNo);
-		vo.setBoard_no(boardNo);
+	public String getEvent(@RequestParam("board_no") int board_no, UserNoticeVO vo, Model model) {
+		userNoticeService.plusCnt(board_no);
+		vo.setBoard_no(board_no);
 		UserNoticeVO noticeVO = userNoticeService.getEvent(vo);
 		model.addAttribute("event", noticeVO);
 		return "/user/eventView";
