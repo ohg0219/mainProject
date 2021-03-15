@@ -5,8 +5,9 @@
 
             <!-- Sidebar - Brand -->
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <img style="height: 100%;" alt="" src="https://thisisthat.s3.ap-northeast-2.amazonaws.com/img/mainlogo.png">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/main.mdo">
+                <img style="height: 100%;" alt="" src="/resources/admin/img/mainlogo.png">
             </a>
 
             <!-- Divider -->
@@ -51,7 +52,7 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                    	
-                        <a class="collapse-item" href="staffList.mdo">직원정보</a>
+                        <a class="collapse-item" href="/admin/staffList.mdo">직원정보</a>
                         <a class="collapse-item" href="utilities-color.html">신규직원등록</a>
                         <a class="collapse-item" href="utilities-border.html">직원정보수정</a>
                         <a class="collapse-item" href="utilities-animation.html">권한관리</a>
@@ -73,8 +74,8 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/categoryList.mdo">상품 카테고리 관리</a>
-                        <a class="collapse-item" href="/productList.mdo">상품 관리</a>
+                        <a class="collapse-item" href="/admin/categoryList.mdo">카테고리 관리</a>
+                        <a class="collapse-item" href="/admin/productList.mdo">상품 관리</a>
                         <a class="collapse-item" href="register.html">상품수정/삭제</a>
                         <a class="collapse-item" href="forgot-password.html">상품재고관리</a>
                     </div>

@@ -10,10 +10,21 @@
 		<result property="categoryUsed" column="category_used"/>
 	</resultMap>
 	<select id="getCategoryList" resultMap="adminCategoryVO">
-		select * from category order by category_no asc
+		select 
+			cate.category_no,
+			cate.category_name,
+			(select count(*) from product where product.product_category = cate.category_name) as category_product,
+			category_used 
+		from category as cate, product as product order by category_no asc
 	</select>
 	<select id="getCategory" resultMap="adminCategoryVO">
-		select * from category where category_no = #{categorySeq}
+		select 
+			cate.category_no,
+			cate.category_name,
+			(select count(*) from product where product.product_category = cate.category_name) as category_product,
+			category_used 
+		from category as cate, product as product
+		where category_no = #{categorySeq}
 	</select>
 	<insert id="insertCategory">
 		insert into category (category_name) values (#{categoryName})

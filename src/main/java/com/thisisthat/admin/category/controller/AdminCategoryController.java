@@ -14,6 +14,7 @@ import com.thisisthat.admin.category.service.AdminCategoryService;
 import com.thisisthat.admin.category.vo.AdminCategoryVO;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminCategoryController {
 
 	@Autowired
@@ -42,20 +43,21 @@ public class AdminCategoryController {
 	@PostMapping("/insertCategory.mdo")
 	public String insertCategory(AdminCategoryVO vo) {
 		categoryService.insertCategory(vo);
-		return "redirect:/categoryList.mdo";
+		return "redirect:/admin/categoryList.mdo";
 	}
 	
 	@PostMapping("/updateCategory.mdo")
 	public String updateCategory(AdminCategoryVO vo) {
 		System.out.println(vo.toString());
 		categoryService.updateCategory(vo);
-		return "redirect:/categoryList.mdo";
+		return "redirect:/admin/categoryList.mdo";
 	}
 	
 	@RequestMapping("/deleteCategory.mdo")
-	public String deleteCategory(@RequestParam("categorySeq")int categorySeq) {
-		categoryService.deleteCategory(categorySeq);
-		return "redirect:/categoryList.mdo";
+	public String deleteCategory(@RequestParam("categorySeq")String categorySeq) {
+		int categorySeqInt = Integer.parseInt(categorySeq);
+		categoryService.deleteCategory(categorySeqInt);
+		return "redirect:/admin/categoryList.mdo";
 	}
 	
 }
