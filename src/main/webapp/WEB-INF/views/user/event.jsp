@@ -50,7 +50,7 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>공지사항</h3>
+				<h3>이벤트</h3>
 				<form action="event.jsp" method="post">
 				<table class="noticeTable">
 					<tr>
@@ -74,14 +74,14 @@
 						<th width="100px">날짜</th>
 						<th width="60px">조회수</th>
 					</tr>
-					<c:forEach var="notice" items="${noticeList}">
+					<c:forEach var="event" items="${eventList}">
 					<tr>
-						<td>${notice.board_no}</td>
-						<td align="center"><strong><a href="noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
-						<td>${notice.board_writer}</td>
-						<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
-						<fmt:formatDate value="${notice.reg_date}" pattern=" hh:mm:ss "/></td>
-						<td>${notice.board_cnt}</td>
+						<td>${event.board_no}</td>
+						<td align="center"><a href="eventView.do?board_no=${event.board_no}"><strong>${event.board_title}</strong></a></td>
+						<td>${event.board_writer}</td>
+						<td><fmt:formatDate value="${event.reg_date}" pattern="yyyy-MM-dd "/><br>
+						<fmt:formatDate value="${event.reg_date}" pattern=" mm:ss "/></td>
+						<td>${event.board_cnt}</td>
 					</tr>
 					</c:forEach>
 				</table>

@@ -40,6 +40,7 @@ public class UserRegisterController {
 	public String nickNameCheck(@RequestParam("nickName") String nickName) {
 		return String.valueOf(userRegisterService.nickNameCheck(nickName));
 	}
+	
 	/**
 	 * 회원가입 처리후 웰컴 페이지이동
 	 * @return
@@ -51,12 +52,14 @@ public class UserRegisterController {
 			@RequestParam("phone3")String phone3,
 			@RequestParam("password")String password
 			) {
-		vo.setPhone(phone1+phone2+phone3);
+		vo.setPhone(phone1+phone2+phone3);	
 		vo.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 		userRegisterService.insertUser(vo);
 		model.addAttribute("user", vo);
 		return "/user/joinResult";
 	}
+	
+	
 	
 	
 }
