@@ -12,12 +12,12 @@ public class Main {
 		Main main = new Main();
 
 		File file = new File("C:\\Users\\a8227\\Desktop\\mainlogo.png"); //업로드할 파일 경로 + 파일명
-		String key = "img/mainlogo.png"; // 저장될 파일명
+		String key = "img/kakao_login_small.png"; // 저장될 파일명
 		String copyKey = "img/my-img-copy.png"; // 복사할시 저장될 파일 명
 
-		main.upload(file, key);
-//        main.copy(key, copyKey);
-//        main.delete(key);
+//		main.upload(file, key);
+//      main.copy(key, copyKey);
+      main.delete(key);
 	}
 
 	/**

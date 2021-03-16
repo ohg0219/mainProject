@@ -97,6 +97,7 @@
                                             <th>메인이미지</th>
                                             <th>소비자가</th>
                                             <th>총재고</th>
+                                            <th>상품노출</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -110,6 +111,14 @@
 		                                        <td align="center"><img style="width: 70px" alt="" src="${product.upload_path }"> </td>
 		                                        <td align="right"><fmt:formatNumber maxFractionDigits="3" value="${product.product_price }"></fmt:formatNumber>원</td>
 		                                        <td align="right">${product.product_stock_total }</td>
+		                                        <td>
+		                                        	<c:if test="${product.product_used == 1 }">
+														노출												
+													</c:if>
+													<c:if test="${product.product_used == 0 }">
+														미노출
+													</c:if>
+		                                        </td>
 		                                    </tr>
 	                                    </c:forEach>
 	                                </c:if>

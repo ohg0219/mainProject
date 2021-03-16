@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ItemListDAO">
+	<resultMap type="com.thisisthat.user.itemlist.vo.UserItemListVO" id="itemListVO">
+		<result property="productCategory" column="product_category"/>
+		<result property="productNo" column="product_no"/>
+		<result property="uploadPath" column="upload_path"/>
+		<result property="productName" column="product_name"/>
+		<result property="productPrice" column="product_price"/>
+	</resultMap>
+	
+	<select id="getItemList" resultMap="itemListVO">
+			select 
+			pro.product_category as product_category, 
+			pro.product_no as product_no,
+			image.upload_path as upload_path,
+			pro.product_name as product_name,
+			pro.product_price as product_price
+			from product as pro , product_image as image
+			where pro.product_no = image.product_no 
+				and image.main_image = 1 
+		<if test="!categoryName.equals('all') and !categoryName.equals('new')">
+			and pro.product_category = #{categoryName}
+		</if>
+			order by pro.product_no desc
+		<if test="categoryName.equals('new')">
+			limit 20
+		</if>
+	</select>
+	
+</mapper>

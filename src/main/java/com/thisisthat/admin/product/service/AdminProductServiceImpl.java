@@ -42,6 +42,36 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return productDAO.getProductImage(productNo);
 	}
 
+	@Override
+	public long getProductStock(long productNo) {
+		return productDAO.getProductStock(productNo);
+	}
+
+	@Override
+	public void deleteProduct(long productNo) {
+		productDAO.deleteProduct(productNo);
+	}
+
+	@Override
+	public void updateProduct(AdminProductVO vo) {
+		productDAO.updateProduct(vo);
+	}
+
+	@Override
+	public void updateMainImage(AdminProductImageVO vo) {
+		productDAO.updateMainImage(vo);
+	}
+
+	@Override
+	public void deleteSubImage(long productNo) {
+		productDAO.deleteSubImage(productNo);
+	}
+
+	@Override
+	public void insertSubImage(AdminProductImageVO vo) {
+		productDAO.insertSubImage(vo);
+	}
+
 	
 	
 

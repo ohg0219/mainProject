@@ -44,4 +44,32 @@ public class AdminProductDAO {
 	public List<AdminProductImageVO> getProductImage(long productNo){
 		return productTemplate.selectList("AdminProduct.getProductImage",productNo);
 	}
+	
+	public long getProductStock(long productNo) {
+		return productTemplate.selectOne("AdminProduct.getProductStock",productNo);
+	}
+	
+	@Transactional
+	public void deleteProduct(long productNo) {
+		productTemplate.delete("AdminProduct.deleteProduct",productNo);
+		productTemplate.delete("AdminProduct.deleteProductImage",productNo);
+		productTemplate.delete("AdminProduct.deleteProductStock",productNo);
+	}
+	
+	public void updateProduct(AdminProductVO vo) {
+		productTemplate.update("AdminProduct.updateProduct",vo);
+	}
+	
+	public void updateMainImage(AdminProductImageVO vo) {
+		productTemplate.update("AdminProduct.updateMainImage",vo);
+	}
+	
+	public void deleteSubImage(long productNo) {
+		productTemplate.delete("AdminProduct.deleteSubImage",productNo);
+	}
+	
+	public void insertSubImage(AdminProductImageVO vo) {
+		productTemplate.insert("AdminProduct.insertSubImage",vo);
+	}
+	
 }

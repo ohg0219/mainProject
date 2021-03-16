@@ -14,4 +14,10 @@ public interface AdminProductService {
 	List<AdminProductListVO> getProductList();
 	AdminProductVO getProduct(long productNo);
 	List<AdminProductImageVO> getProductImage(long productNo);
+	long getProductStock(long productNo);
+	void deleteProduct(long productNo);
+	void updateProduct(AdminProductVO vo);
+	void updateMainImage(AdminProductImageVO vo);
+	void deleteSubImage(long productNo);
+	void insertSubImage(AdminProductImageVO vo);
 }

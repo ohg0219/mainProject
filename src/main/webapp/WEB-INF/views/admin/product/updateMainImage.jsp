@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 상품 상세</title>
+<title>thisisthat - 상품 등록</title>
 
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
@@ -32,34 +32,58 @@
  a {color:black;}
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#delete").on("click",function(){
-			var product_no = $("#product_no").val();
-			var product_stock = $("#product_stock").text();
-			if(confirm("정말 삭제하시겠습니까?")==true){
-				if(product_stock!=0){
-					alert("재고가 있어 삭제할 수 없습니다.\n재고가 있는경우 상품 미노출 처리를 해주세요");
-					return false;
-				}	
-				location.href="/admin/deleteProduct.mdo?product_no="+product_no;
+$(document).ready(function (e){
+	$("#mainUploadFile").change(function(e){
+		//div 내용 비워주기
+		$('#main-preview').empty();
+		var files = e.target.files;
+		var arr =Array.prototype.slice.call(files);
+		//업로드 가능 파일인지 체크
+		for(var i=0;i<files.length;i++){
+			if(!checkExtension(files[i].name,files[i].size)){
+				return false;
 			}
-		});
-		
-		$("#mainImageUpdate").on("click",function(){
-			var product_no = $("#product_no").val();
-			if(confirm("메인 이미지 수정시 기존 이미지는 삭제 됩니다. \n계속 하시겠습니까?")==true){
-				location.href="/admin/updateMainImage.mdo?product_no="+product_no;
-			}
-		});
-		
-		$("#subImageUpdate").on("click",function(){
-			var product_no = $("#product_no").val();
-			if(confirm("상세 이미지 수정시 기존 이미지는 삭제 됩니다. \n계속 하시겠습니까?")==true){
-				location.href="/admin/updateSubImage.mdo?product_no="+product_no;
-			}
-		});
-		
-	});
+		}
+		preview(arr);
+    });//file change
+    function checkExtension(fileName,fileSize){
+      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+      var maxSize = 20971520;  //20MB
+      if(fileSize >= maxSize){
+        alert('파일 사이즈 초과');
+        $("mainUploadFile").val("");  //파일 초기화
+        return false;
+      }
+      if(regex.test(fileName)){
+        alert('업로드 불가능한 파일이 있습니다.');
+        $("mainUploadFile").val("");  //파일 초기화
+        return false;
+      }
+      return true;
+    }
+    function preview(arr){
+      arr.forEach(function(f){
+        //파일명이 길면 파일명...으로 처리
+        var fileName = f.name;
+        if(fileName.length > 10){
+          fileName = fileName.substring(0,7)+"...";
+        }
+        //div에 이미지 추가
+        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
+        str += '<span>'+fileName+'</span><br>';
+        //이미지 파일 미리보기
+        if(f.type.match('image.*')){
+          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=100 />';
+            str += '</li></div>';
+            $(str).appendTo('#main-preview');
+          } 
+          reader.readAsDataURL(f);
+        }
+      });//arr.forEach
+    }
+});
 </script>
 </head>
 <body id="page-top">
@@ -82,16 +106,16 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">상품 상세</h1>
+                    <h1 class="h3 mb-2 text-gray-800">상품 등록</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                        
                         <div class="card-body">
-                           
+                            <form action="updateMainImage.mdo" method="post" enctype="multipart/form-data">
 							 	<div class="table-responsive">
-                           			<input type="hidden" id="product_no" value="${productInfo.product_no }">
+							 		<input type="hidden" name="product_no" value="${productInfo.product_no }">
 	                           		<table class="table table-bordered" id="dataTable">
                     					<tr>
                     						<td>카테고리</td>
@@ -101,74 +125,61 @@
                     					</tr>
                     					<tr>
                     						<td width="150px">상품명</td>
-                    						<td>
-                    							${productInfo.product_name }
-                    						</td>
+                    						<td><input style="width: 100%" type="text" id="productName" name="product_name" value="${productInfo.product_name }"></td>
                     					</tr>
                     					<tr>
                     						<td>소비자가</td>
-                    						<td>
-                    							<fmt:formatNumber maxFractionDigits="3" value="${productInfo.product_price }"></fmt:formatNumber>원
-                    						</td>
+                    						<td><input type="text" id="productPrice" name="product_price" value="${productInfo.product_price }"></td>
                     					</tr>
                     					<tr>
                     						<td>소재정보</td>
-                    						<td>
-                    							${productInfo.material_info }
-                    						</td>
+                    						<td><textarea style="width: 100%" id="materialInfo" name="material_info" >${productInfo.material_info }</textarea></td>
                     					</tr>
                     					<tr>
                     						<td>원산지</td>
-                    						<td>
-                    							${productInfo.origin }
-                    						</td>
+                    						<td><input style="width: 100%" type="text" id="origin" name="origin" value="${productInfo.origin }"></td>
                     					</tr>
                     					<tr>
                     						<td>상품설명</td>
-                    						<td>
-                    							${productInfo.product_info }
-                    						</td>
+                    						<td><textarea style="width: 100%" id="productInfo" name="product_info">${productInfo.product_info }</textarea></td>
                     					</tr>
                     					<tr>
                     						<td>적립율</td>
                     						<td>
-												${productInfo.product_point }%
-											</td>
-                    					</tr>
-                    					<tr>
-                    						<td>총재고</td>
-                    						<td id="product_stock">
-												${productStock}
+												<input type="number" name="product_point" value="${productInfo.product_point }">%
 											</td>
                     					</tr>
                     					<tr>
                     						<td>상품노출유무</td>
                     						<td>
-												<c:if test="${productInfo.product_used == 1 }">
-													노출												
-												</c:if>
-												<c:if test="${productInfo.product_used == 0 }">
-													미노출
-												</c:if>
-												
-											</td>
+                    							<c:if test="${productInfo.product_used == 1 }">
+                    								<select name="product_used">
+	                    								<option value="1" selected="selected">노출</option>
+	                    								<option value="0">미노출</option>
+	                    							</select>
+                    							</c:if>
+                    							<c:if test="${productInfo.product_used == 0 }">
+                    								<select name="product_used">
+	                    								<option value="1" >노출</option>
+	                    								<option value="0" selected="selected">미노출</option>
+	                    							</select>
+                    							</c:if>
+                    						</td>
                     					</tr>
                     					<tr>
                     						<td colspan="2">
-    	                						<span>메인이미지</span>&nbsp;&nbsp;<input id="mainImageUpdate" type="button" class="btn btn-dark" value="메인 이미지 수정">
+    	                						<p>메인이미지</p>
+                    							<div class="col-lg-12">
+                    								<input type="file" name="mainUploadFile" id="mainUploadFile">
+                    							</div>
                     							<div id="main-preview">
-                    								<div style="display: inline-flex; padding: 10px;">
-                    									<li>
-		                    								<span>${mainImage.image_name }</span><br>
-		                    								<img src="${mainImage.upload_path }" width=100  />
-	                    								</li>
-                    								</div>
+                    							
                     							</div>
                     						</td>
                     					</tr>
                     					<tr>
                     						<td colspan="2">
-    	                						<span>상세이미지</span>&nbsp;&nbsp;<input id="subImageUpdate" type="button" class="btn btn-dark" value="상세 이미지 수정">
+    	                						<span>상세이미지</span>
                     							<div id="sub-preview">
                     								<c:forEach items="${subImage }" var="image">
                     								<div style="display: inline-flex; padding: 10px;">
@@ -184,14 +195,13 @@
                     					<tr>
                     						<td colspan="2" align="center">
                     							<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/productList.mdo'">
-                    							<input id="update" type="submit" class="btn btn-dark" onclick="location.href='/admin/updateProduct.mdo?productNo=${productInfo.product_no}'" value="정보수정(이미지 제외)">
-                    							<input id="delete" type="submit" class="btn btn-dark" value="삭제">
+                    							<input id="update" type="submit" class="btn btn-dark" value="수정">
                     						</td>
                     					</tr>
                     				</table>
                     				
                     			</div>
-                    		
+                    		</form>
                         </div>
                     </div>
 				</div>
