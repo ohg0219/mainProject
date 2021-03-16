@@ -13,7 +13,8 @@
 	</typeAliases>
 	
 	<mappers>
-		<!-- 매퍼파일 -->
+		<!-- 매퍼파일 -->		
+		<mapper resource="mappings/user/user-mypage-modify-mapping.xml" />
 		<mapper resource="mappings/user/user-mapping.xml" />
 		<mapper resource="mappings/user/user-loginout-mapping.xml" />
 		<mapper resource="mappings/user/user-register-mapping.xml"/>

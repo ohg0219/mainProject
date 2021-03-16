@@ -103,9 +103,9 @@ a {
 											<c:forEach var="user" items="${userInfo}">
 												<tr>
 													<td width="85">${user.userId}</td>
-													<td width="95"><a
-														id = "${user.userId }" class="who"
-														data-toggle="modal" data-target="#getUserModal">${user.userName}</a></td>
+													<td width="95">
+														<a id = "${user.userId }" class="who"
+														data-toggle="model" data-target="#getUserModal">${user.userName}</a></td>
 													<td width="85">${user.nickName}</td>
 													<td width="160">${user.userPhone}</td>
 													<td width="95"><fmt:formatDate value="${user.inDate}"
@@ -130,17 +130,14 @@ a {
 								</table>
 
 								<div>
-									<select name="example_length" id="search_select" aria-controls="example" class="">
+									<select name="example_length" id="search_select" aria-controls="example">
 										<option value="all">전체</option>
 										<option value="id">아이디</option>
 										<option value="nickname">닉네임</option>
 									</select>
-                        
-                                		
-                                <div>
-									 <input type="text" id="search">
-									
 
+									 <input type="text" id="search">
+		
 									<button type="button" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i> 검색버튼
 									</button>
@@ -196,6 +193,7 @@ a {
 		document.getElementById(failId).click();
 		alert('비밀번호를 확인해 주세요');
 	}
+	
 		$(function(){
 			$("#searchBtn").click(function(){
 				var search = $('#search').val();
@@ -208,10 +206,8 @@ a {
 				        break;
 				    }
 				}location.href="userList.mdo?search="+search+"&select="+val;
-				console.log(search);
-				console.log(select);
-				console.log(val);
 			});
+			
 			$('#search').keypress(function(event){
 			     if ( event.which == 13 ) {
 			         $('#searchBtn').click();
