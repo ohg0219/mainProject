@@ -24,10 +24,7 @@ public class BoardDAO {
 		map.put("cntPerPage",vo.getCntPerPage());
 		map.put("start", vo.getStart());
 		map.put("searchType", search.getSearchType());
-		
 		map.put("parameter", search.getParameter());
-		
-	
 		return answerTemplate.selectList("answerBoardDAO.getAnswerList",map);
 	}
 
@@ -38,14 +35,42 @@ public class BoardDAO {
 
 	
 	public void updateAnswer(AnswerBoardVO board) {
+		answerTemplate.update("answerBoardDAO.updateAnswer",board);
 	
-
+	}
+	public void viewCheck(AnswerBoardVO board) {
+		answerTemplate.update("answerBoardDAO.viewCheck",board);
 	}
 	public int getCount(SearchVO search) {
-		
-		System.out.println("DAO : "+search.getParameter());
-		System.out.println("DAP : "+(int)answerTemplate.selectOne("answerBoardDAO.getCount", search));
 		return answerTemplate.selectOne("answerBoardDAO.getCount", search);
 	}
+	
+	public void replyInsert(AnswerBoardVO board) {
+		answerTemplate.insert("answerBoardDAO.replyInsert", board);
+	}
+
+	
+	public AnswerBoardVO getReply(int boardNo) {
+		return answerTemplate.selectOne("answerBoardDAO.getReply",boardNo);
+	}
+	public void updateReply(AnswerBoardVO board) {
+		answerTemplate.selectOne("answerBoardDAO.updateReply",board);
+		
+	}
+	
+	public void deleteReply(int boardNo) {
+		answerTemplate.update("answerBoardDAO.deleteReply",boardNo);
+		
+	}
+	public void deleteAnswer(int boardNo) {
+		answerTemplate.update("answerBoardDAO.deleteAnswer",boardNo);
+		
+	}
+	public void deleteAnswerReply(int boardNo) {
+		answerTemplate.update("answerBoardDAO.deleteAnswerReply",boardNo);
+		
+	}
+	
+
 	
 }

@@ -30,13 +30,53 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void updateAnswer(AnswerBoardVO board) {
-		// TODO Auto-generated method stub
+		dao.updateAnswer(board);
 
 	}
 
 	@Override
 	public int countAnswer(SearchVO search) {
 		return dao.getCount(search);
+	}
+
+	@Override
+	public void viewCheck(AnswerBoardVO board) {
+		dao.viewCheck(board);
+	}
+
+	@Override
+	public void replyInsert(AnswerBoardVO board) {
+		dao.replyInsert(board);
+		
+	}
+
+	@Override
+	public AnswerBoardVO getReply(int boardNo) {
+		
+		return dao.getReply(boardNo);
+	}
+
+	@Override
+	public void updateReply(AnswerBoardVO board) {
+		dao.updateReply(board);
+		
+	}
+
+	@Override
+	public void deleteReply(int boardNo) {
+		dao.deleteReply(boardNo);
+		
+	}
+
+	@Override
+	public void deleteAnswer(int boardNo) {
+		dao.deleteAnswer(boardNo);
+		
+	}
+
+	@Override
+	public void deleteAnswerReply(int boardNo) {
+		dao.deleteAnswerReply(boardNo);
 	}
 
 }

@@ -79,7 +79,8 @@ public class UserManagementController {
 
 	@PostMapping("/pwCheck.mdo")
 	public String pwCheck(@RequestParam("userId")String userId,
-						  @RequestParam("userPw")String userPw, HttpSession session,
+						  @RequestParam("userPw")String userPw, 
+						  HttpSession session,
 						  RedirectAttributes model) {
 		System.out.println(userId);
 		System.out.println(userPw);

@@ -44,6 +44,7 @@
 			<param-value>/WEB-INF/config/userContext/user-context.xml</param-value>
 			<!-- 팀월들이 만든 컨텍스트 등록 -->
 		</init-param>
+		<!-- 톰캣에서 실행되는 우선순서 -->
 		<load-on-startup>2</load-on-startup>
 		<multipart-config>
 			<max-file-size>20971520</max-file-size>

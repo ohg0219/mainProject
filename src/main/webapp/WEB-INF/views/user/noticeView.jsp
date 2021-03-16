@@ -51,39 +51,27 @@
 		<div class="content">
 			<div class="contentWrap">
 				<h3>공지사항</h3>
-				<form action="event.jsp" method="post">
-				<table class="noticeTable">
+				<table align="left" class="noticeTable">
 					<tr>
-						<td align="right">
-							<select name="searchCondition">
-								<option value="board_title">제목
-								<option value="board_content">내용
-								<option value="board_all">제목+내용
-							</select>
-							<input type="text" name="searchKeyword"/>
-							<input type="submit" value="검색"/>
+						<th>글번호 : ${notice.board_no}</th>
+						<th>글제목 : ${notice.board_title}</th>
+					</tr>
+					<tr>
+						<th>작성자 : ${notice.board_writer}</th>
+						<th>조회수 : ${notice.board_cnt}</th>
+					</tr>
+					<tr>
+						<th>날짜 : <fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
+						<fmt:formatDate value="${notice.reg_date}" pattern=" hh:mm:ss "/></th>
+					</tr>
+					<tr>
+						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="20" readonly="readonly">${notice.board_content}</textarea></td>
+					</tr>
+					<tr>
+						<td>
+							<a href="notice.do"><strong>List</strong></a>
 						</td>
 					</tr>
-				</table>
-				</form>
-				<table class="noticeTable">
-					<tr>
-						<th width="60px">번호</th>
-						<th width="250px">제목</th>
-						<th width="60px">작성자</th>
-						<th width="100px">날짜</th>
-						<th width="60px">조회수</th>
-					</tr>
-					<c:forEach var="notice" items="${noticeList}">
-					<tr>
-						<td>${notice.board_no}</td>
-						<td align="center"><strong><a href="noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
-						<td>${notice.board_writer}</td>
-						<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
-						<fmt:formatDate value="${notice.reg_date}" pattern=" hh:mm:ss "/></td>
-						<td>${notice.board_cnt}</td>
-					</tr>
-					</c:forEach>
 				</table>
 			</div>
 		</div><!-- end Content -->

@@ -15,6 +15,5 @@ public class UserLoginOutServiceImpl implements UserLoginOutService {
 	public String userLogin(String userId) {
 		return userLoginOutDAO.userLogin(userId);
 	}
-
 	
 }
