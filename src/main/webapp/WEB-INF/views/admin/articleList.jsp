@@ -68,8 +68,7 @@
                                     </thead>
                                     <tbody>
                                     
-                                    	
-                                    
+                                    	 
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
                                     	<c:if test="${not empty articleList}" >
 	                                        <c:forEach var="article" items="${articleList}">
@@ -82,6 +81,7 @@
 			                                    </tr>
 	                                        </c:forEach>
                                         
+
                                         </c:if>
                                         <c:if test="${empty articleList }">
                                         	<tr>
@@ -93,16 +93,18 @@
                                     </tbody>
                                 </table>
                                 <div>	
-									<select name="example_length" aria-controls="example" class="">
+                                <form action="noticesearch.mdo?board_group=${article.board_group }" method="get">
+                                    <input type="hidden" name="board_group" value="${where}">
+									<select name="searchOption" aria-controls="example" class="">
 										<option value="all">전체</option>
 										<option value="board_writer">작성자</option>
 										<option value="board_title">제목</option>
-										<option value="writerContent">제목 + 내용</option>
+										<option value="board_content">내용</option>
 									</select>
 										                                    		
-									<input type="text" id="search">
+									<input type="text" name="keyword">
 
-									<button type="button" class="btn btn-dark" id="searchBtn">
+									<button type="submit" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										검색버튼
 									</button>
@@ -111,6 +113,7 @@
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										글쓰기
 									</button>
+                                </form>
 									<br>
 									<div align="center">
 									<a href="#">1</a>

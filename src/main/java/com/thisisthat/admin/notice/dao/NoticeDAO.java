@@ -33,6 +33,22 @@ public class NoticeDAO {
 	public List<NoticeVO> noticeList(NoticeVO noticeVO){
 		return mybatis.selectList("NoticeDAO.noticeList",noticeVO);
 	}
+
+	public List<NoticeVO> allNotice(NoticeVO noticeVO) {
+		return mybatis.selectList("NoticeDAO.allNotice",noticeVO);
+	}
+
+	public List<NoticeVO> titleNotice(NoticeVO noticeVO) {
+		return mybatis.selectList("NoticeDAO.titleNotice",noticeVO);
+	}
+
+	public List<NoticeVO> writerNotice(NoticeVO noticeVO) {
+		return mybatis.selectList("NoticeDAO.writerNotice",noticeVO);
+	}
+
+	public List<NoticeVO> contentNotice(NoticeVO noticeVO) {
+		return mybatis.selectList("NoticeDAO.contentNotice",noticeVO);
+	}
 	
 	
 	

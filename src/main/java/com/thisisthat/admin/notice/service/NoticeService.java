@@ -15,6 +15,15 @@ public interface NoticeService {
 	NoticeVO notice(NoticeVO noticeVO);
 	
 	List<NoticeVO> noticeList(NoticeVO noticeVO);
+
+	List<NoticeVO> allNotice(NoticeVO noticeVO);
+	
+	List<NoticeVO> titleNotice(NoticeVO noticeVO);
+	
+	List<NoticeVO> writerNotice(NoticeVO noticeVO);
+	
+	List<NoticeVO> contentNotice(NoticeVO noticeVO);
+	
 }
 
 
