@@ -1,19 +1,50 @@
+<%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+
+<title>thisisthat - Q&A</title>
+
 <%@include file="include/css.jsp"%>
-<title>Insert title here</title>
+<%@include file="include/js.jsp"%>
+<!-- Custom fonts for this template-->
+    <link href="/resources/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
+<style type="text/css">
+ a:link { color: red; text-decoration: none;}
+ a:visited { color: blue; text-decoration: none;}
+ a:hover { color: red; text-decoration: underline;}
+ a {color:black;}
+</style>
+<script type="text/javascript">
+	function Change() {
+		var sel = document.getElementById('boardState').value;
+		var boardNo = '${answer.boardNo}'
+		location.href="/admin/getAnswer.mdo?no="+boardNo+"&state="+sel;
+		
+	}
+</script>
+<style type="text/css">
+.thumbnail-wrappper { width: 25%; } img { max-width: 100%; height: auto; }
+
+
+</style>
 </head>
-<body>
-
-
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -31,44 +62,144 @@
 			<div id="content">
 				<!-- Topbar -->
 				<%@include file="include/navbar.jsp"%>
-				
-				
-				
 				<div class="container-fluid">
-					<form action="insertArticle.mdo" method="post">
-						 <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            	<tr>
-                            		<td colspan="2">
-	                            		<select name="example_length" aria-controls="example" class="">
-											<option value="noSelect">---선택---</option>
-											<option value="event">이벤트</option>
-											<option value="notice">공지사항</option>
-											<option value="">100</option>
-										</select>
-										<button type="button" class="btn-check:checked pull-right" id="searchBtn" >
-											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
-											작성하기
-										</button>
-										<input type="text" name="title" class="form-control mt-4 mb-2"
-											placeholder="제목을 입력해주세요." required
-										>
-										<div class="form-group">
-											<textarea class="form-control" rows="20" name="content"
-												placeholder="내용을 입력해주세요" required
-											></textarea>
-										</div>
-									</td>
-                            	</tr>
-                         	</table>
-                         </div>
-					</form>
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800"></h1>
+                    <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                       <!--   <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
+                        </div>
+                        -->
+                        <div class="card-body">
+                            <form action="/admin/insertReply.mdo" method="get">
+                            <input type="hidden" name="boardNo" value="${answer.boardNo}"> 
+                            <input type="hidden" name="boardType" value="${answer.boardType}"> 
+                            
+							 	<div class="table-responsive">
+	                           		<table class="table table-bordered" id="dataTable" >
+                    					<tr>
+                    						<td width="200" align="right">제목</td>
+                    						<td align="center"><strong>${answer.boardTitle}</strong></td>
+                    					</tr>
+                    					<tr>
+                    						<td align="right">게시글 상태</td>
+                    						<td align="center">
+                   								<select name="boardState" id="boardState" name="sel" onchange="Change()">
+		                    							<option value="확인중"
+		                    							<c:if test="${answer.boardState == '확인중' }">selected</c:if>
+		                    							>확인중</option>
+		                    							<option value="보류"
+		                    							<c:if test="${answer.boardState == '보류' }">selected</c:if>
+		                    							>보류</option>
+		                    							<option value="처리중"
+		                    							<c:if test="${answer.boardState == '처리중' }">selected</c:if>
+		                    							>처리중</option>
+		                    							<option value="답변완료"
+		                    							<c:if test="${answer.boardState == '답변완료' }">selected</c:if>
+		                    							>답변완료</option>
+                    							</select>
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td align="right">작성자</td>
+                    						<td align="center"><strong>${answer.boardWriter}</strong></td>
+                    					</tr>
+                    					<tr>
+                    						<td align="center" colspan="500"><strong>내용</strong></td>
+                    					</tr>
+                    					<tr>
+                    						<td colspan="2" height="300">${answer.boardContent}</td>
+                    					
+                    					</tr>
+                    					<c:if  test="${not empty answer.boardImg1 || not empty answer.boardImg2 || not empty answer.boardImg3 || not empty answer.boardImg4}">
+                    					<tr>
+                    						<td colspan="2" >
+	                    						<c:if  test="${not empty answer.boardImg1}">
+	                    							<a  class="thumbnail-wrappper" href=${answer.boardImg1 }> 
+	                    								<img alt="이미지를 불러오지 못했습니다" width="10%" height="10%"
+															src="${answer.boardImg1 }"
+															class="img-circle img-responsive">
+	                    							</a>
+	                    						</c:if>
+	                    						<c:if test="${not empty answer.boardImg2}">
+	                    							<a href=${answer.boardImg2 }> 
+	                    								<img alt="이미지를 불러오지 못했습니다" width="50" height="50"
+															src="${answer.boardImg2 }"
+															class="img-circle img-responsive">
+	                    							</a>
+	                    						</c:if>
+	                    						<c:if test="${not empty answer.boardImg3}">
+	                    							<a href=${answer.boardImg3 }> 
+	                    								<img alt="이미지를 불러오지 못했습니다" width="50" height="50"
+															src="${answer.boardImg3 }"
+															class="img-circle img-responsive">
+	                    							</a>
+	                    						</c:if>
+	                    						<c:if test="${not empty answer.boardImg4}">
+	                    							<a href=${answer.boardImg4 }> 
+	                    								<img alt="이미지를 불러오지 못했습니다" width="50" height="50"
+															src="${answer.boardImg4 }"
+															class="img-circle img-responsive">
+	                    							</a>
+	                    						</c:if>
+	                    					</td>
+                    					</tr>
+                    					</c:if>
+                    					<tr>
+                    						<td colspan="2" align="center">
+	                    						<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/answerBoardList.mdo'">
+	                    						<input value="답변" type="submit" class="btn btn-dark">
+	                    						<input id="deleteBtn" value="삭제" type="button" class="btn btn-dark" >
+                    						</td>
+                    					</tr>
+                    				</table>
+                    				
+                    			</div>
+                    		</form>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
 	</div>
-				
+	<!-- End of Page Wrapper -->
+	<script type="text/javascript">
+		var msg = '${msg}';
+		console.log(msg);
+		if(msg === 'msg'){
+			
+			alert('답글이 이미 있습니다.');
+		}
+		$(function(){
+			$("#deleteBtn").click(function(){
+				if(confirm('되돌릴 수 없습니다 정말로 삭제합니까?')){
+					location.href="/admin/deleteAnswer.mdo?boardNo="+'${answer.boardNo}';
+				}
+			});
+		});
+		
+	</script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/resources/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<%@include file="include/js.jsp"%>
+    <!-- Core plugin JavaScript-->
+    <script src="/resources/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/resources/admin/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/resources/admin/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/resources/admin/js/demo/chart-area-demo.js"></script>
+    <script src="/resources/admin/js/demo/chart-pie-demo.js"></script>
+	
+
 </body>
 </html>

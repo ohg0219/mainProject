@@ -141,16 +141,16 @@ a {
 													</c:if>
 													</td>
 													<!-- 이미지 end -->
-													<td width="160"><a href=""/admin/getAnswer.mdo?no=${answer.boardNo}">${answer.boardTitle}</a>
+													<td width="160"><a href="/admin/getAnswer.mdo?no=${answer.boardNo}">${answer.boardTitle}</a>
 														<c:if test="${answer.boardSecret}">
 															<img alt="이미지를 불러오지 못했습니다" width="50" height="50"
 															src="/resources/admin/icon/lock.png"
 															class="img-circle img-responsive">
 														</c:if>
-														<c:if test="${not empty adminAnswerList }">
-															<c:forEach var="ans" items="${adminAnswerList}">
-																<c:if test="${answer.boardNo == ans.resultNo }">
-																 <br>&nbsp;&nbsp;&nbsp;└<a href="/admin/getAnswer.mdo?no=${ans.boardNo}">${ans.boardTitle }</a>
+														<c:if test="${not empty replyList}">
+															<c:forEach var="ans" items="${replyList}">
+																<c:if test="${ans.resultNo == answer.boardNo}">
+																 <br>&nbsp;&nbsp;&nbsp;<a href="/admin/getReply.mdo?no=${ans.boardNo}">└${ans.boardTitle }</a>
 																</c:if>
 															</c:forEach>
 														</c:if>
@@ -227,42 +227,7 @@ a {
 			</div>
 		</div>
 	</div>
-	<ul class="navbar-nav ml-auto">
-		<!-- Nav Item - User Information -->
-		<li class="nav-item dropdown no-arrow">
-			<button type="button" class="btn btn-dark" data-toggle="modal"
-				data-target="#getUserModal">
-				<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-				Logout
-			</button>
-		</li>
-	</ul>
-	<form action="/admin/pwCheck.mdo" method="post">
-	<div class="modal fade" id="getUserModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">비밀번호를 입력해 주세요</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-content">
-					<input type="password" name="userPw" placeholder="비밀번호">
-					
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<input type="submit" class="btn btn-primary" id="modalInput" value="확인">					
-					<input type="hidden" id="userId" name="userId">
-				</div>
-			</div>
-		</div>
-	</div>
-	</form>
+	
 
 	<script>
 	function selChange() {
@@ -280,7 +245,10 @@ a {
 	
 	//--------------------검색하는 함수
 	var msg = '${msg}';
-	var failId = '${failId}';
+	
+	if(msg === '잘못된 요청입니다'){
+		alert(msg);
+	}
 	
 		$(function(){
 			$("#searchBtn").click(function(){
