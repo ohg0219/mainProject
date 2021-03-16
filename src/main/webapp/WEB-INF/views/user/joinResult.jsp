@@ -73,7 +73,7 @@
 								<div class="hello">
 									<p>회원가입이 완료 되었습니다.</p>
 									<p>
-										<strong>${user.userId}</strong> 님은 <strong>N01</strong> 회원입니다.
+										<strong>${user.id}</strong> 님 환영합니다.
 									</p>
 									<br>
 								</div>
@@ -81,21 +81,21 @@
 									<li>
 										<div class="resultTag">ID</div>
 										<div class="resultText">
-											<span>${user.userId }</span>
+											<span>${user.id }</span>
 										</div>
 									</li>
 									<br>
 									<li>
 										<div class="resultTag">이름</div>
 										<div class="resultText">
-											<span>${user.userName }</span>
+											<span>${user.name }</span>
 										</div>
 									</li>
 									<br>
 									<li>
 										<div class="resultTag">E-MAIL</div>
 										<div class="resultText">
-											<span>${user.userEmail }</span>
+											<span>${user.email }</span>
 										</div>
 									</li>
 								</ul>

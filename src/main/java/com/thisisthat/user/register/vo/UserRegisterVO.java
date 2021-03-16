@@ -87,6 +87,14 @@ public class UserRegisterVO {
 	public void setOutDate(Date outDate) {
 		this.outDate = outDate;
 	}
+	@Override
+	public String toString() {
+		return "UserRegisterVO [id=" + id + ", password=" + password + ", nickName=" + nickName + ", name=" + name
+				+ ", phone=" + phone + ", email=" + email + ", zipcode=" + zipcode + ", address1=" + address1
+				+ ", address2=" + address2 + ", user_role=" + user_role + ", inDate=" + inDate + ", outDate=" + outDate
+				+ "]";
+	}
+	
 	
 	
 }
