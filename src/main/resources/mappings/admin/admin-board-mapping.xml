@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="answerBoardDAO">
+	<resultMap type="answerVO" id="answerResult">
+		<id column="board_no" property="boardNo"/>
+		<result column="board_title" property="boardTitle"/>
+		<result column="board_content" property="boardContent"/>
+		<result column="board_writer" property="boardWriter"/>
+		<result column="reg_date" property="regDate"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="product_no" property="productNo"/>
+		<result column="board_state" property="boardState"/>
+		<result column="board_secret" property="boardSecret"/>
+		<result column="result_no" property="resultNo"/>
+		<result column="board_img1" property="boardImg1"/>
+		<result column="board_img2" property="boardImg1"/>
+		<result column="board_img3" property="boardImg1"/>
+		<result column="board_img4" property="boardImg1"/>
+		<result column="board_type" property="boardType"/>
+	</resultMap>
+	
+	<select id="getAnswerList" resultMap="answerResult" resultType="answerVO"  parameterType="hashmap" >
+		select * from answer_board where board_state != '답글' and board_type like #{type}
+			<if test="searchType != '선택없음'">
+			and
+			<if test="searchType == '아이디'">
+					board_writer
+			</if>		
+			<if test="searchType == '제목'">
+					board_title	
+			</if>		
+			like '%'||#{parameter}||'%'
+		</if>
+		 order by board_no desc OFFSET #{start} limit #{cntPerPage} ;
+		
+	</select>
+	
+	<select id="getAnswer" resultMap="answerResult" resultType="answerVO" parameterType="Integer" >
+		select * from answer_board where board_no = #{boardNo};		
+	</select>
+	<select id="getCount" resultType="Integer" >
+		select count(*) from answer_board where board_state != '답글' and board_type like #{type}
+		<if test="searchType != '선택없음'">
+			and
+			<if test="searchType == '아이디'">
+					board_writer
+			</if>		
+			<if test="searchType == '제목'">
+					board_title	
+			</if>		
+			like '%'||#{parameter}||'%'
+		</if>
+		
+	</select>
+	
+</mapper>

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/resources/user/css/common.css">
 <link rel="stylesheet" href="/resources/user/css/item_list.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="/resources/user/js/common.js"></script>ipt>
+<script src="/resources/user/js/common.js"></script>
 </head>
 <body>
 	<div class="wrap">

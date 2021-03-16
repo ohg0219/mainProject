@@ -9,6 +9,9 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="/resources/user/js/naveridlogin_js_sdk_2.0.2.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="619294176541-km5g9ed08619ijmirsaj6i4bsqife0dm.apps.googleusercontent.com">
 <style type="text/css">
 .loginwrap {
 	height: 480px;
@@ -70,15 +73,14 @@
 	margin-bottom: 30px; 
 	font-weight: bold;
 }
-#kakao-login-btn{
-	width: 50%;
-	height: 50%;
-}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".inputId").focus();
-	})
+		$(".loginBtn").on("click",function(){
+			
+		});
+	});
 </script>
 </head>
 <body>
@@ -96,33 +98,41 @@
 							<li><input class="inputPw" type="password" name="password"></li>
 							<li><input class="loginBtn" type="submit" value="로그인"></li>
 							<li style="text-align: right;"><a href="#">FORGET YOUR PASSWORD?</a></li>
-							<li> 　	</li>
-							<li class="kakao-login-panel">
-								<a id="kakao-login-btn"></a>
-							    <a href="http://developers.kakao.com/logout"></a>
-							    <script type='text/javascript'>
-							        //<![CDATA[
-							        // 사용할 앱의 JavaScript 키를 설정해 주세요.
-							        Kakao.init('b8667344f8a6f436b0827f2076f388f0');
-							        // 카카오 로그인 버튼을 생성합니다.
-							        Kakao.Auth.createLoginButton({
-							            container: '#kakao-login-btn',
-							            success: function (authObj) {
-							                alert(JSON.stringify(authObj));
-							                console.log(JSON.stringify(authObj));
-							            },
-							            fail: function (err) {
-							                alert(JSON.stringify(err));
-							            }
-							        });
-							      	//]]>
-   								</script>
-							</li>
 						</ul>
+							<div class="social_login">
+								<a href="https://kauth.kakao.com/oauth/authorize?client_id=7ff3d3c85953e4c8234ff377259bd06b&redirect_uri=http://localhost:8080/kakaologin.do&response_type=code">
+									<img style="width: 208px; height: 45px;" src="/resources/user/image/kakao_login_medium_narrow.png"/>
+								</a>
+								<div id="naverIdLogin"></div>
+								<script type="text/javascript">
+									var naverLogin = new naver.LoginWithNaverId(
+										{
+											clientId: "OfSXR45Si2nhF2qCVIOX",
+											callbackUrl: "http://localhost:8080/naverLoginResult.do",
+											isPopup: false, /* 팝업을 통한 연동처리 여부 */
+											loginButton: {color: "green", type: 3, height: 45} /* 로그인 버튼의 타입을 지정 */
+										}
+									);
+									
+									/* 설정정보를 초기화하고 연동을 준비 */
+									naverLogin.init();
+								</script>
+								<div class="g-signin2" data-onsuccess="onSignIn" data-width="208" data-height="45" data-theme="dark" data-longtitle="true"></div>
+								<script type="text/javascript">
+									function onSignIn(googleUser) {
+										var profile = googleUser.getBasicProfile();
+										console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+										console.log('Name: ' + profile.getName());
+										console.log('Image URL: ' + profile.getImageUrl());
+										console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+										location.href="http://localhost:8080/googlelogin.do?id="+profile.getId()+"&name="+ profile.getName()+"&email="+profile.getEmail();
+									}
+								</script>
+							</div>
 					</form>	
 				</div>
 				<div class="register">
-					<form action="/register.do" method="post">
+					<form action="/register.do" method="get">
 						<p class="box_title">REGISTER</p>
 						<ul>
 							<li><p>회원으로 가입하시면 여러가지 혜택과 함께<br>더 편리하게 사이트를 이용하실 수 있습니다.</p></li>

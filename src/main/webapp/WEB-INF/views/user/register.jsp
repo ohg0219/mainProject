@@ -18,7 +18,7 @@
 		<div class="content">
 			<div class="register_wrap">
 			 	<div class="register" > 
-					<form action="regist.do" method="post" id="registerForm">
+					<form action="register.do" method="post" id="registerForm">
 						<p class="box_title">SIGN UP</p>
 						<ul>
 							<li>ID *</li>
@@ -68,9 +68,13 @@
 								<input class="input_phone" type="tel" name="phone2" size="4">
 								<span>-</span>
 								<input class="input_phone" type="tel" name="phone3" size="4">
+								<span id="phoneCheck" style="display: block;"></span>
 							</li>
 							<li>E-MAIL *</li>
-							<li class="input_li"><input class="input" type="email" name="email"></li>
+							<li class="input_li">
+								<input class="input" type="email" name="email">
+								<span id="emailCheck"></span>
+							</li>
 							<li class="input_li">
 								<p>이용약관에 대한 동의</p>
 								<input type="checkbox" style="vertical-align: -2px;" name="terms"><label style="font-weight: normal;">동의함</label>

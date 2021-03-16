@@ -7,4 +7,5 @@ public interface UserRegisterService {
 	int idCheck(String userId);
 	int nickNameCheck(String nickName);
 	void insertUser(UserRegisterVO vo);
+	
 }

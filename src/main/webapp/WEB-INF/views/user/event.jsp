@@ -58,6 +58,7 @@
 							<select name="searchCondition">
 								<option value="board_title">제목
 								<option value="board_content">내용
+								<option value="board_all">제목+내용
 							</select>
 							<input type="text" name="searchKeyword"/>
 							<input type="submit" value="검색"/>
