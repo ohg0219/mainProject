@@ -27,10 +27,10 @@ public class noticeController {
 
 		if(board_group.equals("notice")) {
 			noticeService.deleteNotice(noticeVO);
-			return "redirect:articleList.mdo?where=notice";
+			return "redirect:getArticleList.mdo?where=notice";
 		}else if(board_group.equals("event")) {
 			noticeService.deleteNotice(noticeVO);
-			return "redirect:articleList.mdo?where=event";
+			return "redirect:getArticleList.mdo?where=event";
 
 		}
 		return null;
@@ -40,10 +40,10 @@ public class noticeController {
 	public String updateNotice(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_title")String board_title,@RequestParam("board_content")String board_content,@RequestParam("board_group")String board_group)throws IOException{
 		if(board_group.equals("notice")) {
 			noticeService.updateNotice(noticeVO);
-			return "redirect:articleList.mdo?where=notice";
+			return "redirect:getArticleList.mdo?where=notice";
 		}else if(board_group.equals("event")) {
 			noticeService.updateNotice(noticeVO);
-			return "redirect:articleList.mdo?where=event";
+			return "redirect:getArticleList.mdo?where=event";
 		}
 		return null;
 	}
@@ -146,21 +146,38 @@ public class noticeController {
 
 		}else if(board_group.equals("event")) {
 			if(searchOption.equals("all")) {
-				 noticeService.allNotice(noticeVO);
+				noticeVO.setKeyword(keyword);
+				noticeVO.setBoard_group(board_group);
+				List<NoticeVO> noticeList = noticeService.allNotice(noticeVO);
+				
+				model.addAttribute("articleList",noticeList);
+				model.addAttribute("where", board_group);
 				return "/admin/articleList";
 			}else if(searchOption.equals("board_title")) {
-				noticeService.titleNotice(noticeVO);
+				noticeVO.setKeyword(keyword);
+				noticeVO.setBoard_group(board_group);
+				List<NoticeVO> noticeList = noticeService.titleNotice(noticeVO);
+				
+				model.addAttribute("articleList",noticeList);
+				model.addAttribute("where", board_group);
 				return "/admin/articleList";
 			}else if(searchOption.equals("board_writer")) {
-				noticeService.writerNotice(noticeVO);
+				noticeVO.setKeyword(keyword);
+				noticeVO.setBoard_group(board_group);
+				List<NoticeVO> noticeList = noticeService.writerNotice(noticeVO);
+				
+				model.addAttribute("articleList",noticeList);
+				model.addAttribute("where", board_group);
 				return "/admin/articleList";
 			}else if(searchOption.equals("board_content")) {
-				noticeService.contentNotice(noticeVO);
+				noticeVO.setKeyword(keyword);
+				noticeVO.setBoard_group(board_group);
+				List<NoticeVO> noticeList =	noticeService.contentNotice(noticeVO);
+				
+				model.addAttribute("articleList",noticeList);
+				model.addAttribute("where", board_group);
 				return "/admin/articleList";
 			}
-
-			noticeService.updateNotice(noticeVO);
-			return "redirect:articleList.mdo?where=event";
 		}
 		return null;
 
