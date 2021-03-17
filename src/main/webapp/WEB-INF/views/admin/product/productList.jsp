@@ -70,15 +70,22 @@
                     </h1>
                     	<div>
                     		<span>카테고리 선택 : </span>
-	                    	<select>
-	                    		<option>전체</option>
+	                    	<select id="categorySelect" onchange="change()">
+	                    		<option value="all" class="category" >전체</option>
 	                    		<c:forEach items="${categoryList }" var="category">
-	                    			<option>
+	                    			<option value="${category.categoryName }" <c:if test="${selectCategory == category.categoryName }">selected</c:if> class="category">
 	                    				${category.categoryName }
 	                    			</option>
 	                    		</c:forEach>
 	                    	</select>
-                    	</div>
+	                    	<script type="text/javascript">
+	                    		function change(){
+	                    			var category = document.getElementById('categorySelect').value;
+	                    			location.href="/admin/productList.mdo?category="+category;
+	                    		}
+	                    	</script>
+	                    	
+                    	</div> 
 
                     <!-- Content Row -->
                			<div class="card shadow mb-4">
@@ -133,35 +140,37 @@
                                 </table>
                                 
                                 <div>	
-									<select name="example_length" aria-controls="example" class="">
-										<option value="all">전체</option>
-										<option value="id">아이디</option>
-										<option value="name">이름</option>
-										<option value="nickname">닉네임</option>
-									</select>
-										                                    		
-									<input type="text" id="search">
-
+									<input type="text" id="search" placeholder="상품명">
 									<button type="button" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										검색
 									</button>
+									
 									<button type="button" class="btn btn-dark" onclick="location.href='/admin/insertProduct.mdo'">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										등록
 									</button>
+									<input type="button" class="btn btn-dark" value="초기화" onclick="location.href='/admin/productList.mdo'">
 									<br>
 									<div align="center">
-									<a href="#">1</a>
-									<a href="#">2</a>
-									<a href="#">3</a>
-									<a href="#">4</a>
-									<a href="#">5</a>
-									<a href="#">6</a>
-									<a href="#">7</a>
-									<a href="#">8</a>
-									<a href="#">9</a>
-									<a href="#">10</a>
+										<c:if test="${paging.startPage != 1 }">
+											<a href="/admin/productList.mdo?nowPage=${paging.startPage - 1 }">&lt;</a>
+										</c:if>
+										<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<b>${p }</b>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<a href="/admin/productList.mdo?nowPage=${p }
+													&searchKeyword=${searchKeyword}&category=${selectCategory}">${p }</a>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										<c:if test="${paging.endPage != paging.lastPage}">
+											<a href="/admin/productList.mdo?nowPage=${paging.endPage+1 }
+											&searchKeyword=${searchKeyword}&category=${selectCategory}">&gt;</a>
+										</c:if>
 									</div>
                                 </div>
                             </div>
@@ -211,7 +220,16 @@
             </div>
         </div>
     </div>
-
+	<script type="text/javascript">
+	$(function(){
+		$("#searchBtn").click(function(){
+			var searchKeyword = $('#search').val();
+			var category = document.getElementById('categorySelect').value;
+			location.href="/admin/productList.mdo?searchKeyword="+searchKeyword+"&category="+category;
+			console.log(search);
+		});
+	});
+	</script>
  
 </body>
 </html>

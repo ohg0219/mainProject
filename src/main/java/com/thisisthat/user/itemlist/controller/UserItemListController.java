@@ -29,7 +29,7 @@ public class UserItemListController {
 		List<UserItemListVO> itemList = itemListService.getItemList(category);
 		model.addAttribute("itemList",itemList);
 		model.addAttribute("category",category);
-		return "/user/itemList";
+		return "/user/item/itemList";
 	}
 	
 	@GetMapping("/itemList/getItem.do")
@@ -38,9 +38,7 @@ public class UserItemListController {
 			@RequestParam("productCategory")String productCategory,
 			Model model) {
 		model.addAttribute("category",productCategory);
-		System.out.println("productNo : " +productNo);
-		
-		return "/user/getItem";
+		return "/user/item/getItem";
 	}
 	
 }

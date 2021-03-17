@@ -38,7 +38,15 @@
 		insert into product_stock values (#{product_no})
 	</insert>
 	
-	
+	<select id="getProductCount" resultType="int">
+		select count(*) from product where 1=1
+		<if test="searchKeyword != null">
+			and product_name like '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="product_category != null">
+			and product_category = #{product_category}
+		</if>
+	</select>
 	
 	<select id="getCategoryList" resultMap="adminCategoryVO">
 		select * from category where category_used = 1 order by category_no asc 
@@ -55,7 +63,13 @@
 		from product as pro , product_image as image
 		where pro.product_no = image.product_no
 		and image.main_image = 1
-		order by pro.product_no desc
+		<if test="searchKeyword != null">
+			and pro.product_name like '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="category != null">
+			and pro.product_category = #{category}
+		</if>
+		order by pro.product_no desc offset #{start} limit #{cntPerPage}
 	</select>
 	<select id="getProduct" resultType="com.thisisthat.admin.product.vo.AdminProductVO">
 		select * from product where product_no = #{productNo} 

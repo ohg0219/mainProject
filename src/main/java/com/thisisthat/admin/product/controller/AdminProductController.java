@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.thisisthat.admin.product.service.AdminProductService;
 import com.thisisthat.admin.product.vo.AdminProductImageVO;
 import com.thisisthat.admin.product.vo.AdminProductVO;
+import com.thisisthat.util.PagingVO;
 
 @Controller
 @RequestMapping("/admin/")
@@ -33,9 +34,27 @@ public class AdminProductController {
 	 * @return
 	 */
 	@GetMapping("/productList.mdo")
-	public String getProductList(Model model) {
+	public String getProductList(AdminProductVO vo,
+			@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
+			@RequestParam(value = "nowPage",required = false) String nowPage,
+			@RequestParam(value = "category",required = false) String category,
+			Model model) {
+		if(category != null) {
+			if(category.equals("all")) {
+				vo.setProduct_category(null);
+			}else {
+				vo.setProduct_category(category);
+			}	
+		}
+		if(searchKeyword == null) vo.setSearchKeyword(null);
+		if(nowPage == null) nowPage = "1";
+		int productCount = productService.getProductCount(vo);
+		PagingVO pagingVO = new PagingVO(productCount,Integer.parseInt(nowPage),10);
+		model.addAttribute("selectCategory",category);
+		model.addAttribute("searchKeyword",searchKeyword);
+		model.addAttribute("paging",pagingVO);
 		model.addAttribute("categoryList",productService.getCategoryList());
-		model.addAttribute("productList",productService.getProductList());
+		model.addAttribute("productList",productService.getProductList(pagingVO,vo));
 		return "/admin/product/productList";
 	}
 	

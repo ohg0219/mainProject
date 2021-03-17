@@ -34,11 +34,22 @@
 		text-decoration: none;
 		border: 1px solid black;
 	}
+	.image_box li{
+		width:50%; 
+		display: inline-block; 
+		float: left; 
+		padding: 5px; 
+		box-sizing: border-box; 
+		min-width: 200px;
+	}
+	.image_box li img{
+		width: 100%;
+	}
 </style>
 </head>
 <body>
 	<div class="wrap">
-		<%@include file="include/header.jsp"%>
+		<%@include file="../include/header.jsp"%>
 		<div class="content">
 			<div class="side-bar" style="width:15%; display: inline-block; float: left; margin-top:50px">
 				<div style="margin-left: 20px;">
@@ -83,18 +94,36 @@
 				<h2 align="center" style="text-transform: uppercase;">${category }</h2>
 				
 				<div style="float: left; width:calc(75% - 210px);">
-					<ul>
-						<li style="width:50%; display: inline-block; float: left; padding: 5px; box-sizing: border-box; min-width: 200px;">
-							<img width="100%" src="/resources/user/image/jackets_ex.jpg">
+					<ul class="image_box">
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
 						</li>
-						<li style="width:50%; display: inline-block; float: left; padding: 5px; box-sizing: border-box; min-width: 200px;">
-							<img width="100%" src="/resources/user/image/pants_ex.jpg">
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
 						</li>
-						<li style="width:50%; display: inline-block; float: left; padding: 5px; box-sizing: border-box; min-width: 200px;">
-							<img width="100%" src="/resources/user/image/pants_ex.jpg">
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
 						</li>
-						<li style="width:50%; display: inline-block; float: left; padding: 5px; box-sizing: border-box; min-width: 200px;">
-							<img width="100%" src="/resources/user/image/pants_ex.jpg">
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
+						</li>
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
+						</li>
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
+						</li>
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
+						</li>
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
+						</li>
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
+						</li>
+						<li>
+							<img src="/resources/user/image/jackets_ex.jpg">
 						</li>
 					</ul>
 				</div>
@@ -103,7 +132,7 @@
 						<ul>
 							<li><strong style="font-size: 12px;">상품명</strong><br><br></li>
 							
-							<li>가격<br><br></li>
+							<li>&#8361; 가격<br><br></li>
 							<li>소재정보</li>
 							<li>원산지</li>
 						</ul>
@@ -121,7 +150,7 @@
 				</div>
 			
 		</div><!-- end Content -->
-		<%@include file="include/footer.jsp"%>
+		<%@include file="../include/footer.jsp"%>
 	</div>
 </body>
 </html>

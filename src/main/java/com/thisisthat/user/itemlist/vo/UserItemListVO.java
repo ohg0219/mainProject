@@ -7,6 +7,7 @@ public class UserItemListVO {
 	private String uploadPath;
 	private String productName;
 	private long productPrice;
+	private long productStockTotal;
 
 	public String getProductCategory() {
 		return productCategory;
@@ -47,11 +48,21 @@ public class UserItemListVO {
 	public void setProductPrice(long productPrice) {
 		this.productPrice = productPrice;
 	}
+	
+	public long getProductStockTotal() {
+		return productStockTotal;
+	}
+
+	public void setProductStockTotal(long productStockTotal) {
+		this.productStockTotal = productStockTotal;
+	}
 
 	@Override
 	public String toString() {
 		return "UserItemListVO [productCategory=" + productCategory + ", productNo=" + productNo + ", uploadPath="
-				+ uploadPath + ", productName=" + productName + ", productPrice=" + productPrice + "]";
+				+ uploadPath + ", productName=" + productName + ", productPrice=" + productPrice
+				+ ", productStockTotal=" + productStockTotal + "]";
 	}
 
+	
 }

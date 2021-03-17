@@ -18,10 +18,8 @@
 </head>
 <body>
 	<div class="wrap">
-		<%@include file="include/header.jsp"%>
+		<%@include file="../include/header.jsp"%>
 		<div class="content">
-			
-			
 			<div class="side-bar" style="width: 15%; display: inline-block; float: left; margin-top:50px">
 				<div style="margin-left: 20px;">
 					<ul>
@@ -70,22 +68,39 @@
 					</c:if>
 					<c:if test="${itemList != null }">
 						<c:forEach items="${itemList }" var="item">
-							<li>
+							<c:choose>
+								<c:when test="${item.productStockTotal == 0 }">
+									<li style="opacity: 0.5">
+								</c:when>
+								<c:otherwise>
+									<li>
+								</c:otherwise>
+							</c:choose>
 								<a href="/itemList/getItem.do?productNo=${item.productNo}&productCategory=${item.productCategory}" class="item">
 									<ul>
 										<li><img alt="" src="${item.uploadPath }"></li>
 										<li><p>${item.productName }</p></li>
-										<li><p><fmt:formatNumber maxFractionDigits="3" value="${item.productPrice }"></fmt:formatNumber>원</p></li>
-										<li><p>Status</p></li>
+										<li><p>&#8361; <fmt:formatNumber maxFractionDigits="3" value="${item.productPrice }"></fmt:formatNumber>원</p></li>
+										<li>
+											<c:choose>
+												<c:when test="${item.productStockTotal == 0 }">
+													<p style="color: red;">품절</p>
+												</c:when>
+												<c:otherwise>
+													
+												</c:otherwise>
+											</c:choose>
+										</li>
 									</ul>
 								</a>
 							</li>
+							
 						</c:forEach>
 					</c:if>
 				</ul>
 			</div><!-- end item-list -->
 		</div><!-- end Content -->
-		<%@include file="include/footer.jsp"%>
+		<%@include file="../include/footer.jsp"%>
 	</div>
 </body>
 </html>

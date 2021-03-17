@@ -10,6 +10,7 @@ import com.thisisthat.admin.product.dao.AdminProductDAO;
 import com.thisisthat.admin.product.vo.AdminProductImageVO;
 import com.thisisthat.admin.product.vo.AdminProductListVO;
 import com.thisisthat.admin.product.vo.AdminProductVO;
+import com.thisisthat.util.PagingVO;
 
 @Service
 public class AdminProductServiceImpl implements AdminProductService {
@@ -28,8 +29,8 @@ public class AdminProductServiceImpl implements AdminProductService {
 	}
 
 	@Override
-	public List<AdminProductListVO> getProductList() {
-		return productDAO.getProductList();
+	public List<AdminProductListVO> getProductList(PagingVO pagingVO,AdminProductVO vo) {
+		return productDAO.getProductList(pagingVO,vo);
 	}
 
 	@Override
@@ -70,6 +71,11 @@ public class AdminProductServiceImpl implements AdminProductService {
 	@Override
 	public void insertSubImage(AdminProductImageVO vo) {
 		productDAO.insertSubImage(vo);
+	}
+
+	@Override
+	public int getProductCount(AdminProductVO vo) {
+		return productDAO.getProductCount(vo);
 	}
 
 	
