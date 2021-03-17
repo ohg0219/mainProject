@@ -41,9 +41,8 @@
                             	<tr>
                             		<td colspan="2">
 	                            		<select name="board_group" aria-controls="example" class="">
-											<option value="noSelect">---선택---</option>
-											<option value="event">이벤트</option>
 											<option value="notice">공지사항</option>
+											<option value="event">이벤트</option>
 										</select>
 										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>

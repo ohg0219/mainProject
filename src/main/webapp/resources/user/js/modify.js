@@ -1,0 +1,161 @@
+$(document).ready(function(){
+	function btn_on(){
+		$("#registBtn").attr("disabled",false);
+		$("#registBtn").css('cursor','pointer');
+	}
+	function btn_off(){
+		$("#registBtn").attr("disabled",true);
+		$("#registBtn").css('cursor','no-drop');
+	}
+	btn_off();
+	$("input[name=id]").focus();
+	$(".address_btn").on("click",function(e){
+		e.preventDefault();
+		DaumPostcode();
+	});
+	$(".register_btn").on("click",function(){
+		if($("input[name=id]").val().trim() == ''){
+			$("input[name=id]").focus();
+			alert("아이디를 입력해주세요");
+			return false;
+		}
+		if($("input[name=password]").val().trim() == ''){
+			$("input[name=password]").focus();
+			alert("비밀번호를 입력해주세요");
+			return false;
+		}
+		if($("input[name=confirmPassword]").val().trim() == ''){
+			$("input[name=confirmPassword]").focus();
+			alert("비밀번호 확인을 입력해주세요");
+			return false;
+		}
+		if($("input[name=name]").val().trim() == ''){
+			$("input[name=name]").focus();
+			alert("이름을 입력해주세요");
+			return false;
+		}
+		if($("input[name=nickName]").val().trim() == ''){
+			$("input[name=nickName]").focus();
+			alert("닉네임을 입력해주세요");
+			return false;
+		}
+		if($("input[name=phone2]").val().trim() == ''){
+			$("input[name=phone2]").focus();
+			alert("전화번호를 입력해주세요");
+			return false;
+		}
+		if($("input[name=phone3]").val().trim() == ''){
+			$("input[name=phone3]").focus();
+			alert("전화번호를 입력해주세요");
+			return false;
+		}
+		if($("input[name=email]").val().trim() == ''){
+			$("input[name=email]").focus();
+			alert("이메일을 입력해주세요");
+			return false;
+		}
+		if($("input[name=phone2]").val().trim() == ''){
+			$("input[name=phone2]").focus();
+			alert("전화번호를 입력해주세요");
+			return false;
+		}
+		return true;
+	});//end regist check
+	
+	// 비밀번호 유효성 검사
+	$("input[name=password]").on("keyup",function(){
+        var password = $("input[name=password]").val();
+        var regType2 = /^[A-za-z0-9]{8,16}/g;
+        if(!regType2.test(password)){
+            $('#passwordRegChk').text('영문 대,소문자/숫자  8~16자로 입력해 주세요.');
+            $("#passwordRegChk").css("color", "red");
+            $("input[name=password]").focus();
+            btn_off();
+        }else{
+            $("#passwordRegChk").text("");
+            btn_on();
+        }
+    });
+    // 비밀번호 와 비밀번호 확인 일치확인
+    $("input[name=confirmPassword]").keyup(function(){
+        if($('input[name=password]').val() != $('input[name=confirmPassword]').val()){
+          $('#passwordCheck').text('비밀번호 일치하지 않음');
+          $("#passwordCheck").css("color", "red");
+          btn_off();
+        } else{
+          $('#passwordCheck').text('비밀번호 일치함');
+          $("#passwordCheck").css("color", "black");
+          btn_on();
+        }
+    });//end passwordCheck
+	//핸드폰번호 정규표현식 체크
+	$("input[name=phone2]").on("keyup",function(){
+		var regType3 = /^[0-9]{4,4}/g;
+		var phone2 = $("input[name=phone2]").val();
+		if(!regType3.test(phone2) || phone2.length!=4){
+			$('#phoneCheck').text('정확한 핸드폰번호를 입력하세요.');
+			$("#phoneCheck").css("color", "red");
+			$("input[name=phone2]").focus();
+			btn_off();
+		}else{
+			btn_on();
+			$('#phoneCheck').text('');
+		}
+	});
+	$("input[name=phone3]").on("keyup",function(){
+		var regType4 = /^[0-9]{4,4}/g;
+		var phone3 = $("input[name=phone3]").val();
+		if(!regType4.test(phone3) || phone3.length!=4){
+			$('#phoneCheck').text('정확한 핸드폰번호를 입력하세요.');
+			$("#phoneCheck").css("color", "red");
+			$("input[name=phone3]").focus();
+			btn_off();
+		}else{
+			btn_on();
+			$('#phoneCheck').text('');
+		}
+	});
+	$("input[name=email]").on("blur",function(){
+		var regType5 = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var email = $("input[name=email]").val();
+		if(!regType5.test(email)){
+			$("#emailCheck").text("정확한 이메일을 입력하세요.");
+			$("#emailCheck").css("color","red");
+			$("input[name=email]").focus();
+			btn_off();
+		}else{
+			btn_on();
+			$("#emailCheck").text("");
+		}
+	});
+
+
+});//end document ready function
+//다음 주소 api
+function DaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var addr = '';
+            var extraAddr = '';
+            if (data.userSelectedType === 'R') {
+                addr = data.roadAddress;
+            } else {
+                addr = data.jibunAddress;
+            }
+            if(data.userSelectedType === 'R'){
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+            }
+            document.getElementById('zipcode').value = data.zonecode;
+            document.getElementById("address1").value = addr + extraAddr;
+            document.getElementById("address2").focus();
+        }
+    }).open();
+}//end postcode function

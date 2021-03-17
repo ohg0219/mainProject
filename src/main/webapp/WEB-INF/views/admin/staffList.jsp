@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -8,7 +8,8 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -17,10 +18,25 @@
 <%@include file="include/css.jsp"%>
 <%@include file="include/js.jsp"%>
 <style type="text/css">
- a:link { color: red; text-decoration: none;}
- a:visited { color: blue; text-decoration: none;}
- a:hover { color: red; text-decoration: underline;}
- a {color:black;}
+a:link {
+	color: red;
+	text-decoration: none;
+}
+
+a:visited {
+	color: blue;
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+	text-decoration: underline;
+	cursor : pointer;
+}
+
+a {
+	color: black;
+}
 </style>
 
 <meta charset="UTF-8">
@@ -45,104 +61,166 @@
 				<%@include file="include/navbar.jsp"%>
 				<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">직원목록</h1>
-                    <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
+					<!-- Page Heading -->
+					<h1 class="h3 mb-2 text-gray-800">직원목록</h1>
+					<p class="mb-4">
+						<!-- 쓸 말 있으면 쓰는 곳 -->
+					</p>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                       <!--   <div class="card-header py-3">
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<!--   <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
                         </div>
                         -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>성명</th>
-                                            <th>닉네임</th>
-                                            <th>휴대폰</th>
-                                            <th>입사일</th>
-                                            <th>계정관리</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    
-                                    <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                    	<c:if test="${not empty staffInfo}" >
-	                                        <c:forEach var="user" items="${staffInfo}">
-		                                        <tr>
-			                                        <td width="85">${user.userId}</td>
-			                                        <td width="95"><a href="getStaff.mdo?userId=${user.userId}">${user.userName}</a></td>
-			                                        <td width="85">${user.nickName}</td>
-			                                        <td width="160">${user.userPhone}</td>
-			                                        <td width="95"><fmt:formatDate value="${user.inDate}" pattern="yyyy-MM-dd"/></td>
-			                                        	<c:if test="${not empty user.outDate}">
-			                                        		<td width="75">퇴사</td>
-			                                        	</c:if>
-			                                        	<c:if test="${empty user.outDate }">
-			                                        		<td width="75">회원</td>
-			                                        	</c:if>
-			                                    </tr>
-	                                        </c:forEach>
-                                        </c:if>
-                                        <c:if test="${empty staffInfo}">
-                                        	<tr>
-                                        		<td colspan="6" align="center">
-                                        		<h3> 직원이 없어요</h3>
-                                        		</td>
-                                        	</tr>
-                                        </c:if>
-                                    </tbody>
-                                </table>
-                                
-                                <div>	
-									<select name="example_length" aria-controls="example" class="">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%"
+									cellspacing="0">
+									<thead>
+										<tr>
+											<th>아이디</th>
+											<th>성명</th>
+											<th>닉네임</th>
+											<th>휴대폰</th>
+											<th>입사일</th>
+											<th>계정관리</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
+										<c:if test="${not empty staffInfo}">
+											<c:forEach var="user" items="${staffInfo}">
+												<tr>
+													<td width="85">${user.userId}</td>
+													<td width="95"><a
+														id="${user.userId}" class="who" 
+														data-toggle="model" data-target="#getUserModel">${user.userName}</a></td>
+													<td width="85">${user.nickName}</td>
+													<td width="160">${user.userPhone}</td>
+													<td width="95"><fmt:formatDate value="${user.inDate}"
+															pattern="yyyy-MM-dd" /></td>
+													<c:if test="${not empty user.outDate}">
+														<td width="75">퇴사</td>
+													</c:if>
+													<c:if test="${empty user.outDate }">
+														<td width="75">회원</td>
+													</c:if>
+												</tr>
+											</c:forEach>
+										</c:if>
+										<c:if test="${empty staffInfo}">
+											<tr>
+												<td colspan="6" align="center">
+													<h3>직원이 없어요</h3>
+												</td>
+											</tr>
+										</c:if>
+									</tbody>
+								</table>
+
+								<div>
+									<select name="example_length" id="select" aria-controls="example" class="">
 										<option value="all">전체</option>
 										<option value="id">아이디</option>
-										<option value="name">이름</option>
 										<option value="nickname">닉네임</option>
-									</select>
-										                                    		
-									<input type="text" id="search">
+									</select> <input type="text" id="search">
 
 									<button type="button" class="btn btn-dark" id="searchBtn">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										검색버튼
+										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i> 검색버튼
 									</button>
 
 									<br>
 									<div align="center">
-									<a href="#">1</a>
-									<a href="#">2</a>
-									<a href="#">3</a>
-									<a href="#">4</a>
-									<a href="#">5</a>
-									<a href="#">6</a>
-									<a href="#">7</a>
-									<a href="#">8</a>
-									<a href="#">9</a>
-									<a href="#">10</a>
+										<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
+											href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a
+											href="#">7</a> <a href="#">8</a> <a href="#">9</a> <a
+											href="#">10</a>
 									</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+		
+	<form action="/admin/pwCheck.mdo" method="post">
+	<div class="modal fade" id="getUserModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">비밀번호를 입력해 주세요</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-content">
+					<input type="password" name="userPw" placeholder="비밀번호">
+					
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<input type="submit" class="btn btn-primary" id="modalInput" value="확인">					
+					<input type="hidden" id="userId" name="userId">
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
 	<script>
+	
+	var msg = '${msg}';
+	var failId = '${failId}';
+	if(msg==='fail'){
+		console.log(failId);
+		document.getElementById(failId).click();
+		alert('비밀번호를 확인해 주세요');
+	}
+	
 	//--------------------검색하는 함수
-		$(function(){
+	$(function(){
 			$("#searchBtn").click(function() {
 				var search = $('#search').val();
-				location.href="/notice.mdo?search="+search;
-				console.log(search);
-			});
-		});
+				var select = document.getElementById('select');
+				var val;
+				
+				for(i=0; i<select.options.length; i++) {
+				    if(select.options[i].selected == true) {
+				        val = select.options[i].value;
+				        break;
+				    }
+				} location.href="/staffList.mdo?search="+search+"&select="+select;
+			});	
+			$('#search').keypress(function(event){
+			     if ( event.which == 13 ) {
+			         $('#searchBtn').click();
+			         return false;
+			     }
+			});		
+			
+		//--getUser전 비밀번호 체크
+		$('.who').click(function(){
+			console.log("들어옴")
+			document.getElementById("userId").value = $(this).attr('id'); 
+		})
+	});
+	
+
+	
+
+	
+	
+	
+	
+	
+	
 	
 	</script>
 </body>

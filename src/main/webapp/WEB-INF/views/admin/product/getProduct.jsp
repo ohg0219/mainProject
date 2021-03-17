@@ -31,6 +31,36 @@
  a:hover { color: red; text-decoration: underline;}
  a {color:black;}
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#delete").on("click",function(){
+			var product_no = $("#product_no").val();
+			var product_stock = $("#product_stock").text();
+			if(confirm("정말 삭제하시겠습니까?")==true){
+				if(product_stock!=0){
+					alert("재고가 있어 삭제할 수 없습니다.\n재고가 있는경우 상품 미노출 처리를 해주세요");
+					return false;
+				}	
+				location.href="/admin/deleteProduct.mdo?product_no="+product_no;
+			}
+		});
+		
+		$("#mainImageUpdate").on("click",function(){
+			var product_no = $("#product_no").val();
+			if(confirm("메인 이미지 수정시 기존 이미지는 삭제 됩니다. \n계속 하시겠습니까?")==true){
+				location.href="/admin/updateMainImage.mdo?product_no="+product_no;
+			}
+		});
+		
+		$("#subImageUpdate").on("click",function(){
+			var product_no = $("#product_no").val();
+			if(confirm("상세 이미지 수정시 기존 이미지는 삭제 됩니다. \n계속 하시겠습니까?")==true){
+				location.href="/admin/updateSubImage.mdo?product_no="+product_no;
+			}
+		});
+		
+	});
+</script>
 </head>
 <body id="page-top">
 
@@ -61,6 +91,7 @@
                         <div class="card-body">
                            
 							 	<div class="table-responsive">
+                           			<input type="hidden" id="product_no" value="${productInfo.product_no }">
 	                           		<table class="table table-bordered" id="dataTable">
                     					<tr>
                     						<td>카테고리</td>
@@ -105,13 +136,31 @@
 											</td>
                     					</tr>
                     					<tr>
+                    						<td>총재고</td>
+                    						<td id="product_stock">
+												${productStock}
+											</td>
+                    					</tr>
+                    					<tr>
+                    						<td>상품노출유무</td>
+                    						<td>
+												<c:if test="${productInfo.product_used == 1 }">
+													노출												
+												</c:if>
+												<c:if test="${productInfo.product_used == 0 }">
+													미노출
+												</c:if>
+												
+											</td>
+                    					</tr>
+                    					<tr>
                     						<td colspan="2">
-    	                						<p>메인이미지</p>
+    	                						<span>메인이미지</span>&nbsp;&nbsp;<input id="mainImageUpdate" type="button" class="btn btn-dark" value="메인 이미지 수정">
                     							<div id="main-preview">
                     								<div style="display: inline-flex; padding: 10px;">
                     									<li>
 		                    								<span>${mainImage.image_name }</span><br>
-		                    								<img src="${mainImage.upload_path }" width=100 height=100 />
+		                    								<img src="${mainImage.upload_path }" width=100  />
 	                    								</li>
                     								</div>
                     							</div>
@@ -119,13 +168,13 @@
                     					</tr>
                     					<tr>
                     						<td colspan="2">
-    	                						<p>상세이미지</p>
+    	                						<span>상세이미지</span>&nbsp;&nbsp;<input id="subImageUpdate" type="button" class="btn btn-dark" value="상세 이미지 수정">
                     							<div id="sub-preview">
                     								<c:forEach items="${subImage }" var="image">
                     								<div style="display: inline-flex; padding: 10px;">
 	                    								<li>
 		                    								<span>${image.image_name }</span><br>
-		                    								<img src="${image.upload_path }" width=100 height=100 />
+		                    								<img src="${image.upload_path }" width=100  />
 	                    								</li>
                     								</div>
                     								</c:forEach>
@@ -135,7 +184,8 @@
                     					<tr>
                     						<td colspan="2" align="center">
                     							<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/productList.mdo'">
-                    							<input id="update" type="submit" class="btn btn-dark" value="수정">
+                    							<input id="update" type="submit" class="btn btn-dark" onclick="location.href='/admin/updateProduct.mdo?productNo=${productInfo.product_no}'" value="정보수정(이미지 제외)">
+                    							<input id="delete" type="submit" class="btn btn-dark" value="삭제">
                     						</td>
                     					</tr>
                     				</table>

@@ -36,7 +36,7 @@
 			var productCount = $("#productCount").text();
 			var categorySeq = $("#categorySeq").val();
 			if(productCount!=0){
-				alert("등록된 상품이 있어 삭제할수 없습니다.");
+				alert("등록된 상품이 있어 삭제할수 없습니다.\n미사용 처리시 외부에 노출되지 않게 처리할 수 있습니다.");
 				return false;
 			}else{
 				location.href="/admin/deleteCategory.mdo?categorySeq="+categorySeq;
@@ -69,7 +69,7 @@
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4" style="width: 500px">
                        <!--   <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
                         </div>

@@ -33,11 +33,16 @@
 				<div class="container-fluid">
 					<form action="updateNotice.mdo" method="post">
 					 <input type="hidden" name="board_no" value="${article.board_no }" >
+					 <input type="hidden" name="board_group" value="${article.board_group }" >
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
                             		<td colspan="2">
 	                            	 <h1 class="h3 mb-2 text-gray-800">${article.board_group}</h1>
+	                            	 <select name="board_view" aria-controls="example" class="">
+											<option value="false">위쪽</option>
+											<option value="true">아래쪽</option>
+										</select>
 										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기

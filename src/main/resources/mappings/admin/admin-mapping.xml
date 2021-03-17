@@ -27,5 +27,9 @@
 		select * from this_user where user_id=#{id}
 	</select>
 
+	<select id="getCategory" resultType="String">
+		select category_name from category where category_used = 1
+	</select>
+
 	
 </mapper>

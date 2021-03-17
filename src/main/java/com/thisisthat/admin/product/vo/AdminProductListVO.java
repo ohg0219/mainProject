@@ -8,6 +8,7 @@ public class AdminProductListVO {
 	private String upload_path;
 	private long product_price;
 	private long product_stock_total;
+	private int product_used;
 	public long getProduct_no() {
 		return product_no;
 	}
@@ -44,11 +45,18 @@ public class AdminProductListVO {
 	public void setProduct_stock_total(long product_stock_total) {
 		this.product_stock_total = product_stock_total;
 	}
+	
+	public int getProduct_used() {
+		return product_used;
+	}
+	public void setProduct_used(int product_used) {
+		this.product_used = product_used;
+	}
 	@Override
 	public String toString() {
 		return "AdminProductListVO [product_no=" + product_no + ", product_category=" + product_category
 				+ ", product_name=" + product_name + ", upload_path=" + upload_path + ", product_price=" + product_price
-				+ ", product_stock_total=" + product_stock_total + "]";
+				+ ", product_stock_total=" + product_stock_total + ", product_used=" + product_used + "]";
 	}
 	
 	
