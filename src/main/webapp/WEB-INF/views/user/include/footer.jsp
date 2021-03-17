@@ -5,6 +5,8 @@
 		<ul class="utilMenu">
 			<li><a href="/notice.do">notice</a></li>
 			<!-- 공지사항 -->
+			<li><a href="/event.do">event</a></li>
+			<!-- 이벤트 -->
 			<li><a href="#">q &amp; a</a></li>
 			<!-- Q & A -->
 			<li><a href="#">terms</a></li>

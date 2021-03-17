@@ -3,6 +3,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="NoticeDAO">
+
+	
+	
+	
 	<insert id="insertNotice" parameterType="com.thisisthat.admin.notice.vo.NoticeVO">
 		insert into notice_board(board_title,board_content,board_group,board_writer) 
 		values(#{board_title},#{board_content},#{board_group},#{board_writer})
@@ -31,7 +35,9 @@
 	<select id="contentNotice" resultType="com.thisisthat.admin.notice.vo.NoticeVO">
 		select * from notice_board where board_content like '%'||#{keyword}||'%'order by board_view asc, board_no desc
 	</select>
-	
+	<select id="nickname">
+		select nick_name from this_user where user_id=#{id}
+	</select>
 	
 	
 </mapper>

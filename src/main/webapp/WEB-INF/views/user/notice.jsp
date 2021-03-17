@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +50,22 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h6>공지사항</h6>
+				<h3>공지사항</h3>
+				<form action="event.jsp" method="post">
+				<table class="noticeTable">
+					<tr>
+						<td align="right">
+							<select name="searchCondition">
+								<option value="board_title">제목
+								<option value="board_content">내용
+								<option value="board_all">제목+내용
+							</select>
+							<input type="text" name="searchKeyword"/>
+							<input type="submit" value="검색"/>
+						</td>
+					</tr>
+				</table>
+				</form>
 				<table class="noticeTable">
 					<tr>
 						<th width="60px">번호</th>
@@ -57,76 +74,16 @@
 						<th width="100px">날짜</th>
 						<th width="60px">조회수</th>
 					</tr>
+					<c:forEach var="notice" items="${noticeList}">
 					<tr>
-						<td>10</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
+						<td>${notice.board_no}</td>
+						<td align="center"><strong><a href="noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
+						<td>${notice.board_writer}</td>
+						<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
+						<fmt:formatDate value="${notice.reg_date}" pattern=" hh:mm:ss "/></td>
+						<td>${notice.board_cnt}</td>
 					</tr>
-					<tr>
-						<td>9</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>8</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>7</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>6</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td><a href="#">더미 제목</a></td>
-						<td>관리자</td>
-						<td>2021-03-07</td>
-						<td>0</td>
-					</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div><!-- end Content -->

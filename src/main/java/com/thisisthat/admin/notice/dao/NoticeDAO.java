@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.thisisthat.admin.notice.vo.NoticeVO;
+import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 @Repository
 public class NoticeDAO {
@@ -50,6 +51,8 @@ public class NoticeDAO {
 		return mybatis.selectList("NoticeDAO.contentNotice",noticeVO);
 	}
 	
-	
+	public String nickname(NoticeVO noticeVO) {
+		return mybatis.selectOne("NoticeDAO.nickname", noticeVO);
+	}
 	
 }

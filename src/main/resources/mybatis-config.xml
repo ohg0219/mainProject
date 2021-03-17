@@ -4,14 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>		
+		<typeAlias type="com.thisisthat.user.notice.vo.UserNoticeVO" alias="UserNoticeVO"/>
+		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>	
+		<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>
+		<typeAlias type="com.thisisthat.admin.board.vo.AnswerBoardVO" alias="answerVO"/>
+			
+
 	</typeAliases>
 	
 	<mappers>
-		<!-- 매퍼파일 -->
+		<!-- 매퍼파일 -->		
+		<mapper resource="mappings/user/user-mypage-modify-mapping.xml" />
 		<mapper resource="mappings/user/user-mapping.xml" />
+		<mapper resource="mappings/user/user-loginout-mapping.xml" />
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
+		<mapper resource="mappings/user/user-notice-mapping.xml"/>
+		<mapper resource="mappings/user/user-itemlist-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
+		<mapper resource="mappings/admin/admin-management-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-category-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-product-mapping.xml"/>
 	</mappers>
 </configuration>

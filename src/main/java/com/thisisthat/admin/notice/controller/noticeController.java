@@ -3,6 +3,8 @@ package com.thisisthat.admin.notice.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.admin.notice.service.NoticeService;
 import com.thisisthat.admin.notice.vo.NoticeVO;
+import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 @Controller
 public class noticeController {
@@ -49,7 +52,17 @@ public class noticeController {
 	}
 
 	@RequestMapping("insertArticle.mdo")
-	public String insertNotice(NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
+	public String insertNotice(HttpSession session, NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
+		String id = null;
+		if(session.getAttribute("userId") !=null) {
+			id = (String) session.getAttribute("userId");
+		}
+		System.out.println(id + "= id");
+		noticeVO.setUser_id(id);
+		String nick_name = noticeService.nickname(noticeVO);
+		System.out.println(nick_name + "= nickname");
+		noticeVO.setBoard_writer(nick_name);
+		
 		noticeService.insertNotice(noticeVO);
 		return "redirect:articleList.mdo?where="+board_group;
 	}
