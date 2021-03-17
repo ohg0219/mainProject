@@ -53,8 +53,8 @@
 											placeholder="제목을 입력해주세요." required>
 										<div class="form-group">
 											<textarea class="form-control" rows="20" name="board_content"
-												placeholder="내용을 입력해주세요" required
-											></textarea>
+												placeholder="내용을 입력해주세요" required>
+											</textarea>
 										</div>
 									</td>
                             	</tr>

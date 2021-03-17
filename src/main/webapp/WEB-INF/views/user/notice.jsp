@@ -57,8 +57,9 @@
 						<td align="right">
 							<select name="searchCondition">
 								<option value="board_title">제목
-								<option value="board_content">내용
-								<option value="board_all">제목+내용
+								<option value="board_writer">작성자
+								<option value="board_tw">제목+내용
+								<option value="board_all">모두
 							</select>
 							<input type="text" name="searchKeyword"/>
 							<input type="submit" value="검색"/>
@@ -66,6 +67,11 @@
 					</tr>
 				</table>
 				</form>
+				<script type="text/javascript">
+					$(function(){
+						$()
+					});
+				</script>
 				<table class="noticeTable">
 					<tr>
 						<th width="60px">번호</th>
@@ -74,16 +80,25 @@
 						<th width="100px">날짜</th>
 						<th width="60px">조회수</th>
 					</tr>
-					<c:forEach var="notice" items="${noticeList}">
-					<tr>
-						<td>${notice.board_no}</td>
-						<td align="center"><strong><a href="noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
-						<td>${notice.board_writer}</td>
-						<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
-						<fmt:formatDate value="${notice.reg_date}" pattern=" hh:mm:ss "/></td>
-						<td>${notice.board_cnt}</td>
-					</tr>
-					</c:forEach>
+					<c:if test="${not empty noticeList}">
+						<c:forEach var="notice" items="${noticeList}">
+						<tr>
+							<td>${notice.board_no}</td>
+							<td align="center"><strong><a href="noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
+							<td>${notice.board_writer}</td>
+							<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
+							<fmt:formatDate value="${notice.reg_date}" pattern=" hh:mm:ss "/></td>
+							<td>${notice.board_cnt}</td>
+						</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty noticeList}">
+						<tr>
+							<td>
+								<h1>게시글이 없어요!</h1>
+							</td>
+						</tr>
+					</c:if>
 				</table>
 			</div>
 		</div><!-- end Content -->
