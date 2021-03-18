@@ -35,7 +35,7 @@
 				
 				
 				<div class="container-fluid">
-					<form action="insertArticle.mdo" method="post">
+					<form action="insertNotice.mdo" method="post">
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
@@ -44,7 +44,7 @@
 											<option value="notice">공지사항</option>
 											<option value="event">이벤트</option>
 										</select>
-										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
+										<button type="submit" class="btn-check:checked pull-right" id="insertNotice" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>

@@ -109,7 +109,7 @@
 										검색버튼
 									</button>
 
-									<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#logoutModal" id="insertArticle">
+									<button type="button" class="btn btn-dark"  id="insertArticle">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										글쓰기
 									</button>
@@ -140,14 +140,10 @@
 	<script>
 	//--------------------검색하는 함수
 		$(function(){
-			$("#searchBtn").click(function(){
-				var search = $('#search').val();
-				location.href="/notice.mdo?search="+search;
-				console.log(search);
-			});
+		
 			//-------------------검색하는 함수end			
 			$("#insertArticle").click(function(){
-				location.href="/insertArticle.mdo"
+				location.href="/admin/insertArticle.mdo"
 			});
 		});
 	

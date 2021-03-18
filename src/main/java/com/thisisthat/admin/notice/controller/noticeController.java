@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +17,7 @@ import com.thisisthat.admin.notice.vo.NoticeVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 @Controller
+@RequestMapping("/admin/*")
 public class noticeController {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class noticeController {
 
 
 
-	@GetMapping("deleteGate.mdo")
+	@RequestMapping("deleteGate.mdo")
 	public String deleteGate(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_group")String board_group) {
 
 		if(board_group.equals("notice")) {
@@ -39,7 +39,7 @@ public class noticeController {
 		return null;
 	}
 
-	@PostMapping("updateNotice.mdo")
+	@RequestMapping("updateNotice.mdo")
 	public String updateNotice(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_title")String board_title,@RequestParam("board_content")String board_content,@RequestParam("board_group")String board_group)throws IOException{
 		if(board_group.equals("notice")) {
 			noticeService.updateNotice(noticeVO);
@@ -51,28 +51,30 @@ public class noticeController {
 		return null;
 	}
 
-	@RequestMapping("insertArticle.mdo")
-	public String insertNotice(HttpSession session, NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
+	@RequestMapping("insertNotice.mdo")
+	public String insertNotice(HttpSession session,UserVO userVO, NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
 		String id = null;
+		UserVO getUser = null;
 		if(session.getAttribute("userId") !=null) {
-			id = (String) session.getAttribute("userId");
+			
+			getUser =  (UserVO) session.getAttribute("userId");
+			id=getUser.getNickName();
 		}
 		System.out.println(id + "= id");
-		noticeVO.setUser_id(id);
-		String nick_name = noticeService.nickname(noticeVO);
-		System.out.println(nick_name + "= nickname");
-		noticeVO.setBoard_writer(nick_name);
+	
 		
+		noticeVO.setBoard_writer(id);
+		System.out.println(noticeVO.getBoard_writer());
 		noticeService.insertNotice(noticeVO);
-		return "redirect:articleList.mdo?where="+board_group;
+		return "redirect:getArticleList.mdo?where="+board_group;
 	}
 
-	@GetMapping("insertArticle.mdo")
+	@RequestMapping("insertArticle.mdo")
 	public String insertArticle() {
 		return "/admin/insertArticle";
 	}
 
-	@GetMapping("noticeGate.mdo")
+	@RequestMapping("noticeGate.mdo")
 	public String noticeGate(@RequestParam(value="board_no")Long board_no) {
 		return "redirect:article.mdo?board_no="+board_no;
 	}
@@ -87,12 +89,12 @@ public class noticeController {
 		return "/admin/article";			
 	}
 
-	@GetMapping("updateGate.mdo")
+	@RequestMapping("updateGate.mdo")
 	public String updateGate(@RequestParam(value="board_no")Long board_no) {
 		return "redirect:updateArticle.mdo?board_no="+board_no;
 	}
 
-	@GetMapping("updateArticle.mdo")
+	@RequestMapping("updateArticle.mdo")
 	public String updateArticle(Model model,@RequestParam(value="board_no")Long board_no,NoticeVO noticeVO) {
 		NoticeVO article  = noticeService.notice(noticeVO);
 
@@ -102,13 +104,13 @@ public class noticeController {
 
 	}
 
-	@GetMapping("articleGate.mdo")
+	@RequestMapping("articleGate.mdo")
 	public String articleGate(@RequestParam(value="where")String where) {
 
 		return "redirect:getArticleList.mdo?where="+where;
 	}
 
-	@GetMapping("getArticleList.mdo")
+	@RequestMapping("getArticleList.mdo")
 	public String getNoticeList(Model model,@RequestParam(value="where")String where) {
 		NoticeVO noticeVO = new NoticeVO();
 		noticeVO.setBoard_group(where);
