@@ -35,24 +35,28 @@ public class AdminProductController {
 	 */
 	@GetMapping("/productList.mdo")
 	public String getProductList(AdminProductVO vo,
-			@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
-			@RequestParam(value = "nowPage",required = false) String nowPage,
-			@RequestParam(value = "category",required = false) String category,
+			@RequestParam(value = "searchKeyword", required = false,defaultValue = "") String searchKeyword,
+			@RequestParam(value = "nowPage",required = false,defaultValue = "1") String nowPage,
+			@RequestParam(value = "category",required = false,defaultValue = "all") String category,
+			@RequestParam(value = "check",required = false,defaultValue = "0") String checked,
+			
 			Model model) {
-		if(category != null) {
-			if(category.equals("all")) {
-				vo.setProduct_category(null);
-			}else {
-				vo.setProduct_category(category);
-			}	
+		if(checked.equals("1")) {
+			vo.setProduct_used(1);
+		}else {
+			vo.setProduct_used(0);
 		}
-		if(searchKeyword == null) vo.setSearchKeyword(null);
-		if(nowPage == null) nowPage = "1";
+		if(category.equals("all")) {
+			vo.setProduct_category(null);
+		}else {
+			vo.setProduct_category(category);
+		}	
 		int productCount = productService.getProductCount(vo);
 		PagingVO pagingVO = new PagingVO(productCount,Integer.parseInt(nowPage),10);
 		model.addAttribute("selectCategory",category);
 		model.addAttribute("searchKeyword",searchKeyword);
 		model.addAttribute("paging",pagingVO);
+		model.addAttribute("checkKey",checked);
 		model.addAttribute("categoryList",productService.getCategoryList());
 		model.addAttribute("productList",productService.getProductList(pagingVO,vo));
 		return "/admin/product/productList";
@@ -78,7 +82,18 @@ public class AdminProductController {
 	 * @return
 	 */
 	@PostMapping("/insertProduct.mdo")
-	public String insertProduct(MultipartFile mainUploadFile,MultipartFile[] subUploadFile, Model model,AdminProductVO vo) {
+	public String insertProduct(
+			MultipartFile mainUploadFile,MultipartFile[] subUploadFile, 
+			Model model,AdminProductVO vo,
+			@RequestParam(value = "guideSelector")String guideSelector,
+			@RequestParam(value = "xs") List<Double> xs,
+			@RequestParam(value = "s") List<Double> s,
+			@RequestParam(value = "m") List<Double> m,
+			@RequestParam(value = "l") List<Double> l,
+			@RequestParam(value = "xl") List<Double> xl
+			) {
+		
+		/*
 		String uploadFolder = "https://thisisthat.s3.ap-northeast-2.amazonaws.com/";
 		List<AdminProductImageVO> imageList = new ArrayList<AdminProductImageVO>();
 		//메인 이미지 가져오기
@@ -114,6 +129,7 @@ public class AdminProductController {
 			}
 		}
 		productService.insertProduct(vo, imageList);
+		*/
 		return "redirect:/admin/productList.mdo";
 	}
 	

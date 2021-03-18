@@ -37,6 +37,7 @@ public class AdminProductDAO {
 	
 	public List<AdminProductListVO> getProductList(PagingVO pagingVO,AdminProductVO vo){
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("used", String.valueOf(vo.getProduct_used()));
 		map.put("searchKeyword", vo.getSearchKeyword());
 		map.put("category", vo.getProduct_category());
 		map.put("cntPerPage",pagingVO.getCntPerPage());

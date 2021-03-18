@@ -41,11 +41,15 @@
 	<select id="getProductCount" resultType="int">
 		select count(*) from product where 1=1
 		<if test="searchKeyword != null">
-			and product_name like '%'||#{searchKeyword}||'%'
+			and product_name ILIKE '%'||#{searchKeyword}||'%'
 		</if>
 		<if test="product_category != null">
 			and product_category = #{product_category}
 		</if>
+		<if test="product_used == 1">
+			and product_used = 1
+		</if>
+		
 	</select>
 	
 	<select id="getCategoryList" resultMap="adminCategoryVO">
@@ -64,10 +68,13 @@
 		where pro.product_no = image.product_no
 		and image.main_image = 1
 		<if test="searchKeyword != null">
-			and pro.product_name like '%'||#{searchKeyword}||'%'
+			and pro.product_name ILIKE '%'||#{searchKeyword}||'%'
 		</if>
 		<if test="category != null">
 			and pro.product_category = #{category}
+		</if>
+		<if test="used == 1">
+			and pro.product_used = 1
 		</if>
 		order by pro.product_no desc offset #{start} limit #{cntPerPage}
 	</select>

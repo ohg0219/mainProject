@@ -1,4 +1,4 @@
-package com.thisisthat.user.itemlist.vo;
+package com.thisisthat.user.item.vo;
 
 public class UserItemListVO {
 

@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - 상품 등록</title>
+<title>thisisthat - 상품 정보수정</title>
 
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
@@ -55,7 +55,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">상품 등록</h1>
+                    <h1 class="h3 mb-2 text-gray-800">상품 정보수정</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
