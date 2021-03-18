@@ -1,6 +1,6 @@
 package com.thisisthat.admin.coupon.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class CouponVO {
 	
@@ -9,6 +9,9 @@ public class CouponVO {
 	private int coupon_price;
 	private Date coupon_first;
 	private Date coupon_last;
+	private String keyword;
+	
+	
 	public int getCoupon_no() {
 		return coupon_no;
 	}
@@ -39,11 +42,20 @@ public class CouponVO {
 	public void setCoupon_last(Date coupon_last) {
 		this.coupon_last = coupon_last;
 	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	@Override
 	public String toString() {
 		return "CouponVO [coupon_no=" + coupon_no + ", coupon_name=" + coupon_name + ", coupon_price=" + coupon_price
-				+ ", coupon_first=" + coupon_first + ", coupon_last=" + coupon_last + "]";
+				+ ", coupon_first=" + coupon_first + ", coupon_last=" + coupon_last + ", keyword=" + keyword + "]";
 	}
+	
+	
+	
 	
 	
 	

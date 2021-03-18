@@ -15,8 +15,19 @@ public class CouponDAO {
 	private SqlSessionTemplate mybatis;
 
 	public List<CouponVO> couponList(CouponVO couponVO) {
-		
 		return mybatis.selectList("CouponDAO.couponList",couponVO);
+	}
+
+	public List<CouponVO> nameSearch(CouponVO couponVO) {
+		return mybatis.selectList("CouponDAO.nameSearch", couponVO);
+	}
+
+	public CouponVO viewCoupon(CouponVO couponVO) {
+		return mybatis.selectOne("CouponDAO.viewCoupon", couponVO);
+	}
+
+	public void insertCoupon(CouponVO couponVO) {
+		 mybatis.insert("CouponDAO.insertCoupon", couponVO);
 	}
 
 }

@@ -93,11 +93,11 @@
                                     </tbody>
                                 </table>
                                 <div>	
-                                <form action="couponsearch.mdo" method="get">
+                                <form action="couponSearch.mdo" method="get">
                                     
 									<select name="searchOption" aria-controls="example" class="">
 										<option value="coupon_name">쿠폰 명</option>
-										<option value="coupon_first">시작 일자</option>
+										<option value="coupon">시작 일자</option>
 										<option value="coupon_last">종료 일자</option>
 									</select>
 										                                    		

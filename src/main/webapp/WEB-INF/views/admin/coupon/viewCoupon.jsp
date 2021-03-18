@@ -44,15 +44,15 @@
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>
-										<input type="text" name="coupon_name" class="form-control mt-4 mb-2"
-											placeholder="쿠폰 명" required>
 										<div class="form-group">
-											<input type="text" name="coupon_price" class="form-control mt-4 mb-2"
-											placeholder="쿠폰 금액" required>
-											<input type="date" name="coupon_first" class="form-control mt-4 mb-2"
-											placeholder="시작일자" required>
-											<input type="date" name="coupon_list" class="form-control mt-4 mb-2"
-											placeholder="종료 일자" required>
+										<input type="text" value="${article.coupon_name }" class="form-control mt-4 mb-2"
+											placeholder="쿠폰 명" disabled>
+											<input type="text" value="${article.coupon_price }" class="form-control mt-4 mb-2"
+											placeholder="쿠폰 금액" disabled>
+											<input type="date" value="${article.coupon_first}" class="form-control mt-4 mb-2"
+											placeholder="시작일자" disabled>
+											<input type="date" value="${article.coupon_last}" class="form-control mt-4 mb-2"
+											placeholder="종료 일자" disabled>
 										</div>
 									</td>
                             	</tr>

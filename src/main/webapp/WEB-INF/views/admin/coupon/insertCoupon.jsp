@@ -35,12 +35,12 @@
 				
 				
 				<div class="container-fluid">
-					<form action="insertNotice.mdo" method="post">
+					<form action="insertCoupon.mdo" method="post">
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
                             		<td colspan="2">
-										<button type="submit" class="btn-check:checked pull-right" id="insertNotice" >
+										<button type="submit" class="btn-check:checked pull-right" id="insertCoupon" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>
@@ -49,9 +49,9 @@
 										<div class="form-group">
 											<input type="text" name="coupon_price" class="form-control mt-4 mb-2"
 											placeholder="쿠폰 금액" required>
-											<input type="date" name="coupon_first" class="form-control mt-4 mb-2"
+											<input type="date" name="first" class="form-control mt-4 mb-2"
 											placeholder="시작일자" required>
-											<input type="date" name="coupon_list" class="form-control mt-4 mb-2"
+											<input type="date" name="last"  class="form-control mt-4 mb-2"
 											placeholder="종료 일자" required>
 										</div>
 									</td>

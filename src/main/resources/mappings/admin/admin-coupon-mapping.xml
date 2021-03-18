@@ -8,6 +8,15 @@
 	<select id="couponList" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
 		select * from admin_coupon order by coupon_last desc
 	</select>
+	<select id="nameSearch" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select * from admin_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_last desc
+	</select>
+	<select id="viewCoupon" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select * from admin_coupon where coupon_no=#{coupon_no}
+	</select>
+	<select id="insertCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
+		insert into admin_coupon(coupon_name, coupon_price, coupon_first, coupon_last) values(#{coupon_name},#{coupon_price},#{coupon_first},#{coupon_last})
+	</select>
 	
 	
 </mapper>

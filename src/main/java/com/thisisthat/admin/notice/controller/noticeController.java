@@ -62,7 +62,6 @@ public class noticeController {
 		}
 		System.out.println(id + "= id");
 	
-		
 		noticeVO.setBoard_writer(id);
 		System.out.println(noticeVO.getBoard_writer());
 		noticeService.insertNotice(noticeVO);
@@ -76,7 +75,9 @@ public class noticeController {
 
 	@RequestMapping("noticeGate.mdo")
 	public String noticeGate(@RequestParam(value="board_no")Long board_no) {
-		return "redirect:article.mdo?board_no="+board_no;
+		return ""
+				+ ""
+				+ "?board_no="+board_no;
 	}
 
 

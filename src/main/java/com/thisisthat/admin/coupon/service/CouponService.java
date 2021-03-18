@@ -8,6 +8,17 @@ public interface CouponService {
 
 	List<CouponVO> couponList(CouponVO couponVO);
 
+	List<CouponVO> nameSearch(CouponVO couponVO);
+
+	CouponVO viewCoupon(CouponVO couponVO);
+
+	void insertCoupon(CouponVO couponVO);
+
+	
+		
+	
+	
+
 	
 
 }

@@ -20,4 +20,19 @@ public class CouponServiceImpl implements CouponService{
 		return couponDAO.couponList(couponVO);
 	}
 
+	@Override
+	public List<CouponVO> nameSearch(CouponVO couponVO) {
+		return couponDAO.nameSearch(couponVO);
+	}
+
+	@Override
+	public CouponVO viewCoupon(CouponVO couponVO) {
+		return couponDAO.viewCoupon(couponVO);
+	}
+
+	@Override
+	public void insertCoupon(CouponVO couponVO) {
+		couponDAO.insertCoupon(couponVO);
+	}
+
 }
