@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.thisisthat.admin.notice.vo.NoticeVO;
 import com.thisisthat.user.notice.service.UserNoticeService;
 import com.thisisthat.user.notice.vo.UserNoticeVO;
 
@@ -47,4 +49,68 @@ public class UserNoticeController {
 		model.addAttribute("event", noticeVO);
 		return "/user/eventView";
 	}
+	
+	@RequestMapping("/noticesearch.do")
+	public String noticesearch(Model model, 
+			@RequestParam("searchOption")String searchOption , 
+			@RequestParam("keyword")String keyword ,
+			UserNoticeVO vo) {
+		if(searchOption.equals("all")) {
+			vo.setKeyword(keyword);
+			List<UserNoticeVO> noticeList = userNoticeService.allNotice(vo);
+			model.addAttribute("noticeList", noticeList);
+			return "/user/notice";
+		}else if(searchOption.equals("board_title")){
+			vo.setKeyword(keyword);
+			List<UserNoticeVO> noticeList = userNoticeService.titleNotice(vo);
+			for(UserNoticeVO sdf : noticeList) {
+				System.out.println(sdf.toString());
+			}
+			model.addAttribute("noticeList", noticeList);
+			return "/user/notice";
+		}else if(searchOption.equals("board_writer")) {
+			vo.setKeyword(keyword);
+			List<UserNoticeVO> noticeList = userNoticeService.writerNotice(vo);
+			model.addAttribute("noticeList", noticeList);
+			return "/user/notice";
+		}else if(searchOption.equals("board_content")) {
+			vo.setKeyword(keyword);
+			List<UserNoticeVO> noticeList = userNoticeService.contentNotice(vo);
+			model.addAttribute("noticeList", noticeList);
+			return "/user/notice";
+		}
+		return null;
+	}
+	
+	@RequestMapping("/eventsearch.do")
+	public String eventsearch(Model model, 
+			@RequestParam("searchOption")String searchOption , 
+			@RequestParam("keyword")String keyword ,
+			UserNoticeVO vo) {
+		if(searchOption.equals("all")) {
+			vo.setKeyword(keyword);
+			List<UserNoticeVO> eventList = userNoticeService.allNotice(vo);
+			model.addAttribute("eventList", eventList);
+			return "/user/event";
+		}else if(searchOption.equals("board_title")){
+			vo.setKeyword(keyword);
+			List<UserNoticeVO> eventList = userNoticeService.titleNotice(vo);
+			model.addAttribute("eventList", eventList);
+			return "/user/event";
+		}else if(searchOption.equals("board_writer")) {
+			vo.setKeyword(keyword);
+			List<UserNoticeVO> eventList = userNoticeService.writerNotice(vo);
+			model.addAttribute("eventList", eventList);
+			return "/user/event";
+		}else if(searchOption.equals("board_content")) {
+			vo.setKeyword(keyword);
+			List<UserNoticeVO> eventList = userNoticeService.contentNotice(vo);
+			model.addAttribute("eventList", eventList);
+			return "/user/event";
+		}
+		return null;
+	}
+
+	
+	
 }

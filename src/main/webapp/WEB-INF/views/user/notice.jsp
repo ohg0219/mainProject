@@ -51,22 +51,6 @@
 		<div class="content">
 			<div class="contentWrap">
 				<h3>공지사항</h3>
-				<form action="event.jsp" method="post">
-				<table class="noticeTable">
-					<tr>
-						<td align="right">
-							<select name="searchCondition">
-								<option value="board_title">제목
-								<option value="board_writer">작성자
-								<option value="board_tw">제목+내용
-								<option value="board_all">모두
-							</select>
-							<input type="text" name="searchKeyword"/>
-							<input type="submit" value="검색"/>
-						</td>
-					</tr>
-				</table>
-				</form>
 				<script type="text/javascript">
 					$(function(){
 						$()
@@ -84,7 +68,7 @@
 						<c:forEach var="notice" items="${noticeList}">
 						<tr>
 							<td>${notice.board_no}</td>
-							<td align="center"><strong><a href="noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
+							<td align="center"><strong><a href="/noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
 							<td>${notice.board_writer}</td>
 							<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
 							<fmt:formatDate value="${notice.reg_date}" pattern=" hh:mm:ss "/></td>
@@ -94,12 +78,30 @@
 					</c:if>
 					<c:if test="${empty noticeList}">
 						<tr>
-							<td>
-								<h1>게시글이 없어요!</h1>
+							<td colspan="5" align="center">
+								<h1>게시글이 없습니다.</h1>
 							</td>
 						</tr>
 					</c:if>
 				</table>
+				
+				<form action="/noticesearch.do" method="get">
+				<table class="noticeTable">
+					<tr>
+						<td align="right">
+							<select name="searchOption">
+								<option value="all">전체
+								<option value="board_title">제목
+								<option value="board_writer">작성자
+								<option value="board_content">내용
+							</select>
+							<input type="text" name="keyword"/>
+							<input type="submit" value="검색"/>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
 			</div>
 		</div><!-- end Content -->
 		<%@include file="include/footer.jsp" %>
