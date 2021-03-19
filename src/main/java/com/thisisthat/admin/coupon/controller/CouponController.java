@@ -65,8 +65,8 @@ public class CouponController {
 	@PostMapping("insertCoupon.mdo")
 	public String insertCoupon(CouponVO couponVO, @RequestParam(value = "first") String first,
 			@RequestParam(value = "last") String last) throws Exception {
-		SimpleDateFormat sdf1 = new SimpleDateFormat();
-		SimpleDateFormat sdf2 = new SimpleDateFormat();
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmm");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmm");
 
 		Date coupon_first = sdf1.parse(first);
 		couponVO.setCoupon_first(coupon_first);
@@ -76,7 +76,7 @@ public class CouponController {
 
 		System.out.println(couponVO.toString());
 		couponService.insertCoupon(couponVO);
-		return "redirect:getCouponList";
+		return "redirect:getCouponList.mdo";
 	}
 
 }// end class
