@@ -57,8 +57,9 @@
 						<td align="right">
 							<select name="searchCondition">
 								<option value="board_title">제목
-								<option value="board_content">내용
-								<option value="board_all">제목+내용
+								<option value="board_writer">작성자
+								<option value="board_tw">제목+내용
+								<option value="board_all">모두
 							</select>
 							<input type="text" name="searchKeyword"/>
 							<input type="submit" value="검색"/>
@@ -74,16 +75,25 @@
 						<th width="100px">날짜</th>
 						<th width="60px">조회수</th>
 					</tr>
-					<c:forEach var="event" items="${eventList}">
-					<tr>
-						<td>${event.board_no}</td>
-						<td align="center"><a href="eventView.do?board_no=${event.board_no}"><strong>${event.board_title}</strong></a></td>
-						<td>${event.board_writer}</td>
-						<td><fmt:formatDate value="${event.reg_date}" pattern="yyyy-MM-dd "/><br>
-						<fmt:formatDate value="${event.reg_date}" pattern=" mm:ss "/></td>
-						<td>${event.board_cnt}</td>
-					</tr>
-					</c:forEach>
+					<c:if test="${not empty eventList}">
+						<c:forEach var="event" items="${eventList}">
+							<tr>
+								<td>${event.board_no}</td>
+								<td align="center"><a href="eventView.do?board_no=${event.board_no}"><strong>${event.board_title}</strong></a></td>
+								<td>${event.board_writer}</td>
+								<td><fmt:formatDate value="${event.reg_date}" pattern="yyyy-MM-dd "/><br>
+								<fmt:formatDate value="${event.reg_date}" pattern=" mm:ss "/></td>
+								<td>${event.board_cnt}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty eventList}">
+						<tr>
+							<td>
+								<h1>게시글이 없어요!</h1>
+							</td>
+						</tr>
+					</c:if>
 				</table>
 			</div>
 		</div><!-- end Content -->

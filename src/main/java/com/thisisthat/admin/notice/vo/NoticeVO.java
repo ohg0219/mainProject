@@ -12,12 +12,29 @@ public class NoticeVO {
 	private String board_group;
 	private String board_img;
 	private boolean board_view;
-	@Override
-	public String toString() {
-		return "NoticeVO [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
-				+ ", board_writer=" + board_writer + ", reg_Date=" + reg_Date + ", board_cnt=" + board_cnt
-				+ ", board_group=" + board_group + ", board_img=" + board_img + ", board_view=" + board_view + "]";
+	private String keyword;
+	private String user_id;
+	private String nick_name;
+	
+	public String getUser_id() {
+		return user_id;
 	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getNick_name() {
+		return nick_name;
+	}
+	public void setNick_name(String nick_name) {
+		this.nick_name = nick_name;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
 	public Long getBoard_no() {
 		return board_no;
 	}
@@ -72,6 +89,14 @@ public class NoticeVO {
 	public void setBoard_view(boolean board_view) {
 		this.board_view = board_view;
 	}
+	@Override
+	public String toString() {
+		return "NoticeVO [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
+				+ ", board_writer=" + board_writer + ", reg_Date=" + reg_Date + ", board_cnt=" + board_cnt
+				+ ", board_group=" + board_group + ", board_img=" + board_img + ", board_view=" + board_view
+				+ ", keyword=" + keyword + ", user_id=" + user_id + ", nick_name=" + nick_name + "]";
+	}
+	
 	
 	
 	

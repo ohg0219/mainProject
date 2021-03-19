@@ -12,10 +12,10 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - ${where }</title>
+<title>thisisthat 쿠폰</title>
 
-<%@include file="include/css.jsp"%>
-<%@include file="include/js.jsp"%>
+<%@include file="../include/css.jsp"%>
+<%@include file="../include/js.jsp"%>
 <style type="text/css">
  a:link { color: red; text-decoration: none;}
  a:visited { color: blue; text-decoration: none;}
@@ -31,7 +31,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@include file="include/sideMenu.jsp"%>
+		<%@include file="../include/sideMenu.jsp"%>
 
 		<!-- End of Sidebar -->
 
@@ -41,11 +41,11 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<%@include file="include/navbar.jsp"%>
+				<%@include file="../include/navbar.jsp"%>
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">${where}</h1>
+                    <h1 class="h3 mb-2 text-gray-800">쿠폰 목록</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -59,31 +59,31 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>제목</th>
-                                            <th>작성자</th>
-                                            <th>날짜</th>
-                                            <th>조회수</th>
+                                            <th>쿠폰 번호</th>
+                                            <th>쿠폰 명</th>
+                                            <th>할인 금액(단위 원)</th>
+                                            <th>시작 일자</th>
+                                            <th>종료 일자</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     
                                     	 
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                    	<c:if test="${not empty articleList}" >
-	                                        <c:forEach var="article" items="${articleList}">
+                                    	<c:if test="${not empty couponList}" >
+	                                        <c:forEach var="article" items="${couponList}">
 		                                        <tr>
-			                                        <td width="45">${article.board_no}</td>
-			                                        <td width="295"><a href="noticeGate.mdo?board_no=${article.board_no }" style="">${article.board_title }<!--댓글수--> </a></td>
-			                                        <td width="140">${article.board_writer }</td>
-			                                        <td width="115"><fmt:formatDate value="${article.reg_Date}" pattern="yyyy-MM-dd HH:mm"/></td>
-			                                        <td width="45">${article.board_cnt }</td>
+			                                        <td width="45">${article.coupon_no }</td>
+			                                        <td width="295"><a href="viewCoupon.mdo?coupon_no=${article.coupon_no }">${article.coupon_name }</a></td>
+			                                        <td width="140">${article.coupon_price }</td>
+			                                        <td width="115"><fmt:formatDate value="${article.coupon_first }" pattern="yyyy-MM-dd "/></td>
+			                                        <td width="45"><fmt:formatDate value="${article.coupon_last }" pattern="yyyy-MM-dd "/></td>
 			                                    </tr>
 	                                        </c:forEach>
                                         
 
                                         </c:if>
-                                        <c:if test="${empty articleList }">
+                                        <c:if test="${empty couponList }">
                                         	<tr>
                                         		<td colspan="5" align="center">
                                         		<h1> 게시글이 없어요</h1>
@@ -93,25 +93,24 @@
                                     </tbody>
                                 </table>
                                 <div>	
-                                <form action="noticesearch.mdo?board_group=${article.board_group }" method="get">
-                                    <input type="hidden" name="board_group" value="${where}">
+                                <form action="couponSearch.mdo" method="get">
+                                    
 									<select name="searchOption" aria-controls="example" class="">
-										<option value="all">전체</option>
-										<option value="board_writer">작성자</option>
-										<option value="board_title">제목</option>
-										<option value="board_content">내용</option>
+										<option value="coupon_name">쿠폰 명</option>
+										<option value="coupon">시작 일자</option>
+										<option value="coupon_last">종료 일자</option>
 									</select>
 										                                    		
 									<input type="text" name="keyword">
 
 									<button type="submit" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										검색버튼
+										쿠폰 검색 
 									</button>
 
-									<button type="button" class="btn btn-dark"  id="insertArticle">
+									<button type="button" class="btn btn-dark"  id="insertCoupon">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										글쓰기
+										쿠폰 생성
 									</button>
                                 </form>
 									<br>
@@ -142,8 +141,8 @@
 		$(function(){
 		
 			//-------------------검색하는 함수end			
-			$("#insertArticle").click(function(){
-				location.href="/admin/insertArticle.mdo"
+			$("#insertCoupon").click(function(){
+				location.href="/admin/insertCoupon.mdo"
 			});
 		});
 	

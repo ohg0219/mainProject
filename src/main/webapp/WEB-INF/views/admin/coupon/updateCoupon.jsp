@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<%@include file="include/css.jsp"%>
-<title>thisisthat - 글 수정</title>
+<%@include file="../include/css.jsp"%>
+<title>thisisthat - 쿠폰 등록</title>
 </head>
 <body>
+
+
 <body id="page-top">
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@include file="include/sideMenu.jsp"%>
+		<%@include file="../include/sideMenu.jsp"%>
 
 		<!-- End of Sidebar -->
 
@@ -29,28 +30,30 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<%@include file="include/navbar.jsp"%>
+				<%@include file="../include/navbar.jsp"%>
+				
+				
+				
 				<div class="container-fluid">
-					<form action="updateNotice.mdo" method="post">
-					 <input type="hidden" name="board_no" value="${article.board_no }" >
-					 <input type="hidden" name="board_group" value="${article.board_group }" >
+					<form action="updateCouponPro.mdo" method="post">
+					<input type="hidden" name="coupon_no" value="${article.coupon_no}">
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
-                            		<td colspan="2">
-	                            	 <h1 class="h3 mb-2 text-gray-800">${article.board_group}</h1>
-	                            	 <select name="board_view" aria-controls="example" class="">
-											<option value="false">위쪽</option>
-											<option value="true">아래쪽</option>
-										</select>
-										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
+										<button type="submit" class="btn-check:checked pull-right" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
-											작성하기
+											수정 하기
 										</button>
-										<input type="text" name="board_title" class="form-control mt-4 mb-2"
-											value="${article.board_title } " >
+                            		<td colspan="2">
 										<div class="form-group">
-											<textarea class="form-control" rows="20" name="board_content" >${article.board_content }</textarea>
+										<input type="text" name="coupon_name" value="${article.coupon_name }" class="form-control mt-4 mb-2"
+											placeholder="쿠폰 명" >
+											<input type="text" name="coupon_price" value="${article.coupon_price }" class="form-control mt-4 mb-2"
+											placeholder="쿠폰 금액" >
+											<input type="date" name="coupon_first" value="${article.coupon_first}" class="form-control mt-4 mb-2"
+											placeholder="시작일자" >
+											<input type="date" name="coupon_last" value="${article.coupon_last}" class="form-control mt-4 mb-2"
+											placeholder="종료 일자" >
 										</div>
 									</td>
                             	</tr>
@@ -64,7 +67,7 @@
 <script>
 
 </script>
-<%@include file="include/js.jsp"%>
+<%@include file="../include/js.jsp"%>
 
 </body>
 </html>
