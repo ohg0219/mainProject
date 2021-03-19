@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.thisisthat.admin.product.service.AdminProductService;
 import com.thisisthat.admin.product.vo.AdminProductImageVO;
+import com.thisisthat.admin.product.vo.AdminProductSizeUsedVO;
+import com.thisisthat.admin.product.vo.AdminProductSizeGuideVO;
 import com.thisisthat.admin.product.vo.AdminProductVO;
 import com.thisisthat.util.PagingVO;
 
@@ -35,24 +37,28 @@ public class AdminProductController {
 	 */
 	@GetMapping("/productList.mdo")
 	public String getProductList(AdminProductVO vo,
-			@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
-			@RequestParam(value = "nowPage",required = false) String nowPage,
-			@RequestParam(value = "category",required = false) String category,
+			@RequestParam(value = "searchKeyword", required = false,defaultValue = "") String searchKeyword,
+			@RequestParam(value = "nowPage",required = false,defaultValue = "1") String nowPage,
+			@RequestParam(value = "category",required = false,defaultValue = "all") String category,
+			@RequestParam(value = "check",required = false,defaultValue = "0") String checked,
+			
 			Model model) {
-		if(category != null) {
-			if(category.equals("all")) {
-				vo.setProduct_category(null);
-			}else {
-				vo.setProduct_category(category);
-			}	
+		if(checked.equals("1")) {
+			vo.setProduct_used(1);
+		}else {
+			vo.setProduct_used(0);
 		}
-		if(searchKeyword == null) vo.setSearchKeyword(null);
-		if(nowPage == null) nowPage = "1";
+		if(category.equals("all")) {
+			vo.setProduct_category(null);
+		}else {
+			vo.setProduct_category(category);
+		}	
 		int productCount = productService.getProductCount(vo);
 		PagingVO pagingVO = new PagingVO(productCount,Integer.parseInt(nowPage),10);
 		model.addAttribute("selectCategory",category);
 		model.addAttribute("searchKeyword",searchKeyword);
 		model.addAttribute("paging",pagingVO);
+		model.addAttribute("checkKey",checked);
 		model.addAttribute("categoryList",productService.getCategoryList());
 		model.addAttribute("productList",productService.getProductList(pagingVO,vo));
 		return "/admin/product/productList";
@@ -78,7 +84,31 @@ public class AdminProductController {
 	 * @return
 	 */
 	@PostMapping("/insertProduct.mdo")
-	public String insertProduct(MultipartFile mainUploadFile,MultipartFile[] subUploadFile, Model model,AdminProductVO vo) {
+	public String insertProduct(
+			MultipartFile mainUploadFile,MultipartFile[] subUploadFile, 
+			Model model,AdminProductVO vo,AdminProductSizeUsedVO sizeVO,
+			@RequestParam(value = "guideSelector")String guideSelector,
+			@RequestParam(value = "size1") List<String> size1,@RequestParam(value = "size2") List<String> size2,@RequestParam(value = "size3") List<String> size3,@RequestParam(value = "size4") List<String> size4
+			) {
+		List<AdminProductSizeGuideVO> sizeGuideList = new ArrayList<AdminProductSizeGuideVO>();
+		AdminProductSizeGuideVO guide1 = new AdminProductSizeGuideVO(); AdminProductSizeGuideVO guide2 = new AdminProductSizeGuideVO(); 
+		AdminProductSizeGuideVO guide3 = new AdminProductSizeGuideVO(); AdminProductSizeGuideVO guide4 = new AdminProductSizeGuideVO();
+		if(guideSelector.equals("top")) {
+			guide1.setXs_size(size1.get(0)); guide1.setS_size(size1.get(1)); guide1.setM_size(size1.get(2)); guide1.setL_size(size1.get(3)); guide1.setXl_size(size1.get(4));
+			guide2.setXs_size(size2.get(0)); guide2.setS_size(size2.get(1)); guide2.setM_size(size2.get(2)); guide2.setL_size(size2.get(3)); guide2.setXl_size(size2.get(4));
+			guide3.setXs_size(size3.get(0)); guide3.setS_size(size3.get(1)); guide3.setM_size(size3.get(2)); guide3.setL_size(size3.get(3)); guide3.setXl_size(size3.get(4));
+			guide4.setXs_size(size4.get(0)); guide4.setS_size(size4.get(1)); guide4.setM_size(size4.get(2)); guide4.setL_size(size4.get(3)); guide4.setXl_size(size4.get(4));
+			guide1.setGuideSelector(guideSelector); guide2.setGuideSelector(guideSelector); guide3.setGuideSelector(guideSelector); guide4.setGuideSelector(guideSelector);
+			guide1.setSize_item("length"); guide2.setSize_item("chest"); guide3.setSize_item("arm"); guide4.setSize_item("shoulder");
+		}else {
+			guide1.setXs_size(size1.get(0)); guide1.setS_size(size1.get(1)); guide1.setM_size(size1.get(2)); guide1.setL_size(size1.get(3)); guide1.setXl_size(size1.get(4));
+			guide2.setXs_size(size2.get(0)); guide2.setS_size(size2.get(1)); guide2.setM_size(size2.get(2)); guide2.setL_size(size2.get(3)); guide2.setXl_size(size2.get(4));
+			guide3.setXs_size(size3.get(0)); guide3.setS_size(size3.get(1)); guide3.setM_size(size3.get(2)); guide3.setL_size(size3.get(3)); guide3.setXl_size(size3.get(4));
+			guide4.setXs_size(size4.get(0)); guide4.setS_size(size4.get(1)); guide4.setM_size(size4.get(2)); guide4.setL_size(size4.get(3)); guide4.setXl_size(size4.get(4));
+			guide1.setGuideSelector(guideSelector); guide2.setGuideSelector(guideSelector); guide3.setGuideSelector(guideSelector); guide4.setGuideSelector(guideSelector);
+			guide1.setSize_item("length"); guide2.setSize_item("waist"); guide3.setSize_item("thigh"); guide4.setSize_item("hem");
+		}
+		sizeGuideList.add(guide1); sizeGuideList.add(guide2); sizeGuideList.add(guide3); sizeGuideList.add(guide4);
 		String uploadFolder = "https://thisisthat.s3.ap-northeast-2.amazonaws.com/";
 		List<AdminProductImageVO> imageList = new ArrayList<AdminProductImageVO>();
 		//메인 이미지 가져오기
@@ -113,7 +143,8 @@ public class AdminProductController {
 				e.printStackTrace();
 			}
 		}
-		productService.insertProduct(vo, imageList);
+		
+		productService.insertProduct(vo, imageList, sizeGuideList,sizeVO);
 		return "redirect:/admin/productList.mdo";
 	}
 	
@@ -140,6 +171,28 @@ public class AdminProductController {
 		}
 		model.addAttribute("mainImage",mainImage);
 		model.addAttribute("subImage",subImage);
+		String selectSizeGuideGroup = null;
+		List<AdminProductSizeGuideVO> sizeGuideList = productService.getProductSizeGuide(productNo);
+		for(AdminProductSizeGuideVO size : sizeGuideList) {
+			String select = size.getSize_item();
+			if(select.equals("chest")) {
+				selectSizeGuideGroup = "top";
+			}else if(select.equals("waist")) {
+				selectSizeGuideGroup = "bottom";
+			}
+			switch (select) {
+			case "length":model.addAttribute("length", size);break;
+			case "chest":model.addAttribute("chest", size);break;
+			case "arm":model.addAttribute("arm", size);break;
+			case "shoulder":model.addAttribute("shoulder", size);break;
+			case "waist":model.addAttribute("waist", size);break;
+			case "thigh":model.addAttribute("thigh", size);break;
+			case "hem":model.addAttribute("hem", size);break;
+			}
+		}
+		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
+		System.out.println(selectSizeGuideGroup);
+		model.addAttribute("sizeUsed",productService.getProductSizeUsed(productNo));
 		return "/admin/product/getProduct";
 	}
 	
@@ -290,12 +343,10 @@ public class AdminProductController {
 	@GetMapping("/deleteProduct.mdo")
 	public String deleteProduct(@RequestParam("product_no")String product_no) {
 		long productNo = Long.parseLong(product_no);
-		//aws s3 파일 삭제
 		List<AdminProductImageVO> imageList = productService.getProductImage(productNo);
 		for(AdminProductImageVO imagevo : imageList) {
 			awsS3.delete(imagevo.getImage_name());
 		}
-		//db 삭제
 		productService.deleteProduct(productNo);
 		return "redirect:/admin/productList.mdo";
 	}

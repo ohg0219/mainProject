@@ -30,6 +30,21 @@
  a:visited { color: blue; text-decoration: none;}
  a:hover { color: red; text-decoration: underline;}
  a {color:black;}
+ #size_used{
+ 	text-align: center;
+ }
+ .sizeGuide{
+ 	text-align: center;
+ }
+ .sizeGuide td:nth-child(2) {
+	width: 190px;
+ }
+ .bottomSize{
+ 	display: none;
+ }
+ .in{
+ 	background-color: white;
+ }
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -182,7 +197,7 @@
 	                           		<table class="table table-bordered" id="dataTable">
                     					<tr>
                     						<td>카테고리</td>
-                    						<td>
+                    						<td colspan="6">
                     							<select id="category" name="product_category">
                     								<option>----카테고리 선택----</option>
 	                    							<c:forEach items="${categoryList }" var="category">
@@ -193,32 +208,154 @@
                     					</tr>
                     					<tr>
                     						<td width="150px">상품명</td>
-                    						<td><input style="width: 100%" type="text" id="productName" name="product_name"></td>
+                    						<td colspan="6"><input style="width: 100%" type="text" id="productName" name="product_name"></td>
                     					</tr>
                     					<tr>
                     						<td>소비자가</td>
-                    						<td><input type="text" id="productPrice" name="product_price"></td>
+                    						<td colspan="6"><input type="text" id="productPrice" name="product_price"></td>
                     					</tr>
                     					<tr>
                     						<td>소재정보</td>
-                    						<td><textarea style="width: 100%" id="materialInfo" name="material_info"></textarea></td>
+                    						<td colspan="6"><textarea style="width: 100%" id="materialInfo" name="material_info"></textarea></td>
                     					</tr>
                     					<tr>
                     						<td>원산지</td>
-                    						<td><input style="width: 100%" type="text" id="origin" name="origin"></td>
+                    						<td colspan="6"><input style="width: 100%" type="text" id="origin" name="origin"></td>
                     					</tr>
                     					<tr>
                     						<td>상품설명</td>
-                    						<td><textarea style="width: 100%" id="productInfo" name="product_info"></textarea></td>
+                    						<td colspan="6"><textarea style="width: 100%" id="productInfo" name="product_info"></textarea></td>
                     					</tr>
                     					<tr>
                     						<td>적립율</td>
-                    						<td>
+                    						<td colspan="6">
 												<input type="number" value="product_point">
 											</td>
                     					</tr>
                     					<tr>
-                    						<td colspan="2">
+                    						<td rowspan="2" colspan="2" style="vertical-align: middle; text-align: center;">사이즈 사용유무</td>
+                    						<td align="center">XS</td>
+                    						<td align="center">S</td>
+                    						<td align="center">M</td>
+                    						<td align="center">L</td>
+                    						<td align="center">XL</td>
+                    					</tr>
+                    					<tr id="size_used">
+                    						<td>
+                    							<select id="xs" name="xs_used">
+                    								<option value="1">사용</option>
+                    								<option value="0">미사용</option>
+                    							</select>
+                    						</td>
+                    						<td>
+                    							<select id="s" name="s_used">
+                    								<option value="1">사용</option>
+                    								<option value="0">미사용</option>
+                    							</select>
+                    						</td>
+                    						<td>
+                    							<select id="m" name="m_used">
+                    								<option value="1">사용</option>
+                    								<option value="0">미사용</option>
+                    							</select>
+                    						</td>
+                    						<td>
+                    							<select id="l" name="l_used">
+                    								<option value="1">사용</option>
+                    								<option value="0">미사용</option>
+                    							</select>
+                    						</td>
+                    						<td>
+                    							<select id="xl" name="xl_used">
+                    								<option value="1">사용</option>
+                    								<option value="0">미사용</option>
+                    							</select>
+                    						</td>
+                    						<script type="text/javascript">
+                    							$("#xs").change(function(){
+                    								if($("#xs option:selected").val() == 1){$(".xs").attr("readonly",false);$(".xs").css("background-color","white");
+                    								}else{$(".xs").attr("readonly",true); $(".xs").val(null); $(".xs").css("background-color","red");
+                    								}
+                    							});
+                    							$("#s").change(function(){
+                    								if($("#s option:selected").val() == 1){$(".s").attr("readonly",false);$(".s").css("background-color","white");
+                    								}else{$(".s").attr("readonly",true); $(".s").val(null);$(".s").css("background-color","red");}
+                    							});
+                    							$("#m").change(function(){
+                    								if($("#m option:selected").val() == 1){$(".m").attr("readonly",false);$(".m").css("background-color","white");
+                    								}else{$(".m").attr("readonly",true); $(".m").val(null);$(".m").css("background-color","red");}
+                    							});
+                    							$("#l").change(function(){
+                    								if($("#l option:selected").val() == 1){$(".l").attr("readonly",false);$(".l").css("background-color","white");
+                    								}else{$(".l").attr("readonly",true); $(".l").val(null);$(".l").css("background-color","red");}
+                    							});
+                    							$("#xl").change(function(){
+                    								if($("#xl option:selected").val() == 1){$(".xl").attr("readonly",false);$(".xl").css("background-color","white");
+                    								}else{$(".xl").attr("readonly",true); $(".xl").val(null);$(".xl").css("background-color","red");}
+                    							});
+                    						</script>
+                    					</tr>
+                    					<tr>
+                    						<td align="center" colspan="7">사이즈 가이드
+                    							<select id="guideSelector" name="guideSelector">
+                    								<option value="top">상의류</option>
+                    								<option value="bottom">하의류</option>
+                    							</select>
+                    							<script type="text/javascript">
+                    								$("#guideSelector").change(function(){
+                    									var con= $("#guideSelector option:selected").val();
+														if(con == 'top'){
+															$("#sizeGuideTitle").text("상의류");
+															$("#sizeInfo1").text("LENGTH(총길이)");
+															$("#sizeInfo2").text("CHEST(가슴)");
+															$("#sizeInfo3").text("ARM(팔)");
+															$("#sizeInfo4").text("SHOULDER(어깨)");
+														}else if(con == 'bottom'){
+															$("#sizeGuideTitle").text("하의류");
+															$("#sizeInfo1").text("LENGTH(총길이)");
+															$("#sizeInfo2").text("WAIST(허리)");
+															$("#sizeInfo3").text("THIGH(허벅지)");
+															$("#sizeInfo4").text("HEM(밑단)");
+														}
+                    								});
+                    							</script>
+                    						</td>
+                    					</tr>
+                    					<tr class="sizeGuide">
+                    						<td id="sizeGuideTitle"rowspan="4" style="vertical-align: middle;">상의류</td>
+                    						<td id="sizeInfo1">LENGTH(총길이)</td>
+                    						<td><input class="xs in" type="text" name="size1" size="5"></td>
+                    						<td><input class="s in" type="text" name="size1" size="5"></td>
+                    						<td><input class="m in" type="text" name="size1" size="5"></td>
+                    						<td><input class="l in" type="text" name="size1" size="5"></td>
+                    						<td><input class="xl in" type="text" name="size1" size="5"></td>
+                    					</tr>
+                    					<tr class="sizeGuide">
+                    						<td id="sizeInfo2">CHEST(가슴)</td>
+                    						<td><input class="xs in" type="text" name="size2" size="5"></td>
+                    						<td><input class="s in" type="text" name="size2" size="5"></td>
+                    						<td><input class="m in" type="text" name="size2" size="5"></td>
+                    						<td><input class="l in" type="text" name="size2" size="5"></td>
+                    						<td><input class="xl in" type="text" name="size2" size="5"></td>
+                    					</tr>
+                    					<tr class="sizeGuide">
+                    						<td id="sizeInfo3">ARM(팔)</td>
+                    						<td><input class="xs in" type="text" name="size3" size="5"></td>
+                    						<td><input class="s in" type="text" name="size3" size="5"></td>
+                    						<td><input class="m in" type="text" name="size3" size="5"></td>
+                    						<td><input class="l in" type="text" name="size3" size="5"></td>
+                    						<td><input class="xl in" type="text" name="size3" size="5"></td>
+                    					</tr>
+                    					<tr class="sizeGuide">
+                    						<td id="sizeInfo4">SHOULDER(어깨)</td>
+                    						<td><input class="xs in" type="text" name="size4" size="5"></td>
+                    						<td><input class="s in" type="text" name="size4" size="5"></td>
+                    						<td><input class="m in" type="text" name="size4" size="5"></td>
+                    						<td><input class="l in" type="text" name="size4" size="5"></td>
+                    						<td><input class="xl in" type="text" name="size4" size="5"></td>
+                    					</tr>
+                    					<tr>
+                    						<td colspan="7">
     	                						<p>메인이미지</p>
                     							<div class="col-lg-12">
                     								<input type="file" name="mainUploadFile" id="mainUploadFile">
@@ -229,7 +366,7 @@
                     						</td>
                     					</tr>
                     					<tr>
-                    						<td colspan="2">
+                    						<td colspan="7">
     	                						<p>상세이미지</p>
                     							<div class="col-lg-12">
                     								<input type="file" name="subUploadFile" id="subUploadFile" multiple>
@@ -240,7 +377,7 @@
                     						</td>
                     					</tr>
                     					<tr>
-                    						<td colspan="2" align="center">
+                    						<td colspan="7" align="center">
                     							<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/productList.mdo'">
                     							<input id="insert" type="submit" class="btn btn-dark" value="등록">
                     						</td>

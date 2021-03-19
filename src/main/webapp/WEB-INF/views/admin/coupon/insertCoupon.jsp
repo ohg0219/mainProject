@@ -8,8 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<%@include file="include/css.jsp"%>
-<title>thisisthat - 새글 등록</title>
+<%@include file="../include/css.jsp"%>
+<title>thisisthat - 쿠폰 등록</title>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@include file="include/sideMenu.jsp"%>
+		<%@include file="../include/sideMenu.jsp"%>
 
 		<!-- End of Sidebar -->
 
@@ -30,30 +30,29 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<%@include file="include/navbar.jsp"%>
+				<%@include file="../include/navbar.jsp"%>
 				
 				
 				
 				<div class="container-fluid">
-					<form action="insertNotice.mdo" method="post">
+					<form action="insertCouponPro.mdo" method="post">
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
                             		<td colspan="2">
-	                            		<select name="board_group" aria-controls="example" class="">
-											<option value="notice">공지사항</option>
-											<option value="event">이벤트</option>
-										</select>
-										<button type="submit" class="btn-check:checked pull-right" id="insertNotice" >
+										<button type="submit" class="btn-check:checked pull-right" id="insertCoupon" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>
-										<input type="text" name="board_title" class="form-control mt-4 mb-2"
-											placeholder="제목을 입력해주세요." required>
+										<input type="text" name="coupon_name" class="form-control mt-4 mb-2"
+											placeholder="쿠폰 명" required>
 										<div class="form-group">
-											<textarea class="form-control" rows="20" name="board_content"
-												placeholder="내용을 입력해주세요" required>
-											</textarea>
+											<input type="text" name="coupon_price" class="form-control mt-4 mb-2"
+											placeholder="쿠폰 금액" required>
+											<input type="date" name="first" class="form-control mt-4 mb-2"
+											placeholder="시작일자" required>
+											<input type="date" name="last"  class="form-control mt-4 mb-2"
+											placeholder="종료 일자" required>
 										</div>
 									</td>
                             	</tr>
@@ -67,7 +66,7 @@
 <script>
 
 </script>
-<%@include file="include/js.jsp"%>
+<%@include file="../include/js.jsp"%>
 
 </body>
 </html>

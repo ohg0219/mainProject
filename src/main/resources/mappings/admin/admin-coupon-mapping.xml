@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CouponDAO">
+
+	
+	<select id="couponList" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select * from admin_coupon order by coupon_last desc
+	</select>
+	<select id="nameSearch" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select * from admin_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_last desc
+	</select>
+	<select id="viewCoupon" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select * from admin_coupon where coupon_no=#{coupon_no}
+	</select>
+	<select id="insertCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
+		insert into admin_coupon(coupon_name, coupon_price, coupon_first, coupon_last) values(#{coupon_name},#{coupon_price},#{coupon_first},#{coupon_last})
+	</select>
+	<select id="deleteCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
+		delete from admin_coupon where coupon_no=#{coupon_no}
+	</select>
+	<select id="updateCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
+		update admin_coupon set coupon_name=#{coupon_name},coupon_price=#{coupon_price},coupon_first=#{coupon_first},coupon_last=#{coupon_last} where coupon_no=#{coupon_no}
+	</select>
+	
+	
+</mapper>

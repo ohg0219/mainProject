@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thisisthat.admin.category.vo.AdminCategoryVO;
 import com.thisisthat.admin.product.vo.AdminProductImageVO;
 import com.thisisthat.admin.product.vo.AdminProductListVO;
+import com.thisisthat.admin.product.vo.AdminProductSizeGuideVO;
+import com.thisisthat.admin.product.vo.AdminProductSizeUsedVO;
 import com.thisisthat.admin.product.vo.AdminProductVO;
 import com.thisisthat.util.PagingVO;
 
@@ -21,7 +23,7 @@ public class AdminProductDAO {
 	private SqlSessionTemplate productTemplate;
 	
 	@Transactional
-	public void insertProduct(AdminProductVO vo,List<AdminProductImageVO> imageList) {
+	public void insertProduct(AdminProductVO vo,List<AdminProductImageVO> imageList,List<AdminProductSizeGuideVO> sizeGuideList,AdminProductSizeUsedVO sizeVO) {
 		productTemplate.insert("AdminProduct.insertProduct",vo);
 		int result = productTemplate.selectOne("AdminProduct.getSeq");
 		for(AdminProductImageVO image : imageList) {
@@ -29,6 +31,12 @@ public class AdminProductDAO {
 			productTemplate.insert("AdminProduct.insertProductImage",image);
 		}
 		productTemplate.insert("AdminProduct.insertProductStock",result);
+		for(AdminProductSizeGuideVO size : sizeGuideList) {
+			size.setProduct_no(result);
+			productTemplate.insert("AdminProduct.insertSizeGuide",size);
+		}
+		sizeVO.setProduct_no(result);
+		productTemplate.insert("AdminProduct.insertSizeUsed",sizeVO);
 	}
 	
 	public List<AdminCategoryVO> getCategoryList(){
@@ -37,6 +45,7 @@ public class AdminProductDAO {
 	
 	public List<AdminProductListVO> getProductList(PagingVO pagingVO,AdminProductVO vo){
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("used", String.valueOf(vo.getProduct_used()));
 		map.put("searchKeyword", vo.getSearchKeyword());
 		map.put("category", vo.getProduct_category());
 		map.put("cntPerPage",pagingVO.getCntPerPage());
@@ -54,7 +63,15 @@ public class AdminProductDAO {
 	
 	public long getProductStock(long productNo) {
 		return productTemplate.selectOne("AdminProduct.getProductStock",productNo);
+	} 
+	
+	public List<AdminProductSizeGuideVO> getProductSizeGuide(long productNo) {
+		return productTemplate.selectList("AdminProduct.getProductSizeGuide",productNo);
 	}
+	public AdminProductSizeUsedVO getProductSizeUsed(long productNo) {
+		return productTemplate.selectOne("AdminProduct.getProductSizeUsed",productNo);
+	}
+	
 	
 	@Transactional
 	public void deleteProduct(long productNo) {

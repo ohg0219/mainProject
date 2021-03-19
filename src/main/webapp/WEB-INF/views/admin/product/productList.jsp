@@ -6,15 +6,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>thisisthat - 상품 관리</title>
-
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>thisisthat - 상품 관리</title>
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
 <!-- Custom fonts for this template-->
@@ -37,10 +34,7 @@
  	text-align: center;
  }
 </style>
-    
-
 </head>
-
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -78,13 +72,8 @@
 	                    			</option>
 	                    		</c:forEach>
 	                    	</select>
-	                    	<script type="text/javascript">
-	                    		function change(){
-	                    			var category = document.getElementById('categorySelect').value;
-	                    			location.href="/admin/productList.mdo?category="+category;
-	                    		}
-	                    	</script>
-	                    	
+	                    	&nbsp;&nbsp;&nbsp;&nbsp;
+	                    	<label><input id="see" type="checkbox" onchange="checkChange()" <c:if test="${checkKey == '1' }">checked</c:if>>노출 상품만 보기</label>
                     	</div> 
 
                     <!-- Content Row -->
@@ -98,27 +87,26 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>상품번호</th>
-                                            <th>카테고리</th>
+                                            <th width="100px">상품번호</th>
+                                            <th width="150px">카테고리</th>
                                             <th>상품명</th>
                                             <th>메인이미지</th>
                                             <th>소비자가</th>
                                             <th>총재고</th>
-                                            <th>상품노출</th>
+                                            <th width="100px">노출유무</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                   	<c:if test="${productList ne null }">
+                                   	<c:if test="${not empty productList}">
 	                                    <c:forEach items="${productList}" var="product">
 	                                   	    <tr>
 		                                        <td>${product.product_no }</td>
-		                                        <td>${product.product_category }</td>
+		                                        <td style="text-transform: uppercase;">${product.product_category }</td>
 		                                        <td><a href="/admin/getProduct.mdo?productNo=${product.product_no }">${product.product_name }</a></td>
 		                                        <td align="center"><img style="width: 70px" alt="" src="${product.upload_path }"> </td>
 		                                        <td align="right"><fmt:formatNumber maxFractionDigits="3" value="${product.product_price }"></fmt:formatNumber>원</td>
 		                                        <td align="right">${product.product_stock_total }</td>
-		                                        <td>
+		                                        <td align="center">
 		                                        	<c:if test="${product.product_used == 1 }">
 														노출												
 													</c:if>
@@ -129,10 +117,10 @@
 		                                    </tr>
 	                                    </c:forEach>
 	                                </c:if>
-	                                <c:if test="${productList eq null }">
+	                                <c:if test="${empty productList}">
 	                                       	<tr>
-	                                       		<td colspan="6" align="center">
-	                                       		<h3> 상품이 없어요</h3>
+	                                       		<td colspan="7" align="center">
+	                                       		<h3>등록된 상품이 없습니다.</h3>
 	                                       		</td>
 	                                       	</tr>
 	                                </c:if>
@@ -140,7 +128,7 @@
                                 </table>
                                 
                                 <div>	
-									<input type="text" id="search" placeholder="상품명">
+									<input type="text" id="search" placeholder="상품명" >
 									<button type="button" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										검색
@@ -163,13 +151,13 @@
 												</c:when>
 												<c:when test="${p != paging.nowPage }">
 													<a href="/admin/productList.mdo?nowPage=${p }
-													&searchKeyword=${searchKeyword}&category=${selectCategory}">${p }</a>
+													&searchKeyword=${searchKeyword}&category=${selectCategory}&check=${checkKey}">${p }</a>
 												</c:when>
 											</c:choose>
 										</c:forEach>
 										<c:if test="${paging.endPage != paging.lastPage}">
 											<a href="/admin/productList.mdo?nowPage=${paging.endPage+1 }
-											&searchKeyword=${searchKeyword}&category=${selectCategory}">&gt;</a>
+											&searchKeyword=${searchKeyword}&category=${selectCategory}&check=${checkKey}">&gt;</a>
 										</c:if>
 									</div>
                                 </div>
@@ -221,13 +209,39 @@
         </div>
     </div>
 	<script type="text/javascript">
+	function change(){
+		var searchKeyword = $('#search').val();
+		var category = document.getElementById('categorySelect').value;
+		if($("#see").is(":checked")){
+			location.href="/admin/productList.mdo?searchKeyword="+searchKeyword+"&category="+category+"&check=1";;
+		}else{
+			location.href="/admin/productList.mdo?searchKeyword="+searchKeyword+"&category="+category+"&check=0";
+		}
+	}
+	function checkChange(){
+		var searchKeyword = $('#search').val();
+		var category = document.getElementById('categorySelect').value;
+		if($("#see").is(":checked")){
+			location.href="/admin/productList.mdo?searchKeyword="+searchKeyword+"&category="+category+"&check=1";;
+		}else{
+			location.href="/admin/productList.mdo?searchKeyword="+searchKeyword+"&category="+category+"&check=0";
+		}
+	}
 	$(function(){
 		$("#searchBtn").click(function(){
 			var searchKeyword = $('#search').val();
 			var category = document.getElementById('categorySelect').value;
-			location.href="/admin/productList.mdo?searchKeyword="+searchKeyword+"&category="+category;
-			console.log(search);
+			if($("#see").is(":checked")){
+				location.href="/admin/productList.mdo?searchKeyword="+searchKeyword+"&category="+category+"&check=1";;
+			}else{
+				location.href="/admin/productList.mdo?searchKeyword="+searchKeyword+"&category="+category+"&check=0";
+			}
 		});
+		
+		
+		
+		
+		
 	});
 	</script>
  

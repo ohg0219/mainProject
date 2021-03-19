@@ -25,6 +25,7 @@
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
+		<mapper resource="mappings/admin/admin-coupon-mapping.xml" />
 		<mapper resource="mappings/admin/admin-management-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-category-mapping.xml"/>
