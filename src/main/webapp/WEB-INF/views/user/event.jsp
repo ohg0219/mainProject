@@ -50,14 +50,14 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>이벤트</h3>
+				<h3>EVENT</h3>
 				<table class="noticeTable">
 					<tr>
-						<th width="60px">번호</th>
-						<th width="250px">제목</th>
-						<th width="60px">작성자</th>
-						<th width="100px">날짜</th>
-						<th width="60px">조회수</th>
+						<th width="60px">NO.</th>
+						<th width="250px">SUBJECT</th>
+						<th width="60px">이름</th>
+						<th width="100px">DATE</th>
+						<th width="60px">HIT</th>
 					</tr>
 					<c:if test="${not empty eventList}">
 						<c:forEach var="event" items="${eventList}">
@@ -65,15 +65,14 @@
 								<td>${event.board_no}</td>
 								<td align="center"><a href="eventView.do?board_no=${event.board_no}"><strong>${event.board_title}</strong></a></td>
 								<td>${event.board_writer}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd" value="${event.reg_date}" /><br>
-								<fmt:formatDate pattern="mm:ss" value="${event.reg_date}" /></td>
+								<td><fmt:formatDate value="${event.reg_date}"  pattern="yyyy-MM-dd"/><br>
 								<td>${event.board_cnt}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<c:if test="${empty eventList}">
 						<tr>
-							<td>
+							<td colspan="5" align="center">
 								<h1>게시글이 없습니다.</h1>
 							</td>
 						</tr>
