@@ -50,41 +50,37 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>NOTICE</h3>
-				<script type="text/javascript">
-					$(function(){
-						$()
-					});
-				</script>
+				<h3>COUPON!</h3>
 				<table class="noticeTable">
 					<tr>
-						<th width="60px">NO.</th>
-						<th width="250px">SUBJECT</th>
-						<th width="60px">이름</th>
-						<th width="100px">DATE</th>
-						<th width="60px">HIT</th>
+						<th width="60px">번호</th>
+						<th width="250px">제목</th>
+						<th width="60px">작성자</th>
+						<th width="100px">날짜</th>
+						<th width="60px">조회수</th>
 					</tr>
-					<c:if test="${not empty noticeList}">
-						<c:forEach var="notice" items="${noticeList}">
-						<tr>
-							<td>${notice.board_no}</td>
-							<td align="center"><strong><a href="/noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
-							<td>${notice.board_writer}</td>
-							<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
-							<td>${notice.board_cnt}</td>
-						</tr>
+					<c:if test="${not empty eventList}">
+						<c:forEach var="event" items="${eventList}">
+							<tr>
+								<td>${event.board_no}</td>
+								<td align="center"><a href="eventView.do?board_no=${event.board_no}"><strong>${event.board_title}</strong></a></td>
+								<td>${event.board_writer}</td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd" value="${event.reg_date}" /><br>
+								<fmt:formatDate pattern="mm:ss" value="${event.reg_date}" /></td>
+								<td>${event.board_cnt}</td>
+							</tr>
 						</c:forEach>
 					</c:if>
-					<c:if test="${empty noticeList}">
+					<c:if test="${empty eventList}">
 						<tr>
-							<td colspan="5" align="center">
+							<td>
 								<h1>게시글이 없습니다.</h1>
 							</td>
 						</tr>
 					</c:if>
 				</table>
 				
-				<form action="/noticesearch.do" method="get">
+				<form action="/eventsearch.do" method="get">
 				<table class="noticeTable">
 					<tr>
 						<td align="right">

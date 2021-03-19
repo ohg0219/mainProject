@@ -50,30 +50,14 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>이벤트</h3>
-				<form action="event.jsp" method="post">
+				<h3>EVENT</h3>
 				<table class="noticeTable">
 					<tr>
-						<td align="right">
-							<select name="searchCondition">
-								<option value="board_title">제목
-								<option value="board_writer">작성자
-								<option value="board_tw">제목+내용
-								<option value="board_all">모두
-							</select>
-							<input type="text" name="searchKeyword"/>
-							<input type="submit" value="검색"/>
-						</td>
-					</tr>
-				</table>
-				</form>
-				<table class="noticeTable">
-					<tr>
-						<th width="60px">번호</th>
-						<th width="250px">제목</th>
-						<th width="60px">작성자</th>
-						<th width="100px">날짜</th>
-						<th width="60px">조회수</th>
+						<th width="60px">NO.</th>
+						<th width="250px">SUBJECT</th>
+						<th width="60px">이름</th>
+						<th width="100px">DATE</th>
+						<th width="60px">HIT</th>
 					</tr>
 					<c:if test="${not empty eventList}">
 						<c:forEach var="event" items="${eventList}">
@@ -81,20 +65,37 @@
 								<td>${event.board_no}</td>
 								<td align="center"><a href="eventView.do?board_no=${event.board_no}"><strong>${event.board_title}</strong></a></td>
 								<td>${event.board_writer}</td>
-								<td><fmt:formatDate value="${event.reg_date}" pattern="yyyy-MM-dd "/><br>
-								<fmt:formatDate value="${event.reg_date}" pattern=" mm:ss "/></td>
+								<td><fmt:formatDate value="${event.reg_date}"  pattern="yyyy-MM-dd"/><br>
 								<td>${event.board_cnt}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<c:if test="${empty eventList}">
 						<tr>
-							<td>
-								<h1>게시글이 없어요!</h1>
+							<td colspan="5" align="center">
+								<h1>게시글이 없습니다.</h1>
 							</td>
 						</tr>
 					</c:if>
 				</table>
+				
+				<form action="/eventsearch.do" method="get">
+				<table class="noticeTable">
+					<tr>
+						<td align="right">
+							<select name="searchOption">
+								<option value="all">전체
+								<option value="board_title">제목
+								<option value="board_writer">작성자
+								<option value="board_content">내용
+							</select>
+							<input type="text" name="keyword"/>
+							<input type="submit" value="검색"/>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
 			</div>
 		</div><!-- end Content -->
 		<%@include file="include/footer.jsp" %>
