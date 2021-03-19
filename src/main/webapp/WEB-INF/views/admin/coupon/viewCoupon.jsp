@@ -48,6 +48,10 @@
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											삭제하기
 										</botton>
+										<button type="button" class="btn-check:checked pull-right" id="CouponList" >
+											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
+											목록으로
+										</botton>
                             		<td colspan="2">
 										<div class="form-group">
 										<input type="text" value="${article.coupon_name }" class="form-control mt-4 mb-2"
@@ -72,6 +76,9 @@
 $(function(){//삭제 페이지로 가는 함수
 	$("#deleteCoupon").click(function(){
 		location.href="/admin/deleteCoupon.mdo?coupon_no="+${article.coupon_no}
+	});
+	$("#CouponList").click(function(){
+		location.href="/admin/getCouponList.mdo"
 	});
 });
 </script>
