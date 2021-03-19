@@ -42,6 +42,9 @@
  .bottomSize{
  	display: none;
  }
+ .in{
+ 	background-color: white;
+ }
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -229,7 +232,7 @@
 												<input type="number" value="product_point">
 											</td>
                     					</tr>
-                    					<tr >
+                    					<tr>
                     						<td rowspan="2" colspan="2" style="vertical-align: middle; text-align: center;">사이즈 사용유무</td>
                     						<td align="center">XS</td>
                     						<td align="center">S</td>
@@ -270,24 +273,25 @@
                     						</td>
                     						<script type="text/javascript">
                     							$("#xs").change(function(){
-                    								if($("#xs option:selected").val() == 1){$(".xs").attr("disabled",false);
-                    								}else{$(".xs").attr("disabled",true); $(".xs").val("");}
+                    								if($("#xs option:selected").val() == 1){$(".xs").attr("readonly",false);$(".xs").css("background-color","white");
+                    								}else{$(".xs").attr("readonly",true); $(".xs").val(null); $(".xs").css("background-color","red");
+                    								}
                     							});
                     							$("#s").change(function(){
-                    								if($("#s option:selected").val() == 1){$(".s").attr("disabled",false);
-                    								}else{$(".s").attr("disabled",true); $(".s").val("");}
+                    								if($("#s option:selected").val() == 1){$(".s").attr("readonly",false);$(".s").css("background-color","white");
+                    								}else{$(".s").attr("readonly",true); $(".s").val(null);$(".s").css("background-color","red");}
                     							});
                     							$("#m").change(function(){
-                    								if($("#m option:selected").val() == 1){$(".m").attr("disabled",false);
-                    								}else{$(".m").attr("disabled",true); $(".m").val("");}
+                    								if($("#m option:selected").val() == 1){$(".m").attr("readonly",false);$(".m").css("background-color","white");
+                    								}else{$(".m").attr("readonly",true); $(".m").val(null);$(".m").css("background-color","red");}
                     							});
                     							$("#l").change(function(){
-                    								if($("#l option:selected").val() == 1){$(".l").attr("disabled",false);
-                    								}else{$(".l").attr("disabled",true); $(".l").val("");}
+                    								if($("#l option:selected").val() == 1){$(".l").attr("readonly",false);$(".l").css("background-color","white");
+                    								}else{$(".l").attr("readonly",true); $(".l").val(null);$(".l").css("background-color","red");}
                     							});
                     							$("#xl").change(function(){
-                    								if($("#xl option:selected").val() == 1){$(".xl").attr("disabled",false);
-                    								}else{$(".xl").attr("disabled",true); $(".xl").val("");}
+                    								if($("#xl option:selected").val() == 1){$(".xl").attr("readonly",false);$(".xl").css("background-color","white");
+                    								}else{$(".xl").attr("readonly",true); $(".xl").val(null);$(".xl").css("background-color","red");}
                     							});
                     						</script>
                     					</tr>
@@ -320,35 +324,35 @@
                     					<tr class="sizeGuide">
                     						<td id="sizeGuideTitle"rowspan="4" style="vertical-align: middle;">상의류</td>
                     						<td id="sizeInfo1">LENGTH(총길이)</td>
-                    						<td><input class="xs" type="text" name="xs" size="5"></td>
-                    						<td><input class="s" type="text" name="s" size="5"></td>
-                    						<td><input class="m" type="text" name="m" size="5"></td>
-                    						<td><input class="l" type="text" name="l" size="5"></td>
-                    						<td><input class="xl" type="text" name="xl" size="5"></td>
+                    						<td><input class="xs in" type="text" name="size1" size="5"></td>
+                    						<td><input class="s in" type="text" name="size1" size="5"></td>
+                    						<td><input class="m in" type="text" name="size1" size="5"></td>
+                    						<td><input class="l in" type="text" name="size1" size="5"></td>
+                    						<td><input class="xl in" type="text" name="size1" size="5"></td>
                     					</tr>
                     					<tr class="sizeGuide">
                     						<td id="sizeInfo2">CHEST(가슴)</td>
-                    						<td><input class="xs" type="text" name="xs" size="5"></td>
-                    						<td><input class="s" type="text" name="s" size="5"></td>
-                    						<td><input class="m" type="text" name="m" size="5"></td>
-                    						<td><input class="l" type="text" name="l" size="5"></td>
-                    						<td><input class="xl" type="text" name="xl" size="5"></td>
+                    						<td><input class="xs in" type="text" name="size2" size="5"></td>
+                    						<td><input class="s in" type="text" name="size2" size="5"></td>
+                    						<td><input class="m in" type="text" name="size2" size="5"></td>
+                    						<td><input class="l in" type="text" name="size2" size="5"></td>
+                    						<td><input class="xl in" type="text" name="size2" size="5"></td>
                     					</tr>
                     					<tr class="sizeGuide">
                     						<td id="sizeInfo3">ARM(팔)</td>
-                    						<td><input class="xs" type="text" name="xs" size="5"></td>
-                    						<td><input class="s" type="text" name="s" size="5"></td>
-                    						<td><input class="m" type="text" name="m" size="5"></td>
-                    						<td><input class="l" type="text" name="l" size="5"></td>
-                    						<td><input class="xl" type="text" name="xl" size="5"></td>
+                    						<td><input class="xs in" type="text" name="size3" size="5"></td>
+                    						<td><input class="s in" type="text" name="size3" size="5"></td>
+                    						<td><input class="m in" type="text" name="size3" size="5"></td>
+                    						<td><input class="l in" type="text" name="size3" size="5"></td>
+                    						<td><input class="xl in" type="text" name="size3" size="5"></td>
                     					</tr>
                     					<tr class="sizeGuide">
                     						<td id="sizeInfo4">SHOULDER(어깨)</td>
-                    						<td><input class="xs" type="text" name="xs" size="5"></td>
-                    						<td><input class="s" type="text" name="s" size="5"></td>
-                    						<td><input class="m" type="text" name="m" size="5"></td>
-                    						<td><input class="l" type="text" name="l" size="5"></td>
-                    						<td><input class="xl" type="text" name="xl" size="5"></td>
+                    						<td><input class="xs in" type="text" name="size4" size="5"></td>
+                    						<td><input class="s in" type="text" name="size4" size="5"></td>
+                    						<td><input class="m in" type="text" name="size4" size="5"></td>
+                    						<td><input class="l in" type="text" name="size4" size="5"></td>
+                    						<td><input class="xl in" type="text" name="size4" size="5"></td>
                     					</tr>
                     					<tr>
                     						<td colspan="7">

@@ -9,6 +9,8 @@ import com.thisisthat.admin.category.vo.AdminCategoryVO;
 import com.thisisthat.admin.product.dao.AdminProductDAO;
 import com.thisisthat.admin.product.vo.AdminProductImageVO;
 import com.thisisthat.admin.product.vo.AdminProductListVO;
+import com.thisisthat.admin.product.vo.AdminProductSizeUsedVO;
+import com.thisisthat.admin.product.vo.AdminProductSizeGuideVO;
 import com.thisisthat.admin.product.vo.AdminProductVO;
 import com.thisisthat.util.PagingVO;
 
@@ -19,8 +21,8 @@ public class AdminProductServiceImpl implements AdminProductService {
 	private AdminProductDAO productDAO;
 	
 	@Override
-	public void insertProduct(AdminProductVO vo, List<AdminProductImageVO> imageList) {
-		productDAO.insertProduct(vo, imageList);
+	public void insertProduct(AdminProductVO vo, List<AdminProductImageVO> imageList,List<AdminProductSizeGuideVO> sizeGuideList,AdminProductSizeUsedVO sizeVO) {
+		productDAO.insertProduct(vo, imageList, sizeGuideList, sizeVO);
 	}
 
 	@Override
@@ -78,6 +80,17 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return productDAO.getProductCount(vo);
 	}
 
+	@Override
+	public List<AdminProductSizeGuideVO> getProductSizeGuide(long productNo) {
+		return productDAO.getProductSizeGuide(productNo);
+	}
+
+	@Override
+	public AdminProductSizeUsedVO getProductSizeUsed(long productNo) {
+		return productDAO.getProductSizeUsed(productNo);
+	}
+
+	
 	
 	
 
