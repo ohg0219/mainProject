@@ -9,14 +9,14 @@ import com.thisisthat.admin.coupon.DAO.CouponDAO;
 import com.thisisthat.admin.coupon.vo.CouponVO;
 
 @Service("CouponService")
-public class CouponServiceImpl implements CouponService{
-	
+public class CouponServiceImpl implements CouponService {
+
 	@Autowired
 	CouponDAO couponDAO;
 
 	@Override
 	public List<CouponVO> couponList(CouponVO couponVO) {
-		
+
 		return couponDAO.couponList(couponVO);
 	}
 
@@ -37,7 +37,12 @@ public class CouponServiceImpl implements CouponService{
 
 	@Override
 	public void deleteCoupon(CouponVO couponVO) {
-		couponDAO.deleteCoupon(couponVO);		
+		couponDAO.deleteCoupon(couponVO);
+	}
+
+	@Override
+	public void updateCoupon(CouponVO couponVO) {
+		couponDAO.updateCoupon(couponVO);
 	}
 
 }

@@ -4,18 +4,24 @@ import java.util.Date;
 
 public class CouponVO {
 	
-	private int coupon_no;
+	private Long coupon_no;
 	private String coupon_name;
-	private int coupon_price;
+	private Long coupon_price;
 	private Date coupon_first;
 	private Date coupon_last;
 	private String keyword;
 	
+	public Long getCoupon_price() {
+		return coupon_price;
+	}
+	public void setCoupon_price(Long coupon_price) {
+		this.coupon_price = coupon_price;
+	}
 	
-	public int getCoupon_no() {
+	public Long getCoupon_no() {
 		return coupon_no;
 	}
-	public void setCoupon_no(int coupon_no) {
+	public void setCoupon_no(Long coupon_no) {
 		this.coupon_no = coupon_no;
 	}
 	public String getCoupon_name() {
@@ -24,12 +30,7 @@ public class CouponVO {
 	public void setCoupon_name(String coupon_name) {
 		this.coupon_name = coupon_name;
 	}
-	public int getCoupon_price() {
-		return coupon_price;
-	}
-	public void setCoupon_price(int coupon_price) {
-		this.coupon_price = coupon_price;
-	}
+	
 	public Date getCoupon_first() {
 		return coupon_first;
 	}

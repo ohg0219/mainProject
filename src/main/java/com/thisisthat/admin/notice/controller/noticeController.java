@@ -75,9 +75,7 @@ public class noticeController {
 
 	@RequestMapping("noticeGate.mdo")
 	public String noticeGate(@RequestParam(value="board_no")Long board_no) {
-		return ""
-				+ ""
-				+ "?board_no="+board_no;
+		return "redirect:article.mdo?board_no="+board_no;
 	}
 
 

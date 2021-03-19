@@ -35,7 +35,7 @@
 				
 				
 				<div class="container-fluid">
-					<form action="insertCoupon.mdo" method="post">
+					<form action="insertCouponPro.mdo" method="post">
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>

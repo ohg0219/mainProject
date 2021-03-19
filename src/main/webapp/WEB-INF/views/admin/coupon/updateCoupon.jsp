@@ -35,29 +35,25 @@
 				
 				
 				<div class="container-fluid">
-					<form action="updateCoupon.mdo" method="post">
+					<form action="updateCouponPro.mdo" method="post">
 					<input type="hidden" name="coupon_no" value="${article.coupon_no}">
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
 										<button type="submit" class="btn-check:checked pull-right" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
-											수정하기
+											수정 하기
 										</button>
-										<button type="button" class="btn-check:checked pull-right" id="deleteCoupon" >
-											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
-											삭제하기
-										</botton>
                             		<td colspan="2">
 										<div class="form-group">
-										<input type="text" value="${article.coupon_name }" class="form-control mt-4 mb-2"
-											placeholder="쿠폰 명" disabled>
-											<input type="text" value="${article.coupon_price }" class="form-control mt-4 mb-2"
-											placeholder="쿠폰 금액" disabled>
-											<input type="text" value="${article.coupon_first}" class="form-control mt-4 mb-2"
-											placeholder="시작일자" disabled>
-											<input type="text" value="${article.coupon_last}" class="form-control mt-4 mb-2"
-											placeholder="종료 일자" disabled>
+										<input type="text" name="coupon_name" value="${article.coupon_name }" class="form-control mt-4 mb-2"
+											placeholder="쿠폰 명" >
+											<input type="text" name="coupon_price" value="${article.coupon_price }" class="form-control mt-4 mb-2"
+											placeholder="쿠폰 금액" >
+											<input type="date" name="coupon_first" value="${article.coupon_first}" class="form-control mt-4 mb-2"
+											placeholder="시작일자" >
+											<input type="date" name="coupon_last" value="${article.coupon_last}" class="form-control mt-4 mb-2"
+											placeholder="종료 일자" >
 										</div>
 									</td>
                             	</tr>
@@ -69,11 +65,7 @@
 		</div>
 	</div>
 <script>
-$(function(){//삭제 페이지로 가는 함수
-	$("#deleteCoupon").click(function(){
-		location.href="/admin/deleteCoupon.mdo?coupon_no="+${article.coupon_no}
-	});
-});
+
 </script>
 <%@include file="../include/js.jsp"%>
 
