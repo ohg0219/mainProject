@@ -78,6 +78,8 @@ public class AdminProductDAO {
 		productTemplate.delete("AdminProduct.deleteProduct",productNo);
 		productTemplate.delete("AdminProduct.deleteProductImage",productNo);
 		productTemplate.delete("AdminProduct.deleteProductStock",productNo);
+		productTemplate.delete("AdminProduct.deleteProductSizeGuide",productNo);
+		productTemplate.delete("AdminProduct.deleteProductSizeUsed",productNo);
 	}
 	
 	public void updateProduct(AdminProductVO vo) {
@@ -96,6 +98,18 @@ public class AdminProductDAO {
 		productTemplate.insert("AdminProduct.insertSubImage",vo);
 	}
 
+	public void updateProductSizeGuide(List<AdminProductSizeGuideVO> sizeGuideList) {
+		for(AdminProductSizeGuideVO size : sizeGuideList) {
+			productTemplate.update("AdminProduct.updateProductSizeGuide",size);
+		}
+	}
+	
+	public void updateProductSizeUsed(AdminProductSizeUsedVO sizeVO) {
+		productTemplate.update("AdminProduct.updateProductSizeUsed",sizeVO);
+	}
+	
+	
+	
 	public int getProductCount(AdminProductVO vo) {
 		return productTemplate.selectOne("AdminProduct.getProductCount",vo);
 	}

@@ -90,6 +90,16 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return productDAO.getProductSizeUsed(productNo);
 	}
 
+	@Override
+	public void updateProductSizeGuide(List<AdminProductSizeGuideVO> sizeGuideList) {
+		productDAO.updateProductSizeGuide(sizeGuideList);
+	}
+
+	@Override
+	public void updateProductSizeUsed(AdminProductSizeUsedVO sizeVO) {
+		productDAO.updateProductSizeUsed(sizeVO);
+	}
+
 	
 	
 	

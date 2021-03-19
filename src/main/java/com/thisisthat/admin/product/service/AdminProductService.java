@@ -12,24 +12,26 @@ import com.thisisthat.util.PagingVO;
 
 public interface AdminProductService {
 
-	void insertProduct(AdminProductVO vo,List<AdminProductImageVO> imageList,List<AdminProductSizeGuideVO> sizeGuideList,AdminProductSizeUsedVO sizeVO);
 	List<AdminCategoryVO> getCategoryList();
-	List<AdminProductListVO> getProductList(PagingVO pagingVO,AdminProductVO vo);
+	int getProductCount(AdminProductVO vo);
+
+	void insertProduct(AdminProductVO vo,List<AdminProductImageVO> imageList,List<AdminProductSizeGuideVO> sizeGuideList,AdminProductSizeUsedVO sizeVO);
+	void updateProduct(AdminProductVO vo);
+	void deleteProduct(long productNo);
 	AdminProductVO getProduct(long productNo);
+	List<AdminProductListVO> getProductList(PagingVO pagingVO,AdminProductVO vo);
 	List<AdminProductImageVO> getProductImage(long productNo);
+
 	long getProductStock(long productNo);
+
+	void updateMainImage(AdminProductImageVO vo);
+	void insertSubImage(AdminProductImageVO vo);
+	void deleteSubImage(long productNo);
 	
 	List<AdminProductSizeGuideVO> getProductSizeGuide(long productNo);
 	AdminProductSizeUsedVO getProductSizeUsed(long productNo);
+	void updateProductSizeGuide(List<AdminProductSizeGuideVO> sizeGuideList);
+	void updateProductSizeUsed(AdminProductSizeUsedVO sizeVO);
 	
 	
-	
-	
-	void deleteProduct(long productNo);
-	void updateProduct(AdminProductVO vo);
-	void updateMainImage(AdminProductImageVO vo);
-	void deleteSubImage(long productNo);
-	void insertSubImage(AdminProductImageVO vo);
-	
-	int getProductCount(AdminProductVO vo);
 }

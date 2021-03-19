@@ -36,7 +36,7 @@
  .sizeGuide{
  	text-align: center;
  }
- .sizeGuide td:nth-child(2) {
+.sizeInfo1,.sizeInfo2,.sizeInfo3,.sizeInfo4 {
 	width: 190px;
  }
  .bottomSize{
