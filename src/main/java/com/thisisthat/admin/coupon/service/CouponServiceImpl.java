@@ -35,4 +35,9 @@ public class CouponServiceImpl implements CouponService{
 		couponDAO.insertCoupon(couponVO);
 	}
 
+	@Override
+	public void deleteCoupon(CouponVO couponVO) {
+		couponDAO.deleteCoupon(couponVO);		
+	}
+
 }

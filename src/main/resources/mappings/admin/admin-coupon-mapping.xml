@@ -17,6 +17,9 @@
 	<select id="insertCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
 		insert into admin_coupon(coupon_name, coupon_price, coupon_first, coupon_last) values(#{coupon_name},#{coupon_price},#{coupon_first},#{coupon_last})
 	</select>
+	<select id="deleteCoupon">
+		delete from admin_coupon where coupon_no=#{coupon_no}
+	</select>
 	
 	
 </mapper>

@@ -30,4 +30,8 @@ public class CouponDAO {
 		 mybatis.insert("CouponDAO.insertCoupon", couponVO);
 	}
 
+	public void deleteCoupon(CouponVO couponVO) {
+		mybatis.delete("CouponDAO.deleteCoupon", couponVO);		
+	}
+
 }

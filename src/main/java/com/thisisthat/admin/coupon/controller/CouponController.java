@@ -74,8 +74,16 @@ public class CouponController {
 		Date coupon_last = sdf2.parse(last);
 		couponVO.setCoupon_last(coupon_last);
 
-		System.out.println(couponVO.toString());
+
 		couponService.insertCoupon(couponVO);
+		return "redirect:getCouponList.mdo";
+	}
+	
+	@RequestMapping("deleteCoupon.mdo")
+	public String deleteCoupon(CouponVO couponVO,@RequestParam(value="coupon_no")int coupon_no) {
+		couponVO.setCoupon_no(coupon_no);
+		
+		couponService.deleteCoupon(couponVO);
 		return "redirect:getCouponList.mdo";
 	}
 

@@ -14,6 +14,8 @@ public interface CouponService {
 
 	void insertCoupon(CouponVO couponVO);
 
+	void deleteCoupon(CouponVO couponVO);
+
 	
 		
 	

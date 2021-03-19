@@ -36,14 +36,19 @@
 				
 				<div class="container-fluid">
 					<form action="insertNotice.mdo" method="post">
+					<input type="hidden" name="coupon_no" value="${article.coupon_no}">
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
-                            		<td colspan="2">
-										<button type="submit" class="btn-check:checked pull-right" id="insertNotice" >
+										<button type="submit" class="btn-check:checked pull-right" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
-											작성하기
+											수정하기
 										</button>
+										<button type="button" class="btn-check:checked pull-right" id="deleteCoupon" >
+											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
+											삭제하기
+										</botton>
+                            		<td colspan="2">
 										<div class="form-group">
 										<input type="text" value="${article.coupon_name }" class="form-control mt-4 mb-2"
 											placeholder="쿠폰 명" disabled>
@@ -64,7 +69,11 @@
 		</div>
 	</div>
 <script>
-
+$(function(){//삭제 페이지로 가는 함수
+	$("#deleteCoupon").click(function(){
+		location.href="/admin/deleteCoupon.mdo?coupon_no="+${article.coupon_no}
+	});
+});
 </script>
 <%@include file="../include/js.jsp"%>
 
