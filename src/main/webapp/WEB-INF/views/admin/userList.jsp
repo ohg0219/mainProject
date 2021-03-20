@@ -105,7 +105,7 @@ a {
 													<td width="85">${user.userId}</td>
 													<td width="95">
 														<a id = "${user.userId }" class="who"
-														data-toggle="model" data-target="#getUserModal">${user.userName}</a></td>
+														data-toggle="modal" data-target="#getUserModal">${user.userName}</a></td>
 													<td width="85">${user.nickName}</td>
 													<td width="160">${user.userPhone}</td>
 													<td width="95"><fmt:formatDate value="${user.inDate}"

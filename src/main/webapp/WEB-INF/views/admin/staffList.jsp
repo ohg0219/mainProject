@@ -94,9 +94,8 @@ a {
 											<c:forEach var="user" items="${staffInfo}">
 												<tr>
 													<td width="85">${user.userId}</td>
-													<td width="95"><a
-														id="${user.userId}" class="who" 
-														data-toggle="model" data-target="#getUserModel">${user.userName}</a></td>
+													<td width="95"><a id="${user.userId }" class="who"
+														 data-target="#getUserModal" data-toggle="modal">${user.userName}</a></td>
 													<td width="85">${user.nickName}</td>
 													<td width="160">${user.userPhone}</td>
 													<td width="95"><fmt:formatDate value="${user.inDate}"
@@ -148,31 +147,32 @@ a {
 	</div>
 	
 		
-	<form action="/admin/pwCheck.mdo" method="post">
-	<div class="modal fade" id="getUserModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">비밀번호를 입력해 주세요</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
+<form action="/admin/pwCheck.mdo" method="post">
+		<div class="modal fade" id="getUserModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
 				<div class="modal-content">
-					<input type="password" name="userPw" placeholder="비밀번호">
-					
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<input type="submit" class="btn btn-primary" id="modalInput" value="확인">					
-					<input type="hidden" id="userId" name="userId">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">비밀번호를 입력해 주세요</h5>
+						<button class="close" type="button" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-content">
+						<input type="password" name="userPw" placeholder="비밀번호">
+
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button"
+							data-dismiss="modal">Cancel</button>
+						<input type="submit" class="btn btn-primary" id="modalInput"
+							value="확인"> <input type="hidden" id="userId"
+							name="userId">
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</form>
 	<script>
 	
@@ -209,7 +209,7 @@ a {
 		$('.who').click(function(){
 			console.log("들어옴")
 			document.getElementById("userId").value = $(this).attr('id'); 
-		})
+		});
 	});
 	
 
