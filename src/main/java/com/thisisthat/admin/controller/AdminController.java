@@ -62,7 +62,7 @@ public class AdminController {
 			
 		}else if(BCrypt.checkpw(vo.getUserPw(), user.getUserPw())) {
 			if(user.getUserRole()<21) {
-				session.setAttribute("userId", user);
+				session.setAttribute("adminId", user);
 				if(autoLogin) {
 					System.out.println("쿠키");
 					Cookie cookie = new Cookie("userVO", user.getUserId());

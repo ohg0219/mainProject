@@ -19,6 +19,7 @@
 		<mapper resource="mappings/user/user-loginout-mapping.xml" />
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
 		<mapper resource="mappings/user/user-notice-mapping.xml"/>
+		<mapper resource="mappings/user/user-answer-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
 		<mapper resource="mappings/admin/admin-management-mapping.xml"/>

@@ -7,7 +7,7 @@
 			<!-- 공지사항 -->
 			<li><a href="/event.do">event</a></li>
 			<!-- 이벤트 -->
-			<li><a href="#">q &amp; a</a></li>
+			<li><a href="/answerList.do">q &amp; a</a></li>
 			<!-- Q & A -->
 			<li><a href="#">terms</a></li>
 			<!-- 약관 -->
