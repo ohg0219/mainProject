@@ -66,7 +66,8 @@ public class UserSocialLoginOutController {
         if(userRegisterService.idCheck(vo.getId())==0) {
         	userRegisterService.insertUser(vo);
         }
-        session.setAttribute("kakaoUserId", id);
+        session.setAttribute("kakaoUserId", id+"@k");
+        session.setAttribute("userId", id+"@k");
 		return "redirect:/main.do";
 	}
 	/**
@@ -77,6 +78,7 @@ public class UserSocialLoginOutController {
 	@RequestMapping("/kakaologout.do")
 	public String kakaoLogout(HttpSession session) {
 		session.removeAttribute("kakaoUserId");
+		session.removeAttribute("userId");
 		return "redirect:/main.do";
 	}
 	
@@ -116,8 +118,8 @@ public class UserSocialLoginOutController {
         if(userRegisterService.idCheck(vo.getId())==0) {
         	userRegisterService.insertUser(vo);
         }
-        session.setAttribute("naverUserId", uniqId);
-		
+        session.setAttribute("naverUserId", uniqId+"@n");
+		session.setAttribute("userId", uniqId+"@n");
 		return "redirect:/main.do";
 	}
 	
@@ -145,7 +147,8 @@ public class UserSocialLoginOutController {
         if(userRegisterService.idCheck(vo.getId())==0) {
         	userRegisterService.insertUser(vo);
         }
-		session.setAttribute("googleUserId", id);
+		session.setAttribute("googleUserId", id+"@g");
+		session.setAttribute("userId", id+"@g");
 		return "redirect:/main.do";
 	}
 	
@@ -157,6 +160,7 @@ public class UserSocialLoginOutController {
 	@RequestMapping("/googlelogout.do")
 	public String googleLogout(HttpSession session) {
 		session.removeAttribute("googleUserId");
+		session.removeAttribute("userId");
 		return "redirect:/main.do";
 	}
 	

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserController {
+	
 	/**
 	 * 메인페이지로 이동
 	 * @return
@@ -37,16 +38,7 @@ public class UserController {
 	public String registerView() {
 		return "/user/register";
 	}
-	/**
-	 * 상품 리스트 페이지로 이동
-	 * @param category
-	 * @return
-	 */
-	@RequestMapping("/shop/list/{category}.do")
-	public String itemListView(@PathVariable String category) {
-		System.out.println(category);
-		return "/user/itemList/"+category;
-	}
+	
 	/**
 	 * 공지사항 페이지로 이동
 	 * @return

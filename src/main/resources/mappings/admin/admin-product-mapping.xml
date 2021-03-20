@@ -17,8 +17,12 @@
 		<result property="upload_path" column="upload_path"/>
 		<result property="product_price" column="product_price"/>
 		<result property="product_stock_total" column="product_stock_total"/>
+		<result property="product_used" column="product_used"/>
 	</resultMap>
 	
+	<select id="getSeq" resultType="int">
+		select currval('product_no_seq')
+	</select>
 	<insert id="insertProduct" parameterType="com.thisisthat.admin.product.vo.AdminProductVO" useGeneratedKeys="true" keyProperty="product_no">
 		<selectKey keyProperty="product_no" resultType="int" order="BEFORE">
 			select nextval('product_no_seq')
@@ -26,23 +30,40 @@
 		insert into product values
 		(#{product_no},#{product_category},#{product_name},#{product_price},#{material_info},#{origin},#{product_info},#{product_point})
 	</insert>
-	<select id="getSeq" resultType="int">
-		select currval('product_no_seq')
-	</select>
 	<insert id="insertProductImage" parameterType="com.thisisthat.admin.product.vo.AdminProductImageVO">
 		insert into product_image values
 		(#{product_no},#{upload_path},#{image_name},#{main_image})
 	</insert>
-	
 	<insert id="insertProductStock" parameterType="int">
 		insert into product_stock values (#{product_no})
 	</insert>
+	<insert id="insertSizeGuide">
+		insert into size_guide 
+		(product_no,size_item,xs_size,s_size,m_size,l_size,xl_size)
+		values (#{product_no},#{size_item},#{xs_size},#{s_size},#{m_size},#{l_size},#{xl_size})
+	</insert>
+	<insert id="insertSizeUsed">
+		insert into size_used
+		(product_no,xs_used,s_used,m_used,l_used,xl_used)
+		values (#{product_no},#{xs_used},#{s_used},#{m_used},#{l_used},#{xl_used})
+	</insert>
 	
+	<select id="getProductCount" resultType="int">
+		select count(*) from product where 1=1
+		<if test="searchKeyword != null">
+			and product_name ILIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="product_category != null">
+			and product_category = #{product_category}
+		</if>
+		<if test="product_used == 1">
+			and product_used = 1
+		</if>
+	</select>
 	
 	<select id="getCategoryList" resultMap="adminCategoryVO">
 		select * from category where category_used = 1 order by category_no asc 
 	</select>
-	
 	<select id="getProductList" resultMap="adminProductListVO">
 		select 
 		pro.product_no as product_no,
@@ -50,17 +71,103 @@
 		pro.product_name as product_name,
 		image.upload_path as upload_path,
 		pro.product_price as product_price,
-		(select xs+s+m+l+xl+free as product_stock_total from product_stock where product_no = pro.product_no)
+		(select xs+s+m+l+xl as product_stock_total from product_stock where product_no = pro.product_no),
+		pro.product_used as product_used
 		from product as pro , product_image as image
 		where pro.product_no = image.product_no
 		and image.main_image = 1
+		<if test="searchKeyword != null">
+			and pro.product_name ILIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="category != null">
+			and pro.product_category = #{category}
+		</if>
+		<if test="used == 1">
+			and pro.product_used = 1
+		</if>
+		order by pro.product_no desc offset #{start} limit #{cntPerPage}
 	</select>
-	
 	<select id="getProduct" resultType="com.thisisthat.admin.product.vo.AdminProductVO">
 		select * from product where product_no = #{productNo} 
 	</select>
 	<select id="getProductImage" resultType="com.thisisthat.admin.product.vo.AdminProductImageVO">
 		select * from product_image where product_no = #{productNo}
 	</select>
+	<select id="getProductStock" parameterType="Long" resultType="Long">
+		select xs+s+m+l+xl from product_stock where product_no = #{productNo}
+	</select>
+	<select id="getProductSizeGuide" parameterType="Long" resultType="com.thisisthat.admin.product.vo.AdminProductSizeGuideVO">
+		select * from size_guide where product_no = #{productNo}
+	</select>
+	<select id="getProductSizeUsed" parameterType="Long" resultType="com.thisisthat.admin.product.vo.AdminProductSizeUsedVO">
+		select * from size_used where product_no = #{productNo}
+	</select>
+	
+	<delete id="deleteProduct">
+		delete from product where product_no = #{productNo}
+	</delete>
+	<delete id="deleteProductImage">
+		delete from product_image where product_no = #{productNo}
+	</delete>
+	<delete id="deleteProductStock">
+		delete from product_stock where product_no = #{productNo}
+	</delete>
+	<delete id="deleteProductSizeGuide">
+		delete from size_guide where product_no = #{producNo}
+	</delete>
+	<delete id="deleteProductSizeUsed">
+		delete from size_used where product_no = #{productNo}
+	</delete>
+	<update id="updateProduct">
+		update product 
+		set 
+		product_name = #{product_name},
+		product_price = #{product_price},
+		material_info = #{material_info},
+		origin = #{origin},
+		product_info = #{product_info},
+		product_point = #{product_point},
+		product_used = #{product_used}
+		where product_no = #{product_no}
+	</update>
+	<update id="updateMainImage">
+		update product_image 
+		set 
+		upload_path = #{upload_path},
+		image_name = #{image_name}
+		where product_no = #{product_no}
+		and main_image = 1
+	</update>
+	
+	<delete id="deleteSubImage">
+		delete from product_image where product_no = #{productNo} and main_image = 0
+	</delete>
+	
+	<insert id="insertSubImage">
+		insert into product_image values
+		(#{product_no},#{upload_path},#{image_name},0)
+	</insert>
+	
+	<update id="updateProductSizeGuide">
+		update size_guide
+		set 
+		xs_size = #{xs_size},
+		s_size = #{s_size},
+		m_size = #{m_size},
+		l_size = #{l_size},
+		xl_size = #{xl_size}
+		where product_no = #{product_no} and size_item = #{size_item}
+	</update>
+	
+	<update id="updateProductSizeUsed">
+		update size_used
+		set 
+		xs_used = #{xs_used},
+		s_used = #{s_used},
+		m_used = #{m_used},
+		l_used = #{l_used},
+		xl_used = #{xl_used}
+		where product_no = #{product_no}
+	</update>
 	
 </mapper>

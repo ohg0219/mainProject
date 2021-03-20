@@ -4,11 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+	
 		<typeAlias type="com.thisisthat.user.notice.vo.UserNoticeVO" alias="UserNoticeVO"/>
+		<typeAlias type="com.thisisthat.admin.grant.coupon.vo.CouponGrantVO" alias="CouponGrantVO"/>
 		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>	
 		<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.thisisthat.admin.board.vo.AnswerBoardVO" alias="answerVO"/>
-			
+		
 
 	</typeAliases>
 	
@@ -20,8 +22,11 @@
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
 		<mapper resource="mappings/user/user-notice-mapping.xml"/>
 		<mapper resource="mappings/user/user-answer-mapping.xml"/>
+		<mapper resource="mappings/user/user-itemlist-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml" />
+		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
+		<mapper resource="mappings/admin/admin-coupon-mapping.xml" />
 		<mapper resource="mappings/admin/admin-management-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-category-mapping.xml"/>

@@ -50,41 +50,57 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>공지사항</h3>
-				<form action="event.jsp" method="post">
+				<h3>NOTICE</h3>
+				<script type="text/javascript">
+					$(function(){
+						$()
+					});
+				</script>
+				<table class="noticeTable">
+					<tr>
+						<th width="60px">NO.</th>
+						<th width="250px">SUBJECT</th>
+						<th width="60px">이름</th>
+						<th width="100px">DATE</th>
+						<th width="60px">HIT</th>
+					</tr>
+					<c:if test="${not empty noticeList}">
+						<c:forEach var="notice" items="${noticeList}">
+						<tr>
+							<td>${notice.board_no}</td>
+							<td align="center"><strong><a href="/noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
+							<td>${notice.board_writer}</td>
+							<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
+							<td>${notice.board_cnt}</td>
+						</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty noticeList}">
+						<tr>
+							<td colspan="5" align="center">
+								<h1>게시글이 없습니다.</h1>
+							</td>
+						</tr>
+					</c:if>
+				</table>
+				
+				<form action="/noticesearch.do" method="get">
 				<table class="noticeTable">
 					<tr>
 						<td align="right">
-							<select name="searchCondition">
+							<select name="searchOption">
+								<option value="all">전체
 								<option value="board_title">제목
+								<option value="board_writer">작성자
 								<option value="board_content">내용
-								<option value="board_all">제목+내용
 							</select>
-							<input type="text" name="searchKeyword"/>
+							<input type="text" name="keyword"/>
 							<input type="submit" value="검색"/>
 						</td>
 					</tr>
 				</table>
 				</form>
-				<table class="noticeTable">
-					<tr>
-						<th width="60px">번호</th>
-						<th width="250px">제목</th>
-						<th width="60px">작성자</th>
-						<th width="100px">날짜</th>
-						<th width="60px">조회수</th>
-					</tr>
-					<c:forEach var="notice" items="${noticeList}">
-					<tr>
-						<td>${notice.board_no}</td>
-						<td align="center"><strong><a href="noticeView.do?board_no=${notice.board_no}">${notice.board_title}</a></strong></td>
-						<td>${notice.board_writer}</td>
-						<td><fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
-						<fmt:formatDate value="${notice.reg_date}" pattern=" hh:mm:ss "/></td>
-						<td>${notice.board_cnt}</td>
-					</tr>
-					</c:forEach>
-				</table>
+				
 			</div>
 		</div><!-- end Content -->
 		<%@include file="include/footer.jsp" %>

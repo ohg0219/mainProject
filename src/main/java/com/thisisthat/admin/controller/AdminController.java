@@ -82,33 +82,7 @@ public class AdminController {
 		model.addAttribute("msg","pwFail");
 		return "/admin/login";
 	}
-
-	@GetMapping("/admin/articleList.mdo")
-	public String notice(Model model,@RequestParam(value="where")String where) {
-		List<TestVO> voList = new ArrayList<TestVO>();
-		for(int i = 1; i<=10; i++) {
-			TestVO vo = new TestVO();
-			vo.setCnt(new Long(i));
-			vo.setRegDate(new Date());
-			vo.setSeq(new Long(i));
-			vo.setTitle(i+"제목");
-			vo.setWriter(i+"작성자");
-			voList.add(vo);
-		}
-		model.addAttribute("articleList",voList);
-		model.addAttribute("where", where);
-		return "/admin/articleList";
-	}
-
-	@GetMapping("/admin/articleGate.mdo")
-	public String articleGate(@RequestParam(value="where")String where) {
-		return "redirect:/admin/articleList.mdo?where="+where;
-	}
-
-	@GetMapping("/admin/insertArticle.mdo")
-	public String insertArticle() {
-		return "/admin/insertArticle";
-	}
+	
 	
 
 	

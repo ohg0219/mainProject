@@ -48,7 +48,6 @@ public class AdminCategoryController {
 	
 	@PostMapping("/updateCategory.mdo")
 	public String updateCategory(AdminCategoryVO vo) {
-		System.out.println(vo.toString());
 		categoryService.updateCategory(vo);
 		return "redirect:/admin/categoryList.mdo";
 	}

@@ -7,6 +7,7 @@
 	<select id="getNotice" parameterType="UserNoticeVO" resultType="UserNoticeVO">
 		SELECT * FROM notice_board WHERE board_no = #{board_no} and board_group='notice'
 	</select>
+	
 	<select id="getEvent" parameterType="UserNoticeVO" resultType="UserNoticeVO">
 		SELECT * FROM notice_board WHERE board_no = #{board_no} and board_group='event'
 	</select>
@@ -22,8 +23,22 @@
 	<update id="plusCnt">
 		UPDATE notice_board SET board_cnt = board_cnt + 1 WHERE board_no = #{board_no}
 	</update>
-	<select id="listPage" resultType="UserNoticeVO">
-		SELECT * FROM notice_board WHERE board_no > 0 order by board_no desc, reg_date desc limit
-		#{pageStart}, #{perPageNum} and board_group= 'event'
+	
+	<select id="allNotice" resultType="UserNoticeVO">
+		SELECT * FROM notice_board WHERE board_title 
+		LIKE '%'||#{keyword}||'%' OR board_writer LIKE '%'||#{keyword}||'%' OR board_content LIKE '%'||#{keyword}||'%' ORDER BY board_view asc, board_no desc
 	</select>
+	
+	<select id="titleNotice" resultType="UserNoticeVO">
+		SELECT * FROM notice_board WHERE board_title LIKE '%'||#{keyword}||'%' ORDER BY board_view asc, board_no desc
+	</select>
+	
+	<select id="writerNotice" resultType="UserNoticeVO">
+		SELECT * FROM notice_board WHERE board_writer LIKE '%'||#{keyword}||'%' ORDER BY board_view asc, board_no desc
+	</select>
+	
+	<select id="contentNotice" resultType="UserNoticeVO">
+		SELECT * FROM notice_board WHERE board_content LIKE '%'||#{keyword}||'%' ORDER BY board_view asc, board_no desc
+	</select>
+	
 </mapper>

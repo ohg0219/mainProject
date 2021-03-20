@@ -35,5 +35,21 @@ public class UserNoticeServiceImpl implements UserNoticeService{
 	public void plusCnt(int board_no) {
 		userNoticeDAO.plusCnt(board_no);
 	}
+	@Override
+	public List<UserNoticeVO> allNotice(UserNoticeVO vo) {
+		return userNoticeDAO.allNotice(vo);
+	}
+	@Override
+	public List<UserNoticeVO> titleNotice(UserNoticeVO vo) {
+		return userNoticeDAO.titleNotice(vo);
+	}
+	@Override
+	public List<UserNoticeVO> writerNotice(UserNoticeVO vo) {
+		return userNoticeDAO.writerNotice(vo);
+	}
+	@Override
+	public List<UserNoticeVO> contentNotice(UserNoticeVO vo) {
+		return userNoticeDAO.contentNotice(vo);
+	}
 
 }

@@ -22,4 +22,14 @@ public interface UserNoticeService {
 	//조회수 올리기
 	void plusCnt(int board_no);
 	
+	//검색기능 메서드
+	List<UserNoticeVO> allNotice(UserNoticeVO vo);
+	
+	List<UserNoticeVO> titleNotice(UserNoticeVO vo);
+	
+	List<UserNoticeVO> writerNotice(UserNoticeVO vo);
+	
+	List<UserNoticeVO> contentNotice(UserNoticeVO vo);
+	
+	
 }

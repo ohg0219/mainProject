@@ -10,6 +10,9 @@ public class AdminProductVO {
 	private String origin;
 	private String product_info;
 	private int product_point;
+	private int product_used;
+	private String searchKeyword;
+	
 	public long getProduct_no() {
 		return product_no;
 	}
@@ -58,12 +61,31 @@ public class AdminProductVO {
 	public void setProduct_point(int product_point) {
 		this.product_point = product_point;
 	}
+	public int getProduct_used() {
+		return product_used;
+	}
+	public void setProduct_used(int product_used) {
+		this.product_used = product_used;
+	}
+	
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	@Override
 	public String toString() {
-		return "ProductVO [product_no=" + product_no + ", product_category=" + product_category + ", product_name="
+		return "AdminProductVO [product_no=" + product_no + ", product_category=" + product_category + ", product_name="
 				+ product_name + ", product_price=" + product_price + ", material_info=" + material_info + ", origin="
-				+ origin + ", product_info=" + product_info + ", product_point=" + product_point + "]";
+				+ origin + ", product_info=" + product_info + ", product_point=" + product_point + ", product_used="
+				+ product_used + ", searchKeyword=" + searchKeyword + "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 }

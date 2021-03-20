@@ -56,7 +56,8 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
-	 <filter>
+	
+	<filter>
         <filter-name>encodingFilter</filter-name>
     <filter-class>
             org.springframework.web.filter.CharacterEncodingFilter

@@ -50,22 +50,21 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>이벤트</h3>
+				<h3>EVENT</h3>
 				<table align="left" class="noticeTable">
 					<tr>
-						<th>글번호 : ${event.board_no}</th>
-						<th>글제목 : ${event.board_title}</th>
+						<th>  ${event.board_no}</th>
+						<th>  ${event.board_title}</th>
 					</tr>
 					<tr>
-						<th>작성자 : ${event.board_writer}</th>
-						<th>조회수 : ${event.board_cnt}</th>
+						<th>  ${event.board_writer}</th>
+						<th>HIT  ${event.board_cnt}</th>
 					</tr>
 					<tr>
-						<th>날짜 : <fmt:formatDate value="${event.reg_date}" pattern="yyyy-MM-dd "/><br>
-						<fmt:formatDate value="${event.reg_date}" pattern=" hh:mm:ss "/></th>
+						<th>DATE  <fmt:formatDate value="${event.reg_date}" pattern="yyyy-MM-dd "/><br>
 					</tr>
 					<tr>
-						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="20" readonly="readonly">${notice.board_content}</textarea></td>
+						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="10" readonly="readonly">${notice.board_content}</textarea></td>
 					</tr>
 					<tr>
 						<td>

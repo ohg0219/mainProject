@@ -31,4 +31,20 @@ public class UserNoticeDAO {
 	public void plusCnt(int board_no) {
 		userNoticeTemplate.update("UserNoticeM.plusCnt", board_no);
 	}
+	
+	public List<UserNoticeVO> allNotice(UserNoticeVO vo){
+		return userNoticeTemplate.selectList("UserNoticeM.allNotice", vo);
+	}
+	
+	public List<UserNoticeVO> titleNotice(UserNoticeVO vo){
+		return userNoticeTemplate.selectList("UserNoticeM.titleNotice", vo);
+	}
+	
+	public List<UserNoticeVO> writerNotice(UserNoticeVO vo){
+		return userNoticeTemplate.selectList("UserNoticeM.writerNotice", vo);
+	}
+	
+	public List<UserNoticeVO> contentNotice(UserNoticeVO vo){
+		return userNoticeTemplate.selectList("UserNoticeM.contentNotice", vo);
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.thisisthat.admin.notice.vo.NoticeVO;
+import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 @Repository
 public class NoticeDAO {
@@ -33,7 +34,25 @@ public class NoticeDAO {
 	public List<NoticeVO> noticeList(NoticeVO noticeVO){
 		return mybatis.selectList("NoticeDAO.noticeList",noticeVO);
 	}
+
+	public List<NoticeVO> allNotice(NoticeVO noticeVO) {
+		return mybatis.selectList("NoticeDAO.allNotice",noticeVO);
+	}
+
+	public List<NoticeVO> titleNotice(NoticeVO noticeVO) {
+		return mybatis.selectList("NoticeDAO.titleNotice",noticeVO);
+	}
+
+	public List<NoticeVO> writerNotice(NoticeVO noticeVO) {
+		return mybatis.selectList("NoticeDAO.writerNotice",noticeVO);
+	}
+
+	public List<NoticeVO> contentNotice(NoticeVO noticeVO) {
+		return mybatis.selectList("NoticeDAO.contentNotice",noticeVO);
+	}
 	
-	
+	public String nickname(NoticeVO noticeVO) {
+		return mybatis.selectOne("NoticeDAO.nickname", noticeVO);
+	}
 	
 }

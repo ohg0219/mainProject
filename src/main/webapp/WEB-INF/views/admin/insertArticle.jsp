@@ -35,17 +35,16 @@
 				
 				
 				<div class="container-fluid">
-					<form action="insertArticle.mdo" method="post">
+					<form action="insertNotice.mdo" method="post">
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
                             		<td colspan="2">
 	                            		<select name="board_group" aria-controls="example" class="">
-											<option value="noSelect">---선택---</option>
-											<option value="event">이벤트</option>
 											<option value="notice">공지사항</option>
+											<option value="event">이벤트</option>
 										</select>
-										<button type="submit" class="btn-check:checked pull-right" id="insertArticle" >
+										<button type="submit" class="btn-check:checked pull-right" id="insertNotice" >
 											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
 											작성하기
 										</button>
@@ -53,8 +52,8 @@
 											placeholder="제목을 입력해주세요." required>
 										<div class="form-group">
 											<textarea class="form-control" rows="20" name="board_content"
-												placeholder="내용을 입력해주세요" required
-											></textarea>
+												placeholder="내용을 입력해주세요" required>
+											</textarea>
 										</div>
 									</td>
                             	</tr>
