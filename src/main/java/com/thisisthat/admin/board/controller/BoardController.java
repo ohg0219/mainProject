@@ -105,7 +105,7 @@ public class BoardController {
 	//답변insert
 	@PostMapping("/insertReply.mdo")
 	public String answerInsert(AnswerBoardVO vo, Model model,HttpSession session,RedirectAttributes rttr) {
-		UserVO userVo = (UserVO)session.getAttribute("userId");
+		UserVO userVo = (UserVO)session.getAttribute("adminId");
 		//질문자의 번호vo.getBoardNo();
 		//답변자 아이디 userVo.getUserId();
 		AnswerBoardVO reply = boardService.getReply(vo.getBoardNo());
