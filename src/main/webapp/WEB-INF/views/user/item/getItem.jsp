@@ -116,7 +116,12 @@
 		font-weight:700;
 		cursor: pointer;
 	}
-	
+	.noneSize{
+		display: none;
+	}
+	#sizeGuideTable tr td:first-child{
+		font-weight: 700;
+	}
 </style>
 </head>
 <body>
@@ -216,11 +221,11 @@
 					</ul>
 					<div class="size_info">
 						<ul>
-							<li class="size_selection <c:choose><c:when test="${itemInfo.xs < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose>" ><a href="#">XS</a></li>
-							<li class="size_selection <c:choose><c:when test="${itemInfo.s < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose>" ><a href="#">S</a></li>
-							<li class="size_selection <c:choose><c:when test="${itemInfo.m < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose>" ><a href="#">M</a></li>
-							<li class="size_selection <c:choose><c:when test="${itemInfo.l < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose>" ><a href="#">L</a></li>
-							<li class="size_selection <c:choose><c:when test="${itemInfo.xl < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose>" ><a href="#">XL</a></li>
+							<li class="size_selection <c:choose><c:when test="${itemInfo.xs < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose> <c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>" ><a href="#">XS</a></li>
+							<li class="size_selection <c:choose><c:when test="${itemInfo.s < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose> <c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>" ><a href="#">S</a></li>
+							<li class="size_selection <c:choose><c:when test="${itemInfo.m < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose> <c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>" ><a href="#">M</a></li>
+							<li class="size_selection <c:choose><c:when test="${itemInfo.l < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose> <c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>" ><a href="#">L</a></li>
+							<li class="size_selection <c:choose><c:when test="${itemInfo.xl < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose> <c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>" ><a href="#">XL</a></li>
 						</ul>
 						<script type="text/javascript">
 							$(document).ready(function(){
@@ -288,7 +293,101 @@
 					<p id="sizeGuideBtn">SIZE GUIDE</p>
 					<div style="width: 250px; display: none;" id="sizeGuide">
 						<!-- 사이즈 가이드 추가 -->
-						<div>제품 이미지 색상은 사용하시는 컴퓨터 해상도에 <br>따라 어둡거나 밝게 보일 수 있습니다.<br><br>상세 사이즈 치수는 측정 방법과 위치에 따라 <br>약간의 오차가 발생할 수 있습니다.<br><br>지퍼 폴리 백의 특성상 소량의 슬립제 가루가 <br>제품에 묻어 나올 수 있습니다.</div>
+						<div>
+							<table id="sizeGuideTable" >
+								<tr style="font-weight: 700">
+									<td width="80px"></td>
+									<td width="40px" height="" class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">XS</td>
+									<td width="40px" class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">S</td>
+									<td width="40px" class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">M</td>
+									<td width="40px" class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">L</td>
+									<td width="40px" class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">XL</td>
+								</tr>
+								<c:if test="${selectSizeGuideGroup eq 'top' }">
+								<tr>
+									<td>LENGTH</td>
+									<td class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">${length.xs_size}</td>
+									<td class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">${length.s_size}</td>
+									<td class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">${length.m_size}</td>
+									<td class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">${length.l_size}</td>
+									<td class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">${length.xl_size}</td>
+								</tr>
+								<tr>
+									<td>CHEST</td>
+									<td class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">${chest.xs_size}</td>
+									<td class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">${chest.s_size}</td>
+									<td class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">${chest.m_size}</td>
+									<td class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">${chest.l_size}</td>
+									<td class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">${chest.xl_size}</td>
+								</tr>
+								<tr>
+									<td>ARM</td>
+									<td class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">${arm.xs_size}</td>
+									<td class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">${arm.s_size}</td>
+									<td class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">${arm.m_size}</td>
+									<td class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">${arm.l_size}</td>
+									<td class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">${arm.xl_size}</td>
+								</tr>
+								<tr>
+									<td>SHOULDER</td>
+									<td class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">${shoulder.xs_size}</td>
+									<td class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">${shoulder.s_size}</td>
+									<td class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">${shoulder.m_size}</td>
+									<td class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">${shoulder.l_size}</td>
+									<td class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">${shoulder.xl_size}</td>
+								</tr>
+								</c:if>
+								<c:if test="${selectSizeGuideGroup eq 'bottom' }">
+								<tr>
+									<td>LENGTH</td>
+									<td class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">${length.xs_size}</td>
+									<td class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">${length.s_size}</td>
+									<td class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">${length.m_size}</td>
+									<td class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">${length.l_size}</td>
+									<td class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">${length.xl_size}</td>
+								</tr>
+								<tr>
+									<td>WAIST</td>
+									<td class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">${waist.xs_size}</td>
+									<td class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">${waist.s_size}</td>
+									<td class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">${waist.m_size}</td>
+									<td class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">${waist.l_size}</td>
+									<td class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">${waist.xl_size}</td>
+								</tr>
+								<tr>
+									<td>THIGH</td>
+									<td class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">${thigh.xs_size}</td>
+									<td class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">${thigh.s_size}</td>
+									<td class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">${thigh.m_size}</td>
+									<td class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">${thigh.l_size}</td>
+									<td class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">${thigh.xl_size}</td>
+								</tr>
+								<tr>
+									<td>HEM</td>
+									<td class="<c:if test="${sizeUsed.xs_used == 0 }">noneSize</c:if>">${hem.xs_size}</td>
+									<td class="<c:if test="${sizeUsed.s_used == 0 }">noneSize</c:if>">${hem.s_size}</td>
+									<td class="<c:if test="${sizeUsed.m_used == 0 }">noneSize</c:if>">${hem.m_size}</td>
+									<td class="<c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>">${hem.l_size}</td>
+									<td class="<c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>">${hem.xl_size}</td>
+								</tr>
+								</c:if>
+							</table>
+						</div>
+						<br>
+						<div>
+							제품 이미지 색상은 사용하시는 컴퓨터 해상도에 <br>
+							따라 어둡거나 밝게 보일 수 있습니다.<br><br>
+							
+							상세 사이즈 치수는 측정 방법과 위치에 따라 <br>
+							약간의 오차가 발생할 수 있습니다.<br><br>
+							지퍼 폴리 백의 특성상 소량의 슬립제 가루가 <br>
+							제품에 묻어 나올 수 있습니다.<br><br>
+							표백제나 표백 성분 세제는 사용하지 마십시오.<br><br>
+							세탁 시 탈색 또는 이염될 우려가 있으므로<br> 
+							타 의류와 함께 세탁하지 마시고 반드시 단독 세탁 하십시오.<br><br>
+							착용 중 마찰로 인해 다른 제품에 이염될<br> 
+							우려가 있으므로 주의하시기 바랍니다.
+						</div>
 					</div>
 					<script type="text/javascript">
 					$(document).ready(function(){

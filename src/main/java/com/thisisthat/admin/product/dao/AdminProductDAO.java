@@ -98,9 +98,10 @@ public class AdminProductDAO {
 		productTemplate.insert("AdminProduct.insertSubImage",vo);
 	}
 
-	public void updateProductSizeGuide(List<AdminProductSizeGuideVO> sizeGuideList) {
+	public void updateProductSizeGuide(AdminProductVO vo,List<AdminProductSizeGuideVO> sizeGuideList) {
+		productTemplate.delete("AdminProduct.deleteProductSizeGuide",vo);
 		for(AdminProductSizeGuideVO size : sizeGuideList) {
-			productTemplate.update("AdminProduct.updateProductSizeGuide",size);
+			productTemplate.update("AdminProduct.insertSizeGuide",size);
 		}
 	}
 	

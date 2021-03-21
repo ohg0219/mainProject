@@ -44,14 +44,44 @@
  }
  .in{
  	background-color: white;
+ 	width: 80px;
  }
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#insert").on("click",function(){
 			if($("#category").val()=='----카테고리 선택----'){
-				$("#category").focus();
 				alert("카테고리를 선택하세요");
+				$("#category").focus();
+				return false;
+			}
+			if($("#productName").val()==''){
+				alert("상품명을 입력하세요");
+				$("#productName").focus();
+				return false;
+			}
+			var priceType = /^[1-9]{1}[0-9]*$/g;
+			if(!priceType.test($("#productPrice").val())){
+				alert("소비자가는 숫자만 입력가능합니다.");
+				$("#productPrice").focus();
+				return false;
+			}
+			if($("#materialInfo").val()==''){
+				alert("소재정보를 입력하세요");
+				$("#materialInfo").focus();
+				return false;
+			}
+			if($("#origin").val()==''){
+				alert("원산지를 입력하세요");
+				$("#origin").focus();
+				return false;
+			}
+			if(!$("#mainUploadFile").val()){
+				alert("메인 이미지를 등록해주세요.");
+				return false;
+			}
+			if(!$("#subUploadFile").val()){
+				alert("상세 이미지를 등록해주세요.");
 				return false;
 			}
 		});
@@ -324,35 +354,35 @@
                     					<tr class="sizeGuide">
                     						<td id="sizeGuideTitle"rowspan="4" style="vertical-align: middle;">상의류</td>
                     						<td id="sizeInfo1">LENGTH(총길이)</td>
-                    						<td><input class="xs in" type="text" name="size1" size="5"></td>
-                    						<td><input class="s in" type="text" name="size1" size="5"></td>
-                    						<td><input class="m in" type="text" name="size1" size="5"></td>
-                    						<td><input class="l in" type="text" name="size1" size="5"></td>
-                    						<td><input class="xl in" type="text" name="size1" size="5"></td>
+                    						<td><input class="xs in" type="number" step="0.01" name="size1" size="5"></td>
+                    						<td><input class="s in"  type="number" step="0.01" name="size1" size="5"></td>
+                    						<td><input class="m in"  type="number" step="0.01" name="size1" size="5"></td>
+                    						<td><input class="l in"  type="number" step="0.01" name="size1" size="5"></td>
+                    						<td><input class="xl in" type="number" step="0.01" name="size1" size="5"></td>
                     					</tr>
                     					<tr class="sizeGuide">
                     						<td id="sizeInfo2">CHEST(가슴)</td>
-                    						<td><input class="xs in" type="text" name="size2" size="5"></td>
-                    						<td><input class="s in" type="text" name="size2" size="5"></td>
-                    						<td><input class="m in" type="text" name="size2" size="5"></td>
-                    						<td><input class="l in" type="text" name="size2" size="5"></td>
-                    						<td><input class="xl in" type="text" name="size2" size="5"></td>
+                    						<td><input class="xs in"  type="number" step="0.01" name="size2" size="5"></td>
+                    						<td><input class="s in" type="number" step="0.01" name="size2" size="5"></td>
+                    						<td><input class="m in"  type="number" step="0.01" name="size2" size="5"></td>
+                    						<td><input class="l in"  type="number" step="0.01" name="size2" size="5"></td>
+                    						<td><input class="xl in"  type="number" step="0.01" name="size2" size="5"></td>
                     					</tr>
                     					<tr class="sizeGuide">
                     						<td id="sizeInfo3">ARM(팔)</td>
-                    						<td><input class="xs in" type="text" name="size3" size="5"></td>
-                    						<td><input class="s in" type="text" name="size3" size="5"></td>
-                    						<td><input class="m in" type="text" name="size3" size="5"></td>
-                    						<td><input class="l in" type="text" name="size3" size="5"></td>
-                    						<td><input class="xl in" type="text" name="size3" size="5"></td>
+                    						<td><input class="xs in"  type="number" step="0.01" name="size3" size="5"></td>
+                    						<td><input class="s in"  type="number" step="0.01" name="size3" size="5"></td>
+                    						<td><input class="m in"  type="number" step="0.01" name="size3" size="5"></td>
+                    						<td><input class="l in"  type="number" step="0.01" name="size3" size="5"></td>
+                    						<td><input class="xl in" type="number" step="0.01" name="size3" size="5"></td>
                     					</tr>
                     					<tr class="sizeGuide">
                     						<td id="sizeInfo4">SHOULDER(어깨)</td>
-                    						<td><input class="xs in" type="text" name="size4" size="5"></td>
-                    						<td><input class="s in" type="text" name="size4" size="5"></td>
-                    						<td><input class="m in" type="text" name="size4" size="5"></td>
-                    						<td><input class="l in" type="text" name="size4" size="5"></td>
-                    						<td><input class="xl in" type="text" name="size4" size="5"></td>
+                    						<td><input class="xs in" type="number" step="0.01" name="size4" size="5"></td>
+                    						<td><input class="s in" type="number" step="0.01" name="size4" size="5"></td>
+                    						<td><input class="m in"  type="number" step="0.01" name="size4" size="5"></td>
+                    						<td><input class="l in" type="number" step="0.01" name="size4" size="5"></td>
+                    						<td><input class="xl in"  type="number" step="0.01" name="size4" size="5"></td>
                     					</tr>
                     					<tr>
                     						<td colspan="7">

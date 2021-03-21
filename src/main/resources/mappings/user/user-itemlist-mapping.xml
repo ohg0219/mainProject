@@ -61,5 +61,12 @@
 	<select id="getItemImage" resultMap="itemImageVO">
 		select * from product_image where product_no = #{productNo}
 	</select>
+	<select id="getItemSizeGuide" parameterType="Long" resultType="com.thisisthat.user.item.vo.UserItemSizeGuideVO">
+		select * from size_guide where product_no = #{productNo}
+	</select>
+	<select id="getItemSizeUsed" parameterType="Long" resultType="com.thisisthat.user.item.vo.UserItemSizeUsedVO">
+		select * from size_used where product_no = #{productNo}
+	</select>
+	
 	
 </mapper>
