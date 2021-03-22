@@ -31,5 +31,6 @@
 		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-category-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-product-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-product_stock-mapping.xml"/>
 	</mappers>
 </configuration>

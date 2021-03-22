@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Product_StockDAO">
+
+	<select id="getStockList"
+		resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
+		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock  left join product using(product_no) order by product_no desc
+	</select>
+
+
+</mapper>
