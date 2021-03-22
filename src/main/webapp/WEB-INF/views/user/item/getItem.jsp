@@ -123,11 +123,117 @@
 		font-weight: 700;
 	}
 </style>
+<script type="text/javascript">
+$(document).ready(function (e){
+	$(document).on("click","img",function(){
+		var path = $(this).attr('src')
+		showImage(path);
+	});//end click event
+	function showImage(fileCallPath){
+	    $(".bigPictureWrapper").css("display","flex").show();
+	    $(".bigPicture")
+	    .html("<img src='"+fileCallPath+"' >")
+	    .animate({width:'100%', height: '100%'}, 1000);
+	  }//end fileCallPath
+	$(".bigPictureWrapper").on("click", function(e){
+	    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+	    setTimeout(function(){
+	      $('.bigPictureWrapper').hide();
+	    }, 1000);
+	  });//end bigWrapperClick event
+});
+$(document).ready(function(){
+	var productName = $(".product_name").text();
+	var size = "";
+	$(".empty").on("click",function(e){
+		e.preventDefault();
+	});
+	$(".full").on("click",function(e){
+		e.preventDefault();
+		size = $(this).children().text();
+		console.log($("."+size).text())
+		if($("."+size).text() == size){
+			return false;
+		}
+		var str ="";
+		str += "<tr>";
+		str += "<td class='select_info'>";
+		str += "<span class='productName'>"+productName + "</span><br> - <strong class='selectSize "+size+"'>" + size + "</strong>";
+		str += "</td>";
+		str += "<td>";
+		str += "<input class='sizeType' type='hidden' value='"+size+"'>"
+		str += "<input class='productBtn' type='button' id='plus' value='+' >";
+		str += "</td>";
+		str += "<td>";
+		str += "<div class='select_count' id='"+size+"'>1</div>";
+		str += "</td>";
+		str += "<td>";
+		str += "<input class='sizeType' type='hidden' value='"+size+"'>"
+		str += "<input class='productBtn' type='button' id='minus' value='-' >";
+		str += "</td>";
+		str += "<td><a href='#' class='choose_cancel' >X</a></td>";
+		str += "</tr>";
+		$(".choose").append(str);
+	});
+	$(document).on("click","#basket",function(){
+		var grpl = $(".selectSize").length;
+		//배열 생성
+		var selectSize = new Array(grpl);
+		var selectCount = new Array(grpl);
+		//배열에 값 주입
+		var selectItem = "";
+		var productNo = $("#productNo").val();
+		var productPrice = $("#productPrice").val();
+		for(var i=0; i<grpl; i++){                          
+			selectSize[i] = $(".selectSize").eq(i).text();
+			selectCount[i] = $(".select_count").eq(i).text();
+			selectItem += selectSize[i] + ":"+selectCount[i] + "/";
+	    }
+		if(selectItem == ''){
+			alert("구매하실 상품을 선택해주세요.");
+			return false;
+		}
+		location.href="/insertbasket.do?productNo="+productNo+"&selectItem="+selectItem+"&productPrice="+productPrice;
+	});
+	$(document).on("click",".choose_cancel",function(){
+		$(this).closest("tr").remove();
+	});
+	$(document).on("click",".productBtn",function(){
+		var type = $(this).val();
+		var sizeType = $(this).siblings(".sizeType").val();
+		const resultElement = document.getElementById(sizeType);
+		  let number = resultElement.innerText;
+		  if(type == '+') {
+		    number = parseInt(number) + 1;
+		  }else if(type === '-')  {
+		  	if(number == '1'){ return false; }
+			number = parseInt(number) - 1;
+		  }
+		  resultElement.innerText = number;
+	});
+});	
+$(document).ready(function(){
+	$("#sizeGuideBtn").click(function(){
+		$(this).next("#sizeGuide").slideToggle(300);
+		$("#deliveryGuide").hide();
+		$("#questionGuide").hide();
+	});
+	$("#deliveryBtn").click(function(){
+		$(this).next("#deliveryGuide").slideToggle(300);
+		$("#sizeGuide").hide();
+		$("#questionGuide").hide();
+	});
+	$("#questionBtn").click(function(){
+		$(this).next("#questionGuide").slideToggle(300);
+		$("#sizeGuide").hide();
+		$("#deliveryGuide").hide();
+	});
+});			
+</script>
 </head>
 <body>
 	<div class='bigPictureWrapper'>
-		<div class='bigPicture'>
-		</div>
+		<div class='bigPicture'></div>
 	</div>
 	<div class="wrap">
 		<%@include file="../include/header.jsp"%>
@@ -170,7 +276,6 @@
 					</ul>
 				</div>
 			</div>
-			
 			<h2 align="center" style="text-transform: uppercase;">${category }</h2>
 			
 			<!-- 이미지  -->
@@ -182,40 +287,16 @@
 						</li>	
 					</c:forEach>
 				</ul>
-				<script type="text/javascript">
-				$(document).ready(function (e){
-					
-					$(document).on("click","img",function(){
-						var path = $(this).attr('src')
-						showImage(path);
-					});//end click event
-					
-					function showImage(fileCallPath){
-					    
-					    $(".bigPictureWrapper").css("display","flex").show();
-					    
-					    $(".bigPicture")
-					    .html("<img src='"+fileCallPath+"' >")
-					    .animate({width:'100%', height: '100%'}, 1000);
-					    
-					  }//end fileCallPath
-					  
-					$(".bigPictureWrapper").on("click", function(e){
-					    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
-					    setTimeout(function(){
-					      $('.bigPictureWrapper').hide();
-					    }, 1000);
-					  });//end bigWrapperClick event
-				});
-				</script>
 			</div>
 			<!-- 상품정보 및 주문 -->
 			<div style=" width:calc(10% + 210px); float:left; ">
 				<div class="item_info" style="margin-left: 20px;">
+					<input id="productNo" type="hidden" value="${itemInfo.productNo }">
+					<input id="productPrice" type="hidden" value="${itemInfo.productPrice }">
 					<ul>
 						<li><strong class="product_name" style="font-size: 12px;">${itemInfo.productName }</strong><br><br></li>
 						
-						<li>&#8361;<fmt:formatNumber maxFractionDigits="3" value="${itemInfo.productPrice }"/>원<br><br></li>
+						<li>&#8361;<fmt:formatNumber maxFractionDigits="3"  value="${itemInfo.productPrice }"/>원<br><br></li>
 						<li>${itemInfo.materialInfo }</li>
 						<li>${itemInfo.origin }</li>
 					</ul>
@@ -227,59 +308,6 @@
 							<li class="size_selection <c:choose><c:when test="${itemInfo.l < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose> <c:if test="${sizeUsed.l_used == 0 }">noneSize</c:if>" ><a href="#">L</a></li>
 							<li class="size_selection <c:choose><c:when test="${itemInfo.xl < 1}">empty</c:when><c:otherwise>full</c:otherwise></c:choose> <c:if test="${sizeUsed.xl_used == 0 }">noneSize</c:if>" ><a href="#">XL</a></li>
 						</ul>
-						<script type="text/javascript">
-							$(document).ready(function(){
-								var productName = $(".product_name").text();
-								var size = "";
-								$(".empty").on("click",function(e){
-									e.preventDefault();
-								});
-								$(".full").on("click",function(e){
-									e.preventDefault();
-									size = $(this).children().text();
-									console.log($("."+size).text())
-									if($("."+size).text() == size){
-										return false;
-									}
-									var str ="";
-									str += "<tr>";
-									str += "<td class='select_info'>";
-									str += productName + "<br> - <strong class="+size+">" + size + "</strong>";
-									str += "</td>";
-									str += "<td>";
-									str += "<input class='sizeType' type='hidden' value='"+size+"'>"
-									str += "<input class='productBtn' type='button' id='plus' value='+' >";
-									str += "</td>";
-									str += "<td>";
-									str += "<div class='select_count' id='"+size+"'>1</div>";
-									str += "</td>";
-									str += "<td>";
-									str += "<input class='sizeType' type='hidden' value='"+size+"'>"
-									str += "<input class='productBtn' type='button' id='minus' value='-' >";
-									str += "</td>";
-									str += "<td><a href='#' class='choose_cancel' >X</a></td>";
-									str += "</tr>";
-									$(".choose").append(str);
-								});
-								$(document).on("click",".choose_cancel",function(){
-									$(this).closest("tr").remove();
-								});
-								$(document).on("click",".productBtn",function(){
-									var type = $(this).val();
-									var sizeType = $(this).siblings(".sizeType").val();
-									console.log(sizeType);
-									const resultElement = document.getElementById(sizeType);
-									  let number = resultElement.innerText;
-									  if(type == '+') {
-									    number = parseInt(number) + 1;
-									  }else if(type === '-')  {
-									  	if(number == '1'){ return false; }
-										number = parseInt(number) - 1;
-									  }
-									  resultElement.innerText = number;
-								});
-							});					
-						</script>
 					</div>
 					<div class="choose_products" style="display: inline-block;">
 						<table class="choose" style="width: 214px;">
@@ -389,25 +417,6 @@
 							우려가 있으므로 주의하시기 바랍니다.
 						</div>
 					</div>
-					<script type="text/javascript">
-					$(document).ready(function(){
-						$("#sizeGuideBtn").click(function(){
-							$(this).next("#sizeGuide").slideToggle(300);
-							$("#deliveryGuide").hide();
-							$("#questionGuide").hide();
-						});
-						$("#deliveryBtn").click(function(){
-							$(this).next("#deliveryGuide").slideToggle(300);
-							$("#sizeGuide").hide();
-							$("#questionGuide").hide();
-						});
-						$("#questionBtn").click(function(){
-							$(this).next("#questionGuide").slideToggle(300);
-							$("#sizeGuide").hide();
-							$("#deliveryGuide").hide();
-						});
-					});						
-					</script>
 					<p id="deliveryBtn">배송 &#38; 반품</p>
 					<div style="width: 250px; display: none;" id="deliveryGuide">
 						택배<br>

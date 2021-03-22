@@ -54,7 +54,7 @@
 					</c:if>	
 				</c:if>
 				<li><a href="#">ORDERS</a></li>
-				<li><a href="#">BAG</a></li>
+				<li><a href="/basket.do">BAG</a></li>
 			</ul>
 		</div> 
 		<br style="clear: both" />
