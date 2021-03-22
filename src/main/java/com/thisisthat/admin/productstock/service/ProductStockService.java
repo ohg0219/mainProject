@@ -8,4 +8,6 @@ public interface ProductStockService {
 
 	List<ProductStockVO> stockList(ProductStockVO productStockVO);
 
+	ProductStockVO getStock(ProductStockVO productStockVO);
+
 }

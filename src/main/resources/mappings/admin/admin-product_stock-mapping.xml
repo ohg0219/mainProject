@@ -8,6 +8,9 @@
 		resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
 		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock  left join product using(product_no) order by product_no desc
 	</select>
+	<select id="getProductStock" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
+		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock left join product using(product_no) where product_no=#{product_no}
+	</select>
 
 
 </mapper>

@@ -60,10 +60,14 @@ a {
 				<div class="container-fluid">
 
 					<select name="searchOption" aria-controls="example" class="">
-						<option value="all">전체</option>
-						<option value="board_writer">작성자</option>
-						<option value="board_title">제목</option>
-						<option value="board_content">내용</option>
+						<option value="all">ALL</option>
+						<option value="board_writer">SHIRT</option>
+						<option value="board_title">TOPS</option>
+						<option value="board_content">PANTS</option>
+						<option value="board_content">JACKETS</option>
+						<option value="board_content">TEES</option>
+						<option value="board_content">LONGSLEEVETEES</option>
+						<option value="board_content">SWEATSHIRTS</option>
 					</select>
 
 
@@ -97,7 +101,7 @@ a {
 												<tr>
 													<td width="45">${article.product_no}</td>
 													<td width="100">${article.product_category}</td>
-													<td width="300">${article.product_name}</td>
+													<td width="300"><a href="getProductStock.mdo?product_no=${article.product_no }" value="${article.product_no }">${article.product_name}</a></td>
 													<td width="45">${article.xs }</td>
 													<td width="45">${article.s }</td>
 													<td width="45">${article.m}</td>

@@ -19,6 +19,11 @@ public class ProductStockDAO {
 		return mybatis.selectList("Product_StockDAO.getStockList", productStockVO);
 	}
 
+	public ProductStockVO getProductStock(ProductStockVO productStockVO) {
+
+		return mybatis.selectOne("Product_StockDAO.getProductStock", productStockVO);
+	}
+
 	
 	
 	
