@@ -23,6 +23,9 @@
 	<update id="modify">
 		update this_user set user_pass=#{password}, zip_code=#{zipcode}, first_address=#{address1}, last_address=#{address2}, user_phone=#{phone}, user_email=#{email} where user_name=#{name}
 	</update>
-
+	
+	<select id="modifyPoint" resultMap="myPageModify">
+		select * from this_user where user_id=#{id}
+	</select>
 
 </mapper>

@@ -12,23 +12,49 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<!-- db 정보 파일 -->
-	<context:property-placeholder location="classpath:/config/db.properties"/>
+	<context:property-placeholder
+		location="classpath:/config/db.properties" />
 	<!-- postgreSQL dataSource 설정 -->
-	<bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}"></property>
+	<bean class="org.apache.commons.dbcp2.BasicDataSource"
+		id="dataSource">
+		<property name="driverClassName"
+			value="${jdbc.driverClassName}"></property>
 		<property name="url" value="${jdbc.url}"></property>
 		<property name="username" value="${jdbc.username}"></property>
 		<property name="password" value="${jdbc.password}"></property>
 	</bean>
 	<!-- myBatis 사용을 위한 설정 -->
-	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactoryBean"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<property name="configLocation"
+			value="classpath:/mybatis-config.xml" />
 	</bean>
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactoryBean" />
 	</bean>
-	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
+
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="thisisthat.official@gmail.com" />
+		<property name="password" value="dhgudrbs1!" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Email, EmailSender Bean 등록 -->
+	<bean id="email" class="com.thisisthat.user.email.Email"></bean>
+	<bean id="emailSender" class="com.thisisthat.user.email.EmailSender"></bean>
 
 </beans>

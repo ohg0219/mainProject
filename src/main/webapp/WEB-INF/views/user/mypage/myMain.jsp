@@ -277,7 +277,7 @@ a.dual {
 							</p>
         				</div>
         				<div id="boxsize">
-       				    	<a href="/mypage/index.do" class="sltd">my</a>
+       				    	<a href="/mypage/mypage.do" class="sltd"><strong>my</strong></a>
             				<a href="/mypage/modify.do">profile</a>
             				<a href="/mypage/addr.do">address book</a>
 							<a href="/mypage/orderlist.do">orders</a>

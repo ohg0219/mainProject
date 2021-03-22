@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FindIdPasswordDAO">
+
+	<select id="findIdEmail" resultType="String">
+		select user_id from this_user where user_name=#{name} and user_email=#{email} and user_id not like '%'|| <![CDATA[ '@' ]]> ||'%'
+	</select>
+	
+	<select id="findIdPhone" resultType="String"> 		
+		select user_id from this_user where user_name=#{name} and user_phone=#{phone} and user_id not like '%'|| <![CDATA[ '@' ]]> ||'%' 
+	</select>
+	
+	<select id="findPwEmail" resultType="String">
+		select user_pass from this_user where user_name=#{name} and user_email=#{email} and user_id=#{id}  and user_id not like '%'|| <![CDATA[ '@' ]]> ||'%'
+	</select>
+	
+	<update id="updatePw">
+		update this_user set user_pass=#{pass} where user_id=#{id}
+	</update>
+	
+	<select id="findPwPhone" resultType="String">
+		select user_pass from this_user where user_name=#{name} and user_phone=#{phone} and user_id=#{id} and user_id not like '%'|| <![CDATA[ '@' ]]> ||'%'
+	</select>	
+	
+	
+</mapper>

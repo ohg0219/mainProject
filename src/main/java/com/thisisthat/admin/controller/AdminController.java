@@ -27,9 +27,6 @@ import com.thisisthat.user.register.vo.TestVO;
 
 public class AdminController {
 	
-	
-	
-	
 	@Autowired
 	AdminService dao;
 
