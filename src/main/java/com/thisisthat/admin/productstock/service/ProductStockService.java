@@ -12,4 +12,6 @@ public interface ProductStockService {
 
 	void updateStock(ProductStockVO productStockVO);
 
+	List<ProductStockVO> poductStockList(ProductStockVO productStockVO);
+
 }

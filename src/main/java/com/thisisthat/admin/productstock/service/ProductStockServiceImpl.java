@@ -16,7 +16,7 @@ public class ProductStockServiceImpl implements ProductStockService {
 	@Override
 	public List<ProductStockVO> stockList(ProductStockVO productStockVO) {
 		
-		return product_StockDAO.getProductStockList(productStockVO);
+		return product_StockDAO.getStockList(productStockVO);
 	}
 
 	@Override
@@ -29,6 +29,11 @@ public class ProductStockServiceImpl implements ProductStockService {
 	public void updateStock(ProductStockVO productStockVO) {
 		product_StockDAO.updateStock(productStockVO);
 		
+	}
+
+	@Override
+	public List<ProductStockVO> poductStockList(ProductStockVO productStockVO) {
+		return product_StockDAO.getProductStockList(productStockVO);
 	}
 	
 	

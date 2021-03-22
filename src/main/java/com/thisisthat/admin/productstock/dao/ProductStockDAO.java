@@ -14,7 +14,7 @@ public class ProductStockDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public List<ProductStockVO> getProductStockList(ProductStockVO productStockVO) {
+	public List<ProductStockVO> getStockList(ProductStockVO productStockVO) {
 		
 		return mybatis.selectList("Product_StockDAO.getStockList", productStockVO);
 	}
@@ -27,6 +27,10 @@ public class ProductStockDAO {
 	public void updateStock(ProductStockVO productStockVO) {
 		mybatis.update("Product_StockDAO.updateStock", productStockVO);
 		
+	}
+
+	public List<ProductStockVO> getProductStockList(ProductStockVO productStockVO) {
+		return mybatis.selectList("Product_StockDAO.getProductStockList", productStockVO);
 	}
 
 	

@@ -18,7 +18,24 @@ public class ProductStockController {
 	@Autowired
 	private ProductStockService productStockService;
 
-	@RequestMapping("productStockList.mdo")
+	@RequestMapping("getStockList.mdo")
+	public String productStockList(Model model,@RequestParam(value="searchOption")String searchOption,ProductStockVO productStockVO){
+		if(searchOption.equals("all")) {
+			return "redirect:getProductStockList.mdo";
+		}else  {
+			System.out.println(searchOption);
+			productStockVO.setProduct_category(searchOption);
+			List<ProductStockVO> prodcutStockList = productStockService.poductStockList(productStockVO);
+
+			model.addAttribute("prodcutStockList", prodcutStockList);
+			return "/admin/product_stock/productStockList";
+		}
+			
+			
+
+	}
+	
+	@RequestMapping("getProductStockList.mdo")
 	public String getProductStockList(Model model) {
 		ProductStockVO productStockVO = new ProductStockVO();
 		List<ProductStockVO> prodcutStockList = productStockService.stockList(productStockVO);

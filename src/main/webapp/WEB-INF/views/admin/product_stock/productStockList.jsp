@@ -58,17 +58,20 @@ a {
 				<!-- Topbar -->
 				<%@include file="../include/navbar.jsp"%>
 				<div class="container-fluid">
-
-					<select name="searchOption" aria-controls="example" class="">
-						<option value="all">ALL</option>
-						<option value="board_writer">SHIRT</option>
-						<option value="board_title">TOPS</option>
-						<option value="board_content">PANTS</option>
-						<option value="board_content">JACKETS</option>
-						<option value="board_content">TEES</option>
-						<option value="board_content">LONGSLEEVETEES</option>
-						<option value="board_content">SWEATSHIRTS</option>
+					<form action="/admin/getStockList.mdo?searchOption=" method="get">
+					<select name="searchOption" aria-controls="example" >
+						<option value="all" id="update">ALL</option>
+						<option value="shirt" class="update">SHIRT</option>
+						<option value="tops" class="update">TOPS</option>
+						<option value="pants" class="update">PANTS</option>
+						<option value="jackets" class="update">JACKETS</option>
+						<option value="tees" class="update">TEES</option>
+						<option value="longsleevetees" class="update">LONGSLEEVETEES</option>
+						<option value="sweatshirts" class="update">SWEATSHIRTS</option>
 					</select>
+					<input type="submit" value="조회">
+					
+					</form>
 
 
 					<!-- DataTales Example -->
@@ -136,8 +139,8 @@ a {
 		$(function() {
 
 			//-------------------검색하는 함수end			
-			$("#insertArticle").click(function() {
-				location.href = "/admin/insertArticle.mdo"
+			$("#update").click(function() {
+				location.href = "/admin/getStockList.mdo?searchOption="
 			});
 		});
 	</script>
