@@ -31,7 +31,7 @@
 				<!-- Topbar -->
 				<%@include file="../include/navbar.jsp"%>
 				<div class="container-fluid">
-					<form action="updateGate.mdo?board_no=${article.product_no }"
+					<form action="updateStock.mdo?product_no=${article.product_no }"
 						method="get">
 
 						<input type="hidden" name="product_no"
@@ -67,16 +67,16 @@
 									<td width="45"><h3>xl</h3></td>
 								</tr>
 								<td><input type="text" value="${article.xs }"
-									name="product_xs" class="form-control mt-4 mb-2" width="45" />
+									name="xs" class="form-control mt-4 mb-2" width="45" />
 								</td>
 								<td><input type="text" value="${article.s }"
-									name="product_s" class="form-control mt-4 mb-2" /></td>
+									name="s" class="form-control mt-4 mb-2" /></td>
 								<td><input type="text" value="${article.m }"
-									name="product_m" class="form-control mt-4 mb-2" /></td>
+									name="m" class="form-control mt-4 mb-2" /></td>
 								<td><input type="text" value="${article.l }"
-									name="product_l" class="form-control mt-4 mb-2" /></td>
+									name="l" class="form-control mt-4 mb-2" /></td>
 								<td><input type="text" value="${article.xl }"
-									name="product_xl" class="form-control mt-4 mb-2" /></td>
+									name="xl" class="form-control mt-4 mb-2" /></td>
 								</tr>
 							</table>
 						</div>

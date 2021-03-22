@@ -24,6 +24,11 @@ public class ProductStockDAO {
 		return mybatis.selectOne("Product_StockDAO.getProductStock", productStockVO);
 	}
 
+	public void updateStock(ProductStockVO productStockVO) {
+		mybatis.update("Product_StockDAO.updateStock", productStockVO);
+		
+	}
+
 	
 	
 	

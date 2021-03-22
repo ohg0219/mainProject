@@ -34,6 +34,14 @@ public class ProductStockController {
 
 		model.addAttribute("article", getStock);
 		return "/admin/product_stock/productStock";
+	}//상세보기
+	
+	@RequestMapping("updateStock.mdo")
+	public String updateProductStock(@RequestParam(value="product_no")int product_no, @RequestParam(value="xs")int xs, @RequestParam(value="s")int s, @RequestParam(value="m")int m, @RequestParam(value="l")int l, @RequestParam(value="xl")int xl, ProductStockVO productStockVO) {
+		productStockService.updateStock(productStockVO);
+		
+		
+		return "redirect:productStockList.mdo";
 	}
 
 }// end class

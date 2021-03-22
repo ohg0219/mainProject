@@ -11,6 +11,9 @@
 	<select id="getProductStock" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
 		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock left join product using(product_no) where product_no=#{product_no}
 	</select>
+	<select id="updateStock" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
+		update product_stock set xs=#{xs}, s=#{s}, m=#{m}, l=#{l}, xl=#{xl} where product_no=#{product_no}
+	</select>
 
 
 </mapper>

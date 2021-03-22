@@ -10,4 +10,6 @@ public interface ProductStockService {
 
 	ProductStockVO getStock(ProductStockVO productStockVO);
 
+	void updateStock(ProductStockVO productStockVO);
+
 }

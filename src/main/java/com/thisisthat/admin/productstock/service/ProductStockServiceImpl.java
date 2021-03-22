@@ -24,6 +24,12 @@ public class ProductStockServiceImpl implements ProductStockService {
 		
 		return product_StockDAO.getProductStock(productStockVO);
 	}
+
+	@Override
+	public void updateStock(ProductStockVO productStockVO) {
+		product_StockDAO.updateStock(productStockVO);
+		
+	}
 	
 	
 }
