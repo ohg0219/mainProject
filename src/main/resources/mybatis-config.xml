@@ -10,6 +10,7 @@
 		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>	
 		<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.thisisthat.admin.board.vo.AnswerBoardVO" alias="answerVO"/>
+		<typeAlias type="com.thisisthat.admin.point.vo.PointVO" alias="pointVO"/>
 		
 
 	</typeAliases>
@@ -31,5 +32,7 @@
 		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-category-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-product-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-register-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-point-mapping.xml"/>
 	</mappers>
 </configuration>

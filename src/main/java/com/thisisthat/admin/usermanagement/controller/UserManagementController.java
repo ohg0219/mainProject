@@ -84,7 +84,7 @@ public class UserManagementController {
 						  RedirectAttributes model) {
 		System.out.println(userId);
 		System.out.println(userPw);
-		UserVO sessionUser = (UserVO)session.getAttribute("userId");
+		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
 			return "redirect:/admin/getUser.mdo?userId="+userId;
 		}else {
