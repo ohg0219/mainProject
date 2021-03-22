@@ -3,11 +3,11 @@ package com.thisisthat.user.basket.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,9 +22,12 @@ public class UserBasketController {
 	@Autowired
 	private UserBasketItemService basketItemService;
 	
-	//화면 확인용 메서드
 	@RequestMapping("/basket.do")
-	public String basketList() {
+	public String basketList(HttpSession session,Model model) {
+		if(session.getAttribute("userId")!=null) {
+			String userId = (String) session.getAttribute("userId");
+			model.addAttribute("basketList",basketItemService.getBasketList(userId));
+		}
 		return "/user/basket";
 	}
 	
@@ -37,12 +40,11 @@ public class UserBasketController {
 		List<UserBasketItemVO> basketItemList = new ArrayList<UserBasketItemVO>();
 		for(int i = 0;i<sizeAndCount.length;i++) {
 			String[] split = sizeAndCount[i].split(":");
-			UserBasketItemVO basketItemVO = new UserBasketItemVO();
+			UserBasketItemVO basketItemVO = basketItemService.getItemInfo(productNo);
 			basketItemVO.setProductNo(productNo);
 			basketItemVO.setSelectSize(split[0]);
 			basketItemVO.setSelectCount(Integer.parseInt(split[1]));
 			basketItemVO.setProductPrice(productPrice);
-			System.out.println(basketItemVO.toString());
 			basketItemList.add(basketItemVO);
 		}
 		if(session.getAttribute("userId")==null) {

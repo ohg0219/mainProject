@@ -4,10 +4,12 @@ public class UserBasketItemVO {
 
 	private String userId;
 	private long productNo;
+	private long productPrice;
+	private String productName;
 	private String selectSize;
 	private int selectCount;
-	private long productPrice;
-	
+	private String uploadPath;
+	private String productCategory;
 	
 	public String getUserId() {
 		return userId;
@@ -40,10 +42,31 @@ public class UserBasketItemVO {
 	public void setProductPrice(long productPrice) {
 		this.productPrice = productPrice;
 	}
+	
+	public String getUploadPath() {
+		return uploadPath;
+	}
+	public void setUploadPath(String uploadPath) {
+		this.uploadPath = uploadPath;
+	}
+	public String getProductCategory() {
+		return productCategory;
+	}
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+	
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 	@Override
 	public String toString() {
-		return "UserBasketItemVO [userId=" + userId + ", productNo=" + productNo + ", selectSize=" + selectSize
-				+ ", selectCount=" + selectCount + ", productPrice=" + productPrice + "]";
+		return "UserBasketItemVO [userId=" + userId + ", productNo=" + productNo + ", productPrice=" + productPrice
+				+ ", productName=" + productName + ", selectSize=" + selectSize + ", selectCount=" + selectCount
+				+ ", uploadPath=" + uploadPath + ", productCategory=" + productCategory + "]";
 	}
 	
 	

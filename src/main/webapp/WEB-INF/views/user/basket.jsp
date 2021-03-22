@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,56 +63,74 @@
 		<div class="content">
 			<div class="basket" align="center" style="margin-top: 100px;">
 				<div class="basket_item">
-					<!-- 장바구니 아이템 1세트 -->
-					<table class="itemTable">
-						<tr>
-							<td rowspan="3" >
-								<a href=""><img class="itemImg" src="https://thisisthat.s3.ap-northeast-2.amazonaws.com/T-Logo+Tee+Black+(003)/main.jpg"></a>
-							</td>
-							<td class="itemTitle" ><a href="">T-Logo Tee Black (003)</a></td>
-							<td>&#8361; 39,000</td>
-						</tr>
-						<tr>
-							<td>[옵션 : L]</td>
-							<td align="right"><input type="button" class="deleteBtn" value="삭제"></td>
-						</tr>
-						<tr>
-							<td><div><input type="button" class="itemCount" value="-"> 1 <input type="button" class="itemCount" value="+"></div></td>
-						</tr>
-					</table>
-					<!-- 장바구니 아이템 1세트 끝 -->
-					<!-- 장바구니 아이템 2세트 -->
-					<table class="itemTable">
-						<tr>
-							<td rowspan="3" >
-								<a href=""><img class="itemImg" src="https://thisisthat.s3.ap-northeast-2.amazonaws.com/T-Logo+Tee+Black+(003)/main.jpg"></a>
-							</td>
-							<td class="itemTitle"><a href="">T-Logo Tee Black (003)</a></td>
-							<td>&#8361; 39,000</td>
-						</tr>
-						<tr>
-							<td>[옵션 : S]</td>
-							<td align="right"><input type="button" class="deleteBtn" value="삭제"></td>
-						</tr>
-						<tr>
-							<td><div><input type="button" class="itemCount" value="-"> 1 <input type="button" class="itemCount" value="+"></div></td>
-						</tr>
-					</table>
-					<!-- 장바구니 아이템 2세트 끝 -->
+					<!-- 회원 장바구니 -->
+					<c:if test="${sessionScope.userId != null }">
+						<c:set var = "subtotal" value="0" />
+						<c:forEach items="${basketList }" var="basket">
+						<table class="itemTable">
+							<tr>
+								<td rowspan="3" >
+									<a href="/itemList/getItem.do?productNo=${basket.productNo}&productCategory=${basket.productCategory}"><img class="itemImg" src="${basket.uploadPath }"></a>
+								</td>
+								<td class="itemTitle" ><a href="/itemList/getItem.do?productNo=${basket.productNo}&productCategory=${basket.productCategory}">${basket.productName }</a></td>
+								<td>&#8361; <fmt:formatNumber maxFractionDigits="3" value="${basket.productPrice }"/></td>
+							</tr>
+							<tr>
+								<td>[옵션 : ${basket.selectSize }]</td>
+								<td align="right"><input type="button" class="deleteBtn" value="삭제"></td>
+							</tr>
+							<tr>
+								<td><div><input type="button" class="itemCount" value="-"> ${basket.selectCount } <input type="button" class="itemCount" value="+"></div></td>
+							</tr>
+						</table>
+						<c:set var="subtotal" value="${total+ basket.productPrice}" />
+						</c:forEach>
+					</c:if>
+					<!-- end 회원 장바구니 -->
+					<!-- 비회원 장바구니 -->
+					<c:if test="${sessionScope.userId == null }">
+						<c:forEach items="${sessionScope.basketItem }" var="sessionBasket">
+						<table class="itemTable">
+							<tr>
+								<td rowspan="3" >
+									<a href="/itemList/getItem.do?productNo=${sessionBasket.productNo}&productCategory=${sessionBasket.productCategory}"><img class="itemImg" src="${sessionBasket.uploadPath }"></a>
+								</td>
+								<td class="itemTitle" ><a href="/itemList/getItem.do?productNo=${sessionBasket.productNo}&productCategory=${sessionBasket.productCategory}">${sessionBasket.productName }</a></td>
+								<td>&#8361; <fmt:formatNumber maxFractionDigits="3" value="${sessionBasket.productPrice }"/></td>
+							</tr>
+							<tr>
+								<td>[옵션 : ${sessionBasket.selectSize }]</td>
+								<td align="right"><input type="button" class="deleteBtn" value="삭제"></td>
+							</tr>
+							<tr>
+								<td><div><input type="button" class="itemCount" value="-"> ${sessionBasket.selectCount } <input type="button" class="itemCount" value="+"></div></td>
+							</tr>
+						</table>
+						<c:set var="subtotal" value="${total+ sessionBasket.productPrice}" />
+						</c:forEach>
+					</c:if>
+					<!-- end 비회원 장바구니 -->
 				</div>
 				<div class="basket_total" style="width:492px">
 					<table style="float: right;">
 						<tr height="30px;">
 							<td width="150px;">SUBTOTAL</td>
-							<td align="right">&#8361; 39,000</td>
+							<td align="right">&#8361; <fmt:formatNumber maxFractionDigits="3" value="${subtotal }"/></td>
 						</tr>
 						<tr height="30px;">
 							<td>배송비</td>
-							<td align="right">&#8361; 0 (무료)</td>
+							<c:set var="deliveryPay" value="2500"/>
+							<td align="right">&#8361; 
+								<c:if test="${subtotal < 30000 }"><fmt:formatNumber maxFractionDigits="3" value="${deliveryPay }"/></c:if>
+								<c:if test="${subtotal >= 30000 }">0</c:if>
+							</td>
 						</tr>
 						<tr style="font-weight: 700; height:30px;">
 							<td>TOTAL</td>
-							<td align="right">&#8361; 39,000</td>
+							<td align="right">&#8361; 
+								<c:if test="${subtotal < 30000 }"><fmt:formatNumber maxFractionDigits="3" value="${subtotal+deliveryPay }"/></c:if>
+								<c:if test="${subtotal >= 30000 }"><fmt:formatNumber maxFractionDigits="3" value="${subtotal }"/></c:if>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="2">

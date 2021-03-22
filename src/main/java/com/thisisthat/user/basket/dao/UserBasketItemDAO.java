@@ -17,4 +17,12 @@ public class UserBasketItemDAO {
 	public void insertBasket(List<UserBasketItemVO> basketItemList) {
 		sessionTemplate.insert("BasketDAO.insertBasket",basketItemList);
 	}
+	
+	public List<UserBasketItemVO> getBasketList(String userId){
+		return sessionTemplate.selectList("BasketDAO.getBasketList",userId);
+	}
+	
+	public UserBasketItemVO getItemInfo(long productNo) {
+		return sessionTemplate.selectOne("BasketDAO.getItemInfo",productNo);
+	}
 }

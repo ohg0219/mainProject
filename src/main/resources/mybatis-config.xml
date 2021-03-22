@@ -24,6 +24,7 @@
 		<mapper resource="mappings/user/user-notice-mapping.xml"/>
 		<mapper resource="mappings/user/user-answer-mapping.xml"/>
 		<mapper resource="mappings/user/user-itemlist-mapping.xml"/>
+		<mapper resource="mappings/user/user-basketlist-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />

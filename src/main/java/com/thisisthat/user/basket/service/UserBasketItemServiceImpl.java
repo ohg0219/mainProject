@@ -19,4 +19,14 @@ public class UserBasketItemServiceImpl implements UserBasketItemService {
 		basketItemDAO.insertBasket(basketItemList);
 	}
 
+	@Override
+	public List<UserBasketItemVO> getBasketList(String userId) {
+		return basketItemDAO.getBasketList(userId);
+	}
+
+	@Override
+	public UserBasketItemVO getItemInfo(long productNo) {
+		return basketItemDAO.getItemInfo(productNo);
+	}
+
 }
