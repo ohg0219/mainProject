@@ -97,7 +97,9 @@
 							<li>PASSWORD</li>
 							<li><input class="inputPw" type="password" name="password"></li>
 							<li><input class="loginBtn" type="submit" value="로그인"></li>
-							<li style="text-align: right;"><a href="#">FORGET YOUR PASSWORD?</a></li>
+							<li style="text-align: right;">								
+								<a href="findIdPassword.do">FORGET YOUR ID / PASSWORD ?</a>
+							</li>
 						</ul>
 							<div class="social_login">
 								<a href="https://kauth.kakao.com/oauth/authorize?client_id=7ff3d3c85953e4c8234ff377259bd06b&redirect_uri=http://localhost:8080/kakaologin.do&response_type=code">

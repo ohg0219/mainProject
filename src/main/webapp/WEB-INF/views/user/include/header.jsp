@@ -46,7 +46,7 @@
 					<c:if test="${sessionScope.userId != null || sessionScope.kakaoUserId != null || sessionScope.naverUserId != null }">
 						<li><a href="/logout.do">LOGOUT</a></li>
 					</c:if>
-					<li><a href="/mypage.do">MYPAGE</a></li>	
+					<li><a href="/mypage/mypage.do">MYPAGE</a></li>	
 				</c:if>
 				<li><a href="#">ORDERS</a></li>
 				<li><a href="#">BAG</a></li>
