@@ -4,6 +4,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,9 +57,16 @@ public class UserRegisterController {
 		vo.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 		userRegisterService.insertUser(vo);
 		model.addAttribute("user", vo);
-		return "/user/joinResult";
+		return "/user/loginAndRegister/joinResult";
 	}
-	
+	/**
+	 * 회원가입페이지로 이동
+	 * @return
+	 */
+	@GetMapping(value = {"/register.do"})
+	public String registerView() {
+		return "/user/loginAndRegister/register";
+	}
 	
 	
 	

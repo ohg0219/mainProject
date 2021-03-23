@@ -78,14 +78,21 @@
 	$(document).ready(function(){
 		$(".inputId").focus();
 		$(".loginBtn").on("click",function(){
-			
+			if($("input[name=id]").val()==''){
+				alert("아이디를 입력해주세요");
+				return false;
+			}
+			if($("input[name=password]").val()==''){
+				alert("비밀번호를 입력해주세요");
+				return false;
+			}
 		});
 	});
 </script>
 </head>
 <body>
 	<div class="wrap">
-		<%@include file="include/header.jsp" %>
+		<%@include file="../include/header.jsp" %>
 		<div class="content">
 			<div class="loginwrap">
 				<div class="login" >
@@ -144,7 +151,7 @@
 				</div>
 			</div>
 		</div><!-- end Content -->
-		<%@include file="include/footer.jsp" %>
+		<%@include file="../include/footer.jsp" %>
 	</div>
 </body>
 </html>
