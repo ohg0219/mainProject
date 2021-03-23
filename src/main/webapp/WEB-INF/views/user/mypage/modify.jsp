@@ -83,8 +83,8 @@
 							<li></li>
 							<li>E-MAIL 수신 *</li>
 							<li>
-								<input type="radio" name="email_check" value="email_yes"> 수신함 &nbsp;&nbsp;
-								<input type="radio" name="email_check" value="email_no"> 수신안함					
+								<input type="radio" name="check" value="email_yes"> 수신함 &nbsp;&nbsp;
+								<input type="radio" name="check" value="email_no"> 수신안함					
 							</li>
 							<li></li>
 							<li></li>

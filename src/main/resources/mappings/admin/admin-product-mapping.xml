@@ -113,7 +113,7 @@
 		delete from product_stock where product_no = #{productNo}
 	</delete>
 	<delete id="deleteProductSizeGuide">
-		delete from size_guide where product_no = #{producNo}
+		delete from size_guide where product_no = #{product_no}
 	</delete>
 	<delete id="deleteProductSizeUsed">
 		delete from size_used where product_no = #{productNo}
@@ -147,17 +147,6 @@
 		insert into product_image values
 		(#{product_no},#{upload_path},#{image_name},0)
 	</insert>
-	
-	<update id="updateProductSizeGuide">
-		update size_guide
-		set 
-		xs_size = #{xs_size},
-		s_size = #{s_size},
-		m_size = #{m_size},
-		l_size = #{l_size},
-		xl_size = #{xl_size}
-		where product_no = #{product_no} and size_item = #{size_item}
-	</update>
 	
 	<update id="updateProductSizeUsed">
 		update size_used

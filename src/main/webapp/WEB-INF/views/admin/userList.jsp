@@ -185,14 +185,14 @@ a {
 	</form>
 
 	<script>
-	//--------------------검색하는 함수
-	var msg = '${msg}';
-	var failId = '${failId}';
-	if(msg==='fail'){
-		console.log(failId);
-		document.getElementById(failId).click();
-		alert('비밀번호를 확인해 주세요');
-	}
+		//--------------------검색하는 함수
+		var msg = '${msg}';
+		var failId = '${failId}';
+		if(msg==='fail'){
+			console.log(failId);
+			document.getElementById(failId).click();
+			alert('비밀번호를 확인해 주세요');
+		}
 	
 		$(function(){
 			$("#searchBtn").click(function(){

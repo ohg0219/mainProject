@@ -41,7 +41,6 @@ public class AdminProductController {
 			@RequestParam(value = "nowPage",required = false,defaultValue = "1") String nowPage,
 			@RequestParam(value = "category",required = false,defaultValue = "all") String category,
 			@RequestParam(value = "check",required = false,defaultValue = "0") String checked,
-			
 			Model model) {
 		if(checked.equals("1")) {
 			vo.setProduct_used(1);
@@ -143,7 +142,6 @@ public class AdminProductController {
 				e.printStackTrace();
 			}
 		}
-		
 		productService.insertProduct(vo, imageList, sizeGuideList,sizeVO);
 		return "redirect:/admin/productList.mdo";
 	}
@@ -171,6 +169,7 @@ public class AdminProductController {
 		}
 		model.addAttribute("mainImage",mainImage);
 		model.addAttribute("subImage",subImage);
+		
 		String selectSizeGuideGroup = null;
 		List<AdminProductSizeGuideVO> sizeGuideList = productService.getProductSizeGuide(productNo);
 		for(AdminProductSizeGuideVO size : sizeGuideList) {
@@ -191,7 +190,6 @@ public class AdminProductController {
 			}
 		}
 		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
-		System.out.println(selectSizeGuideGroup);
 		model.addAttribute("sizeUsed",productService.getProductSizeUsed(productNo));
 		return "/admin/product/getProduct";
 	}
@@ -241,7 +239,6 @@ public class AdminProductController {
 			}
 		}
 		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
-		System.out.println(selectSizeGuideGroup);
 		model.addAttribute("sizeUsed",productService.getProductSizeUsed(productNo));
 		return "/admin/product/updateProduct";
 	}
@@ -278,7 +275,7 @@ public class AdminProductController {
 		guide1.setProduct_no(vo.getProduct_no()); guide2.setProduct_no(vo.getProduct_no()); guide3.setProduct_no(vo.getProduct_no()); guide4.setProduct_no(vo.getProduct_no());
 		sizeGuideList.add(guide1); sizeGuideList.add(guide2); sizeGuideList.add(guide3); sizeGuideList.add(guide4);
 		productService.updateProduct(vo);
-		productService.updateProductSizeGuide(sizeGuideList);
+		productService.updateProductSizeGuide(vo,sizeGuideList);
 		productService.updateProductSizeUsed(sizeVO);
 		return "redirect:/admin/getProduct.mdo?productNo="+ vo.getProduct_no();
 	}
@@ -302,6 +299,27 @@ public class AdminProductController {
 				subImage.add(image);
 			}
 		}
+		String selectSizeGuideGroup = null;
+		List<AdminProductSizeGuideVO> sizeGuideList = productService.getProductSizeGuide(productNo);
+		for(AdminProductSizeGuideVO size : sizeGuideList) {
+			String select = size.getSize_item();
+			if(select.equals("chest")) {
+				selectSizeGuideGroup = "top";
+			}else if(select.equals("waist")) {
+				selectSizeGuideGroup = "bottom";
+			}
+			switch (select) {
+			case "length":model.addAttribute("length", size);break;
+			case "chest":model.addAttribute("chest", size);break;
+			case "arm":model.addAttribute("arm", size);break;
+			case "shoulder":model.addAttribute("shoulder", size);break;
+			case "waist":model.addAttribute("waist", size);break;
+			case "thigh":model.addAttribute("thigh", size);break;
+			case "hem":model.addAttribute("hem", size);break;
+			}
+		}
+		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
+		model.addAttribute("sizeUsed",productService.getProductSizeUsed(productNo));
 		model.addAttribute("subImage",subImage);
 		return "/admin/product/updateMainImage";
 	}
@@ -352,6 +370,27 @@ public class AdminProductController {
 				mainImage = image;
 			}
 		}
+		String selectSizeGuideGroup = null;
+		List<AdminProductSizeGuideVO> sizeGuideList = productService.getProductSizeGuide(productNo);
+		for(AdminProductSizeGuideVO size : sizeGuideList) {
+			String select = size.getSize_item();
+			if(select.equals("chest")) {
+				selectSizeGuideGroup = "top";
+			}else if(select.equals("waist")) {
+				selectSizeGuideGroup = "bottom";
+			}
+			switch (select) {
+			case "length":model.addAttribute("length", size);break;
+			case "chest":model.addAttribute("chest", size);break;
+			case "arm":model.addAttribute("arm", size);break;
+			case "shoulder":model.addAttribute("shoulder", size);break;
+			case "waist":model.addAttribute("waist", size);break;
+			case "thigh":model.addAttribute("thigh", size);break;
+			case "hem":model.addAttribute("hem", size);break;
+			}
+		}
+		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
+		model.addAttribute("sizeUsed",productService.getProductSizeUsed(productNo));
 		model.addAttribute("mainImage",mainImage);
 		return "/admin/product/updateSubImage";
 	}

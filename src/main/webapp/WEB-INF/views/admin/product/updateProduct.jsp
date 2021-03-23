@@ -44,10 +44,35 @@ i<%@ page language="java" contentType="text/html; charset=UTF-8"
  }
  .in{
  	background-color: white;
+ 	width: 80px;
  }
 </style>
 <script type="text/javascript">
-	
+$(document).ready(function(){
+	$("#update").on("click",function(){
+		if($("#productName").val()==''){
+			alert("상품명을 입력하세요");
+			$("#productName").focus();
+			return false;
+		}
+		var priceType = /^[1-9]{1}[0-9]*$/g;
+		if(!priceType.test($("#productPrice").val())){
+			alert("소비자가는 숫자만 입력가능합니다.");
+			$("#productPrice").focus();
+			return false;
+		}
+		if($("#materialInfo").val()==''){
+			alert("소재정보를 입력하세요");
+			$("#materialInfo").focus();
+			return false;
+		}
+		if($("#origin").val()==''){
+			alert("원산지를 입력하세요");
+			$("#origin").focus();
+			return false;
+		}
+	});
+});
 </script>
 </head>
 <body id="page-top">
@@ -89,27 +114,27 @@ i<%@ page language="java" contentType="text/html; charset=UTF-8"
                     					</tr>
                     					<tr>
                     						<td width="150px">상품명</td>
-                    						<td  colspan="6"><input style="width: 100%" type="text" id="productName" name="product_name" value="${productInfo.product_name }"></td>
+                    						<td colspan="6"><input style="width: 100%" type="text" id="productName" name="product_name" value="${productInfo.product_name }"></td>
                     					</tr>
                     					<tr>
                     						<td>소비자가</td>
-                    						<td  colspan="6"><input type="text" id="productPrice" name="product_price" value="${productInfo.product_price }"></td>
+                    						<td colspan="6"><input type="text" id="productPrice" name="product_price" value="${productInfo.product_price }"></td>
                     					</tr>
                     					<tr>
                     						<td>소재정보</td>
-                    						<td  colspan="6"><textarea style="width: 100%" id="materialInfo" name="material_info" >${productInfo.material_info }</textarea></td>
+                    						<td colspan="6"><textarea style="width: 100%" id="materialInfo" name="material_info" >${productInfo.material_info }</textarea></td>
                     					</tr>
                     					<tr>
                     						<td>원산지</td>
-                    						<td  colspan="6"><input style="width: 100%" type="text" id="origin" name="origin" value="${productInfo.origin }"></td>
+                    						<td colspan="6"><input style="width: 100%" type="text" id="origin" name="origin" value="${productInfo.origin }"></td>
                     					</tr>
                     					<tr>
                     						<td>상품설명</td>
-                    						<td  colspan="6"><textarea style="width: 100%" id="productInfo" name="product_info">${productInfo.product_info }</textarea></td>
+                    						<td colspan="6"><textarea style="width: 100%" id="productInfo" name="product_info">${productInfo.product_info }</textarea></td>
                     					</tr>
                     					<tr>
                     						<td>적립율</td>
-                    						<td  colspan="6">
+                    						<td colspan="6">
 												<input type="number" name="product_point" value="${productInfo.product_point }">%
 											</td>
                     					</tr>
@@ -210,42 +235,42 @@ i<%@ page language="java" contentType="text/html; charset=UTF-8"
                     						<td id="sizeInfo1">LENGTH(총길이)</td>
                     						<td>
                     							<c:if test='${sizeUsed.xs_used == 0}'>
-	                    							<input class="xs in" type="text" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.xs_size}">
+	                    							<input class="xs in" type="number" step="0.01" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.xs_size}">
                     							</c:if>
                     							<c:if test='${sizeUsed.xs_used == 1}'>
-	                    							<input class="xs in" type="text" name="size1" size="5" value="${length.xs_size}">
+	                    							<input class="xs in" type="number" step="0.01" name="size1" size="5" value="${length.xs_size}">
                     							</c:if>
                     						</td>
                     						<td>
                     							<c:if test='${sizeUsed.s_used == 0}'>
-	                    							<input class="s in" type="text" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.s_size}">
+	                    							<input class="s in" type="number" step="0.01" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.s_size}">
                     							</c:if>
                     							<c:if test='${sizeUsed.s_used == 1}'>
-	                    							<input class="s in" type="text" name="size1" size="5" value="${length.s_size}">
+	                    							<input class="s in" type="number" step="0.01" name="size1" size="5" value="${length.s_size}">
                     							</c:if>
                     						</td>
                     						<td>
                     							<c:if test='${sizeUsed.m_used == 0}'>
-	                    							<input class="m in" type="text" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.m_size}">
+	                    							<input class="m in" type="number" step="0.01" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.m_size}">
                     							</c:if>
                     							<c:if test='${sizeUsed.m_used == 1}'>
-	                    							<input class="m in" type="text" name="size1" size="5" value="${length.m_size}">
+	                    							<input class="m in" type="number" step="0.01" name="size1" size="5" value="${length.m_size}">
                     							</c:if>
                     						</td>
                     						<td>
                     							<c:if test='${sizeUsed.l_used == 0}'>
-	                    							<input class="l in" type="text" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.l_size}">
+	                    							<input class="l in" type="number" step="0.01" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.l_size}">
                     							</c:if>
                     							<c:if test='${sizeUsed.l_used == 1}'>
-	                    							<input class="l in" type="text" name="size1" size="5" value="${length.l_size}">
+	                    							<input class="l in" type="number" step="0.01" name="size1" size="5" value="${length.l_size}">
                     							</c:if>
                     						</td>
 											<td>
                     							<c:if test='${sizeUsed.xl_used == 0}'>
-	                    							<input class="xl in" type="text" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.xl_size}">
+	                    							<input class="xl in" type="number" step="0.01" name="size1" size="5" style="background-color:red;" readonly="readonly" value="${length.xl_size}">
                     							</c:if>
                     							<c:if test='${sizeUsed.xl_used == 1}'>
-	                    							<input class="xl in" type="text" name="size1" size="5" value="${length.xl_size}">
+	                    							<input class="xl in" type="number" step="0.01" name="size1" size="5" value="${length.xl_size}">
                     							</c:if>
                     						</td>
                     					</tr>
@@ -260,84 +285,84 @@ i<%@ page language="java" contentType="text/html; charset=UTF-8"
                     							<c:when test="${selectSizeGuideGroup eq 'top'}">
                     								<td>
 		                    							<c:if test='${sizeUsed.xs_used == 0}'>
-			                    							<input class="xs in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.xs_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xs_used == 1}'>
-			                    							<input class="xs in" type="text" name="size2" size="5" value="${chest.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size2" size="5" value="${chest.xs_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.s_used == 0}'>
-			                    							<input class="s in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.s_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.s_used == 1}'>
-			                    							<input class="s in" type="text" name="size2" size="5" value="${chest.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size2" size="5" value="${chest.s_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.m_used == 0}'>
-			                    							<input class="m in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.m_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.m_used == 1}'>
-			                    							<input class="m in" type="text" name="size2" size="5" value="${chest.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size2" size="5" value="${chest.m_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.l_used == 0}'>
-			                    							<input class="l in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.l_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.l_used == 1}'>
-			                    							<input class="l in" type="text" name="size2" size="5" value="${chest.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size2" size="5" value="${chest.l_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.xl_used == 0}'>
-			                    							<input class="xl in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${chest.xl_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xl_used == 1}'>
-			                    							<input class="xl in" type="text" name="size2" size="5" value="${chest.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size2" size="5" value="${chest.xl_size}">
 		                    							</c:if>
 		                    						</td>
                     							</c:when>
                     							<c:otherwise>
                     								<td>
 		                    							<c:if test='${sizeUsed.xs_used == 0}'>
-			                    							<input class="xs in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.xs_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xs_used == 1}'>
-			                    							<input class="xs in" type="text" name="size2" size="5" value="${waist.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size2" size="5" value="${waist.xs_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.s_used == 0}'>
-			                    							<input class="s in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.s_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.s_used == 1}'>
-			                    							<input class="s in" type="text" name="size2" size="5" value="${waist.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size2" size="5" value="${waist.s_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.m_used == 0}'>
-			                    							<input class="m in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.m_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.m_used == 1}'>
-			                    							<input class="m in" type="text" name="size2" size="5" value="${waist.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size2" size="5" value="${waist.m_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.l_used == 0}'>
-			                    							<input class="l in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.l_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.l_used == 1}'>
-			                    							<input class="l in" type="text" name="size2" size="5" value="${waist.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size2" size="5" value="${waist.l_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.xl_used == 0}'>
-			                    							<input class="xl in" type="text" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size2" size="5" style="background-color:red;" readonly="readonly" value="${waist.xl_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xl_used == 1}'>
-			                    							<input class="xl in" type="text" name="size2" size="5" value="${chwaistest.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size2" size="5" value="${chwaistest.xl_size}">
 		                    							</c:if>
 		                    						</td>
                     							</c:otherwise>
@@ -354,84 +379,84 @@ i<%@ page language="java" contentType="text/html; charset=UTF-8"
                     							<c:when test="${selectSizeGuideGroup eq 'top'}">
                     								<td>
 		                    							<c:if test='${sizeUsed.xs_used == 0}'>
-			                    							<input class="xs in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.xs_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xs_used == 1}'>
-			                    							<input class="xs in" type="text" name="size3" size="5" value="${arm.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size3" size="5" value="${arm.xs_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.s_used == 0}'>
-			                    							<input class="s in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.s_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.s_used == 1}'>
-			                    							<input class="s in" type="text" name="size3" size="5" value="${arm.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size3" size="5" value="${arm.s_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.m_used == 0}'>
-			                    							<input class="m in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.m_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.m_used == 1}'>
-			                    							<input class="m in" type="text" name="size3" size="5" value="${arm.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size3" size="5" value="${arm.m_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.l_used == 0}'>
-			                    							<input class="l in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.l_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.l_used == 1}'>
-			                    							<input class="l in" type="text" name="size3" size="5" value="${arm.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size3" size="5" value="${arm.l_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.xl_used == 0}'>
-			                    							<input class="xl in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${arm.xl_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xl_used == 1}'>
-			                    							<input class="xl in" type="text" name="size3" size="5" value="${arm.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size3" size="5" value="${arm.xl_size}">
 		                    							</c:if>
 		                    						</td>
                     							</c:when>
                     							<c:otherwise>
                     								<td>
 		                    							<c:if test='${sizeUsed.xs_used == 0}'>
-			                    							<input class="xs in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.xs_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xs_used == 1}'>
-			                    							<input class="xs in" type="text" name="size3" size="5" value="${thigh.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size3" size="5" value="${thigh.xs_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.s_used == 0}'>
-			                    							<input class="s in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.s_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.s_used == 1}'>
-			                    							<input class="s in" type="text" name="size3" size="5" value="${thigh.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size3" size="5" value="${thigh.s_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.m_used == 0}'>
-			                    							<input class="m in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.m_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.m_used == 1}'>
-			                    							<input class="m in" type="text" name="size3" size="5" value="${thigh.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size3" size="5" value="${thigh.m_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.l_used == 0}'>
-			                    							<input class="l in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.l_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.l_used == 1}'>
-			                    							<input class="l in" type="text" name="size3" size="5" value="${thigh.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size3" size="5" value="${thigh.l_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.xl_used == 0}'>
-			                    							<input class="xl in" type="text" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size3" size="5" style="background-color:red;" readonly="readonly" value="${thigh.xl_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xl_used == 1}'>
-			                    							<input class="xl in" type="text" name="size3" size="5" value="${thigh.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size3" size="5" value="${thigh.xl_size}">
 		                    							</c:if>
 		                    						</td>
                     							</c:otherwise>
@@ -448,84 +473,84 @@ i<%@ page language="java" contentType="text/html; charset=UTF-8"
                     							<c:when test="${selectSizeGuideGroup eq 'top'}">
                     								<td>
 		                    							<c:if test='${sizeUsed.xs_used == 0}'>
-			                    							<input class="xs in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.xs_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xs_used == 1}'>
-			                    							<input class="xs in" type="text" name="size4" size="5" value="${shoulder.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size4" size="5" value="${shoulder.xs_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.s_used == 0}'>
-			                    							<input class="s in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.s_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.s_used == 1}'>
-			                    							<input class="s in" type="text" name="size4" size="5" value="${shoulder.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size4" size="5" value="${shoulder.s_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.m_used == 0}'>
-			                    							<input class="m in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.m_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.m_used == 1}'>
-			                    							<input class="m in" type="text" name="size4" size="5" value="${shoulder.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size4" size="5" value="${shoulder.m_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.l_used == 0}'>
-			                    							<input class="l in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.l_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.l_used == 1}'>
-			                    							<input class="l in" type="text" name="size4" size="5" value="${shoulder.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size4" size="5" value="${shoulder.l_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.xl_used == 0}'>
-			                    							<input class="xl in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${shoulder.xl_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xl_used == 1}'>
-			                    							<input class="xl in" type="text" name="size4" size="5" value="${shoulder.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size4" size="5" value="${shoulder.xl_size}">
 		                    							</c:if>
 		                    						</td>
                     							</c:when>
                     							<c:otherwise>
                     								<td>
 		                    							<c:if test='${sizeUsed.xs_used == 0}'>
-			                    							<input class="xs in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.xs_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xs_used == 1}'>
-			                    							<input class="xs in" type="text" name="size4" size="5" value="${hem.xs_size}">
+			                    							<input class="xs in" type="number" step="0.01" name="size4" size="5" value="${hem.xs_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.s_used == 0}'>
-			                    							<input class="s in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.s_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.s_used == 1}'>
-			                    							<input class="s in" type="text" name="size4" size="5" value="${hem.s_size}">
+			                    							<input class="s in" type="number" step="0.01" name="size4" size="5" value="${hem.s_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.m_used == 0}'>
-			                    							<input class="m in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.m_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.m_used == 1}'>
-			                    							<input class="m in" type="text" name="size4" size="5" value="${hem.m_size}">
+			                    							<input class="m in" type="number" step="0.01" name="size4" size="5" value="${hem.m_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.l_used == 0}'>
-			                    							<input class="l in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.l_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.l_used == 1}'>
-			                    							<input class="l in" type="text" name="size4" size="5" value="${hem.l_size}">
+			                    							<input class="l in" type="number" step="0.01" name="size4" size="5" value="${hem.l_size}">
 		                    							</c:if>
 		                    						</td>
                     								<td>
 		                    							<c:if test='${sizeUsed.xl_used == 0}'>
-			                    							<input class="xl in" type="text" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size4" size="5" style="background-color:red;" readonly="readonly" value="${hem.xl_size}">
 		                    							</c:if>
 		                    							<c:if test='${sizeUsed.xl_used == 1}'>
-			                    							<input class="xl in" type="text" name="size4" size="5" value="${hem.xl_size}">
+			                    							<input class="xl in" type="number" step="0.01" name="size4" size="5" value="${hem.xl_size}">
 		                    							</c:if>
 		                    						</td>
                     							</c:otherwise>

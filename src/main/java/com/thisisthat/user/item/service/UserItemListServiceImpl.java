@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.thisisthat.user.item.dao.UserItemListDAO;
 import com.thisisthat.user.item.vo.UserItemImageVO;
 import com.thisisthat.user.item.vo.UserItemListVO;
+import com.thisisthat.user.item.vo.UserItemSizeGuideVO;
+import com.thisisthat.user.item.vo.UserItemSizeUsedVO;
 import com.thisisthat.user.item.vo.UserItemVO;
 
 @Service
@@ -29,6 +31,16 @@ public class UserItemListServiceImpl implements UserItemListService {
 	@Override
 	public List<UserItemImageVO> getItemImage(long productNo) {
 		return itemListDAO.getItemImage(productNo);
+	}
+
+	@Override
+	public List<UserItemSizeGuideVO> getItemSizeGuide(long productNo) {
+		return itemListDAO.getItemSizeGuide(productNo);
+	}
+
+	@Override
+	public UserItemSizeUsedVO getItemSizeUsed(long productNo) {
+		return itemListDAO.getItemSizeUsed(productNo);
 	}
 
 }

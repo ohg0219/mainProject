@@ -30,7 +30,7 @@ public interface AdminProductService {
 	
 	List<AdminProductSizeGuideVO> getProductSizeGuide(long productNo);
 	AdminProductSizeUsedVO getProductSizeUsed(long productNo);
-	void updateProductSizeGuide(List<AdminProductSizeGuideVO> sizeGuideList);
+	void updateProductSizeGuide(AdminProductVO vo,List<AdminProductSizeGuideVO> sizeGuideList);
 	void updateProductSizeUsed(AdminProductSizeUsedVO sizeVO);
 	
 	

@@ -25,8 +25,6 @@ public class UserManagementController {
 	@Autowired
 	private UserManagementService userService;
 
-
-
 	@GetMapping("/userList.mdo")
 	public String getUserList(Model model, UserVO vo) {
 		System.out.println("1 :"+ vo.getSelect());
@@ -84,7 +82,7 @@ public class UserManagementController {
 						  RedirectAttributes model) {
 		System.out.println(userId);
 		System.out.println(userPw);
-		UserVO sessionUser = (UserVO)session.getAttribute("userId");
+		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
 			return "redirect:/admin/getUser.mdo?userId="+userId;
 		}else {
@@ -97,7 +95,6 @@ public class UserManagementController {
 	}
 	@GetMapping("staffList.mdo")
 	public String getStaffList(UserVO vo, Model model) {
-		List<UserVO> staff = userService.staffList(vo);
 
 		List<UserVO> userList = userService.staffList(vo);
 		List<UserVO> newUserList = new ArrayList<UserVO>();
@@ -110,7 +107,7 @@ public class UserManagementController {
 			}
 			String Name[] = user.getUserName().split("");
 			String newName = "";
-			for (int i = 0; i < Name.length; i++) {
+			for (int i = 0; i < Name.length; i++)	 {
 				if (i != 0 || i == Name.length) {
 					newName += "*";
 				} else {

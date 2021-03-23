@@ -10,6 +10,7 @@
 		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>	
 		<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.thisisthat.admin.board.vo.AnswerBoardVO" alias="answerVO"/>
+		<typeAlias type="com.thisisthat.admin.point.vo.PointVO" alias="pointVO"/>
 		
 
 	</typeAliases>
@@ -17,12 +18,14 @@
 	<mappers>
 		<!-- 매퍼파일 -->		
 		<mapper resource="mappings/user/user-mypage-modify-mapping.xml" />
+		<mapper resource="mappings/user/user-find-idpw-mapping.xml" />
 		<mapper resource="mappings/user/user-mapping.xml" />
 		<mapper resource="mappings/user/user-loginout-mapping.xml" />
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
 		<mapper resource="mappings/user/user-notice-mapping.xml"/>
 		<mapper resource="mappings/user/user-answer-mapping.xml"/>
 		<mapper resource="mappings/user/user-itemlist-mapping.xml"/>
+		<mapper resource="mappings/user/user-basketlist-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
@@ -31,6 +34,11 @@
 		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-category-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-product-mapping.xml"/>
+<<<<<<< HEAD
 		<mapper resource="mappings/admin/admin-product_stock-mapping.xml"/>
+=======
+		<mapper resource="mappings/admin/admin-register-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-point-mapping.xml"/>
+>>>>>>> d07fdf4daa372ea882da2871f609cb20a7909617
 	</mappers>
 </configuration>
