@@ -41,7 +41,7 @@ public class PointController {
 		search.setSearchType(searchType);
 		search.setParameter(parameter);
 		
-		PagingVO paging = new PagingVO(pointService.getTotal(search), Integer.parseInt(nowPage), 1);
+		PagingVO paging = new PagingVO(pointService.getTotal(search), Integer.parseInt(nowPage), 15);
 		List<UserVO> userList = pointService.getUserList(paging,search);
 
 		//--페이징end--
@@ -70,7 +70,7 @@ public class PointController {
 		
 		PointVO point = pointService.getPoint(userId);// 총 포인트
 		
-		PagingVO paging = new PagingVO(pointService.getPointCount(userId), Integer.parseInt(nowPage), 1);
+		PagingVO paging = new PagingVO(pointService.getPointCount(userId), Integer.parseInt(nowPage), 15);
 		List<PointVO> pointList=pointService.getPoints(userId, paging);
 		model.addAttribute("paging",paging);
 		model.addAttribute("userId",userId);

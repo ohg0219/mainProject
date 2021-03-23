@@ -103,7 +103,6 @@ public class CouponController {
 	public String updateCouponPro(@RequestParam("coupon_name")String coupon_name,@RequestParam("coupon_price")Long coupon_price,@RequestParam("coupon_no")Long coupon_no, @RequestParam(value="coupon_first")String first, @RequestParam(value="coupon_last")String last)throws Exception{
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd");
-		System.out.println(coupon_no);
 		
 		Date coupon_first = sdf1.parse(first);
 		Date coupon_last = sdf2.parse(last);

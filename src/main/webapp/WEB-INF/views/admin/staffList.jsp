@@ -147,7 +147,7 @@ a {
 	</div>
 	
 		
-<form action="/admin/pwCheck.mdo" method="post">
+<form action="/admin/StaffPwCheck.mdo" method="post">
 		<div class="modal fade" id="getUserModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -182,6 +182,9 @@ a {
 		console.log(failId);
 		document.getElementById(failId).click();
 		alert('비밀번호를 확인해 주세요');
+	}
+	if(msg === 'noPw'){
+		alert('잘못된 접근입니다.');
 	}
 	
 	//--------------------검색하는 함수

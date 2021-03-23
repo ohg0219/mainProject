@@ -26,7 +26,7 @@ public class UserManagementController {
 	private UserManagementService userService;
 
 	@GetMapping("/userList.mdo")
-	public String getUserList(Model model, UserVO vo) {
+	public String getUserList(Model model, UserVO vo, @RequestParam(value="msg", required = false)String msg) {
 		System.out.println("1 :"+ vo.getSelect());
 		System.out.println("2 :"+ vo.getSearch());
 		List<UserVO> getUserList = userService.getUserList(vo);
@@ -54,10 +54,11 @@ public class UserManagementController {
 			}
 			userList.add(userTemp);
 		}
+		if(msg != null) model.addAttribute("msg","noPw");
 		model.addAttribute("userInfo", userList);
 		return "/admin/userList";
 	}
-	
+
 
 	@GetMapping("/getUser.mdo")
 	public String getUser(Model model, @RequestParam(value = "userId") String id){
@@ -77,24 +78,44 @@ public class UserManagementController {
 
 	@PostMapping("/pwCheck.mdo")
 	public String pwCheck(@RequestParam("userId")String userId,
-						  @RequestParam("userPw")String userPw, 
-						  HttpSession session,
-						  RedirectAttributes model) {
+			@RequestParam("userPw")String userPw, 
+			HttpSession session,
+			RedirectAttributes attr) {
 		System.out.println(userId);
 		System.out.println(userPw);
 		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
+			attr.addFlashAttribute("msg","login");
 			return "redirect:/admin/getUser.mdo?userId="+userId;
 		}else {
-			model.addFlashAttribute("msg","fail");
-			model.addFlashAttribute("failId",userId);
+			attr.addFlashAttribute("msg","fail");
+			attr.addFlashAttribute("failId",userId);
 			return "redirect:/admin/userList.mdo";
 		}
 
-		
+
 	}
-	@GetMapping("staffList.mdo")
-	public String getStaffList(UserVO vo, Model model) {
+	@PostMapping("/StaffPwCheck.mdo")
+	public String StaffPwCheck(@RequestParam("userId")String userId,
+			@RequestParam("userPw")String userPw, 
+			HttpSession session,
+			RedirectAttributes model) {
+		System.out.println(userId);
+		System.out.println(userPw);
+		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
+		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
+			model.addFlashAttribute("msg","login");
+			return "redirect:/admin/getStaff.mdo?userId="+userId;
+		}else {
+			model.addFlashAttribute("msg","fail");
+			model.addFlashAttribute("failId",userId);
+			return "redirect:/admin/staffList.mdo";
+		}
+
+
+	}
+	@GetMapping("/staffList.mdo")
+	public String getStaffList(UserVO vo, Model model,@RequestParam(value="msg", required = false)String msg) {
 
 		List<UserVO> userList = userService.staffList(vo);
 		List<UserVO> newUserList = new ArrayList<UserVO>();
@@ -117,6 +138,7 @@ public class UserManagementController {
 			user.setUserName(newName);
 			newUserList.add(user);
 		}
+		if(msg !=null) model.addAttribute("msg","noPw");
 		model.addAttribute("staffInfo", newUserList);
 		return "/admin/staffList";
 	}
@@ -133,6 +155,7 @@ public class UserManagementController {
 			newPhone = phone1 + bar + phone2 + bar + phone3;
 			uservo.setUserPhone(newPhone);
 		}
+		System.out.println(uservo.toString());
 		model.addAttribute("user", uservo);
 		return "/admin/getStaff";
 	}
@@ -142,14 +165,14 @@ public class UserManagementController {
 		vo.setUserId(id);
 		vo.setUserRole(state);
 		userService.userUpdate(vo);
-		
+
 		return "redirect:/getUser.mdo?userId="+id;
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 
 }
