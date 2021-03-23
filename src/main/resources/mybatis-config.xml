@@ -18,12 +18,14 @@
 	<mappers>
 		<!-- 매퍼파일 -->		
 		<mapper resource="mappings/user/user-mypage-modify-mapping.xml" />
+		<mapper resource="mappings/user/user-find-idpw-mapping.xml" />
 		<mapper resource="mappings/user/user-mapping.xml" />
 		<mapper resource="mappings/user/user-loginout-mapping.xml" />
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
 		<mapper resource="mappings/user/user-notice-mapping.xml"/>
 		<mapper resource="mappings/user/user-answer-mapping.xml"/>
 		<mapper resource="mappings/user/user-itemlist-mapping.xml"/>
+		<mapper resource="mappings/user/user-basketlist-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
