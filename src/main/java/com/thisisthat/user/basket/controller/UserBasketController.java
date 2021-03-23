@@ -18,10 +18,15 @@ import com.thisisthat.user.basket.vo.UserBasketItemVO;
 @Controller
 public class UserBasketController {
 
-	
 	@Autowired
 	private UserBasketItemService basketItemService;
-	
+
+	/**
+	 * 장바구니 목록 
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/basket.do")
 	public String basketList(HttpSession session,Model model) {
 		if(session.getAttribute("userId")!=null) {
@@ -30,7 +35,14 @@ public class UserBasketController {
 		}
 		return "/user/basket";
 	}
-	
+	/**
+	 * 장바구니에 담기 버튼 (비회원의 경우 세션에, 회원의 경우 basket 테이블에 저장)
+	 * @param session
+	 * @param productNo
+	 * @param selectItem
+	 * @param productPrice
+	 * @return
+	 */
 	@GetMapping("/insertbasket.do")
 	public String insertBasket(HttpSession session,
 			@RequestParam("productNo")long productNo,
@@ -58,5 +70,10 @@ public class UserBasketController {
 		}
 		return "redirect:/basket.do";
 	}
+	
+	
+	
+	
+	
 	
 }

@@ -26,12 +26,14 @@ public class MyPageController {
 			id = (String) session.getAttribute("userId");
 		System.out.println(id);
 		UserRegisterVO user = service.modifyView(id);
-		String phone1 = user.getPhone().substring(0, 3);
-		String phone2 = user.getPhone().substring(3, 7);
-		String phone3 = user.getPhone().substring(7, 11);
-		model.addAttribute("phone1", phone1);
-		model.addAttribute("phone2", phone2);
-		model.addAttribute("phone3", phone3);
+		if(user.getPhone()!=null) {
+			String phone1 = user.getPhone().substring(0, 3);
+			String phone2 = user.getPhone().substring(3, 7);
+			String phone3 = user.getPhone().substring(7, 11);
+			model.addAttribute("phone1", phone1);
+			model.addAttribute("phone2", phone2);
+			model.addAttribute("phone3", phone3);
+		}
 		model.addAttribute("modify", user);
 		System.out.println(user.toString());
 		return "/user/mypage/modify";

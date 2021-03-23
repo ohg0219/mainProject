@@ -16,7 +16,7 @@
 	<insert id="insertBasket" >
 		insert into basket values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.userId},#{item.productNo}, #{item.selectSize}, #{item.productPrice}, #{item.selectCount})
+			(#{item.userId}, #{item.productNo}, #{item.selectSize}, #{item.productPrice}, #{item.selectCount})
 		</foreach>
 	</insert>
 	

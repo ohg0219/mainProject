@@ -147,7 +147,7 @@ a {
 	</div>
 	
 		
-<form action="/admin/pwCheck.mdo" method="post">
+<form action="/admin/StaffPwCheck.mdo" method="post">
 		<div class="modal fade" id="getUserModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
