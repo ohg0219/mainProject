@@ -155,6 +155,11 @@ a {
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+		var msg = '${msg}';
+		if(msg != 'login'){
+			location.href = "/admin/staffList.mdo?msg=noPw";
+		}
+	</script>
 </body>
 </html>

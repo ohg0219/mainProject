@@ -26,7 +26,7 @@ public class UserManagementController {
 	private UserManagementService userService;
 
 	@GetMapping("/userList.mdo")
-	public String getUserList(Model model, UserVO vo) {
+	public String getUserList(Model model, UserVO vo, @RequestParam(value="msg", required = false)String msg) {
 		System.out.println("1 :"+ vo.getSelect());
 		System.out.println("2 :"+ vo.getSearch());
 		List<UserVO> getUserList = userService.getUserList(vo);
@@ -54,6 +54,7 @@ public class UserManagementController {
 			}
 			userList.add(userTemp);
 		}
+		if(msg != null) model.addAttribute("msg","noPw");
 		model.addAttribute("userInfo", userList);
 		return "/admin/userList";
 	}
@@ -79,15 +80,16 @@ public class UserManagementController {
 	public String pwCheck(@RequestParam("userId")String userId,
 			@RequestParam("userPw")String userPw, 
 			HttpSession session,
-			RedirectAttributes model) {
+			RedirectAttributes attr) {
 		System.out.println(userId);
 		System.out.println(userPw);
 		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
+			attr.addFlashAttribute("msg","login");
 			return "redirect:/admin/getUser.mdo?userId="+userId;
 		}else {
-			model.addFlashAttribute("msg","fail");
-			model.addFlashAttribute("failId",userId);
+			attr.addFlashAttribute("msg","fail");
+			attr.addFlashAttribute("failId",userId);
 			return "redirect:/admin/userList.mdo";
 		}
 
@@ -102,6 +104,7 @@ public class UserManagementController {
 		System.out.println(userPw);
 		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
+			model.addFlashAttribute("msg","login");
 			return "redirect:/admin/getStaff.mdo?userId="+userId;
 		}else {
 			model.addFlashAttribute("msg","fail");
@@ -112,7 +115,7 @@ public class UserManagementController {
 
 	}
 	@GetMapping("/staffList.mdo")
-	public String getStaffList(UserVO vo, Model model) {
+	public String getStaffList(UserVO vo, Model model,@RequestParam(value="msg", required = false)String msg) {
 
 		List<UserVO> userList = userService.staffList(vo);
 		List<UserVO> newUserList = new ArrayList<UserVO>();
@@ -135,6 +138,7 @@ public class UserManagementController {
 			user.setUserName(newName);
 			newUserList.add(user);
 		}
+		if(msg !=null) model.addAttribute("msg","noPw");
 		model.addAttribute("staffInfo", newUserList);
 		return "/admin/staffList";
 	}
