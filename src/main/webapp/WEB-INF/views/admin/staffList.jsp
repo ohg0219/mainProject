@@ -183,6 +183,9 @@ a {
 		document.getElementById(failId).click();
 		alert('비밀번호를 확인해 주세요');
 	}
+	if(msg === 'noPw'){
+		alert('잘못된 접근입니다.');
+	}
 	
 	//--------------------검색하는 함수
 	$(function(){
