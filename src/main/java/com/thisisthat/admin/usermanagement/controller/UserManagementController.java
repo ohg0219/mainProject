@@ -57,7 +57,7 @@ public class UserManagementController {
 		model.addAttribute("userInfo", userList);
 		return "/admin/userList";
 	}
-	
+
 
 	@GetMapping("/getUser.mdo")
 	public String getUser(Model model, @RequestParam(value = "userId") String id){
@@ -77,9 +77,9 @@ public class UserManagementController {
 
 	@PostMapping("/pwCheck.mdo")
 	public String pwCheck(@RequestParam("userId")String userId,
-						  @RequestParam("userPw")String userPw, 
-						  HttpSession session,
-						  RedirectAttributes model) {
+			@RequestParam("userPw")String userPw, 
+			HttpSession session,
+			RedirectAttributes model) {
 		System.out.println(userId);
 		System.out.println(userPw);
 		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
@@ -91,9 +91,27 @@ public class UserManagementController {
 			return "redirect:/admin/userList.mdo";
 		}
 
-		
+
 	}
-	@GetMapping("staffList.mdo")
+	@PostMapping("/StaffPwCheck.mdo")
+	public String StaffPwCheck(@RequestParam("userId")String userId,
+			@RequestParam("userPw")String userPw, 
+			HttpSession session,
+			RedirectAttributes model) {
+		System.out.println(userId);
+		System.out.println(userPw);
+		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
+		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
+			return "redirect:/admin/getStaff.mdo?userId="+userId;
+		}else {
+			model.addFlashAttribute("msg","fail");
+			model.addFlashAttribute("failId",userId);
+			return "redirect:/admin/staffList.mdo";
+		}
+
+
+	}
+	@GetMapping("/staffList.mdo")
 	public String getStaffList(UserVO vo, Model model) {
 
 		List<UserVO> userList = userService.staffList(vo);
@@ -133,6 +151,7 @@ public class UserManagementController {
 			newPhone = phone1 + bar + phone2 + bar + phone3;
 			uservo.setUserPhone(newPhone);
 		}
+		System.out.println(uservo.toString());
 		model.addAttribute("user", uservo);
 		return "/admin/getStaff";
 	}
@@ -142,14 +161,14 @@ public class UserManagementController {
 		vo.setUserId(id);
 		vo.setUserRole(state);
 		userService.userUpdate(vo);
-		
+
 		return "redirect:/getUser.mdo?userId="+id;
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 
 }
