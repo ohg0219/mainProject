@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thisisthat.user.basket.service.UserBasketItemService;
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
@@ -34,47 +35,6 @@ public class UserBasketController {
 			model.addAttribute("basketList",basketItemService.getBasketList(userId));
 		}
 		return "/user/payment/basket";
-	}
-	/**
-	 * 장바구니에 담기 버튼 (비회원의 경우 세션에, 회원의 경우 basket 테이블에 저장)
-	 * @param session
-	 * @param productNo
-	 * @param selectItem
-	 * @param productPrice
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	@GetMapping("/insertbasket.do")
-	public String insertBasket(HttpSession session,
-			@RequestParam("productNo")long productNo,
-			@RequestParam("selectItem")String selectItem,
-			@RequestParam("productPrice")long productPrice) {
-		String[] sizeAndCount = selectItem.split("/");
-		List<UserBasketItemVO> basketItemList = new ArrayList<UserBasketItemVO>();
-		for(int i = 0;i<sizeAndCount.length;i++) {
-			String[] split = sizeAndCount[i].split(":");
-			UserBasketItemVO basketItemVO = basketItemService.getItemInfo(productNo);
-			basketItemVO.setProductNo(productNo);
-			basketItemVO.setSelectSize(split[0]);
-			basketItemVO.setSelectCount(Integer.parseInt(split[1]));
-			basketItemVO.setProductPrice(productPrice);
-			basketItemList.add(basketItemVO);
-		}
-		if(session.getAttribute("userId")==null) {
-			if(session.getAttribute("basketItem")==null) {
-				session.setAttribute("basketItem", basketItemList);
-			}else {
-				List<UserBasketItemVO> basketItem = (List<UserBasketItemVO>) session.getAttribute("basketItem");
-				basketItem.addAll(basketItemList);
-			}
-		}else {
-			String userId = (String) session.getAttribute("userId");
-			for(UserBasketItemVO vo : basketItemList) {
-				vo.setUserId(userId);
-			}
-			basketItemService.insertBasket(basketItemList);
-		}
-		return "redirect:/basket.do";
 	}
 	/**
 	 * 회원 장바구니 상품 삭제
@@ -138,10 +98,64 @@ public class UserBasketController {
 				}else {
 					basketItem.get(i).setSelectCount(basketItem.get(i).getSelectCount()-1);
 				}
-				
 			}
 		}
 		return "redirect:/basket.do";
 	}
+	
+	/**
+	 * 장바구니 상품 등록
+	 */
+	@RequestMapping("/insertBasket.do")
+	@ResponseBody
+	public String insertBasket(HttpSession session,
+			@RequestParam("productNo")long productNo,
+			@RequestParam("selectItem")String selectItem) {
+		String[] sizeAndCount = selectItem.split("/");
+		List<UserBasketItemVO> getItemList = new ArrayList<UserBasketItemVO>();
+		for(int i = 0;i<sizeAndCount.length;i++) {
+			String[] split = sizeAndCount[i].split(":");
+			UserBasketItemVO basketItemVO = basketItemService.getItemInfo(productNo);
+			basketItemVO.setProductNo(productNo);
+			basketItemVO.setSelectSize(split[0]);
+			basketItemVO.setSelectCount(Integer.parseInt(split[1]));
+			getItemList.add(basketItemVO);
+		}
+		//회원 장바구니 추가 + 중복체크
+		if(session.getAttribute("userId")!=null) {
+			String userId = (String) session.getAttribute("userId");
+			List<UserBasketItemVO> dbBasketList = basketItemService.getBasketList(userId);
+			for(UserBasketItemVO dbBasket : dbBasketList) {
+				for(UserBasketItemVO getItem : getItemList) {
+					if(dbBasket.getProductNo() == getItem.getProductNo()
+							&& dbBasket.getSelectSize().equals(getItem.getSelectSize())) {
+						return "fail";
+					}
+				}
+			}
+			for(UserBasketItemVO vo : getItemList) {
+				vo.setUserId(userId);
+			}
+			basketItemService.insertBasket(getItemList);
+		}else {//비회원 장바구니 추가 + 중복체크
+			//비회원 장바구니 존재시
+			if(session.getAttribute("basketItem")!=null) {
+				List<UserBasketItemVO> basketItem = (List<UserBasketItemVO>) session.getAttribute("basketItem");
+				for(UserBasketItemVO basket : basketItem) {
+					for(UserBasketItemVO getItem : getItemList) {
+						if(basket.getProductNo() == getItem.getProductNo()
+								&& basket.getSelectSize().equals(getItem.getSelectSize())) {
+							return "fail";
+						}
+					}
+				}
+				basketItem.addAll(getItemList);
+			}else {
+				session.setAttribute("basketItem", getItemList);
+			}
+		}
+		return "";
+	}
+	
 	
 }
