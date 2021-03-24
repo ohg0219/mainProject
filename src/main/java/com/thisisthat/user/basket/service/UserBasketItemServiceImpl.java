@@ -29,4 +29,14 @@ public class UserBasketItemServiceImpl implements UserBasketItemService {
 		return basketItemDAO.getItemInfo(productNo);
 	}
 
+	@Override
+	public void deleteUserBasket(UserBasketItemVO vo) {
+		basketItemDAO.deleteUserBasket(vo);
+	}
+
+	@Override
+	public void updateUserBasket(UserBasketItemVO vo) {
+		basketItemDAO.updateUserBasket(vo);
+	}
+
 }

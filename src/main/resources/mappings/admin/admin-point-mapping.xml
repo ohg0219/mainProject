@@ -33,8 +33,10 @@
 	
 	<select id="getUserList" resultMap="resultUser">
 		select * from this_user where <![CDATA[ user_role > 50  ]]>
-			and
+			
+			
 		<if test="searchType != 'all'">
+		and
 			<if test="searchType == 'id'">
 					user_id
 			</if>		
@@ -43,9 +45,11 @@
 			</if>		
 			like '%'||#{parameter}||'%'
 		</if>
-		<if test="searchType == 'all'">
+		<if test="searchType == 'all' and parameter !=''">
+		and
 			user_id like '%'||#{parameter}||'%' or nick_name like '%'||#{parameter}||'%' or user_name like '%'||#{parameter}||'%'
 		</if>
+		
 		 order by in_date desc OFFSET #{start} limit #{cntPerPage} ;
 	</select>
 	
@@ -53,13 +57,13 @@
 		insert into user_point values(#{userId},#{pointDate},#{point},#{pointContent});
 	</insert>
 	<insert id="insertUsers">
-		insert into user_point (user_id) (select user_id from this_user where user_role <![CDATA[> 50]]>)
+		insert into user_point (user_id) (select user_id from this_user where  <![CDATA[user_role > 50]]>)
 	</insert>
 	<update id="updatePoints">
 		update user_point set point_date = #{pointDate}, point = #{point}, point_content = #{pointContent} where point is null;
 	</update>
 	<select id="getTotal" resultType="Integer">
-		select count(*) from this_user where user_role <![CDATA[> 50]]>
+		select count(*) from this_user where  <![CDATA[user_role > 50]]>
 			and
 		<if test="searchType != 'all'">
 			<if test="searchType == 'id'">
@@ -75,10 +79,10 @@
 		</if>
 	</select>
 	<select id="getUser">
-		select * from this_user where user_id = #{userId};
+		select * from this_user where user_id = #{userId} and  <![CDATA[user_role > 50]]>;
 	</select>
 	<select id="getPoints" resultMap="resultPoint">
-		select * from user_point where user_id = #{userId} order by point_date desc OFFSET #{start} limit #{cntPerPage};
+		select * from user_point where user_id = #{userId}  order by point_date desc OFFSET #{start} limit #{cntPerPage};
 	</select>
 	<delete id="deletePoint">
 		delete from user_point where point_num = ${pointNum}

@@ -17,6 +17,19 @@ public class UserLoginOutController {
 	private UserLoginOutService userLoginOutService;
 	
 	/**
+	 * 로그인페이지로 이동
+	 * @return
+	 */
+	@RequestMapping(value = {"/login.do"})
+	public String loginView(HttpSession session) {
+		if(session.getAttribute("userId")!=null || session.getAttribute("kakaoUserId") != null || 
+				session.getAttribute("naverUserId") != null || session.getAttribute("googleUserId") != null) {
+			return "redirect:/main.do";
+		}
+		return "/user/loginAndRegister/login";
+	}
+	
+	/**
 	 * 회원 로그인 처리 (로그인시 세션에 저장)
 	 * @param id
 	 * @param password

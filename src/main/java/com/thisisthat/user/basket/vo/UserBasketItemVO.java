@@ -10,6 +10,7 @@ public class UserBasketItemVO {
 	private int selectCount;
 	private String uploadPath;
 	private String productCategory;
+	private String type;
 	
 	public String getUserId() {
 		return userId;
@@ -62,11 +63,17 @@ public class UserBasketItemVO {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
 		return "UserBasketItemVO [userId=" + userId + ", productNo=" + productNo + ", productPrice=" + productPrice
 				+ ", productName=" + productName + ", selectSize=" + selectSize + ", selectCount=" + selectCount
-				+ ", uploadPath=" + uploadPath + ", productCategory=" + productCategory + "]";
+				+ ", uploadPath=" + uploadPath + ", productCategory=" + productCategory + ", type=" + type + "]";
 	}
 	
 	

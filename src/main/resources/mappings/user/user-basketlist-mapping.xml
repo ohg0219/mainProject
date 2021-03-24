@@ -35,4 +35,19 @@
 		and pro.product_no = #{productNo}
 	</select>
 	
+	<delete id="deleteUserBasket">
+		delete from basket where user_id = #{userId} and product_no = #{productNo} and select_size = #{selectSize}
+	</delete>
+	
+	<update id="updateUserBasket">
+		update basket set select_count = (select select_count from basket where user_id=#{userId} and product_no = #{productNo} and select_size = #{selectSize})
+		<if test="type == 'plus'">
+			+1
+		</if>
+		<if test="type == 'minus'">
+			-1
+		</if>
+		where user_id=#{userId} and product_no = #{productNo} and select_size = #{selectSize}
+	</update>
+	
 </mapper>

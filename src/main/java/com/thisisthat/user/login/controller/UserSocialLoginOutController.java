@@ -90,7 +90,7 @@ public class UserSocialLoginOutController {
 	 */
 	@RequestMapping("/naverLoginResult.do")
 	public String naverLoginCallback() {
-		return "/user/naverLoginCallback";
+		return "/user/loginAndRegister/naverLoginCallback";
 	}
 	
 	/**

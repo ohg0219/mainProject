@@ -133,13 +133,13 @@ $(document).ready(function (e){
 	    $(".bigPictureWrapper").css("display","flex").show();
 	    $(".bigPicture")
 	    .html("<img src='"+fileCallPath+"' >")
-	    .animate({width:'100%', height: '100%'}, 1000);
+	    .animate({width:'100%', height: '100%'}, 0);
 	  }//end fileCallPath
 	$(".bigPictureWrapper").on("click", function(e){
-	    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+	    $(".bigPicture").animate({width:'0%', height: '0%'}, 0);
 	    setTimeout(function(){
 	      $('.bigPictureWrapper').hide();
-	    }, 1000);
+	    }, 0);
 	  });//end bigWrapperClick event
 });
 $(document).ready(function(){
