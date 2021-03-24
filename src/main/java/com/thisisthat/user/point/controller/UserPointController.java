@@ -26,12 +26,26 @@ public class UserPointController {
 		if(session.getAttribute("userId") !=null) {
 			id = (String) session.getAttribute("userId");
 		}
-		
+		/**
+		 * 사용 가능 포인트
+		 */
 		userPointVO.setUser_id(id);
 		UserPointVO pointSum = userPointService.pointsum(userPointVO);
 		
 		model.addAttribute("pointSum", pointSum);
+
+		/**
+		 * 사용 포인트
+		 */
+		userPointVO.setUser_id(id);
+		UserPointVO usingSum = userPointService.usingSum(userPointVO);
 		
+		model.addAttribute("usingSum", usingSum);
+		
+		
+		/**
+		 * 리스트 보기
+		 */
 		userPointVO.setUser_id(id);
 		
 		List<UserPointVO> pointList = userPointService.pointList(userPointVO);

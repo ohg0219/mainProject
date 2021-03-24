@@ -23,6 +23,11 @@ public class UserPointServiceImpl implements UserPointService {
 	public UserPointVO pointsum(UserPointVO userPointVO) {
 		return userPointDAO.pointSum(userPointVO);
 	}
+
+	@Override
+	public UserPointVO usingSum(UserPointVO userPointVO) {
+		return userPointDAO.usingSum(userPointVO);
+	}
 	
 	
 }//end class

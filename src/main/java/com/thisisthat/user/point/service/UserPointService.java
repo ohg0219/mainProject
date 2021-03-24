@@ -11,6 +11,8 @@ public interface UserPointService {
 
 	UserPointVO pointsum(UserPointVO userPointVO);
 
+	UserPointVO usingSum(UserPointVO userPointVO);
+
 	
 
 }

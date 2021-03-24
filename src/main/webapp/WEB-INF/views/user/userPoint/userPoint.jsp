@@ -307,7 +307,7 @@ a.dual {
             			</li>
             			<li class="">
                 			<strong class="title">사용된 포인트</strong>
-                			<strong class="data">0P</strong>
+                			<strong class="data">${usingSum.sum }P</strong>
             			</li>
             			<li class="etc">
                 			<strong class="title">미가용 포인트</strong>

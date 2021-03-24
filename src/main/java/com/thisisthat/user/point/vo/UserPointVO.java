@@ -10,6 +10,7 @@ public class UserPointVO {
 	private String point_content;
 	private int point_num;
 	private int sum;
+	private int usingsum;
 	
 	public String getUser_id() {
 		return user_id;
@@ -48,11 +49,19 @@ public class UserPointVO {
 	public void setSum(int sum) {
 		this.sum = sum;
 	}
+	public int getUsingsum() {
+		return usingsum;
+	}
+	public void setUsingsum(int usingsum) {
+		this.usingsum = usingsum;
+	}
 	@Override
 	public String toString() {
 		return "UserPointVO [user_id=" + user_id + ", point_date=" + point_date + ", point=" + point
-				+ ", point_content=" + point_content + ", point_num=" + point_num + ", sum=" + sum + "]";
+				+ ", point_content=" + point_content + ", point_num=" + point_num + ", sum=" + sum + ", usingsum="
+				+ usingsum + "]";
 	}
+	
 	
 	
 	
