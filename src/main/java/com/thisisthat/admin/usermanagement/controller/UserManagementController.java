@@ -113,7 +113,7 @@ public class UserManagementController {
 	}
 	@GetMapping("/staffList.mdo")
 	public String getStaffList(UserVO vo, Model model) {
-
+		
 		List<UserVO> userList = userService.staffList(vo);
 		List<UserVO> newUserList = new ArrayList<UserVO>();
 		for (UserVO user : userList) {
