@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>thisisthat® 디스이즈댓</title>
+<title>thisisthat® MyPage</title>
 <link rel="stylesheet" href="/resources/user/css/common.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
@@ -281,7 +283,7 @@ a.dual {
             				<a href="/mypage/modify.do">profile</a>
             				<a href="/mypage/addr.do">address book</a>
 							<a href="/mypage/orderlist.do">orders</a>
-            				<a href="/user/userPoint.do" >point</a>
+            				<a href="/mypage/point.do">point</a>
             				<a href="/mypage/coupon.do">coupon</a>
         				</div>
 					</div>
@@ -289,8 +291,6 @@ a.dual {
         	    	<div class="xans-element- xans-myshop xans-myshop-benefit">
         	    		<div class="infoWrap">
                 			<div class="myInfo">
-                    			<strong class="name"><span>박진수</span></strong>
-                    			<strong class="group">[N01]</strong>
                				</div>
                			</div>
                		</div>
@@ -298,29 +298,48 @@ a.dual {
    					<div class="xans-element- xans-myshop xans-myshop-bankbook">
    					<ul>
 						<li class=" ">
-                			<strong class="title">가용 포인트</strong>
-                			<strong class="data use">10,000P</strong>
-                			<a href="/myshop/mileage/historyList.html" class="dual">조회</a>
+                			<strong class="title">총 포인트</strong>
+                			<strong class="data use">10000P</strong>
             			</li>
             			<li class="">
-                			<strong class="title">총 포인트</strong>
+                			<strong class="title">사용가능 포인트</strong>
                 			<strong class="data">10,000P</strong>
             			</li>
             			<li class="">
-                			<strong class="title">사용 포인트</strong>
+                			<strong class="title">사용된 포인트</strong>
                 			<strong class="data">0P</strong>
             			</li>
             			<li class="etc">
-                			<strong class="title">총 주문</strong>
+                			<strong class="title">미가용 포인트</strong>
                 			<strong class="data">0(0회)</strong>
             			</li>
             			<li class="etc ">
-                			<strong class="title">coupon</strong>
+                			<strong class="title">환불예정 포인트</strong>
                 			<strong class="data">1</strong>
-                			<a href="/user/userPoint.do" class="dual coup">조회</a>
             			</li>
         			 </ul>
         			 </div>
+        			 	<table align="center" border="1" width="550">
+        			 		<tr hight="500">
+        			 			<td colspan="4" align="center">
+			        			 	<strong class="title">적립내역 보기</strong>
+        			 			</td>
+        			 		</tr>
+        			 		<tr hight="500">
+		        			 	<td align="center">주문날짜</td>
+		        			 	<td align="center">포인트</td>
+		        			 	<td align="center">관련 주문</td>
+		        			 	<td align="center">적립 내용</td>
+        			 		</tr>
+        			 		<c:forEach var="article" items="${article }">
+	        			 		<tr hight="500">
+    	    			 			<td align="center"><fmt:formatDate value="${article.point_date }" pattern="yyyy-MM-dd "/></td>
+    	    			 			<td align="center">${article.point}</td>
+    	    			 			<td align="center"></td>
+    	    			 			<td align="center">${article.point_content}</td>
+        				 		</tr>
+        			 		</c:forEach>
+        			 	</table>        			 	
         			 </div> 
 			   		</div>
 		    	</div>
