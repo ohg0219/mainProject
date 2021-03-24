@@ -61,7 +61,7 @@ public class UserSocialLoginOutController {
         vo.setId(id+"@k");
         vo.setName(name);
         vo.setEmail(email);
-        vo.setPassword("");
+        vo.setPassword(null);
         vo.setNickName(name);
         if(userRegisterService.idCheck(vo.getId())==0) {
         	userRegisterService.insertUser(vo);

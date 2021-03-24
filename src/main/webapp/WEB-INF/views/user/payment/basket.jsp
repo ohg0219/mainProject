@@ -55,6 +55,18 @@
 	.itemTable{
 		border-bottom: 1px solid #eee;
 	}
+	#shopBtn{
+		all : unset;
+		cursor: pointer;
+		border: 1px solid black;
+		text-align: center;
+		padding: 10px;
+		font-size: 15px;
+	}
+	#shopBtn:hover{
+		background: black;
+		color: white;
+	}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -195,7 +207,8 @@ $(document).ready(function(){
 								</table>
 							</c:when>
 							<c:otherwise>
-								<h2>장바구니에 상품이 없습니다.</h2>
+								<h2>장바구니가 비어 있습니다.</h2>
+								<input id="shopBtn" type="button" value="쇼핑하러 가기" onclick="location.href='/itemList/category/all.do'">
 							</c:otherwise>
 						</c:choose>
 					</div>
