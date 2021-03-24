@@ -299,11 +299,11 @@ a.dual {
    					<ul>
 						<li class=" ">
                 			<strong class="title">총 포인트</strong>
-                			<strong class="data use">10000P</strong>
+                			<strong class="data use">${pointSum.sum }P</strong>
             			</li>
             			<li class="">
                 			<strong class="title">사용가능 포인트</strong>
-                			<strong class="data">10,000P</strong>
+                			<strong class="data">${pointSum.sum }P</strong>
             			</li>
             			<li class="">
                 			<strong class="title">사용된 포인트</strong>

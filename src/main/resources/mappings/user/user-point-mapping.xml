@@ -8,6 +8,10 @@
 		select * from user_point where user_id=#{user_id}
 	</select>
 	
+	<select id="pointSum" resultType="userPointVO">
+		select sum(point) from user_point where user_id=#{user_id}
+	</select>
+	
 		
 		
 		

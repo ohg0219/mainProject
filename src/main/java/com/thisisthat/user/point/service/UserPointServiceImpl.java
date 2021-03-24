@@ -15,9 +15,13 @@ public class UserPointServiceImpl implements UserPointService {
 	private UserPointDAO userPointDAO;
 
 	@Override
-	public List<UserPointVO> pointList(UserPointVO userPointVO) {
-		
+	public List<UserPointVO> pointList(UserPointVO userPointVO) {	
 		return userPointDAO.pointList(userPointVO);
+	}
+
+	@Override
+	public UserPointVO pointsum(UserPointVO userPointVO) {
+		return userPointDAO.pointSum(userPointVO);
 	}
 	
 	

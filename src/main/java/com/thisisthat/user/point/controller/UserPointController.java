@@ -26,7 +26,12 @@ public class UserPointController {
 		if(session.getAttribute("userId") !=null) {
 			id = (String) session.getAttribute("userId");
 		}
-		System.out.println(id);
+		
+		userPointVO.setUser_id(id);
+		UserPointVO pointSum = userPointService.pointsum(userPointVO);
+		
+		model.addAttribute("pointSum", pointSum);
+		
 		userPointVO.setUser_id(id);
 		
 		List<UserPointVO> pointList = userPointService.pointList(userPointVO);

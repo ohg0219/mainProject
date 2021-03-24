@@ -9,6 +9,8 @@ public interface UserPointService {
 
 	List<UserPointVO> pointList(UserPointVO userPointVO);
 
+	UserPointVO pointsum(UserPointVO userPointVO);
+
 	
 
 }

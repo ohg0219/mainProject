@@ -8,7 +8,9 @@ public class UserPointVO {
 	private Date point_date;
 	private int point;
 	private String point_content;
-	private int point_nul;
+	private int point_num;
+	private int sum;
+	
 	public String getUser_id() {
 		return user_id;
 	}
@@ -34,17 +36,24 @@ public class UserPointVO {
 	public void setPoint_content(String point_content) {
 		this.point_content = point_content;
 	}
-	public int getPoint_nul() {
-		return point_nul;
+	public int getPoint_num() {
+		return point_num;
 	}
-	public void setPoint_nul(int point_nul) {
-		this.point_nul = point_nul;
+	public void setPoint_num(int point_num) {
+		this.point_num = point_num;
+	}
+	public int getSum() {
+		return sum;
+	}
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 	@Override
 	public String toString() {
-		return "PointVO [user_id=" + user_id + ", point_date=" + point_date + ", point=" + point + ", point_count="
-				+ point_content + ", point_nul=" + point_nul + "]";
+		return "UserPointVO [user_id=" + user_id + ", point_date=" + point_date + ", point=" + point
+				+ ", point_content=" + point_content + ", point_num=" + point_num + ", sum=" + sum + "]";
 	}
+	
 	
 	
 	
