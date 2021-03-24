@@ -13,6 +13,9 @@
 	<select id="usingSum" resultType="userPointVO">
 		select sum(point) from user_point where user_id=#{user_id} and point <![CDATA[ < ]]> 0
 	</select>
+	<select id="totalPoint" resultType="userPointVO">
+		select sum(point) from user_point where user_id=#{user_id} and point <![CDATA[ > ]]> 0
+	</select>
 	
 		
 		

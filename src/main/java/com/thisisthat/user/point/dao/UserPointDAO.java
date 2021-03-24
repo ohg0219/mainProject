@@ -26,6 +26,10 @@ public class UserPointDAO {
 	public UserPointVO usingSum(UserPointVO userPointVO) {
 		return mybatis.selectOne("userPointDAO.usingSum", userPointVO);
 	}
+
+	public UserPointVO totalPoint(UserPointVO userPointVO) {
+		return mybatis.selectOne("userPointDAO.totalPoint", userPointVO);
+	}
 	
 
 	

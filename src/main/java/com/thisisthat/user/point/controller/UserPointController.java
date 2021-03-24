@@ -27,6 +27,14 @@ public class UserPointController {
 			id = (String) session.getAttribute("userId");
 		}
 		/**
+		 *  총 포인트
+		 */
+		userPointVO.setUser_id(id);
+		UserPointVO totalPoint = userPointService.totalPoint(userPointVO);
+		
+		model.addAttribute("totalPoint", totalPoint);
+		
+		/**
 		 * 사용 가능 포인트
 		 */
 		userPointVO.setUser_id(id);
