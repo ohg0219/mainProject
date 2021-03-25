@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thisisthat.admin.coupon.vo.CouponVO;
 import com.thisisthat.admin.grant.coupon.dao.UserCouponDAO;
 import com.thisisthat.admin.grant.coupon.vo.CouponGrantVO;
+import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 
 @Service
@@ -18,12 +20,12 @@ public class CouponGrantServiceImpl implements CouponGrantService {
 	
 	
 	@Override
-	public List<CouponGrantVO> getUserIDList(CouponGrantVO vo) {
+	public List<UserVO> getUserIDList(UserVO vo) {
 		return couponGrantDAO.getUserIDList(vo);
 	}
 
 	@Override
-	public List<CouponGrantVO> getAdminCoupon(CouponGrantVO vo) {
+	public List<CouponVO> getAdminCoupon(CouponVO vo) {
 		return couponGrantDAO.getAdminCoupon(vo);
 	}
 
@@ -32,5 +34,16 @@ public class CouponGrantServiceImpl implements CouponGrantService {
 		couponGrantDAO.userGrantCoupon(vo);
 	}
 
+	@Override
+	public List<CouponGrantVO> userCouponList(CouponGrantVO vo) {
+		return couponGrantDAO.userCouponList(vo);
+	}
+
+	@Override
+	public void userAllGrantCoupon(List<UserVO> userIdList, int coupon) {
+		couponGrantDAO.userAllGrantCoupon(userIdList, coupon);
+	}
+	
+	
 	
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserCouponDAO">
+	
+	<resultMap type="com.thisisthat.admin.usermanagement.vo.UserVO" id="UserVOMap">
+	<result property="userId" column="user_id"/>
+	</resultMap>
+	
+	<select id="getUserIDList" resultMap="UserVOMap">
+		select user_id from this_user
+	</select>
+	
+	<select id="getAdminCoupon" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select coupon_no, coupon_name,coupon_price from admin_coupon
+	</select>
+	
+	<insert id="userGrantCoupon">
+		insert into user_coupon
+		(user_id,coupon_no,coupon_name,coupon_price,coupon_first,coupon_last,used)
+		values (
+		#{user_id},
+		#{coupon_no},
+		(select coupon_name from admin_coupon where coupon_no=1),
+		(select coupon_price from admin_coupon where coupon_no=1),
+		now(),
+		(select coupon_last from admin_coupon where coupon_no = 1),
+		0);
+	</insert>
+	
+	<!-- 수정, 삭제, 상세보기 , 조회, -->
+	
+	<select id="userCouponList" resultType="CouponGrantVO">
+		select * from user_coupon
+	</select>
+	
+</mapper>
