@@ -14,7 +14,8 @@ window.onload=function(){
 	alert("${errMsg}");
 	var id = "${id}"
 	var pw = ${pass}
-	location.href="/updatePw.do?id="+ id+"&pw="+ pw;
+//	location.href="/updatePw.do?id="+ id+"&pw="+ pw;
+	location.href="/main.do";
 }
 
 </script>
