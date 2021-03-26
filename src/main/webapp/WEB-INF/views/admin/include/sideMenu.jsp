@@ -38,8 +38,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/admin/userList.mdo">회원정보</a>
                         <a class="collapse-item" href="cards.html">회원적립금관리</a>
-                        <a class="collapse-item" href="/admin/getCouponList.mdo">쿠폰생성</a>
-                        <a class="collapse-item" href="/admin/grantCoupon.mdo">회원쿠폰부여</a>
+                        <a class="collapse-item" href="/admin/getCouponList.mdo">회원쿠폰생성</a>
+                        <a class="collapse-item" href="/admin/grantCoupon.mdo">회원쿠폰지급</a>
                     </div>
                 </div>
             </li>

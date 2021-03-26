@@ -58,10 +58,10 @@
 					</tr>
 					<tr>
 						<th>  ${notice.board_writer}</th>
-						<th>HIT  ${notice.board_cnt}</th>
+						<th>HIT &nbsp; ${notice.board_cnt}</td>
 					</tr>
 					<tr>
-						<th>DATE  <fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
+						<th>DATE &nbsp;  <fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
 					</tr>
 					<tr>
 						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="10" readonly="readonly">${notice.board_content}</textarea></td>

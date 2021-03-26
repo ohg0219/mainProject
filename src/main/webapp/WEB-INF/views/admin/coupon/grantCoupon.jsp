@@ -45,7 +45,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">쿠폰 현황</h1>
+                    <h1 class="h3 mb-2 text-gray-800">쿠폰 지급 목록</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -56,7 +56,14 @@
                         -->
                         <div class="card-body">
                             <div class="table-responsive">
+                                    <form action="userGrant.mdo" method="get">
+                                    	<button type="submit" class="btn btn-dark" id="userGrant">
+                                    	회원 쿠폰 지급
+                                    	</button>
+                                    </form>
+                                    <br>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <strong>회원쿠폰 지급 현황</strong>
                                     <thead>
                                         <tr>
                                             <th>사용자 아이디</th>
@@ -75,9 +82,9 @@
                                     	<c:if test="${not empty userCouponList}" >
 	                                        <c:forEach var="couponlist" items="${userCouponList}">
 		                                        <tr>
-			                                        <td width="100">${couponlist.user_id }</td>
+			                                        <td width="100"><a href="couponUserList.mdo?user_id=${couponlist.user_id }">${couponlist.user_id }</a></td>
 			                                        <td width="80">${couponlist.coupon_no }</td>
-			                                        <td width="140">${couponlist.coupon_name }</td>
+			                                        <td width="140"><a href="grantCouponView.mdo?coupon_no=${couponlist.coupon_no }">${couponlist.coupon_name }</a></td>
 			                                        <td width="115">${couponlist.coupon_price }</td>
 			                                        <td width="45"><fmt:formatDate value="${couponlist.coupon_first }" pattern="yyyy-MM-dd "/></td>
 			                                        <td width="45"><fmt:formatDate value="${couponlist.coupon_last }" pattern="yyyy-MM-dd "/></td>
@@ -97,13 +104,27 @@
                                     </tbody>
                                     
                                 </table>
-                                    
-                                    <form action="userGrant.mdo" method="get">
-                                    	<button type="submit" class="btn btn-dark" id="userGrant">
-                                    	쿠폰 등록
-                                    	</button>
-                                    </form>
                                 
+                                	<form action="couponSearch.mdo" method="get">
+										<table class="noticeTable">
+											<tr>
+												<td align="right">
+													<select name="searchOption">
+														<option value="user_id">회원ID
+														<option value="coupon_name">쿠폰이름
+													</select>
+													<input type="text" name="keyword"/>
+													<input type="submit" value="검색"/>
+											</td>
+										</tr>
+									</table>
+									</form>
+                                    <br>
+                                    
+                    
+                                    <button class="btn btn-dark" type="button" onclick="location.href='/admin/grantCoupon.mdo' ">목록으로</button>&nbsp;
+                                    <button class="btn btn-dark" type="button" onclick="location.href='/admin/main.mdo' ">메인으로</button>
+                    				            
                                 <div>	
                                 
 								</div>
@@ -116,7 +137,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+		
+		    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 	<script>
 	//--------------------검색하는 함수
 		$(function(){

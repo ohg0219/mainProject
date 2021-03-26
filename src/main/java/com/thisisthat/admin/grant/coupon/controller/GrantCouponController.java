@@ -21,7 +21,15 @@ public class GrantCouponController {
 	@Autowired
 	private CouponGrantService couponGrantService;
 	
+	@RequestMapping("mainGo.mdo")
+	public String mainGo() {
+		return "/admin/main.mdo";
+	}
 	
+	/*
+	 * 관리자 페이지에서 쿠폰 부여 페이지를 요청 했을때 가는 요청 메서드
+	 * 쿠폰 부여 현황 페이지가 보여짐
+	 */
 	@RequestMapping("grantCoupon.mdo")
 	public String grantCouponList(Model model, CouponGrantVO vo, UserVO vo1) {
 		List<CouponGrantVO> userCouponList = couponGrantService.userCouponList(vo);
@@ -30,6 +38,7 @@ public class GrantCouponController {
 	}
 	/**
 	 * 고객에게 쿠폰 부여 페이지로 이동
+	 * 쿠폰 부여 페이지로가는 요청
 	 * @return
 	 */
 	@GetMapping("userGrant.mdo")
@@ -53,6 +62,7 @@ public class GrantCouponController {
 								CouponGrantVO vo , UserVO vo1) {
 		if(userId.equals("all")) {
 			List<UserVO> userIdList=couponGrantService.getUserIDList(vo1);
+			System.out.println("여기까지는 된다.");
 			couponGrantService.userAllGrantCoupon(userIdList, coupon);
 		}else {
 			vo.setUser_id(userId);
@@ -61,9 +71,55 @@ public class GrantCouponController {
 		}
 		
 		
-		return  "redirect:/grantCoupon.mdo";
+		return  "redirect:/admin/grantCoupon.mdo";
 	}
 	
+	/**
+	 * 관리자 페이지에서 
+	 * 부여된 쿠폰 이름을 클릭하면 쿠폰의 정보가
+	 * 뜨게 만드는 메서드
+	 */
+	@GetMapping("grantCouponView.mdo")
+	public String grantCouponView(Model model, @RequestParam(value = "coupon_no") long coupon_no, CouponVO vo) {
+		
+		vo.setCoupon_no(coupon_no);
+		CouponVO grantVo = couponGrantService.getAdminCouponInfo(vo);
+		
+		model.addAttribute("grantVo", grantVo);
+		return "/admin/coupon/userCouponInfo";
+	}
+	
+	
+	//부여 쿠폰 현황에서 아이디를 누르면 그 아이디를 가진 회원의 쿠폰 리스트가 나오는 메서드
+	@GetMapping("couponUserList.mdo")
+	public String CouponUserList(Model model, @RequestParam(value = "user_id") String user_id, CouponGrantVO vo) {
+		vo.setUser_id(user_id);
+		List<CouponGrantVO> couponUserList = couponGrantService.couponUserList(vo);
+		model.addAttribute("couponUserList", couponUserList);
+		model.addAttribute("userIdCoupon", user_id);
+		return "/admin/coupon/userCouponView";
+	}
+	
+	@GetMapping("couponSearch.mdo")
+	public String couponSearch(Model model,
+			@RequestParam("keyword")String keyword,
+			@RequestParam("searchOption")String searchOption,
+			CouponGrantVO vo) {
+		System.out.println("searchOption : "+searchOption);
+		System.out.println("keyword : "+keyword);
+		if(searchOption.equals("user_id")) {
+			vo.setKeyword(keyword);
+			List<CouponGrantVO> searchId = couponGrantService.IdCouponSearch(vo);
+			model.addAttribute("userCouponList", searchId);
+			return "/admin/coupon/grantCoupon";
+		}else if(searchOption.equals("coupon_name")) {
+			vo.setKeyword(keyword);
+			List<CouponGrantVO> searchCoupon = couponGrantService.nameCouponSearch(vo);
+			model.addAttribute("userCouponList", searchCoupon);
+			return "/admin/coupon/grantCoupon";
+		}
+		return null;
+	}
 	
 	
 }

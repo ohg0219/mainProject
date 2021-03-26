@@ -43,7 +43,30 @@ public class CouponGrantServiceImpl implements CouponGrantService {
 	public void userAllGrantCoupon(List<UserVO> userIdList, int coupon) {
 		couponGrantDAO.userAllGrantCoupon(userIdList, coupon);
 	}
-	
-	
+
+	@Override
+	public CouponVO getAdminCouponInfo(CouponVO vo) {
+		return couponGrantDAO.getAdminCouponInfo(vo);
+	}
+
+	@Override
+	public List<CouponGrantVO> couponUserList(CouponGrantVO vo) {
+		return couponGrantDAO.couponUserList(vo);
+	}
+
+	@Override
+	public String userIdCoupon(String userId) {
+		return couponGrantDAO.userIdCoupon(userId);
+	}
+
+	@Override
+	public List<CouponGrantVO> nameCouponSearch(CouponGrantVO vo) {
+		return couponGrantDAO.nameCouponSearch(vo);
+	}
+
+	@Override
+	public List<CouponGrantVO> IdCouponSearch(CouponGrantVO vo) {
+		return couponGrantDAO.IdCouponSearch(vo);
+	}
 	
 }

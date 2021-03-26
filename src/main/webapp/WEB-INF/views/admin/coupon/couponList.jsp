@@ -45,7 +45,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">쿠폰 목록</h1>
+                    <h1 class="h3 mb-2 text-gray-800">쿠폰 생성 목록</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->

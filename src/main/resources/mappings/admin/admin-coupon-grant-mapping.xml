@@ -22,17 +22,37 @@
 		values (
 		#{user_id},
 		#{coupon_no},
-		(select coupon_name from admin_coupon where coupon_no=1),
-		(select coupon_price from admin_coupon where coupon_no=1),
+		(select coupon_name from admin_coupon where coupon_no= #{coupon_no}),
+		(select coupon_price from admin_coupon where coupon_no= #{coupon_no}),
 		now(),
-		(select coupon_last from admin_coupon where coupon_no = 1),
+		(select coupon_last from admin_coupon where coupon_no = #{coupon_no}),
 		0);
 	</insert>
 	
-	<!-- 수정, 삭제, 상세보기 , 조회, -->
+	
+	<select id="getAdminCouponInfo" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select * from admin_coupon where coupon_no =  #{coupon_no}
+	</select>
 	
 	<select id="userCouponList" resultType="CouponGrantVO">
-		select * from user_coupon
+		select * from user_coupon order by coupon_last desc
+	</select>
+	
+	<select id="userIdCoupon">
+		select user_id from this_user where user_id = #{userId}
+	</select>
+	
+	<select id="couponUserList" resultType="CouponGrantVO">
+		select user_id, coupon_name, coupon_price, coupon_first, coupon_last,
+		used from user_coupon where user_id = #{user_id}
+	</select>
+	
+	<select id="nameCouponSearch" resultType="CouponGrantVO">
+		select * from user_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_last desc
+	</select>
+	
+	<select id="IdCouponSearch" resultType="CouponGrantVO">
+		select * from user_coupon where user_id like '%'||#{keyword}||'%' order by coupon_last  desc
 	</select>
 	
 </mapper>
