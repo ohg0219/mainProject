@@ -201,7 +201,7 @@ $(document).ready(function(){
 									</tr>
 									<tr>
 										<td colspan="2">
-											<input id="paymentBtn" class="payment_btn" type="submit" value="결제하기">
+											<input id="paymentBtn" class="payment_btn" type="submit" onclick="location.href='/paymentDivide.do'" value="결제하기">
 										</td>
 									</tr>
 								</table>

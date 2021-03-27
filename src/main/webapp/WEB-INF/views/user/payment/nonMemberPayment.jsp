@@ -214,7 +214,7 @@
 	<div class="wrap">
 		<%@include file="../include/header.jsp" %>
 		<div class="content" style="margin-top: 100px; ">
-			<form style="width: 100%;display: flex;" action="/memberPayment.do" method="post" name="payform">
+			<form style="width: 100%;display: flex;" action="/nonMemberPayment.do" method="post" name="payform">
 				<input type="hidden" value="${productList}" id="productList">
 				<div class="divide" style="flex: 1; vertical-align: middle;">
 					<div class="shipping" style=" width: 250px; float: right; margin-right: 60px;">
@@ -223,6 +223,24 @@
 							<li class="inputTitle">E-MAIL</li>
 							<li class="inputContent">
 								<input class="input" type="email" name="orderEmail" value="${userInfo.userEmail}">
+							</li>
+							
+							<li class="inputTitle">PASSWORD</li>
+							<li class="inputContent">
+								<input class="input" type="password" name="orderPassword">
+							</li>
+							<li>비밀번호제약</li>
+							<li class="inputTitle">PASSWORD 확인</li>
+							<li class="inputContent">
+								<input class="input" type="password" name="confirm_order_password">
+							</li>
+							<li class="inputTitle">비회원 구매 및 결제 개인정보취급방침에 대하여<br>동의합니다.</li>
+							<li>
+								<label><input type="radio" name="agreeCheck" value="agree">동의함</label>
+								<label><input type="radio" name="agreeCheck" value="deagree" checked="checked">동의안함</label>
+							</li>
+							<li>
+								<textarea style="font: 500 11px/1.5 arial, sans-serif; width: 105%;margin-top:10px; height: 50px;border-radius:0; box-sizing: border-box;">1. 개인정보 수집목적 및 이용목적 : 비회원 구매 서비스 제공 2. 수집하는 개인정보 항목 : 성명, 주소, 전화번호, 이메일, 결제 정보, 비회원 결제 비밀번호 3. 개인정보의 보유기간 및 이용기간원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다. 가. 회사 내부 방침에 의한 정보 보유 사유· 부정거래 방지 및 쇼핑몰 운영방침에 따른 보관 : 1년 나. 관련 법령에 의한 정보보유 사유 o 계약 또는 청약철회 등에 관한 기록-보존이유 : 전자상거래등에서의소비자보호에관한법률-보존기간 : 5년 o 대금 결제 및 재화 등의 공급에 관한 기록-보존이유: 전자상거래등에서의소비자보호에관한법률-보존기간 : 5년  o 소비자 불만 또는 분쟁처리에 관한 기록-보존이유 : 전자상거래등에서의소비자보호에관한법률-보존기간 : 3년  o 로그 기록 -보존이유: 통신비밀보호법-보존기간 : 3개월 ※ 동의를 거부할 수 있으나 거부시 비회원 구매 서비스 이용이 불가능합니다.</textarea>
 							</li>
 							
 						</ul>
@@ -342,6 +360,7 @@
 						</ul>
 						<hr>
 						<ul>
+							<li><span id="selectPayment">카카오페이</span></li>
 							<li>
 								<span class="leftItem">TOTAL</span>
 								<span class="rightItem">&#8361; <span id="totalPrice">${subTotal }</span></span>
