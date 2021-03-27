@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.thisisthat.admin.board.service.BoardService;
-import com.thisisthat.admin.board.service.BoardServiceImpl;
 import com.thisisthat.admin.board.vo.AnswerBoardVO;
 import com.thisisthat.admin.product.controller.AwsS3;
 import com.thisisthat.user.answer.service.AnswerService;
