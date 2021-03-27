@@ -25,4 +25,12 @@ public class UserBasketItemDAO {
 	public UserBasketItemVO getItemInfo(long productNo) {
 		return sessionTemplate.selectOne("BasketDAO.getItemInfo",productNo);
 	}
+	
+	public void deleteUserBasket(UserBasketItemVO vo) {
+		sessionTemplate.delete("BasketDAO.deleteUserBasket",vo);
+	}
+	
+	public void updateUserBasket(UserBasketItemVO vo) {
+		sessionTemplate.update("BasketDAO.updateUserBasket",vo);
+	}
 }

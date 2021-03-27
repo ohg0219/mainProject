@@ -4,12 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,6 +34,8 @@ public class EmailController {
 	private Email email;
 	@Autowired
     private JavaMailSender mailSender;
+	@Autowired
+	private JavaMailSenderImpl senderImpl;
 	
 	@Autowired
 	EmailService service;
@@ -36,7 +45,7 @@ public class EmailController {
 	public String sendIdEmailAction (	@RequestParam(value="name") String name, 
 										@RequestParam(value="email") String email,
 										Model model, UserVO vo ) throws Exception {	
-		
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		map.put("email", email);
@@ -68,13 +77,13 @@ public class EmailController {
 			return "/user/findView";
 		}	
 	}
-
 	
 	// 이메일로 비밀번호 찾기
 	@RequestMapping("/sendPwEmail.do")
 	public String findPwEmail ( @RequestParam(value="email") String pwEmail,
 								@RequestParam(value="name") String name,
 								@RequestParam(value="id") String id,
+								HttpSession session,
 								Model model ) throws Exception {
 		
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -84,18 +93,37 @@ public class EmailController {
 		
 		String user_pw = service.getPwEmail(paramMap);
 		int pw = (int)(Math.random()*100000000);
-		if (user_pw != null) {
-
+		String bcryptPw =  BCrypt.hashpw(String.valueOf(pw), BCrypt.gensalt());
+		System.out.println("bcryptPw : " + bcryptPw);
+		if (user_pw != null) {	
+			session.setAttribute("userPw", bcryptPw);
 			StringBuffer ms =  new StringBuffer();
-			ms.append("<html><body><h1>Hello</h1></body></html>");
-			ms.append("[임시 비밀번호 발급]\n\nthisisthat 계정의 비밀번호가 변경되었습니다.\n");
-			ms.append(name + "님의 임시 비밀번호는 [" + pw + "] 입니다.\n비밀번호 변경을 원하지 않으셨거나, 요청하지 않은 경우 고객센터로 연락주시기 바랍니다.\n");
-			ms.append("감사합니다.\n\n-thisisthat 계정팀-");
-			
+			String url = "http://localhost:8080/changePw.do?pw="+ bcryptPw + "&id=" + id;
+			ms.append("<html><body>");
+			ms.append("<img src='https://thisisthat.s3.ap-northeast-2.amazonaws.com/img/mainlogo.png' style='width:150px' alt='[thisisthat]'><br>");
+			ms.append("<br><strong>&nbsp;[비밀번호 재설정]</strong><br><br>");
+			ms.append("&nbsp;" + name + "님,<br>&nbsp;비밀번호를 잊으셨습니까?</body></html><br><br>&nbsp;");
+			ms.append("<a style='border-bottom: 1px solid #111;' href=" + url + "> &#8618; 비밀번호 재설정</a>");
+	//		ms.append(name + "님의 임시 비밀번호는 [" + pw + "] 입니다.<br>비밀번호 변경을 원하지 않으셨거나, 요청하지 않은 경우 고객센터로 연락주시기 바랍니다.<br>");
+			ms.append("<br>&nbsp;감사합니다.<br><br>&nbsp;-thisisthat 계정팀-");
+			ms.append("</html></body>");
+			final MimeMessagePreparator preparator = new MimeMessagePreparator() { 
+				@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
+					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
+					helper.setTo(pwEmail);
+					helper.setSubject(pwEmail + "님 계정 암호 재설정");
+					helper.setText(ms.toString(), true);
+					}
+				};
+		/*		
+			MimeMessageHelper helper = new MimeMessageHelper();
 			email.setContent(ms.toString()); // 내용
+			email.set
 			email.setReceiver(pwEmail); // 수신자
 			email.setSubject(pwEmail + "님 비밀번호 찾기 메일입니다."); // 제목
 			emailSender.SendEmail(mailSender, email); // 보내기!
+		 */
+			senderImpl.send(preparator); // 보내기!
 			
 			model.addAttribute("errType", "mailSendingComplete");
 			model.addAttribute("errMsg", pwEmail + " 로 새로운 비밀번호가 전송되었습니다.");
@@ -111,18 +139,43 @@ public class EmailController {
 		}
 	}
 	
-	@GetMapping("/updatePw.do")
+	@GetMapping("/changePw.do")
+	public String changePw(@RequestParam(value="pw") String bcryptPw,
+							@RequestParam(value="id") String id,
+								Model model, HttpSession session) {	
+		if(session.getAttribute("userPw") != null) {
+			
+			if (session.getAttribute("userPw").equals(bcryptPw)) {
+				model.addAttribute("id" , id);
+				return "/user/changePw";
+				
+			} else {
+				model.addAttribute("errType", "mailSendingComplete");
+				model.addAttribute("errMsg", "잘못된 요청입니다.");
+				return "/user/findFail";
+			}			
+			
+		} else {
+			model.addAttribute("errType", "mailSendingComplete");
+			model.addAttribute("errMsg", "잘못된 세션입니다.");
+			return "/user/findFail";
+		}		
+	}
+	
+	
+	
+	@PostMapping("/updatePw.do")
 	public String updatePw(Map<String, Object> map,
 							@RequestParam(value="id")String id,
-							@RequestParam(value="pw", required=false)String pw,
+							@RequestParam(value="password", required=false)String pw,
 							UserRegisterVO vo) {
+		
 		vo.setPassword(BCrypt.hashpw(pw, BCrypt.gensalt()));
 		map.put("id", id);
 		map.put("pass", vo.getPassword());
 		service.updatePw(map);
 		return "redirect:/login.do";
 	}
-	
 	
 	
 	

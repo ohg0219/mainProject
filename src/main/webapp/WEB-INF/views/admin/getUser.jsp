@@ -165,6 +165,13 @@ a {
 		</div>
 	</div>
 	<script type="text/javascript">
+	var msg = '${msg}';
+	if(msg === "login"){
+	}else{
+		location.href = "/admin/userList.mdo?msg=noPw";
+		
+	}
+	
 	$(document).ready(function(){
 		$(function() {
 			$("#modifyBtn").click(function(){

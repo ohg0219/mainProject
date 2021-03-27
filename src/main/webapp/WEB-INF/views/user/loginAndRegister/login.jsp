@@ -35,7 +35,7 @@
 	padding: 0;
 }
 
-.inputId,.inputPw,.loginBtn {
+.inputId,.inputPw,.loginBtn,.registBtn {
 	all:unset;
 	margin-bottom: 20px;
 	width: 100%;
@@ -51,7 +51,7 @@
 	font-size: 9pt;
 	padding: 0px 8px;
 }
-.loginBtn {
+.loginBtn,.registBtn {
 	padding: 0px 8px;
 	border: 1px solid black;
 	background: black;
@@ -78,14 +78,21 @@
 	$(document).ready(function(){
 		$(".inputId").focus();
 		$(".loginBtn").on("click",function(){
-			
+			if($("input[name=id]").val().trim()==''){
+				alert("아이디를 입력해주세요");
+				return false;
+			}
+			if($("input[name=password]").val().trim()==''){
+				alert("비밀번호를 입력해주세요");
+				return false;
+			}
 		});
 	});
 </script>
 </head>
 <body>
 	<div class="wrap">
-		<%@include file="include/header.jsp" %>
+		<%@include file="../include/header.jsp" %>
 		<div class="content">
 			<div class="loginwrap">
 				<div class="login" >
@@ -138,13 +145,13 @@
 						<p class="box_title">REGISTER</p>
 						<ul>
 							<li><p>회원으로 가입하시면 여러가지 혜택과 함께<br>더 편리하게 사이트를 이용하실 수 있습니다.</p></li>
-							<li><input class="loginBtn" type="submit" value="회원가입"></li>
+							<li><input class="registBtn" type="submit" value="회원가입"></li>
 						</ul>
 					</form>	
 				</div>
 			</div>
 		</div><!-- end Content -->
-		<%@include file="include/footer.jsp" %>
+		<%@include file="../include/footer.jsp" %>
 	</div>
 </body>
 </html>

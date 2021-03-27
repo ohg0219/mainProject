@@ -43,7 +43,7 @@
 				<div class="container-fluid">
 					<form action="/admin/register.mdo" method="post" id="registerForm">
 						<p class="box_title">SIGN UP</p>
-						<a class="register_btn" href="/admin/staffList.mdo">직원목록</a>
+						
 						<ul style="float: left">
 							<li>ID *</li>
 							<li class="input_li">
@@ -79,6 +79,7 @@
 							
 							
 							<li><input id="registBtn" class="register_btn" type="submit" value="가입하기"></li>
+							<li><a class="btn btn-dark" href="/admin/staffList.mdo" style="float: top;">직원목록</a></li>
 						</ul>
 					</form>	
 				</div>

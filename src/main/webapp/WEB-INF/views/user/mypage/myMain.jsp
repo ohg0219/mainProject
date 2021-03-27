@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +19,7 @@
     height: 100%;
     background: transparent;
 }
+
 
 .wrap {
 	position: absolute;
@@ -262,24 +264,11 @@ a.dual {
  	           <div id="contents">
                	  <div class="inr">
 					<div id="myshopMain" class="xans-element- xans-myshop xans-myshop-main ">
-						<div class="loginstate">
-            			    <p class="xans-element- xans-layout xans-layout-statelogon ">
-            			    	<a href="/exec/front/Member/logout/" class="btnlogin log" id="bigin-logout">logout</a>
-								<!-- GTM FOR BIGIN START-->
-								<script>
-                    				document.querySelector('#bigin-logout').addEventListener('click',function(){
-                        				dataLayer.push(
-                            			{'data': undefined},
-                            			{'event': "logout"});
-                    				})
-                				</script>
-								<!-- GTM FOR BIGIN END-->
-							</p>
-        				</div>
+						
         				<div id="boxsize">
        				    	<a href="/mypage/mypage.do" class="sltd"><strong>my</strong></a>
             				<a href="/mypage/modify.do">profile</a>
-            				<a href="/mypage/addr.do">address book</a>
+            				<a href="/mypage/address.do">address book</a>
 							<a href="/mypage/orderlist.do">orders</a>
             				<a href="/user/userPoint.do" >point</a>
             				<a href="/mypage/coupon.do">coupon</a>

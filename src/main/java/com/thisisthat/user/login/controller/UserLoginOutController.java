@@ -17,6 +17,19 @@ public class UserLoginOutController {
 	private UserLoginOutService userLoginOutService;
 	
 	/**
+	 * 로그인페이지로 이동
+	 * @return
+	 */
+	@RequestMapping(value = {"/login.do"})
+	public String loginView(HttpSession session) {
+		if(session.getAttribute("userId")!=null || session.getAttribute("kakaoUserId") != null || 
+				session.getAttribute("naverUserId") != null || session.getAttribute("googleUserId") != null) {
+			return "redirect:/main.do";
+		}
+		return "/user/loginAndRegister/login";
+	}
+	
+	/**
 	 * 회원 로그인 처리 (로그인시 세션에 저장)
 	 * @param id
 	 * @param password
@@ -28,18 +41,14 @@ public class UserLoginOutController {
 			@RequestParam("id")String id,
 			@RequestParam("password")String password,
 			HttpSession session) {
-		
 		String dbPass = userLoginOutService.userLogin(id);
 		if(dbPass==null) {//아이디없음
-			System.out.println("로그인 실패");
 			return "redirect:/login.do";
 		}else {
 			if(BCrypt.checkpw(password, dbPass)) {
-				System.out.println("로그인 성공");
 				session.setAttribute("userId", id);
 				return "redirect:/main.do";
 			}else {
-				System.out.println("로그인 실패");
 				return "redirect:/login.do";
 			}
 		}
