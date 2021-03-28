@@ -55,9 +55,9 @@ public class noticeController {
 	public String insertNotice(HttpSession session,UserVO userVO, NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
 		String id = null;
 		UserVO getUser = null;
-		if(session.getAttribute("userId") !=null) {
+		if(session.getAttribute("adminId") !=null) {
 			
-			getUser =  (UserVO) session.getAttribute("userId");
+			getUser =  (UserVO) session.getAttribute("adminId");
 			id=getUser.getNickName();
 		}
 		System.out.println(id + "= id");
