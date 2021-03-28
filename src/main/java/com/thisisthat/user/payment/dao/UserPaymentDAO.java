@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
 import com.thisisthat.user.payment.vo.UserOrderVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
@@ -63,7 +64,16 @@ public class UserPaymentDAO {
 		paymentTemplate.insert("PaymentDAO.insertUsePoint",map);
 	}
 	
-	
+	public int insertNonMemberOrder(UserPaymentVO vo,List<com.thisisthat.user.basket.vo.UserBasketItemVO> sessionBasket) {
+		paymentTemplate.insert("PaymentDAO.insertOrder",vo);
+		int seq = paymentTemplate.selectOne("PaymentDAO.getSeq");
+		for(UserBasketItemVO basket : sessionBasket) {
+			UserOrderVO orderVO = new UserOrderVO(seq,basket.getProductNo(),basket.getSelectSize(),basket.getProductPrice(),basket.getSelectCount());
+			paymentTemplate.insert("PaymentDAO.insertOrderProduct",orderVO);
+			paymentTemplate.update("PaymentDAO.updateProductStock",basket);
+		}
+		return seq;
+	}
 	
 	
 }

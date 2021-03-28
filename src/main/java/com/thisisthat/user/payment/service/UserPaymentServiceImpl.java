@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.dao.UserPaymentDAO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
@@ -55,6 +56,11 @@ public class UserPaymentServiceImpl implements UserPaymentService {
 	@Override
 	public void insertUsePoint(UserPaymentVO vo) {
 		paymentDAO.insertUsePoint(vo);
+	}
+
+	@Override
+	public int insertNonMemberOrder(UserPaymentVO vo, List<UserBasketItemVO> sessionBasket) {
+		return paymentDAO.insertNonMemberOrder(vo, sessionBasket);
 	}
 	
 	
