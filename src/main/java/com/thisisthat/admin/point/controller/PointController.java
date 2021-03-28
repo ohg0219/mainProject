@@ -50,7 +50,6 @@ public class PointController {
 			PointVO point = pointService.getPoint(user.getUserId());
 			if(point !=null) {
 				pointList.add(point);
-				System.out.println(point.getPoint());
 			}
 		}
 		if(msg !=null) model.addAttribute("msg","insert");

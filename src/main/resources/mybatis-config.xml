@@ -5,6 +5,7 @@
 <configuration>
 	<typeAliases>
 	
+		<typeAlias type="com.thisisthat.user.point.vo.UserPointVO" alias="userPointVO"/>
 		<typeAlias type="com.thisisthat.user.notice.vo.UserNoticeVO" alias="UserNoticeVO"/>
 		<typeAlias type="com.thisisthat.admin.grant.coupon.vo.CouponGrantVO" alias="CouponGrantVO"/>
 		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>	
@@ -17,6 +18,7 @@
 	
 	<mappers>
 		<!-- 매퍼파일 -->		
+		<mapper resource="mappings/user/user-point-mapping.xml"/>
 		<mapper resource="mappings/user/user-mypage-modify-mapping.xml" />
 		<mapper resource="mappings/user/user-find-idpw-mapping.xml" />
 		<mapper resource="mappings/user/user-mapping.xml" />
@@ -26,6 +28,7 @@
 		<mapper resource="mappings/user/user-answer-mapping.xml"/>
 		<mapper resource="mappings/user/user-itemlist-mapping.xml"/>
 		<mapper resource="mappings/user/user-basketlist-mapping.xml"/>
+		<mapper resource="mappings/user/user-payment-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
