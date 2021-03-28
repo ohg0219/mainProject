@@ -1,6 +1,7 @@
-
+	
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,13 +120,6 @@ tbody {
     border-color: inherit;
 }
 
-.boardList tr {
-    display: inline-block;
-    float: left;
-    width: 50%;
-    margin-bottom: 12px;
-    height: 228px;
-}
 
 .boardList td.empty {
     padding: 40px 0;
@@ -166,6 +160,89 @@ tbody {
     padding: 1px 48px;
 }
 
+.addrBox {
+	display: inline-block;
+    float: left;
+    width: 50%;
+    margin-bottom: 12px;
+    height: 228px;
+}
+
+.btnDelete {
+    float: left;
+    font-size: 11px;
+    color: #111;
+}
+
+.btn-2 {
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    background: #fff;
+    color: #111;
+    margin-top: 0px;
+    clear: none;
+    border: 1px solid #111;
+    padding: 1px 20px;
+}
+
+.boardList tr {
+    display: inline-block;
+    float: left;
+    width: 240px;
+    margin-bottom: 12px;
+    height: 200px;
+}
+
+.boardList td{
+    width: 200px;
+}
+
+.address_name {
+	padding-bottom: 4px;
+    border-bottom: 1px solid #111;
+}
+
+.receive_name {
+	padding-bottom: 12px;
+    padding-top: 4px;
+    color: #111;
+}
+
+.zip_code, .user_phone {	
+	word-break: keep-all;
+    color: #999;
+}
+
+.modify_btn {
+    padding-top: 16px;
+}
+
+.btn-3 {
+    display: inline-block;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    background: #fff;
+    color: #111;
+    clear: none;
+    border: 1px solid #111;
+    padding: 1px 10px;
+}
 
 </style>
 </head>
@@ -176,8 +253,7 @@ tbody {
 			<div id="container">
 				<div id="contents">
 					<div class="inr">
-						<div id="myshopMain"
-							class="xans-element- xans-myshop xans-myshop-main ">
+						<div id="myshopMain" class="xans-element- xans-myshop xans-myshop-main ">
 							<div id="boxsize">
 								<a href="/mypage/mypage.do" class="sltd">my</a>
 								<a href="/mypage/modify.do">profile</a> 
@@ -188,32 +264,79 @@ tbody {
 						</div>
 						<div class="w-1">
 							<div class="w-2">
-								<div class="addressList">
+								<c:if test="${empty addressList}">
+								<div class="noaddressList">
 									<p>자주 쓰는 배송지를 관리하실 수 있습니다.</p>
+									
 									<div class="boardList">
+									
 										<table border="0">
-											<thead class>
+											<thead>
 											</thead>
-											<tbody class>
+											<tbody>
 												<tr>
 													<td colspan="1" class="empty">등록된 주소가 없습니다.</td>
 												</tr>
 											</tbody>
-										</table> 
+										</table>
 									</div>
 									<div class="btnAdd">
-										
-										<a href="#" class="btn-1">새 주소 추가</a>
-									
-									</div>
-									
-									
+										<a href="/addressAdd.do" style="text-decoration: none" class="btn-1">새 주소 추가</a>
+									</div>									
 								</div>
+								</c:if>
 								
-
-
-
-
+								<c:if test="${not empty addressList}">
+								<div class="noaddressList">
+									<p>자주 쓰는 배송지를 관리하실 수 있습니다.</p>
+									
+									<div class="boardList">
+									
+										<table border="0">
+											<thead>
+											</thead>
+											<tbody>
+												<c:forEach items="${addressList}" var="address">
+															
+													<tr class="addressBox">
+														<td class="addressItem">
+															<form action="/addressModify.do?no=${address.addressNo }" method="post">
+															<div>
+																<input type="hidden" id="address_no" name="address_no" value="${address.addressNo}">
+															</div>
+															<div class="address_info">
+																<div class="address_name">
+																	<span>${address.addressName}</span>
+																</div>
+																<div class="receive_name">
+																	<span>${address.receiveName }</span>
+																</div>
+																<div class="zip_code">
+																	<span>(${address.zipCode }) ${address.firstAddress }</span>
+																	<br>
+																	<span>${address.lastAddress }</span>
+																</div>
+																<div class="user_phone">
+																	<span>${address.userPhone}</span>
+																</div>
+																<div class="modify_btn">
+																	<input type="submit" value="수정" style="text-decoration: none" class="btn-3"> 
+																	&nbsp;
+																	<a href="/addressDelete.do?no=${address.addressNo}" style="text-decoration: none" class="btn-3">삭제</a>
+																</div>
+															</div>
+															</form>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									<div class="btnAdd">
+										<a href="/addressAdd.do" style="text-decoration: none" class="btn-1">새 주소 추가</a>
+									</div>									
+								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>
