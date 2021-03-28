@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="roleDAO">
+	<resultMap type="UserVO" id="resultUser">
+		<id property="userId" column="user_id"></id>
+		<result property="userName" column="user_name"/>
+		<result property="nickName" column="nick_name"/>
+		<result property="userPw" column="user_pass"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="userEmail" column="user_email"/>
+		<result property="zipCode" column="zip_code"/>
+		<result property="firstAddress" column="first_address"/>
+		<result property="lastAddress" column="last_address"/>
+		<result property="userRole" column="user_role"/>
+		<result property="inDate" column="in_date"/>
+		<result property="outDate" column="out_date"/>
+		<result property="userImg" column="user_img"/>
+		<result property="social" column="social_login"/>		
+	</resultMap>
+	
+	
+	<select id="getUserList" resultMap="resultUser">
+		select * from this_user 
+		<if test="searchType != 'all'">
+		where
+			<if test="searchType == 'id'">
+					user_id
+			</if>		
+			<if test="searchType == 'nick'">
+					nick_name	
+			</if>		
+			like '%'||#{parameter}||'%'
+		</if>
+		<if test="searchType == 'all' and parameter !=''">
+		where
+			user_id like '%'||#{parameter}||'%' or nick_name like '%'||#{parameter}||'%' or user_name like '%'||#{parameter}||'%'
+		</if>
+		
+		 order by in_date desc OFFSET #{start} limit #{cntPerPage} ;
+	</select>
+	<select id="getTotal" resultType="Integer">
+		select count(*) from this_user 
+			
+		<if test="searchType != 'all'">
+		where
+			<if test="searchType == 'id'">
+					user_id
+			</if>		
+			<if test="searchType == 'nick'">
+					nick_name	
+			</if>		
+			like '%'||#{parameter}||'%'
+		</if>
+		<if test="searchType == 'all' and parameter !=''">
+		where
+			user_id like '%'||#{parameter}||'%' or nick_name like '%'||#{parameter}||'%' or user_name like '%'||#{parameter}||'%'
+		</if>
+	</select>
+	<update id="updateRole">
+		update this_user set user_role = #{userRole} where user_id = #{userId}
+	</update>
+</mapper>

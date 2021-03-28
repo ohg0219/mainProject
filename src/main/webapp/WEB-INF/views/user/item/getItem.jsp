@@ -193,7 +193,18 @@ $(document).ready(function(){
 			alert("구매하실 상품을 선택해주세요.");
 			return false;
 		}
-		location.href="/insertbasket.do?productNo="+productNo+"&selectItem="+selectItem+"&productPrice="+productPrice;
+		$.ajax({
+			url : "/insertBasket.do?productNo="+productNo+"&selectItem="+selectItem,
+			type: 'GET',
+			success : function(data){
+				if(data=='fail'){
+					alert("장바구니에 중복된 상품이 있습니다.");
+					return false;
+				}else{
+					location.href="/basket.do";
+				}
+			}
+		});
 	});
 	$(document).on("click",".choose_cancel",function(){
 		$(this).closest("tr").remove();
