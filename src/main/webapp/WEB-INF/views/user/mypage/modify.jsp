@@ -92,7 +92,11 @@
 							<li><input id="registBtn" class="register_btn" type="submit" value="수정하기"></li>
 						</ul>
 						
-						<h3><a href="#" style="border-bottom: 1px solid #111; padding-bottom: 4px; text-decoration: none; color: black"><strong>회원 탈퇴하기</strong></a></h3>
+						<h3>
+							<a href="#" style="border-bottom: 1px solid #111; padding-bottom: 4px; text-decoration: none; color: black">
+								<strong>회원 탈퇴하기</strong>
+							</a>
+						</h3>
 												
 					</form>	
 			 	</div> 

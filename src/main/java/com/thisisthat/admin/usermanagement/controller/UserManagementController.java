@@ -176,7 +176,7 @@ public class UserManagementController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userId", id);
 		attr.addFlashAttribute("map",map);
-		return "redirect:/getUser.mdo";
+		return "redirect:/admin/getUser.mdo";
 	}
 
 
