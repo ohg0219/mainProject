@@ -13,7 +13,9 @@
 		<result property="email" column="user_email"/>		
 		<result property="zipcode" column="zip_code"/>		
 		<result property="address1" column="first_address"/>	
-		<result property="address2" column="last_address"/>		
+		<result property="address2" column="last_address"/>	
+		<result property="smsOk" column="sms_ok"/>	
+		<result property="emailOk" column="email_ok"/>	
 	</resultMap>
 
 	<select id="modifyView" resultMap="myPageModify">
@@ -21,7 +23,17 @@
 	</select>
 
 	<update id="modify">
-		update this_user set user_pass=#{password}, zip_code=#{zipcode}, first_address=#{address1}, last_address=#{address2}, user_phone=#{phone}, user_email=#{email} where user_name=#{name}
+		update this_user 
+		set 
+		user_pass=#{password}, 
+		zip_code=#{zipcode}, 
+		first_address=#{address1}, 
+		last_address=#{address2}, 
+		user_phone=#{phone}, 
+		user_email=#{email},
+		sms_ok=#{smsOk},
+		email_ok=#{emailOk} 
+		where user_name=#{name}
 	</update>
 	
 	<select id="modifyPoint" resultMap="myPageModify">

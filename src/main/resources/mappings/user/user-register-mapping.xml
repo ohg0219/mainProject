@@ -6,17 +6,19 @@
 
 	<resultMap type="UserRegisterVO" id="registerVO">
 		<id property="id" column="user_id"/>
-		<id property="password" column="user_pass"/>
-		<id property="nickName" column="nick_name"/>
-		<id property="name" column="user_name"/>
-		<id property="phone" column="user_phone"/>
-		<id property="email" column="user_email"/>
-		<id property="zipcode" column="zip_code"/>
-		<id property="address1" column="first_address"/>
-		<id property="address2" column="last_address"/>
-		<id property="user_role" column="user_role"/>
-		<id property="inDate" column="in_date"/>
-		<id property="outDate" column="out_date"/>
+		<result property="password" column="user_pass"/>
+		<result property="nickName" column="nick_name"/>
+		<result property="name" column="user_name"/>
+		<result property="phone" column="user_phone"/>
+		<result property="email" column="user_email"/>
+		<result property="zipcode" column="zip_code"/>
+		<result property="address1" column="first_address"/>
+		<result property="address2" column="last_address"/>
+		<result property="user_role" column="user_role"/>
+		<result property="inDate" column="in_date"/>
+		<result property="outDate" column="out_date"/>
+		<result property="smsOk" column="sms_ok"/>
+		<result property="emailOk" column="email_ok"/>
 	</resultMap>
 	
 	<select id="idCheck" parameterType="String" resultType="int" >
@@ -28,10 +30,8 @@
 	</select>
 	
 	<insert id="insertUser" parameterType="com.thisisthat.user.register.vo.UserRegisterVO" >
-		insert into this_user values(
-		#{id},#{password},#{nickName},#{name},
-		#{phone},#{email},#{zipcode},
-		#{address1},#{address2}); 
+		insert into this_user (user_id,user_pass,nick_name,user_name,user_phone,user_email,zip_code,first_address,last_address,sms_ok,email_ok)
+		values(#{id},#{password},#{nickName},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},#{smsOk},#{emailOk}); 
 	</insert>
 	
 </mapper>

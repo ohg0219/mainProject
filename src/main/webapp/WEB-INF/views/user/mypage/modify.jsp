@@ -69,22 +69,20 @@
 								<span id="phoneCheck" style="display: block;"></span>
 							</li>
 							
-							<li>SMS 수신 *</li>
-							<li>
-								<input type="radio" name="sms" value="sms_yes"> 수신함 &nbsp;&nbsp;
-								<input type="radio" name="sms" value="sms_no"> 수신안함					
-							</li>
-							<li><br></li>
-							<li>E-MAIL *</li>
+							<li>SMS 수신</li>
 							<li class="input_li">
-								<input class="input" type="text" name="email" value="${modify.email}">
+								<label><input type="radio" name="smsOk" value="1" <c:if test="${modify.smsOk == 1 }">checked</c:if>>수신함</label>
+								<label><input type="radio" name="smsOk" value="0" <c:if test="${modify.smsOk == 0 }">checked</c:if>>수신안함</label>					
+							</li>
+							<li>E-MAIL *</li>
+							<li class="">
+								<input class="input" type="email" name="email">
 								<span id="emailCheck"></span>
 							</li>
-							<li></li>
-							<li>E-MAIL 수신 *</li>
-							<li>
-								<input type="radio" name="check" value="email_yes"> 수신함 &nbsp;&nbsp;
-								<input type="radio" name="check" value="email_no"> 수신안함					
+							<li>E-MAIL 수신</li>
+							<li class="input_li">
+								<label><input type="radio" name="emailOk" value="1" <c:if test="${modify.emailOk == 1 }">checked</c:if>>수신함</label>
+								<label><input type="radio" name="emailOk" value="0" <c:if test="${modify.emailOk == 0 }">checked</c:if>>수신안함</label>					
 							</li>
 							<li></li>
 							<li></li>
