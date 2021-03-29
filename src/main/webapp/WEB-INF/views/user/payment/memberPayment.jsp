@@ -253,11 +253,11 @@
 							<li class="input_li z" >
 								<select class="input_tel" name="phone1" id="phone1">
 									<option <c:if test="${userInfo.phone1=='010' }">selected</c:if>>010</option>
-									<option>011</option>
-									<option>016</option>
-									<option>017</option>
-									<option>018</option>
-									<option>019</option>
+									<option <c:if test="${userInfo.phone1=='011' }">selected</c:if>>011</option>
+									<option <c:if test="${userInfo.phone1=='016' }">selected</c:if>>016</option>
+									<option <c:if test="${userInfo.phone1=='017' }">selected</c:if>>017</option>
+									<option <c:if test="${userInfo.phone1=='018' }">selected</c:if>>018</option>
+									<option <c:if test="${userInfo.phone1=='019' }">selected</c:if>>019</option>
 								</select>
 								<span>-</span>
 								<input class="input_phone otherInput" type="tel" name="phone2" size="4" value="${userInfo.phone2 }">

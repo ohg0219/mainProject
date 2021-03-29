@@ -3,17 +3,16 @@ package com.thisisthat.user.payment.vo;
 public class UserOrderVO {
 
 	private int orderNo;
-	private int productNo;
+	private long productNo;
 	private String selectSize;
-	private int productPrice;
+	private long productPrice;
 	private int selectCount;
-	
+
 	public UserOrderVO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public UserOrderVO(int orderNo, int productNo, String selectSize, int productPrice, int selectCount) {
+
+	public UserOrderVO(int orderNo, long productNo, String selectSize, long productPrice, int selectCount) {
 		super();
 		this.orderNo = orderNo;
 		this.productNo = productNo;
@@ -22,41 +21,50 @@ public class UserOrderVO {
 		this.selectCount = selectCount;
 	}
 
-
 	public int getOrderNo() {
 		return orderNo;
 	}
+
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
-	public int getProductNo() {
+
+	public long getProductNo() {
 		return productNo;
 	}
-	public void setProductNo(int productNo) {
+
+	public void setProductNo(long productNo) {
 		this.productNo = productNo;
 	}
+
 	public String getSelectSize() {
 		return selectSize;
 	}
+
 	public void setSelectSize(String selectSize) {
 		this.selectSize = selectSize;
 	}
-	public int getProductPrice() {
+
+	public long getProductPrice() {
 		return productPrice;
 	}
-	public void setProductPrice(int productPrice) {
+
+	public void setProductPrice(long productPrice) {
 		this.productPrice = productPrice;
 	}
+
 	public int getSelectCount() {
 		return selectCount;
 	}
+
 	public void setSelectCount(int selectCount) {
 		this.selectCount = selectCount;
 	}
+
 	@Override
 	public String toString() {
 		return "UserOrderVO [orderNo=" + orderNo + ", productNo=" + productNo + ", selectSize=" + selectSize
 				+ ", productPrice=" + productPrice + ", selectCount=" + selectCount + "]";
 	}
-	
+
 }

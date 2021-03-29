@@ -177,9 +177,8 @@ a {
 			$("#modifyBtn").click(function(){
 				 var state = $("input[name=state]:checked").val();
 				 var userId = $("#userId").text();
-				 window.location.href="/getUserUpdate.mdo?state="+state+"&userId="+userId;
+				 window.location.href="/admin/getUserUpdate.mdo?state="+state+"&userId="+userId;
 				 alert("수정되었습니다.")
-				 
 			});
 		});
 	});
