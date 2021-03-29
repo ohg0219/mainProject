@@ -1,12 +1,18 @@
 package com.thisisthat.user.payment.controller;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.service.UserPaymentService;
 import com.thisisthat.user.payment.vo.UserBasketVO;
+import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
 import com.thisisthat.user.payment.vo.UserVO;
 
@@ -24,6 +31,9 @@ public class UserPaymentController {
 
 	@Autowired
 	UserPaymentService paymentService;
+
+	@Autowired
+	private JavaMailSenderImpl senderImpl;
 	
 	//결제하기 버튼 클릭시 세션검사후 회원, 비회원 분리
 	@GetMapping("/paymentDivide.do")
@@ -86,6 +96,8 @@ public class UserPaymentController {
 		int orderNo = paymentService.insertOrder(vo);
 		model.addAttribute("orderNo",orderNo);
 		model.addAttribute("orderDate",paymentService.getOrderDate(orderNo));
+		mailSend(orderNo);
+		
 		return "/user/payment/paymentResult";
 	}
 	
@@ -97,7 +109,7 @@ public class UserPaymentController {
 		int productPrice = 0;
 		String str ="thisisthat_";
 		for(int i =0;i<basketItem.size();i++) {
-			productPrice+=basketItem.get(i).getProductPrice();
+			productPrice+=basketItem.get(i).getProductPrice()*basketItem.get(i).getSelectCount();
 			str += String.valueOf(basketItem.get(i).getProductNo())+",";
 		}
 		model.addAttribute("subTotal",productPrice);
@@ -127,18 +139,81 @@ public class UserPaymentController {
 		int orderNo = paymentService.insertNonMemberOrder(vo, sessionBasket);
 		model.addAttribute("orderNo",orderNo);
 		model.addAttribute("orderDate",paymentService.getOrderDate(orderNo));
+		mailSend(orderNo);
+		session.removeAttribute("basketItem");
 		return "/user/payment/paymentResult";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * 결제완료 이메일 발송
+	 */
+	String userId = "";
+	public void mailSend(int orderNo) {
+		UserPaymentVO orderInfo = paymentService.userOrder(orderNo);
+		Date orderDate = orderInfo.getOrderDate();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		List<UserMailVO> orderProductInfo = paymentService.userOrderInfo(orderNo);
+		StringBuffer sb = new StringBuffer();
+		DecimalFormat df = new DecimalFormat("###,###");
+		if(orderInfo.getUserId().equals("비회원")) {
+			userId = orderInfo.getReceiveName()+"[비회원]";
+		}else {
+			userId = orderInfo.getUserId();
+		}
+		sb.append("<html><body>");
+		sb.append("<div style='font: 500 11px/1.5 arial, sans-serif; border:1px solid #444;padding: 20px;width: 500px;'>");
+		sb.append("<p>안녕하세요. <strong>thisisthat</strong> 입니다.</p><br>");
+		sb.append("<p><strong>"+userId+"</strong>고객님께서 <strong>thisisthat</strong>에서 주문하신 내역입니다. </p><br><br>");
+		sb.append("<p>"+userId+"</p>");
+		sb.append("<p>주문번호</p>");
+		sb.append("<p>"+orderNo+"</p>");
+		sb.append("<p>주문일</p>");
+		sb.append("<p>"+sdf.format(orderDate)+"</p><br><br>");
+		sb.append("<p>주문 상품 정보</p>");
+		sb.append("<table border='1' style='border-collapse: collapse; text-align: center; '> ");
+		sb.append("<tr>");
+		sb.append("<td width='100px'>상품명</th>");
+		sb.append("<td width='50px'>사이즈</th>");
+		sb.append("<td width='50px'>수량</th>");
+		sb.append("<td width='100px'>판매가</th>");
+		sb.append("<td width='100px'>상품구매금액</th>");
+		sb.append("</tr>");
+		for(UserMailVO mailvo : orderProductInfo) {
+			sb.append("<tr>");
+			sb.append("<td>"+mailvo.getProductName()+"</td>");
+			sb.append("<td>"+mailvo.getOrderSize()+"</td>");
+			sb.append("<td>"+mailvo.getSelectCount()+"</td>");
+			sb.append("<td>"+df.format(mailvo.getProductPrice())+"</td>");
+			sb.append("<td>"+df.format(mailvo.getProductTotal())+"</td>");
+			sb.append("</tr>");
+		}
+		sb.append("<tr>");
+		sb.append("<td colspan='5'>총 상품구매금액 "+df.format(orderInfo.getOriginalPrice())+" + 총 배송비 0 - 할인금액 "+df.format((orderInfo.getUsePoint()+orderInfo.getUseCoupon()))+" <br>= 총 결제금액 "+df.format(orderInfo.getOrderPrice())+"</td>");
+		sb.append("</tr>");
+		sb.append("</table><br><br>");
+		sb.append("<p>결제 정보</p><br>");
+		sb.append("<table border='1' style='border-collapse: collapse;text-align: center;'>");
+		sb.append("<tr>");
+		sb.append("<td width='100px'>총 결제 금액</td>");
+		sb.append("<td width='100px'>"+df.format(orderInfo.getOrderPrice())+"</td>");
+		sb.append("<td width='100px'>결제수단</td>");
+		sb.append("<td width='100px'>무통장 입금</td>");
+		sb.append("</tr>");
+		sb.append("</table>");
+		sb.append("</div>");
+		sb.append("</body></html>");
+		
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true,"UTF-8");
+				helper.setTo(orderInfo.getOrderEmail());
+				helper.setSubject("[thisisthat] "+userId+" 님의 주문 내역을 알려드립니다. ");
+				helper.setText(sb.toString(),true);
+			}
+		};
+		senderImpl.send(preparator);
+		
+	}
 	
 }
