@@ -22,7 +22,6 @@ public class BannerDAO {
 		Integer order = bannerTemplate.selectOne("bannerDAO.getMaxBannerOrder");
 		
 		if(order == null) order = 0;
-		System.out.println(order);
 		banner.setBannerOrder(order + 1);
 		
 		bannerTemplate.selectOne("bannerDAO.insertBanner",banner);

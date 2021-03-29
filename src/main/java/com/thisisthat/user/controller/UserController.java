@@ -19,9 +19,6 @@ public class UserController {
 	 */
 	@RequestMapping(value = {"main.do"})
 	public String mainView(Model model) {
-		for(BannerVO vo : userService.getBannerList()) {
-			System.out.println(vo.toString());
-		}
 		model.addAttribute("bannerList",userService.getBannerList());
 		return "/user/main";
 	}

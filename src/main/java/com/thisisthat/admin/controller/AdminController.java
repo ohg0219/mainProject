@@ -56,14 +56,12 @@ public class AdminController {
 			@RequestParam(value="autoLogin",defaultValue= "false")boolean autoLogin,
 			HttpServletResponse response) {
 		UserVO user = dao.idCheck(vo.getUserId());
-		System.out.println(autoLogin);
 		if(user == null) {
 			
 		}else if(BCrypt.checkpw(vo.getUserPw(), user.getUserPw())) {
 			if(user.getUserRole()<21) {
 				session.setAttribute("adminId", user);
 				if(autoLogin) {
-					System.out.println("쿠키");
 					Cookie cookie = new Cookie("userVO", user.getUserId());
 					cookie.setMaxAge(60*60*24*30);//한달설정
 					cookie.setPath("/");
@@ -71,13 +69,11 @@ public class AdminController {
 				}
 				return "/admin/main";
 			}else {
-				System.out.println("권한없음");
 				model.addAttribute("msg","roleFail");
 				return "/admin/login";
 			}
 		}
 		
-		System.out.println("로그인 실패");
 		model.addAttribute("msg","pwFail");
 		return "/admin/login";
 	}
