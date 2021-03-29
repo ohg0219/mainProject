@@ -79,7 +79,7 @@
 								<input class="address_" type="text" name="address2" id="address2">
 							</li>
 							<li>휴대전화 *</li>
-							<li class="input_li">
+							<li class="">
 								<select class="input_tel" name="phone1">
 									<option>010</option>
 									<option>011</option>
@@ -94,13 +94,23 @@
 								<input class="input_phone" type="tel" name="phone3" size="4">
 								<span id="phoneCheck" style="display: block;"></span>
 							</li>
-							<li>E-MAIL *</li>
+							<li>SMS 수신</li>
 							<li class="input_li">
+								<label><input type="radio" name="smsOk" value="1">수신함</label>
+								<label><input type="radio" name="smsOk" value="0" checked="checked">수신안함</label>					
+							</li>
+							<li>E-MAIL *</li>
+							<li class="">
 								<input class="input" type="email" name="email">
 								<span id="emailCheck"></span>
 							</li>
+							<li>E-MAIL 수신</li>
 							<li class="input_li">
-								<p>이용약관에 대한 동의</p><p>개인정보 수집 및 이용에 대한 동의</p><a class="utilizationDisplay" style="float: right">자세히 보기</a>
+								<label><input type="radio" name="emailOk" value="1">수신함</label>
+								<label><input type="radio" name="emailOk" value="0" checked="checked">수신안함</label>					
+							</li>
+							<li class="input_li">
+								<p>이용약관에 대한 동의</p><a class="utilizationDisplay" style="float: right">자세히 보기</a>
 								<input type="checkbox" style="vertical-align: -2px;" name="terms"><label style="font-weight: normal;">동의함</label>
 								
 							</li>

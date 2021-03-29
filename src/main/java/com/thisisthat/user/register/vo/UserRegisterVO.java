@@ -9,12 +9,14 @@ public class UserRegisterVO {
 	private String name; 
 	private String phone; 
 	private String email; 
-	private int zipcode; 
+	private String zipcode; 
 	private String address1; 
 	private String address2; 
 	private int user_role; 
 	private Date inDate;
 	private Date outDate;
+	private int smsOk;
+	private int emailOk;
 	public String getId() {
 		return id;
 	}
@@ -51,10 +53,10 @@ public class UserRegisterVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getZipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
-	public void setZipcode(int zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 	public String getAddress1() {
@@ -87,14 +89,24 @@ public class UserRegisterVO {
 	public void setOutDate(Date outDate) {
 		this.outDate = outDate;
 	}
+	public int getSmsOk() {
+		return smsOk;
+	}
+	public void setSmsOk(int smsOk) {
+		this.smsOk = smsOk;
+	}
+	public int getEmailOk() {
+		return emailOk;
+	}
+	public void setEmailOk(int emailOk) {
+		this.emailOk = emailOk;
+	}
 	@Override
 	public String toString() {
 		return "UserRegisterVO [id=" + id + ", password=" + password + ", nickName=" + nickName + ", name=" + name
 				+ ", phone=" + phone + ", email=" + email + ", zipcode=" + zipcode + ", address1=" + address1
 				+ ", address2=" + address2 + ", user_role=" + user_role + ", inDate=" + inDate + ", outDate=" + outDate
-				+ "]";
+				+ ", smsOk=" + smsOk + ", emailOk=" + emailOk + "]";
 	}
-	
-	
 	
 }

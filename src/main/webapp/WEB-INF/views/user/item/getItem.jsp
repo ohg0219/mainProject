@@ -125,7 +125,7 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function (e){
-	$(document).on("click","img",function(){
+	$(document).on("click",".image",function(){
 		var path = $(this).attr('src')
 		showImage(path);
 	});//end click event

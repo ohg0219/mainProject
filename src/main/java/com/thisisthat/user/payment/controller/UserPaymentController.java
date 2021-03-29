@@ -35,7 +35,11 @@ public class UserPaymentController {
 	@Autowired
 	private JavaMailSenderImpl senderImpl;
 	
-	//결제하기 버튼 클릭시 세션검사후 회원, 비회원 분리
+	/**
+	 * 결제하기 버튼 클릭시 세션 검사 후 회원과 비회원 페이지 분리
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/paymentDivide.do")
 	public String paymentView(HttpSession session) {
 		if(session.getAttribute("userId")!=null) {
@@ -45,7 +49,12 @@ public class UserPaymentController {
 		}
 	}
 	
-	//회원결제페이지
+	/**
+	 * 회원 결제 페이지 진입
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/memberPayment.do")
 	public String memberPayment(HttpSession session,Model model) {
 		String userId = (String) session.getAttribute("userId");
@@ -69,7 +78,17 @@ public class UserPaymentController {
 		return "/user/payment/memberPayment";
 	}
 	
-	//회원 결제 완료
+	/**
+	 * 회원 결제완료 
+	 * @param phone1
+	 * @param phone2
+	 * @param phone3
+	 * @param originalPrice
+	 * @param vo
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/memberPayment.do")
 	public String memberPayment(
 			@RequestParam("phone1")String phone1,
@@ -101,7 +120,12 @@ public class UserPaymentController {
 		return "/user/payment/paymentResult";
 	}
 	
-	//비회원결제페이지
+	/**
+	 * 비회원 결제 페이지 진입
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@GetMapping("/nonMemberPayment.do")
 	public String nonMemberPayment(HttpSession session,Model model) {
@@ -117,7 +141,17 @@ public class UserPaymentController {
 		return "/user/payment/nonMemberPayment";
 	}
 	
-	//비회원 결제완료
+	/**
+	 * 비회원 결제 완료
+	 * @param phone1
+	 * @param phone2
+	 * @param phone3
+	 * @param orderPassword
+	 * @param vo
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@PostMapping("/nonMemberPayment.do")
 	public String nonMemberPayment(@RequestParam("phone1")String phone1,
@@ -188,7 +222,8 @@ public class UserPaymentController {
 			sb.append("</tr>");
 		}
 		sb.append("<tr>");
-		sb.append("<td colspan='5'>총 상품구매금액 "+df.format(orderInfo.getOriginalPrice())+" + 총 배송비 0 - 할인금액 "+df.format((orderInfo.getUsePoint()+orderInfo.getUseCoupon()))+" <br>= 총 결제금액 "+df.format(orderInfo.getOrderPrice())+"</td>");
+		sb.append("<td colspan='5'>총 상품구매금액 "+df.format(orderInfo.getOriginalPrice())+" + 총 배송비 0 - "
+					+ "할인금액 "+df.format((orderInfo.getUsePoint()+orderInfo.getUseCoupon()))+" <br>= 총 결제금액 "+df.format(orderInfo.getOrderPrice())+"</td>");
 		sb.append("</tr>");
 		sb.append("</table><br><br>");
 		sb.append("<p>결제 정보</p><br>");
@@ -197,7 +232,7 @@ public class UserPaymentController {
 		sb.append("<td width='100px'>총 결제 금액</td>");
 		sb.append("<td width='100px'>"+df.format(orderInfo.getOrderPrice())+"</td>");
 		sb.append("<td width='100px'>결제수단</td>");
-		sb.append("<td width='100px'>무통장 입금</td>");
+		sb.append("<td width='100px'>"+orderInfo.getOrderSelect()+"</td>");
 		sb.append("</tr>");
 		sb.append("</table>");
 		sb.append("</div>");
@@ -212,8 +247,6 @@ public class UserPaymentController {
 				helper.setText(sb.toString(),true);
 			}
 		};
-		senderImpl.send(preparator);
-		
+		senderImpl.send(preparator);	
 	}
-	
 }
