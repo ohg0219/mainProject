@@ -12,6 +12,9 @@
 		<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.thisisthat.admin.board.vo.AnswerBoardVO" alias="answerVO"/>
 		<typeAlias type="com.thisisthat.admin.point.vo.PointVO" alias="pointVO"/>
+		<typeAlias type="com.thisisthat.admin.banner.vo.BannerVO" alias="bannerVO"/>
+		<typeAlias type="com.thisisthat.admin.terms.vo.InformationVO" alias="informationVO"/>
+		<typeAlias type="com.thisisthat.admin.terms.vo.UtilizationVO" alias="utilizationVO"/>
 		
 
 	</typeAliases>
@@ -41,5 +44,7 @@
 		<mapper resource="mappings/admin/admin-register-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-point-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-role-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-banner-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
 	</mappers>
 </configuration>

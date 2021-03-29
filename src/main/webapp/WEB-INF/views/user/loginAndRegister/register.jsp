@@ -11,6 +11,30 @@
 <script src="/resources/user/js/common.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/user/js/register.js"></script>
+<style type="text/css">
+	.text_area{
+	    overflow: auto;
+    width:250px;
+    height: 60px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    clear: both;
+    margin: 8px 0;
+    box-sizing: border-box;
+        -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    position: absolute;
+	padding: 3px 10px;
+	display: none;
+    }
+</style>
 </head>
 <body>
 	<div class="wrap">
@@ -76,14 +100,21 @@
 								<span id="emailCheck"></span>
 							</li>
 							<li class="input_li">
-								<p>이용약관에 대한 동의</p>
+								<p>이용약관에 대한 동의</p><p>개인정보 수집 및 이용에 대한 동의</p><a class="utilizationDisplay" style="float: right">자세히 보기</a>
 								<input type="checkbox" style="vertical-align: -2px;" name="terms"><label style="font-weight: normal;">동의함</label>
+								
+							</li>
+							<li class="input_li" >
+								<textarea id="utilizationDisplay" class="text_area"  readonly="readonly" required="required">${utilization}</textarea>
 							</li>
 							<li class="input_li">
-								<p>개인정보 수집 및 이용에 대한 동의</p>
-								<input type="checkbox" style="vertical-align: -2px;" name="privacyPolicy"><label style="font-weight: normal;">동의함</label>
+								<p>개인정보 수집 및 이용에 대한 동의</p><a class="informationDisplay" style="float: right">자세히 보기</a>
+								<input type="checkbox" name="privacyPolicy"><label style="font-weight: normal;">동의함</label>
 							</li>
-							<li><input id="registBtn" class="register_btn" type="submit" value="가입하기"></li>
+							<li class="input_li">
+								<textarea id="informationDisplay" class="text_area" readonly="readonly" required="required">${information}</textarea>
+							</li>
+							<li><br><br><input id="registBtn" class="register_btn" type="submit" value="가입하기"></li>
 						</ul>
 					</form>	
 			 	</div> 
@@ -93,4 +124,34 @@
 		<%@include file="../include/footer.jsp" %>
 	</div>
 </body>
+<script type="text/javascript">
+$(document).ready(
+		function() {
+			$(".utilizationDisplay").on("click", function() {
+				console.log('ad');
+				var utilization = document.getElementById('utilizationDisplay');
+				if(utilization.style.display == 'block'){
+					utilization.style.display = 'none';
+					return false;
+				}else{
+					utilization.style.display = 'block';
+					
+					return false;
+				}
+			});
+			$(".informationDisplay").on("click", function() {
+				console.log('ad');
+				var information = document.getElementById('informationDisplay');
+				if(information.style.display == 'block'){
+					information.style.display = 'none';
+					return false;
+				}else{
+					information.style.display = 'block';
+					return false;
+				}
+			});
+            
+		
+	});
+</script>
 </html>

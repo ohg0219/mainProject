@@ -1,4 +1,4 @@
-package com.thisisthat.admin.dao;
+package com.thisisthat.user.dao;
 
 import java.util.List;
 
@@ -7,17 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.thisisthat.admin.banner.vo.BannerVO;
-import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 @Repository
-public class AdminDAO {
+public class UserDAO {
+	
 	@Autowired
-	private SqlSessionTemplate adminTemplate;
+	SqlSessionTemplate userTemplate;
 	
-	public UserVO idCheck(String userId) {
-		return adminTemplate.selectOne("AdminDAO.getUser" , userId);
+	public List<BannerVO> getBannerList(){
+		return userTemplate.selectList("bannerDAO.getBannerList");
 	}
-
-	
-	
 }

@@ -40,6 +40,8 @@
                         <a class="collapse-item" href="/admin/pointUserList.mdo">회원적립금관리</a>
                         <a class="collapse-item" href="/admin/getCouponList.mdo">쿠폰생성</a>
                         <a class="collapse-item" href="cards.html">회원쿠폰부여</a>
+                        <a class="collapse-item" href="/admin/getTermsList.mdo?state=information">개인정보 수집 및 이용 약관</a>
+                        <a class="collapse-item" href="/admin/getTermsList.mdo?state=utilization">이용 약관</a>
                     </div>
                 </div>
             </li>
@@ -115,6 +117,11 @@
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>매출현황</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/getBanner.mdo">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>배너관리</span></a>
             </li>
 
             <!-- Divider -->

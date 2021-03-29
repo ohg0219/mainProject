@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.thisisthat.admin.terms.vo.InformationVO;
+import com.thisisthat.admin.terms.vo.UtilizationVO;
 import com.thisisthat.user.register.service.UserRegisterService;
 import com.thisisthat.user.register.vo.UserRegisterVO;
 
@@ -64,7 +66,10 @@ public class UserRegisterController {
 	 * @return
 	 */
 	@GetMapping(value = {"/register.do"})
-	public String registerView() {
+	public String registerView(Model model) {
+		model.addAttribute("utilization",((UtilizationVO)userRegisterService.getToputilization()).getContent());
+		model.addAttribute("information",((InformationVO)userRegisterService.getTopInformation()).getContent());
+		
 		return "/user/loginAndRegister/register";
 	}
 	
