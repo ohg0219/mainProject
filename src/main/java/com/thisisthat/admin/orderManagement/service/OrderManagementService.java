@@ -8,4 +8,6 @@ public interface OrderManagementService {
 
 	List<OrderManagementVO> orderList(OrderManagementVO orderManagementVO);
 
+	List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO);
+
 }

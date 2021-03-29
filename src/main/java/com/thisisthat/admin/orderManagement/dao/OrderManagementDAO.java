@@ -18,4 +18,8 @@ public class OrderManagementDAO {
 		return mybatis.selectList("orderManagementDAO.orderList", orderManagementVO);
 	}
 
+	public List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO) {
+		return mybatis.selectList("orderManagementDAO.getOrder", orderManagementVO);
+	}
+
 }

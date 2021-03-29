@@ -20,4 +20,9 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 		return orderManagementDAO.orderList(orderManagementVO);
 	}
 
+	@Override
+	public List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO) {
+		return orderManagementDAO.getOrder(orderManagementVO);
+	}
+
 }

@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="orderManagementDAO">
-  
-  	<select id="orderList" resultType="orderManagementVO">
-  		select * from order_table order by order_state asc,invoice_no asc
+
+<mapper namespace="orderManagementDAO">
+
+	<select id="orderList" resultType="orderManagementVO">
+		select order_no, order_date,
+		user_id, product_no, order_size, select_count, order_select,
+		passbook_name, order_state, invoice_no, order_cancel from order_table
+		left join order_product using(order_no) order by
+		order_state
+		asc,invoice_no asc
 	</select>
-  
-  </mapper>
+	
+	<select id="getOrder" resultType="orderManagementVO">
+		select * from order_table
+		left join order_product using(order_no)  where order_no=#{order_no}
+		order by
+		order_state
+		asc,invoice_no asc 
+	</select>
+
+	
+
+</mapper>

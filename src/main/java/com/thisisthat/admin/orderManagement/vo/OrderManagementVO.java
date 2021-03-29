@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class OrderManagementVO {
 
+	
+	//order_table
 	private int order_no;//주문 번호 
 	private Date order_date;//주문 일
 	private String user_id;//고객 ID
@@ -26,6 +28,12 @@ public class OrderManagementVO {
 	private int invoice_no;//송장 번호
 	private int waiting_point;//적립 예정 포인트
 	
+	//order_product테이블
+	private int product_no;//상품번호
+	private String order_size;//사이즈
+	private int product_price;//상품 가격
+	private int select_count;//상품 갯수
+
 	public int getOrder_no() {
 		return order_no;
 	}
@@ -152,7 +160,30 @@ public class OrderManagementVO {
 	public void setWaiting_point(int waiting_point) {
 		this.waiting_point = waiting_point;
 	}
-	
+	public int getProduct_no() {
+		return product_no;
+	}
+	public void setProduct_no(int product_no) {
+		this.product_no = product_no;
+	}
+	public String getOrder_size() {
+		return order_size;
+	}
+	public void setOrder_size(String order_size) {
+		this.order_size = order_size;
+	}
+	public int getProduct_price() {
+		return product_price;
+	}
+	public void setProduct_price(int product_price) {
+		this.product_price = product_price;
+	}
+	public int getSelect_count() {
+		return select_count;
+	}
+	public void setSelect_count(int select_count) {
+		this.select_count = select_count;
+	}
 	@Override
 	public String toString() {
 		return "OrderManagementVO [order_no=" + order_no + ", order_date=" + order_date + ", user_id=" + user_id
@@ -162,14 +193,12 @@ public class OrderManagementVO {
 				+ ", order_message=" + order_message + ", original_price=" + original_price + ", use_point=" + use_point
 				+ ", use_coupon=" + use_coupon + ", order_price=" + order_price + ", order_select=" + order_select
 				+ ", passbook_name=" + passbook_name + ", order_state=" + order_state + ", order_cancel=" + order_cancel
-				+ ", invoice_no=" + invoice_no + ", waiting_point=" + waiting_point + "]";
+				+ ", invoice_no=" + invoice_no + ", waiting_point=" + waiting_point + ", product_no=" + product_no
+				+ ", order_size=" + order_size + ", product_price=" + product_price + ", select_count=" + select_count
+				+ "]";
 	}
 	
 	
 	
-	
-	
-	
-	
-	
+		
 }//end class

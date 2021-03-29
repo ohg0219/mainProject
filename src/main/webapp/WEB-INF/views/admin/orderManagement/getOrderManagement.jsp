@@ -76,12 +76,12 @@
                                     
                                     	 
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                    	<c:if test="${not empty orderList}" >
-	                                        <c:forEach var="article" items="${orderList}">
+                                    	<c:if test="${not empty getorder}" >
+	                                        <c:forEach var="article" items="${getorder}">
 		                                        <tr>
 			                                        <td width="45" align="center">${article.order_no}</td>
 			                                        <td width="115" align="center"><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="195" align="center"><a href="getOrderManagement.mdo?order_no=${article.order_no }">${article.user_id }</a></td>
+			                                        <td width="195" align="center"><a href="getOrderManagement.mdo" value="${article.order_no }">${article.user_id }</a></td>
 			                                        <td width="45" align="center">${article.product_no }</td>
 			                                        <td width="45" align="center">${article.order_size }</td>
 			                                        <td width="45" align="center">${article.select_count }</td>
@@ -95,7 +95,7 @@
                                         
 
                                         </c:if>
-                                        <c:if test="${empty orderList }">
+                                        <c:if test="${empty getorder }">
                                         	<tr>
                                         		<td colspan="5" align="center">
                                         		<h1> 받은 주문이 없어요</h1>
