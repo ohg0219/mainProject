@@ -90,7 +90,7 @@
                 </a>
                 <div id="order" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">주문내역</a>
+                        <a class="collapse-item" href="/admin/getOrderManagementList.mdo">주문내역</a>
                         <a class="collapse-item" href="register.html">배송관리</a>
                     </div>
                 </div>
