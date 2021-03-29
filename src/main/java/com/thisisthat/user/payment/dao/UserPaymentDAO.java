@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
+import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserOrderVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
 import com.thisisthat.user.payment.vo.UserVO;
@@ -75,5 +76,12 @@ public class UserPaymentDAO {
 		return seq;
 	}
 	
+	public List<UserMailVO> userOrderInfo(int orderNo){
+		return paymentTemplate.selectList("PaymentDAO.userOrderInfo",orderNo);
+	}
+	
+	public UserPaymentVO userOrder(int orderNo) {
+		return paymentTemplate.selectOne("PaymentDAO.userOrder",orderNo);
+	}
 	
 }
