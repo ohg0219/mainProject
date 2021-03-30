@@ -47,22 +47,22 @@
                             	</tr>
                             	<tr>
                             		<td>
-                            			쿠폰명 : ${grantVo.coupon_name } .쿠폰
+                            			쿠폰명 : [${grantVo.coupon_name }]
                             		</td>
                             	</tr>
                             	<tr>
                             		<td>
-                            			할인금액 : ${grantVo.coupon_price }원
+                            			할인금액 : [${grantVo.coupon_price }]
                             		</td>
                             	</tr>
                             	<tr>
                             		<td>
-                            			발급일자 : <fmt:formatDate value="${grantVo.coupon_first }"  pattern="yyyy-MM-dd "/>
+                            			발급일자 : [<fmt:formatDate value="${grantVo.coupon_first }"  pattern="yyyy-MM-dd "/>]
                             		</td>
                             	</tr>
                             	<tr>
                             		<td>
-                            			만료일자 : <fmt:formatDate value="${grantVo.coupon_last }"  pattern="yyyy-MM-dd "/>
+                            			만료일자 : [<fmt:formatDate value="${grantVo.coupon_last }"  pattern="yyyy-MM-dd "/>]
                             		</td>
                             	</tr>
                          	</table>

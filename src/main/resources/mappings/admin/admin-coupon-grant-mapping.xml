@@ -43,7 +43,7 @@
 	</select>
 	
 	<select id="couponUserList" resultType="CouponGrantVO">
-		select user_id, coupon_name, coupon_price, coupon_first, coupon_last,
+		select user_id, coupon_no, coupon_name, coupon_price, coupon_first, coupon_last,
 		used from user_coupon where user_id = #{user_id}
 	</select>
 	
@@ -54,5 +54,9 @@
 	<select id="IdCouponSearch" resultType="CouponGrantVO">
 		select * from user_coupon where user_id like '%'||#{keyword}||'%' order by coupon_last  desc
 	</select>
+	
+	<delete id="userCouponDelete">
+		delete from user_coupon where user_id = #{user_id} and coupon_no = #{coupon_no}
+	</delete>
 	
 </mapper>

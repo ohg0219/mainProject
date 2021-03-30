@@ -45,7 +45,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">쿠폰 지급 목록</h1>
+                    <h1 class="h3 mb-2 text-gray-800">쿠폰 지급 현황</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -63,7 +63,7 @@
                                     </form>
                                     <br>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <strong>회원쿠폰 지급 현황</strong>
+                                    <strong>회원쿠폰 지급 목록</strong>
                                     <thead>
                                         <tr>
                                             <th>사용자 아이디</th>
@@ -122,7 +122,6 @@
                                     <br>
                                     
                     
-                                    <button class="btn btn-dark" type="button" onclick="location.href='/admin/grantCoupon.mdo' ">목록으로</button>&nbsp;
                                     <button class="btn btn-dark" type="button" onclick="location.href='/admin/main.mdo' ">메인으로</button>
                     				            
                                 <div>	
