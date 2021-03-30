@@ -73,7 +73,6 @@ public class AnswerController {
 		}
 		if(msg !=null) model.addAttribute("msg","msg");
 		
-		System.out.println("searchType = "+searchType+"\n searchDate = "+searchDate);
 		model.addAttribute("searchType",searchType);
 		model.addAttribute("searchDate",searchDate);
 		model.addAttribute("searchKeyword",searchKeyword);
@@ -105,7 +104,6 @@ public class AnswerController {
 				String contentType = img[0].getContentType();
 				long contentLength = img[0].getSize();
 				awsS3.upload(is, key, contentType, contentLength);
-				System.out.println(seq);
 				vo.setBoardImg1(uploadFolder+key);
 				if(img[1].getSize() != 0) {
 					key = seq+img[1].getOriginalFilename();
@@ -113,7 +111,6 @@ public class AnswerController {
 					contentType = img[1].getContentType();
 					contentLength = img[1].getSize();
 					awsS3.upload(is, key, contentType, contentLength);
-					System.out.println("업로드 완료");
 					vo.setBoardImg2(uploadFolder+key);
 					if(img[2].getSize() != 0) {
 						key = seq+img[2].getOriginalFilename();
@@ -121,7 +118,6 @@ public class AnswerController {
 						contentType = img[2].getContentType();
 						contentLength = img[2].getSize();
 						awsS3.upload(is, key, contentType, contentLength);
-						System.out.println("업로드 완료");
 						vo.setBoardImg3(uploadFolder+key);
 						if(img[3].getSize() != 0) {
 							key = seq+img[3].getOriginalFilename();
@@ -129,7 +125,6 @@ public class AnswerController {
 							contentType = img[3].getContentType();
 							contentLength = img[3].getSize();
 							awsS3.upload(is, key, contentType, contentLength);
-							System.out.println("업로드 완료");
 							vo.setBoardImg4(uploadFolder+key);
 						}//3
 					}//2

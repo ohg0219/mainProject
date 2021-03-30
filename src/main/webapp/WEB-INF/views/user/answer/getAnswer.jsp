@@ -56,7 +56,7 @@
 		<%@include file="../include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>공지사항</h3>
+				<h3>Q&A</h3>
 				<table class="noticeTable">
 					<tr>
 						<th>${answer.boardTitle}</th>

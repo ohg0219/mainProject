@@ -16,7 +16,6 @@ public class BannerServiceImpl implements BannerService {
 	
 	@Override
 	public List<BannerVO> getBannerList() {
-		// TODO Auto-generated method stub
 		return dao.getBannerList();
 	}
 

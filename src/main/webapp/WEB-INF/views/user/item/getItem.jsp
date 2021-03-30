@@ -447,7 +447,13 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			
+			<form>
+				<table style=" width: calc(75% - 210px); float:left;">
+				 	<tr>
+						<td>asd</td>
+					</tr>	
+				</table>
+			</form>
 		</div><!-- end Content -->
 		<%@include file="../include/footer.jsp"%>
 	</div>

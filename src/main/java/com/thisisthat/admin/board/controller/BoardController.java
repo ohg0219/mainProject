@@ -144,7 +144,6 @@ public class BoardController {
 	}
 	@GetMapping("/deleteAnswer.mdo")
 	public String deleteAnswer(@RequestParam("boardNo")int boardNo) {
-		System.out.println(boardNo);
 		boardService.deleteAnswer(boardNo);
 		AnswerBoardVO reply = boardService.getReply(boardNo);
 		if(reply != null) {

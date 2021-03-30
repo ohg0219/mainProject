@@ -11,6 +11,8 @@
 <script src="/resources/user/js/common.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/user/js/modify.js"></script>
+
+
 </head>
 <body>
 	<div class="wrap">
@@ -91,8 +93,8 @@
 						</ul>
 						
 						<h3>
-							<a href="#" style="border-bottom: 1px solid #111; padding-bottom: 4px; text-decoration: none; color: black">
-								<strong>회원 탈퇴하기</strong>
+							<a href="delUser.do" style="border-bottom: 1px solid #111; padding-bottom: 4px; text-decoration: none; color: black">
+								<strong class="input_li">회원 탈퇴하기</strong>
 							</a>
 						</h3>
 												
@@ -100,8 +102,15 @@
 			 	</div> 
 				
 			</div>
+							
 		</div><!-- end Content -->
+		
 		<%@include file="../include/footer.jsp" %>
 	</div>
 </body>
+<script type="text/javascript">
+	function checkPW(){
+		document.getElementById('userDelTable').style.display = 'block';
+	}
+</script>
 </html>

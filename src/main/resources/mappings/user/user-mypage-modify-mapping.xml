@@ -39,5 +39,8 @@
 	<select id="modifyPoint" resultMap="myPageModify">
 		select * from this_user where user_id=#{id}
 	</select>
-
+	
+	<update id="delUser">
+		update this_user set user_role = #{user_role} ,out_date = #{outDate};
+	</update>
 </mapper>

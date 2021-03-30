@@ -83,8 +83,6 @@ public class UserManagementController {
 			@RequestParam("userPw")String userPw, 
 			HttpSession session,
 			RedirectAttributes model) {
-		System.out.println(userId);
-		System.out.println(userPw);
 		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
 			Map<String, String> map = new HashMap<String, String>();
@@ -162,7 +160,6 @@ public class UserManagementController {
 			newPhone = phone1 + bar + phone2 + bar + phone3;
 			uservo.setUserPhone(newPhone);
 		}
-		System.out.println(uservo.toString());
 		model.addAttribute("user", uservo);
 		return "/admin/getStaff";
 	}

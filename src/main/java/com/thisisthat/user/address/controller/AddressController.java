@@ -65,7 +65,7 @@ public class AddressController {
 	@PostMapping("/addressUpdate.do")
 	public String addressUpdate(AddressVO vo, @RequestParam(value="userPhone1") String phone1,
 								@RequestParam(value="userPhone2") String phone2, @RequestParam(value="userPhone3") String phone3) {
-		System.out.println(vo.toString());
+
 		vo.setUserPhone(phone1 + phone2 + phone3);
 		service.addressUpdate(vo);
 		return "redirect:/mypage/address.do";
@@ -74,7 +74,7 @@ public class AddressController {
 	// delete 기능 수행
 	@GetMapping("/addressDelete.do")
 	public String addressDelete(@RequestParam(value="no") int addressNo) {
-		System.out.println(addressNo);
+
 		service.addressDelete(addressNo);
 		return "redirect:/mypage/address.do";
 	}

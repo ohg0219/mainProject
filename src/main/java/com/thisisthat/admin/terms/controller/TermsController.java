@@ -32,9 +32,6 @@ public class TermsController {
 		if(state.equals("information")) {
 			pagingVO = new PagingVO(termsService.getInformationTotal(), nowPage, 15); 
 			List<InformationVO> Terms = termsService.getInformationList(pagingVO);
-			for(InformationVO vo : Terms) {
-				System.out.println(vo.toString());
-			}
 			model.addAttribute("termsList",Terms);
 		}else {
 			pagingVO = new PagingVO(termsService.getUtilizationTotal(), nowPage, 15); 

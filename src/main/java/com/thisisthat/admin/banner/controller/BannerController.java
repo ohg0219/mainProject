@@ -75,7 +75,6 @@ public class BannerController {
 			bannerList.get(i).setBannerOrder(bannerOrder.get(i));
 			for(int j = i+1; j<bannerOrder.size(); j++) {
 				if(bannerOrder.get(i) == bannerOrder.get(j)) {
-					System.out.println("중복!");
 					attr.addFlashAttribute("msg","fail");
 					return "redirect:/admin/getBanner.mdo";
 				}
