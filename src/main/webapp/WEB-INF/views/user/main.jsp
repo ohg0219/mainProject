@@ -124,6 +124,11 @@
 
 
 <script>
+	var msg = '${msg}';
+	if(msg ==='delUser'){
+		alert('탈퇴 성공!');
+	}
+
 	$(document).ready(
 			function() {
 				//사용할 배너
@@ -206,4 +211,5 @@
 								};
 			});
 </script>
+
 </html>
