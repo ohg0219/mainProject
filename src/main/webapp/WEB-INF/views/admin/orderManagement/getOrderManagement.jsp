@@ -61,13 +61,15 @@
                                         <tr align="center">
                                             <th>주문 번호</th>
                                             <th>주문일</th>
-                                            <th>아이디</th>
+                                            <th>받는 사람</th>
+                                            <td width="40">받는 사람 연락처</td>
+                                            <td>우편번호</td>
+                                            <th>주소</th>
+                                            <th>상세 주소</th>
                                             <td>상품 번호</td>
                                             <td>사이즈</td>
                                             <td>수량</td>
-                                            <th>결제 정보</th>
-                                            <th>무통장 이름</th>
-                                            <th>결제 상태</th>
+                                            <th>현재 상태</th>
                                             <th>송장 번호</th>
                                             <td>취소 유무</td>
                                         </tr>
@@ -78,18 +80,21 @@
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
                                     	<c:if test="${not empty getorder}" >
 	                                        <c:forEach var="article" items="${getorder}">
-		                                        <tr>
-			                                        <td width="45" align="center">${article.order_no}</td>
-			                                        <td width="115" align="center"><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="195" align="center"><a href="getOrderManagement.mdo" value="${article.order_no }">${article.user_id }</a></td>
-			                                        <td width="45" align="center">${article.product_no }</td>
-			                                        <td width="45" align="center">${article.order_size }</td>
-			                                        <td width="45" align="center">${article.select_count }</td>
-			                                        <td width="140" align="center">${article.order_select }</td>
-			                                        <td width="45" align="center">${article.passbook_name }</td>
-			                                        <td width="45" align="center">${article.order_state }</td>
-			                                        <td width="45" align="center">${article.invoice_no }</td>
-			                                        <td width="45" align="center">${article.order_cancel }</td>
+		                                        <tr align="center">
+			                                        <td width="40">${article.order_no}</td>
+			                                        <td width="80"><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
+			                                        <td width="40">${article.receive_name }</td>
+			                                        <td width="40">${article.receive_phone }</td>
+			                                        <td width="40">${article.receive_zipcode }</td>
+			                                        <td width="250">${article.receive_first_address }</td>
+			                                        <td width="80">${article.receive_last_address }</td>
+			                                        <td width="40">${article.product_no }</td>
+			                                        <td width="40">${article.order_size}</td>
+			                                        <td width="40">${article.select_count }</td>
+			                                        <td width="40">${article.order_state }</td>
+			                                        <td width="40">${article.invoice_no }</td>
+			                                        <td width="40">${article.order_cancel }</td>
+			                                        
 			                                    </tr>
 	                                        </c:forEach>
                                         
@@ -107,12 +112,8 @@
                                 <div>	
                                 <form action="noticesearch.mdo?board_group=${article.board_group }" method="get">
                                     <input type="hidden" name="board_group" value="${where}">
-									<select name="searchOption" aria-controls="example" class="">
-										<option value="all">전체</option>
-										<option value="board_writer">주문번호</option>
-										<option value="board_title">결제 상태</option>
-										<option value="board_content">송장번호</option>
-									</select>
+									
+
 										                                    		
 									<input type="text" name="keyword">
 
@@ -127,18 +128,7 @@
 									</button>
                                 </form>
 									<br>
-									<div align="center">
-									<a href="#">1</a>
-									<a href="#">2</a>
-									<a href="#">3</a>
-									<a href="#">4</a>
-									<a href="#">5</a>
-									<a href="#">6</a>
-									<a href="#">7</a>
-									<a href="#">8</a>
-									<a href="#">9</a>
-									<a href="#">10</a>
-									</div>
+									
                                 </div>
                             </div>
                         </div>
@@ -149,17 +139,7 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	//--------------------검색하는 함수
-		$(function(){
-		
-			//-------------------검색하는 함수end			
-			$("#insertArticle").click(function(){
-				location.href="/admin/insertArticle.mdo"
-			});
-		});
 	
-	</script>
 				
 	
 

@@ -18,6 +18,16 @@ public class OrderManagementController {
 	@Autowired
 	private OrderManagementService orderManagementService;
 	
+	@RequestMapping("selectOrderManagementList.mdo")
+	public String selectOrderManagementlist(@RequestParam(value="order_state")String order_state, OrderManagementVO orderManagementVO, @RequestParam(value="order_no")String order_no) {
+		orderManagementVO.setOrder_no(Integer.parseInt(order_no));
+		orderManagementVO.setOrder_state(order_state);
+		
+		orderManagementService.selectOrder_start(orderManagementVO);
+		
+		return "redirect:getOrderManagementList.mdo";
+	}
+	
 	@RequestMapping("getOrderManagementList.mdo")
 	public String oredrManagementlist(Model model ) {
 		OrderManagementVO orderManagementVO = new OrderManagementVO();

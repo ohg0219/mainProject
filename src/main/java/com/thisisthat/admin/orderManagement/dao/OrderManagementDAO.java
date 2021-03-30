@@ -22,4 +22,12 @@ public class OrderManagementDAO {
 		return mybatis.selectList("orderManagementDAO.getOrder", orderManagementVO);
 	}
 
+	public Object selectOrder_start(OrderManagementVO orderManagementVO) {
+		return mybatis.update("orderManagementDAO.selectOrder_start", orderManagementVO);
+	}
+
+	
+
+	
+
 }

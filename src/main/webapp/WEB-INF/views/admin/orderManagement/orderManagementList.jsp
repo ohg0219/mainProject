@@ -56,20 +56,21 @@
                         -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataTable" cellspacing="0">
                                     <thead>
                                         <tr align="center">
                                             <th>주문 번호</th>
                                             <th>주문일</th>
-                                            <th>아이디</th>
-                                            <td>상품 번호</td>
-                                            <td>사이즈</td>
-                                            <td>수량</td>
+                                            <th width="30">아이디</th>
+                                            <th>우편번호</th>
+                                            <th>주소</th>
+                                            <th>상세주소</th>
+                                            <th>결제 금액</th>
                                             <th>결제 정보</th>
                                             <th>무통장 이름</th>
-                                            <th>결제 상태</th>
+                                            <th>현재 상태</th>
                                             <th>송장 번호</th>
-                                            <td>취소 유무</td>
+                                            <th>취소 유무</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,17 +80,28 @@
                                     	<c:if test="${not empty orderList}" >
 	                                        <c:forEach var="article" items="${orderList}">
 		                                        <tr>
-			                                        <td width="45" align="center">${article.order_no}</td>
-			                                        <td width="115" align="center"><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="195" align="center"><a href="getOrderManagement.mdo?order_no=${article.order_no }">${article.user_id }</a></td>
-			                                        <td width="45" align="center">${article.product_no }</td>
-			                                        <td width="45" align="center">${article.order_size }</td>
-			                                        <td width="45" align="center">${article.select_count }</td>
-			                                        <td width="140" align="center">${article.order_select }</td>
-			                                        <td width="45" align="center">${article.passbook_name }</td>
-			                                        <td width="45" align="center">${article.order_state }</td>
-			                                        <td width="45" align="center">${article.invoice_no }</td>
-			                                        <td width="45" align="center">${article.order_cancel }</td>
+			                                        <td width="40" align="center"><a href="getOrderManagement.mdo?order_no=${article.order_no}">${article.order_no}</a></td>
+			                                        <td width="50" align="center"><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
+			                                        <td width="50px" align="center">${article.user_id }</td>
+			                                        <td width="40" align="center">${article.receive_zipcode }</td>
+			                                        <td width="150" align="center">${article.receive_first_address }</td>
+			                                        <td width="50" align="center">${article.receive_last_address }</td>
+			                                        <td width="40" align="center">${article.order_price }</td>
+			                                        <td width="40" align="center">${article.order_select }</td>
+			                                        <td width="40" align="center">${article.passbook_name }</td>
+			                                        <td width="40" align="center">
+			                                        	<!-- <input type="hidden" class="articleNo" value="${article.order_no }"> -->
+                            				            <select name="order_state" id="selectorder" class="${article.order_no } selector">
+			                                        		<option value="${article.order_state }">${article.order_state }</option>
+			                                        		<option name="select" value="입금대기">입금대기</option>
+			                                        		<option name="select" value="결제완료">결제완료</option>
+			                                        		<option name="select" value="상품준비중">상품준비중</option>
+			                                        		<option name="select" value="배송중">배송중</option>
+			                                        	</select>
+			                                        
+			                                        </td>
+			                                        <td width="40" align="center">${article.invoice_no }</td>
+			                                        <td width="40" align="center">${article.order_cancel }</td>
 			                                    </tr>
 	                                        </c:forEach>
                                         
@@ -149,17 +161,23 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	//--------------------검색하는 함수
-		$(function(){
-		
-			//-------------------검색하는 함수end			
-			$("#insertArticle").click(function(){
-				location.href="/admin/insertArticle.mdo"
-			});
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".selector").on("change",function(){
+			var select = $(".selector option:selected").val();
+			var number = $(this).siblings(".articleNo").val();
+			console.log("select : " + select +"  number :"+ number);
+			location.href="/admin/selectOrderManagementList.mdo?order_state="+select+"&order_no="+number;
 		});
-	
+	});
+	/* function Change(){
+		var select = document.getElementById('selectorder').value;
+		var number = $(this).siblings(".articleNo").val;
+		console.log("select : " + select +"  number :"+ number);
+		//location.href="/admin/selectOrderManagementList.mdo?order_state="+select+"&order_no="+number;
+	} */
 	</script>
+	
 				
 	
 

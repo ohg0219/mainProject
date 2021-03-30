@@ -10,4 +10,6 @@ public interface OrderManagementService {
 
 	List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO);
 
+	Object selectOrder_start(OrderManagementVO orderManagementVO);
+
 }

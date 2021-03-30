@@ -25,4 +25,10 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 		return orderManagementDAO.getOrder(orderManagementVO);
 	}
 
+	@Override
+	public Object selectOrder_start(OrderManagementVO orderManagementVO) {
+		return orderManagementDAO.selectOrder_start(orderManagementVO);
+	}
+	
+	
 }

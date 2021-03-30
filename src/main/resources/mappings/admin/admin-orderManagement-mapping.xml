@@ -5,22 +5,27 @@
 <mapper namespace="orderManagementDAO">
 
 	<select id="orderList" resultType="orderManagementVO">
-		select order_no, order_date,
-		user_id, product_no, order_size, select_count, order_select,
-		passbook_name, order_state, invoice_no, order_cancel from order_table
-		left join order_product using(order_no) order by
+		select * from order_table
+		where order_state='결제완료' or order_state='입금대기' or order_state='상품준비중'
+		order by order_state asc, invoice_no asc
+	</select>
+
+	<select id="getOrder" resultType="orderManagementVO">
+
+		select * from order_table
+		left
+		join order_product using(order_no) where
+		order_no=#{order_no}
+		order by
 		order_state
 		asc,invoice_no asc
 	</select>
-	
-	<select id="getOrder" resultType="orderManagementVO">
-		select * from order_table
-		left join order_product using(order_no)  where order_no=#{order_no}
-		order by
-		order_state
-		asc,invoice_no asc 
-	</select>
 
-	
+	<update id="selectOrder_start">
+		update order_table set order_state=#{order_state}
+		where order_no = #{order_no}
+	</update>
+
+
 
 </mapper>
