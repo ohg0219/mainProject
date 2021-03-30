@@ -6,18 +6,15 @@
 
 	<select id="orderList" resultType="orderManagementVO">
 		select * from order_table
-		where order_state='결제완료' or order_state='입금대기' or order_state='상품준비중'
+		where order_state='결제완료' or order_state='입금대기' or order_state='상품준비중' or order_state='배송준비중'
 		order by order_state asc, invoice_no asc
 	</select>
 
 	<select id="getOrder" resultType="orderManagementVO">
 
-		select * from order_table
-		left
-		join order_product using(order_no) where
-		order_no=#{order_no}
-		order by
-		order_state
+			
+select * from order_product join order_table 
+using(order_no) join product using(product_no) where order_no=#{order_no} order by order_state
 		asc,invoice_no asc
 	</select>
 

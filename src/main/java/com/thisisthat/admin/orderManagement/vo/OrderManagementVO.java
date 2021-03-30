@@ -33,7 +33,10 @@ public class OrderManagementVO {
 	private String order_size;//사이즈
 	private int product_price;//상품 가격
 	private int select_count;//상품 갯수
-
+	
+	//produc 테이블
+	private String product_category;//카테고리
+	private String product_name;//상품 명
 	public int getOrder_no() {
 		return order_no;
 	}
@@ -184,6 +187,18 @@ public class OrderManagementVO {
 	public void setSelect_count(int select_count) {
 		this.select_count = select_count;
 	}
+	public String getProduct_category() {
+		return product_category;
+	}
+	public void setProduct_category(String product_category) {
+		this.product_category = product_category;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
 	@Override
 	public String toString() {
 		return "OrderManagementVO [order_no=" + order_no + ", order_date=" + order_date + ", user_id=" + user_id
@@ -195,10 +210,13 @@ public class OrderManagementVO {
 				+ ", passbook_name=" + passbook_name + ", order_state=" + order_state + ", order_cancel=" + order_cancel
 				+ ", invoice_no=" + invoice_no + ", waiting_point=" + waiting_point + ", product_no=" + product_no
 				+ ", order_size=" + order_size + ", product_price=" + product_price + ", select_count=" + select_count
-				+ "]";
+				+ ", product_category=" + product_category + ", product_name=" + product_name + "]";
 	}
 	
 	
 	
-		
+	
+	
+
+
 }//end class

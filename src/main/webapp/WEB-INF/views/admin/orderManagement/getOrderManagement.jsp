@@ -61,17 +61,13 @@
                                         <tr align="center">
                                             <th>주문 번호</th>
                                             <th>주문일</th>
-                                            <th>받는 사람</th>
-                                            <td width="40">받는 사람 연락처</td>
-                                            <td>우편번호</td>
-                                            <th>주소</th>
-                                            <th>상세 주소</th>
-                                            <td>상품 번호</td>
-                                            <td>사이즈</td>
-                                            <td>수량</td>
+                                            <th>상품 번호</th>
+                                            <th>상품 명</th>
+                                            <th>사이즈</th>
+                                            <th>수량</th>
                                             <th>현재 상태</th>
                                             <th>송장 번호</th>
-                                            <td>취소 유무</td>
+                                            <th>취소 유무</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -81,19 +77,15 @@
                                     	<c:if test="${not empty getorder}" >
 	                                        <c:forEach var="article" items="${getorder}">
 		                                        <tr align="center">
-			                                        <td width="40">${article.order_no}</td>
-			                                        <td width="80"><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="40">${article.receive_name }</td>
-			                                        <td width="40">${article.receive_phone }</td>
-			                                        <td width="40">${article.receive_zipcode }</td>
-			                                        <td width="250">${article.receive_first_address }</td>
-			                                        <td width="80">${article.receive_last_address }</td>
-			                                        <td width="40">${article.product_no }</td>
-			                                        <td width="40">${article.order_size}</td>
-			                                        <td width="40">${article.select_count }</td>
-			                                        <td width="40">${article.order_state }</td>
-			                                        <td width="40">${article.invoice_no }</td>
-			                                        <td width="40">${article.order_cancel }</td>
+			                                        <td>${article.order_no}</td>
+			                                        <td><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
+			                                        <td>${article.product_no }</td>
+			                                        <td>${article.product_name }</td>
+			                                        <td>${article.order_size }</td>
+			                                        <td>${article.select_count }</td>
+			                                        <td>${article.order_state }</td>
+			                                        <td>${article.invoice_no }</td>
+			                                        <td>${article.order_cancel}</td>
 			                                        
 			                                    </tr>
 	                                        </c:forEach>

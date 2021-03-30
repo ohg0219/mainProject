@@ -80,28 +80,29 @@
                                     	<c:if test="${not empty orderList}" >
 	                                        <c:forEach var="article" items="${orderList}">
 		                                        <tr>
-			                                        <td width="40" align="center"><a href="getOrderManagement.mdo?order_no=${article.order_no}">${article.order_no}</a></td>
-			                                        <td width="50" align="center"><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
-			                                        <td width="50px" align="center">${article.user_id }</td>
-			                                        <td width="40" align="center">${article.receive_zipcode }</td>
-			                                        <td width="150" align="center">${article.receive_first_address }</td>
-			                                        <td width="50" align="center">${article.receive_last_address }</td>
-			                                        <td width="40" align="center">${article.order_price }</td>
-			                                        <td width="40" align="center">${article.order_select }</td>
-			                                        <td width="40" align="center">${article.passbook_name }</td>
-			                                        <td width="40" align="center">
-			                                        	<!-- <input type="hidden" class="articleNo" value="${article.order_no }"> -->
+			                                        <td align="center"><a href="getOrderManagement.mdo?order_no=${article.order_no}">${article.order_no}</a></td>
+			                                        <td align="center"><fmt:formatDate value="${article.order_date}" pattern="yyyy-MM-dd"/></td>
+			                                        <td align="center">${article.user_id }</td>
+			                                        <td align="center">${article.receive_zipcode }</td>
+			                                        <td align="center">${article.receive_first_address }</td>
+			                                        <td align="center">${article.receive_last_address }</td>
+			                                        <td align="center">${article.order_price }</td>
+			                                        <td align="center">${article.order_select }</td>
+			                                        <td align="center">${article.passbook_name }</td>
+			                                        <td align="center">
+			                                        	<input type="hidden" class="articleNo" value="${article.order_no }">
                             				            <select name="order_state" id="selectorder" class="${article.order_no } selector">
 			                                        		<option value="${article.order_state }">${article.order_state }</option>
 			                                        		<option name="select" value="입금대기">입금대기</option>
 			                                        		<option name="select" value="결제완료">결제완료</option>
 			                                        		<option name="select" value="상품준비중">상품준비중</option>
+			                                        		<option name="select" value="배송준비중">배송준비중</option>
 			                                        		<option name="select" value="배송중">배송중</option>
 			                                        	</select>
 			                                        
 			                                        </td>
-			                                        <td width="40" align="center">${article.invoice_no }</td>
-			                                        <td width="40" align="center">${article.order_cancel }</td>
+			                                        <td align="center">${article.invoice_no }</td>
+			                                        <td align="center">${article.order_cancel }</td>
 			                                    </tr>
 	                                        </c:forEach>
                                         
