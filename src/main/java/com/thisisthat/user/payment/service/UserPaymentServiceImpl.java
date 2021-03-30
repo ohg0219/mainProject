@@ -73,6 +73,16 @@ public class UserPaymentServiceImpl implements UserPaymentService {
 	public UserPaymentVO userOrder(int orderNo) {
 		return paymentDAO.userOrder(orderNo);
 	}
+
+	@Override
+	public boolean userBasketOrderCount(String userId) {
+		return paymentDAO.userBasketOrderCount(userId);
+	}
+
+	@Override
+	public boolean nonMemberBasketOrderCount(List<UserBasketItemVO> basketItem) {
+		return paymentDAO.nonMemberBasketOrderCount(basketItem);
+	}
 	
 	
 }

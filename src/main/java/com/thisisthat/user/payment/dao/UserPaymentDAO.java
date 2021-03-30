@@ -84,4 +84,28 @@ public class UserPaymentDAO {
 		return paymentTemplate.selectOne("PaymentDAO.userOrder",orderNo);
 	}
 	
+	public boolean userBasketOrderCount(String userId) {
+		boolean flag = true;
+		List<UserBasketVO> basketList = paymentTemplate.selectList("PaymentDAO.getBasketList",userId);
+		for(UserBasketVO basket : basketList) {
+			int stock = paymentTemplate.selectOne("PaymentDAO.getProductStock",basket);
+			if(basket.getSelectCount()>stock) {
+				flag = false;
+			}
+		}
+		return flag;
+	}
+	public boolean nonMemberBasketOrderCount(List<UserBasketItemVO> basketItem) {
+		boolean flag = true;
+		for(UserBasketItemVO basket : basketItem) {
+			int stock = paymentTemplate.selectOne("PaymentDAO.getProductStock",basket);
+			if(basket.getSelectCount()>stock) {
+				flag = false;
+			}
+		}
+		
+		
+		
+		return flag;
+	}
 }

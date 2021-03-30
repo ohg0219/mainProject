@@ -22,4 +22,6 @@ public interface UserPaymentService {
 	void insertUsePoint(UserPaymentVO vo);
 	List<UserMailVO> userOrderInfo(int orderNo);
 	UserPaymentVO userOrder(int orderNo);
+	boolean userBasketOrderCount(String userId);
+	boolean nonMemberBasketOrderCount(List<UserBasketItemVO> basketItem);
 }

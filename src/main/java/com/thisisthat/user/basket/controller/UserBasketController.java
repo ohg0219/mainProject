@@ -106,6 +106,7 @@ public class UserBasketController {
 	/**
 	 * 장바구니 상품 등록
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/insertBasket.do")
 	@ResponseBody
 	public String insertBasket(HttpSession session,
@@ -121,40 +122,44 @@ public class UserBasketController {
 			basketItemVO.setSelectCount(Integer.parseInt(split[1]));
 			getItemList.add(basketItemVO);
 		}
-		//회원 장바구니 추가 + 중복체크
-		if(session.getAttribute("userId")!=null) {
-			String userId = (String) session.getAttribute("userId");
-			List<UserBasketItemVO> dbBasketList = basketItemService.getBasketList(userId);
-			for(UserBasketItemVO dbBasket : dbBasketList) {
-				for(UserBasketItemVO getItem : getItemList) {
-					if(dbBasket.getProductNo() == getItem.getProductNo()
-							&& dbBasket.getSelectSize().equals(getItem.getSelectSize())) {
-						return "fail";
-					}
-				}
-			}
-			for(UserBasketItemVO vo : getItemList) {
-				vo.setUserId(userId);
-			}
-			basketItemService.insertBasket(getItemList);
-		}else {//비회원 장바구니 추가 + 중복체크
-			//비회원 장바구니 존재시
-			if(session.getAttribute("basketItem")!=null) {
-				List<UserBasketItemVO> basketItem = (List<UserBasketItemVO>) session.getAttribute("basketItem");
-				for(UserBasketItemVO basket : basketItem) {
+		if(basketItemService.getProductStock(getItemList) == false) {
+			return "stockOver";
+		}else{
+			//회원 장바구니 추가 + 중복체크
+			if(session.getAttribute("userId")!=null) {
+				String userId = (String) session.getAttribute("userId");
+				List<UserBasketItemVO> dbBasketList = basketItemService.getBasketList(userId);
+				for(UserBasketItemVO dbBasket : dbBasketList) {
 					for(UserBasketItemVO getItem : getItemList) {
-						if(basket.getProductNo() == getItem.getProductNo()
-								&& basket.getSelectSize().equals(getItem.getSelectSize())) {
+						if(dbBasket.getProductNo() == getItem.getProductNo()
+								&& dbBasket.getSelectSize().equals(getItem.getSelectSize())) {
 							return "fail";
 						}
 					}
 				}
-				basketItem.addAll(getItemList);
-			}else {
-				session.setAttribute("basketItem", getItemList);
+				for(UserBasketItemVO vo : getItemList) {
+					vo.setUserId(userId);
+				}
+				basketItemService.insertBasket(getItemList);
+			}else {//비회원 장바구니 추가 + 중복체크
+				//비회원 장바구니 존재시
+				if(session.getAttribute("basketItem")!=null) {
+					List<UserBasketItemVO> basketItem = (List<UserBasketItemVO>) session.getAttribute("basketItem");
+					for(UserBasketItemVO basket : basketItem) {
+						for(UserBasketItemVO getItem : getItemList) {
+							if(basket.getProductNo() == getItem.getProductNo()
+									&& basket.getSelectSize().equals(getItem.getSelectSize())) {
+								return "fail";
+							}
+						}
+					}
+					basketItem.addAll(getItemList);
+				}else {
+					session.setAttribute("basketItem", getItemList);
+				}
 			}
-		}
-		return "";
+		};
+		return "ok";
 	}
 	
 	

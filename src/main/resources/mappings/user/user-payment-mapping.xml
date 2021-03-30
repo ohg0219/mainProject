@@ -108,4 +108,8 @@
 	<select id="userOrder" resultMap="userPaymentVO">
 		select user_id,order_date,order_email,receive_name,original_price,use_point,use_coupon,order_price,order_select from order_table where order_no = #{orderNo}
 	</select>
+	<select id="getProductStock" resultType="int">
+		select ${selectSize} from product_stock where product_no = #{productNo}
+	</select>
+	
 </mapper>

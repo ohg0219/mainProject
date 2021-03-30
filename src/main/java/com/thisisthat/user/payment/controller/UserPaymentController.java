@@ -40,12 +40,24 @@ public class UserPaymentController {
 	 * @param session
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@GetMapping("/paymentDivide.do")
 	public String paymentView(HttpSession session) {
 		if(session.getAttribute("userId")!=null) {
-			return "redirect:/memberPayment.do";
+			//회원 재고 < 선택수량
+			String userId = (String) session.getAttribute("userId");
+			if(paymentService.userBasketOrderCount(userId)) {
+				return "redirect:/memberPayment.do"; // 회원결제가기
+			}else{
+				return "/user/payment/paymentFail"; //재고 < 선택수량 
+			}
 		}else {
-			return "/user/payment/nonMember";
+			List<UserBasketItemVO> basketItem = (List<UserBasketItemVO>) session.getAttribute("basketItem");
+			if(paymentService.nonMemberBasketOrderCount(basketItem)) {
+				return "/user/payment/nonMember"; //비회원결제가기
+			}else {
+				return "/user/payment/paymentFail"; //재고 < 선택수량 
+			}
 		}
 	}
 	

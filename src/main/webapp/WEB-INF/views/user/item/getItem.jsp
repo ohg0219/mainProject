@@ -200,7 +200,10 @@ $(document).ready(function(){
 				if(data=='fail'){
 					alert("장바구니에 중복된 상품이 있습니다.");
 					return false;
-				}else{
+				}else if(data=='stockOver'){
+					alert("재고가 부족합니다.");
+					return false;
+				}else if(data=='ok'){
 					location.href="/basket.do";
 				}
 			}
