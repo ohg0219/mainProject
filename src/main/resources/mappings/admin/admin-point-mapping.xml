@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PointDAO">
+	
+	<resultMap type="pointVO" id="resultPoint">
+		<result column="user_id" property="userId"/>
+		<result column="point_date" property="pointDate"/>
+		<result column="point" property="point"/>
+		<result column="point_content" property="pointContent"/>
+		<result column="point_num" property="pointNum"/>
+	</resultMap>
+		<resultMap type="UserVO" id="resultUser">
+		<id property="userId" column="user_id"></id>
+		<result property="userName" column="user_name"/>
+		<result property="nickName" column="nick_name"/>
+		<result property="userPw" column="user_pass"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="userEmail" column="user_email"/>
+		<result property="zipCode" column="zip_code"/>
+		<result property="firstAddress" column="first_address"/>
+		<result property="lastAddress" column="last_address"/>
+		<result property="userRole" column="user_role"/>
+		<result property="inDate" column="in_date"/>
+		<result property="outDate" column="out_date"/>
+		<result property="userImg" column="user_img"/>
+		<result property="social" column="social_login"/>		
+	</resultMap>
+	<select id="getPoint" resultMap="resultPoint">
+		select user_id,  sum(point) as point from user_point where user_id = #{userId} group by user_id;
+	</select>
+	
+	<select id="getUserList" resultMap="resultUser">
+		select * from this_user where <![CDATA[ user_role > 50  ]]>
+			
+			
+		<if test="searchType != 'all'">
+		and
+			<if test="searchType == 'id'">
+					user_id
+			</if>		
+			<if test="searchType == 'nick'">
+					nick_name	
+			</if>		
+			like '%'||#{parameter}||'%'
+		</if>
+		<if test="searchType == 'all' and parameter !=''">
+		and
+			user_id like '%'||#{parameter}||'%' or nick_name like '%'||#{parameter}||'%' or user_name like '%'||#{parameter}||'%'
+		</if>
+		
+		 order by in_date desc OFFSET #{start} limit #{cntPerPage} ;
+	</select>
+	
+	<insert id="insertOnePoint">
+		insert into user_point values(#{userId},#{pointDate},#{point},#{pointContent});
+	</insert>
+	<insert id="insertUsers">
+		insert into user_point (user_id) (select user_id from this_user where  <![CDATA[user_role > 50]]>)
+	</insert>
+	<update id="updatePoints">
+		update user_point set point_date = #{pointDate}, point = #{point}, point_content = #{pointContent} where point is null;
+	</update>
+	<select id="getTotal" resultType="Integer">
+		select count(*) from this_user where  <![CDATA[user_role > 50]]>
+			and
+		<if test="searchType != 'all'">
+			<if test="searchType == 'id'">
+					user_id
+			</if>		
+			<if test="searchType == 'nick'">
+					nick_name	
+			</if>		
+			like '%'||#{parameter}||'%'
+		</if>
+		<if test="searchType == 'all'">
+			user_id like '%'||#{parameter}||'%' or nick_name like '%'||#{parameter}||'%' or user_name like '%'||#{parameter}||'%'
+		</if>
+	</select>
+	<select id="getUser">
+		select * from this_user where user_id = #{userId} and  <![CDATA[user_role > 50]]>;
+	</select>
+	<select id="getPoints" resultMap="resultPoint">
+		select * from user_point where user_id = #{userId}  order by point_date desc OFFSET #{start} limit #{cntPerPage};
+	</select>
+	<delete id="deletePoint">
+		delete from user_point where point_num = ${pointNum}
+	</delete>
+	<select id="getPointCount" resultType="Integer">
+		select count(*) from user_point where user_id = #{userId};
+	</select>
+</mapper>

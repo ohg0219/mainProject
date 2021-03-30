@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userPointDAO">
+	
+	<select id="pointList" resultType="userPointVO">
+		select * from user_point where user_id=#{user_id}
+	</select>
+	<select id="pointSum" resultType="userPointVO">
+		select sum(point) from user_point where user_id=#{user_id}
+	</select>
+	<select id="usingSum" resultType="userPointVO">
+		select sum(point) from user_point where user_id=#{user_id} and point <![CDATA[ < ]]> 0
+	</select>
+	<select id="totalPoint" resultType="userPointVO">
+		select sum(point) from user_point where user_id=#{user_id} and point <![CDATA[ > ]]> 0
+	</select>
+	
+		
+		
+		
+		
+		
+</mapper>

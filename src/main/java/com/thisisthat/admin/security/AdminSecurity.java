@@ -18,14 +18,14 @@ public class AdminSecurity extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object obj)
 			throws Exception {
 		HttpSession session = req.getSession();
-		UserVO vo = (UserVO)session.getAttribute("userId");
+		UserVO vo = (UserVO)session.getAttribute("adminId");
 		session.setMaxInactiveInterval(60*60*2);//2시간 동안 세션유지
 
 		if(vo == null) {
 			if(req.getCookies() !=null) {
 				for(Cookie cookie : req.getCookies()) {
 					if(cookie.getName().equals("userVO")) {
-						session.setAttribute("userId", dao.idCheck(cookie.getValue()));
+						session.setAttribute("adminId", dao.idCheck(cookie.getValue()));
 						return true;
 					}
 				}

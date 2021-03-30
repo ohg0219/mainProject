@@ -36,7 +36,7 @@
 				image.upload_path as upload_path,
 				pro.product_name as product_name,
 				pro.product_price as product_price,
-				(select xs+s+m+l+xl+free as product_stock_total from product_stock where product_no = pro.product_no),
+				(select xs+s+m+l+xl as product_stock_total from product_stock where product_no = pro.product_no),
 				cate.category_used
 			from product_image as image, 
 				product as pro left outer join category as cate on pro.product_category = cate.category_name
@@ -49,7 +49,7 @@
 		</if>
 			order by pro.product_no desc
 		<if test="categoryName.equals('new')">
-			limit 20
+			limit 12
 		</if>
 	</select>
 	
@@ -61,5 +61,12 @@
 	<select id="getItemImage" resultMap="itemImageVO">
 		select * from product_image where product_no = #{productNo}
 	</select>
+	<select id="getItemSizeGuide" parameterType="Long" resultType="com.thisisthat.user.item.vo.UserItemSizeGuideVO">
+		select * from size_guide where product_no = #{productNo}
+	</select>
+	<select id="getItemSizeUsed" parameterType="Long" resultType="com.thisisthat.user.item.vo.UserItemSizeUsedVO">
+		select * from size_used where product_no = #{productNo}
+	</select>
+	
 	
 </mapper>

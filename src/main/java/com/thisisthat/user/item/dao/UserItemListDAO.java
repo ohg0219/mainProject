@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 
 import com.thisisthat.user.item.vo.UserItemImageVO;
 import com.thisisthat.user.item.vo.UserItemListVO;
+import com.thisisthat.user.item.vo.UserItemSizeGuideVO;
+import com.thisisthat.user.item.vo.UserItemSizeUsedVO;
 import com.thisisthat.user.item.vo.UserItemVO;
 
 @Controller
@@ -27,5 +29,12 @@ public class UserItemListDAO {
 	
 	public List<UserItemImageVO> getItemImage(long productNo){
 		return itemListTemplate.selectList("ItemDAO.getItemImage",productNo);
+	}
+	
+	public List<UserItemSizeGuideVO> getItemSizeGuide(long productNo) {
+		return itemListTemplate.selectList("ItemDAO.getItemSizeGuide",productNo);
+	}
+	public UserItemSizeUsedVO getItemSizeUsed(long productNo) {
+		return itemListTemplate.selectOne("ItemDAO.getItemSizeUsed",productNo);
 	}
 }

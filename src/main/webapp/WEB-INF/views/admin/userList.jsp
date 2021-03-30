@@ -105,7 +105,7 @@ a {
 													<td width="85">${user.userId}</td>
 													<td width="95">
 														<a id = "${user.userId }" class="who"
-														data-toggle="model" data-target="#getUserModal">${user.userName}</a></td>
+														data-toggle="modal" data-target="#getUserModal">${user.userName}</a></td>
 													<td width="85">${user.nickName}</td>
 													<td width="160">${user.userPhone}</td>
 													<td width="95"><fmt:formatDate value="${user.inDate}"
@@ -185,14 +185,17 @@ a {
 	</form>
 
 	<script>
-	//--------------------검색하는 함수
-	var msg = '${msg}';
-	var failId = '${failId}';
-	if(msg==='fail'){
-		console.log(failId);
-		document.getElementById(failId).click();
-		alert('비밀번호를 확인해 주세요');
-	}
+		//--------------------검색하는 함수
+		var msg = '${msg}';
+		var failId = '${failId}';
+		if(msg==='fail'){
+			console.log(failId);
+			document.getElementById(failId).click();
+			alert('비밀번호를 확인해 주세요');
+		}
+		if(msg === "noPw"){
+			alert('잘못된 접근입니다.');
+		}
 	
 		$(function(){
 			$("#searchBtn").click(function(){

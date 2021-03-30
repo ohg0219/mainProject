@@ -7,7 +7,7 @@
 			<!-- 공지사항 -->
 			<li><a href="/event.do">event</a></li>
 			<!-- 이벤트 -->
-			<li><a href="#">q &amp; a</a></li>
+			<li><a href="/answerList.do">q &amp; a</a></li>
 			<!-- Q & A -->
 			<li><a href="#">terms</a></li>
 			<!-- 약관 -->
@@ -25,12 +25,12 @@
 						</span></li>
 					</ul>
 					<ul>
-						<li><span>+82 (0)70 4048 5375-6</span> 
-							<a href="mailto:service@thisisneverthat.com">service@thisisthat.com</a>
+						<li><span>+82 (0)10 1234 5678</span> 
+							<a href="mailto:thisisthat.official@gmail.com">thisisthat.official@gmail.com</a>
 						</li>
 					</ul>
 					<ul class="cp_info">
-						<li><span class="f_t1">company</span><span class="adrs_2">제이케이앤디주식회사</span></li>
+						<li><span class="f_t1">company</span><span class="adrs_2">KG ITBANK</span></li>
 						<li><span class="f_t1">owner</span><span class="adrs_2">오형균 박진수 양예진 조용일 한나라 </span>
 						</li>
 					</ul>

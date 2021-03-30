@@ -59,7 +59,6 @@
 		<if test="product_used == 1">
 			and product_used = 1
 		</if>
-		
 	</select>
 	
 	<select id="getCategoryList" resultMap="adminCategoryVO">
@@ -113,7 +112,12 @@
 	<delete id="deleteProductStock">
 		delete from product_stock where product_no = #{productNo}
 	</delete>
-	
+	<delete id="deleteProductSizeGuide">
+		delete from size_guide where product_no = #{product_no}
+	</delete>
+	<delete id="deleteProductSizeUsed">
+		delete from size_used where product_no = #{productNo}
+	</delete>
 	<update id="updateProduct">
 		update product 
 		set 
@@ -143,4 +147,16 @@
 		insert into product_image values
 		(#{product_no},#{upload_path},#{image_name},0)
 	</insert>
+	
+	<update id="updateProductSizeUsed">
+		update size_used
+		set 
+		xs_used = #{xs_used},
+		s_used = #{s_used},
+		m_used = #{m_used},
+		l_used = #{l_used},
+		xl_used = #{xl_used}
+		where product_no = #{product_no}
+	</update>
+	
 </mapper>

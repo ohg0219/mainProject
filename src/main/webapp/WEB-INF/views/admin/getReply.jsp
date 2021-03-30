@@ -67,7 +67,7 @@ textarea {
                         </div>
                         -->
                         <div class="card-body">
-                            <form action="/admin/updateReply.mdo" method="gete">
+                            <form action="/admin/updateReply.mdo" method="get">
                             <input type="hidden" name="boardNo" value="${reply.boardNo}"> 
 							 	<div class="table-responsive">
 	                           		<table class="table table-bordered" id="dataTable" >

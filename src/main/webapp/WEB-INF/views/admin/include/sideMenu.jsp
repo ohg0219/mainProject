@@ -37,9 +37,13 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/admin/userList.mdo">회원정보</a>
-                        <a class="collapse-item" href="cards.html">회원적립금관리</a>
                         <a class="collapse-item" href="/admin/getCouponList.mdo">회원쿠폰생성</a>
                         <a class="collapse-item" href="/admin/grantCoupon.mdo">회원쿠폰부여</a>
+                        <a class="collapse-item" href="/admin/pointUserList.mdo">회원적립금관리</a>
+                        <a class="collapse-item" href="/admin/getCouponList.mdo">쿠폰생성</a>
+                        <a class="collapse-item" href="/admin/getTermsList.mdo?state=information">개인정보 수집 및 이용 약관</a>
+                        <a class="collapse-item" href="/admin/getTermsList.mdo?state=utilization">이용 약관</a>
+
                     </div>
                 </div>
             </li>
@@ -53,7 +57,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                    	
                         <a class="collapse-item" href="/admin/staffList.mdo">직원정보</a>
-                        <a class="collapse-item" href="utilities-color.html">신규직원등록</a>
+                        <a class="collapse-item" href="/admin/insertStaff.mdo">신규직원등록</a>
                         <a class="collapse-item" href="utilities-border.html">직원정보수정</a>
                         <a class="collapse-item" href="utilities-animation.html">권한관리</a>
                     </div>
@@ -77,7 +81,7 @@
                         <a class="collapse-item" href="/admin/categoryList.mdo">카테고리 관리</a>
                         <a class="collapse-item" href="/admin/productList.mdo">상품 관리</a>
                         <a class="collapse-item" href="register.html">상품수정/삭제</a>
-                        <a class="collapse-item" href="forgot-password.html">상품재고관리</a>
+                        <a class="collapse-item" href="/admin/getProductStockList.mdo">상품재고관리</a>
                     </div>
                 </div>
             </li>
@@ -115,6 +119,11 @@
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>매출현황</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/getBanner.mdo">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>배너관리</span></a>
             </li>
 
             <!-- Divider -->

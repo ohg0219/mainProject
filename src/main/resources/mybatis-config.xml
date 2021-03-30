@@ -5,23 +5,34 @@
 <configuration>
 	<typeAliases>
 	
+		<typeAlias type="com.thisisthat.user.point.vo.UserPointVO" alias="userPointVO"/>
 		<typeAlias type="com.thisisthat.user.notice.vo.UserNoticeVO" alias="UserNoticeVO"/>
 		<typeAlias type="com.thisisthat.admin.grant.coupon.vo.CouponGrantVO" alias="CouponGrantVO"/>
 		<typeAlias type="com.thisisthat.user.register.vo.UserRegisterVO" alias="UserRegisterVO"/>	
 		<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.thisisthat.admin.board.vo.AnswerBoardVO" alias="answerVO"/>
-		
+		<typeAlias type="com.thisisthat.admin.point.vo.PointVO" alias="pointVO"/>
+		<typeAlias type="com.thisisthat.admin.banner.vo.BannerVO" alias="bannerVO"/>
+		<typeAlias type="com.thisisthat.admin.terms.vo.InformationVO" alias="informationVO"/>
+		<typeAlias type="com.thisisthat.admin.terms.vo.UtilizationVO" alias="utilizationVO"/>
+		<typeAlias type="com.thisisthat.user.address.vo.AddressVO" alias="AddressVO"/>
 
 	</typeAliases>
 	
 	<mappers>
 		<!-- 매퍼파일 -->		
+		<mapper resource="mappings/user/user-point-mapping.xml"/>
 		<mapper resource="mappings/user/user-mypage-modify-mapping.xml" />
+		<mapper resource="mappings/user/user-find-idpw-mapping.xml" />
 		<mapper resource="mappings/user/user-mapping.xml" />
 		<mapper resource="mappings/user/user-loginout-mapping.xml" />
 		<mapper resource="mappings/user/user-register-mapping.xml"/>
 		<mapper resource="mappings/user/user-notice-mapping.xml"/>
+		<mapper resource="mappings/user/user-answer-mapping.xml"/>
 		<mapper resource="mappings/user/user-itemlist-mapping.xml"/>
+		<mapper resource="mappings/user/user-basketlist-mapping.xml"/>
+		<mapper resource="mappings/user/user-payment-mapping.xml"/>
+		<mapper resource="mappings/user/user-address-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
 		<mapper resource="mappings/admin/admin-coupon-grant-mapping.xml" />
@@ -30,5 +41,11 @@
 		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-category-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-product-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-product_stock-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-register-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-point-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-role-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-banner-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
 	</mappers>
 </configuration>

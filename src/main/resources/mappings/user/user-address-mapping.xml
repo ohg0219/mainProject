@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AddressDAO">
+	<resultMap type="AddressVO" id="AddressVO">
+		<id property="addressNo" column="address_no"/>
+		<result property="userId" column="user_id" />
+		<result property="addressName" column="address_name" />
+		<result property="receiveName" column="receive_name" />
+		<result property="zipCode" column="zip_code" />
+		<result property="firstAddress" column="first_address" />
+		<result property="lastAddress" column="last_address" />
+		<result property="userPhone" column="user_phone" />	
+	</resultMap>
+
+	<select id="addressList" resultMap="AddressVO">
+		select * from user_address where user_id = #{userId}
+	</select>
+		
+	<insert id="addressInsert">
+		insert into user_address(user_id, address_name, receive_name, zip_code, first_address, last_address, user_phone) 
+						values(#{userId}, #{addressName}, #{receiveName}, #{zipCode}, #{firstAddress}, #{lastAddress}, #{userPhone}) 
+	</insert>
+	
+	<select id="getAddress" resultMap="AddressVO">
+		select address_no, address_name, receive_name, zip_code, first_address, last_address, user_phone from user_address where address_no = #{addressNo}
+	</select>
+	
+	<update id="addressUpdate">
+		update user_address set address_name=#{addressName}, receive_name=#{receiveName}, zip_code=#{zipCode}, 
+			first_address=#{firstAddress}, last_address=#{lastAddress}, user_phone=#{userPhone} where address_no = #{addressNo} 
+	</update>
+	
+	<delete id="addressDelete">
+		delete from user_address where address_no=#{addressNo}
+	</delete>
+	
+	
+</mapper>

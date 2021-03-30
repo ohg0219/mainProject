@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PaymentDAO">
+	<resultMap type="com.thisisthat.user.payment.vo.UserVO" id="userVO">
+		<id property="userId" column="user_id"/>
+		<result property="userEmail" column="user_email"/>
+		<result property="userName" column="user_name"/>
+		<result property="zipCode" column="zip_code"/>
+		<result property="firstAddress" column="first_address"/>
+		<result property="lastAddress" column="last_address"/>
+		<result property="userPhone" column="user_phone"/>
+	</resultMap>
+	<resultMap type="com.thisisthat.user.payment.vo.UserPaymentVO" id="userPaymentVO">
+		<result property="orderNo" column="order_no"/>
+		<result property="orderDate" column="order_date"/>
+		<result property="userId" column="user_id"/>
+		<result property="orderPassword" column="order_password"/>
+		<result property="orderEmail" column="order_email"/>
+		<result property="receiveName" column="receive_name"/>
+		<result property="receivePhone" column="receive_phone"/>
+		<result property="receiveZipcode" column="receive_zipcode"/>
+		<result property="receiveFirstAddress" column="receive_first_address"/>
+		<result property="receiveLastAddress" column="receive_last_address"/>
+		<result property="orderMessage" column="order_message"/>
+		<result property="originalPrice" column="original_price"/>
+		<result property="usePoint" column="use_point"/>
+		<result property="useCoupon" column="use_coupon"/>
+		<result property="orderPrice" column="order_price"/>
+		<result property="orderSelect" column="order_select"/>
+		<result property="passbookName" column="passbook_name"/>
+		<result property="orderState" column="order_state"/>
+		<result property="orderCancel" column="order_cancel"/>
+		<result property="invoiceNo" column="invoice_no"/>
+		<result property="waitingPoint" column="waiting_point"/>
+	</resultMap>
+	<resultMap type="com.thisisthat.user.payment.vo.UserBasketVO" id="userBasketVO">
+		<result property="userId" column="user_id" />
+		<result property="productNo" column="product_no" />
+		<result property="selectSize" column="select_size" />
+		<result property="productPrice" column="product_price" />
+		<result property="selectCount" column="select_count" />
+	</resultMap>
+	<resultMap type="com.thisisthat.user.payment.vo.UserOrderVO" id="userOrderVO">
+		<result property="orderNo" column="order_no" />
+		<result property="productNo" column="product_no" />
+		<result property="selectSize" column="select_size" />
+		<result property="productPrice" column="product_price" />
+		<result property="selectCount" column="select_count" />
+	</resultMap>
+	<resultMap type="com.thisisthat.user.payment.vo.UserMailVO" id="userMailVO">
+		<result property="orderNo" column="order_no"/>
+		<result property="productNo" column="product_no"/>
+		<result property="productName" column="product_name"/>
+		<result property="orderSize" column="order_size"/>
+		<result property="productPrice" column="product_price"/>
+		<result property="selectCount" column="select_count"/>
+		<result property="productTotal" column="product_total"/>
+	</resultMap>
+	<select id="getUserInfo" resultMap="userVO">
+		select * from this_user where user_id = #{userId}
+	</select>	
+	<select id="getUserBasketPrice" resultType="int">
+		select sum(product_price * select_count) from basket where user_id = #{userId}
+	</select>
+	<select id="getUserPoint" resultType="int">
+		select COALESCE(sum(point),0) from user_point where user_id =  #{userId}
+	</select>
+	<select id="basketPointSum" resultType="int">
+		select sum((select product_price*(product_point/100)*b.select_count from product where product_no = b.product_no))
+		from basket as b where user_id=#{userId}
+	</select>
+	<select id="getSeq" resultType="int">
+		select currval('order_order_no_seq')
+	</select>
+	<insert id="insertOrder" useGeneratedKeys="true" keyProperty="order_no" >
+		<selectKey keyProperty="order_no" resultType="int" order="BEFORE">
+			select nextval('order_order_no_seq') as orderNo
+		</selectKey>
+		insert into order_table (ORDER_NO,ORDER_DATE,USER_ID,ORDER_PASSWORD,ORDER_EMAIL,RECEIVE_NAME,RECEIVE_PHONE,RECEIVE_ZIPCODE,RECEIVE_FIRST_ADDRESS,RECEIVE_LAST_ADDRESS,ORDER_MESSAGE,ORIGINAL_PRICE,USE_POINT,USE_COUPON,ORDER_PRICE,ORDER_SELECT,PASSBOOK_NAME,ORDER_STATE,ORDER_CANCEL,INVOICE_NO,WAITING_POINT)
+		values (#{order_no},#{orderDate},#{userId},#{orderPassword},#{orderEmail},#{receiveName},#{receivePhone},#{receiveZipcode},#{receiveFirstAddress},#{receiveLastAddress},#{orderMessage},#{originalPrice},#{usePoint},#{useCoupon},#{orderPrice},#{orderSelect},#{passbookName},#{orderState},#{orderCancel},#{invoiceNo},#{waitingPoint})
+	</insert>
+	<select id="getBasketList" resultMap="userBasketVO">
+		select * from basket where user_id = #{userId}
+	</select>
+	<insert id="insertOrderProduct">
+		insert into order_product values(#{orderNo},#{productNo},#{selectSize},#{productPrice},#{selectCount})
+	</insert>
+	<delete id="deleteBasket">
+		delete from basket where user_id = #{userId}
+	</delete>
+	<update id="updateProductStock">
+		update product_stock set ${selectSize} = (select ${selectSize} from product_stock where product_no = #{productNo})-${selectCount} where product_no = #{productNo}
+	</update>
+	
+	<select id="orderTime" resultType="date">
+		select order_date from order_table where order_no = #{orderNo}
+	</select>
+	<insert id="insertUsePoint">
+		insert into user_point (user_id,point_date,point,point_content) values(#{userId},now(),#{usePoint},#{pointContent})
+	</insert>
+	<select id="userOrderInfo" resultMap="userMailVO">
+		select o.order_no,o.product_no,p.product_name,o.order_size,o.product_price,o.select_count,(o.product_price*o.select_count) as product_total 
+		from order_product as o, product as p
+		where o.product_no = p.product_no and o.order_no = #{orderNo}
+	</select>
+	<select id="userOrder" resultMap="userPaymentVO">
+		select user_id,order_date,order_email,receive_name,original_price,use_point,use_coupon,order_price,order_select from order_table where order_no = #{orderNo}
+	</select>
+</mapper>

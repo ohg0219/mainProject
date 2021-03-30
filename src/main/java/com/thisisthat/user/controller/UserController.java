@@ -1,42 +1,26 @@
 package com.thisisthat.user.controller;
 
-import javax.servlet.http.HttpSession;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.thisisthat.admin.banner.vo.BannerVO;
+import com.thisisthat.user.service.UserService;
 
 @Controller
 public class UserController {
+	@Autowired
+	UserService userService;
 	
 	/**
 	 * 메인페이지로 이동
 	 * @return
 	 */
 	@RequestMapping(value = {"main.do"})
-	public String mainView() {
+	public String mainView(Model model) {
+		model.addAttribute("bannerList",userService.getBannerList());
 		return "/user/main";
-	}
-	/**
-	 * 로그인페이지로 이동
-	 * @return
-	 */
-	@RequestMapping(value = {"/login.do"})
-	public String loginView(HttpSession session) {
-		if(session.getAttribute("userId")!=null || session.getAttribute("kakaoUserId") != null || 
-				session.getAttribute("naverUserId") != null || session.getAttribute("googleUserId") != null) {
-			return "redirect:/main.do";
-		}
-		return "/user/login";
-	}
-	/**
-	 * 회원가입페이지로 이동
-	 * @return
-	 */
-	@GetMapping(value = {"/register.do"})
-	public String registerView() {
-		return "/user/register";
 	}
 	
 	/**

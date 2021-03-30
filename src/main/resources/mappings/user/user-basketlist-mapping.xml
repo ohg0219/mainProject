@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BasketDAO">
+	<resultMap type="com.thisisthat.user.basket.vo.UserBasketItemVO" id="basketItemVO">
+		<result property="userId" column="user_id" />
+		<result property="productNo" column="product_no" />
+		<result property="productPrice" column="product_price" />
+		<result property="selectSize" column="select_size" />
+		<result property="selectCount" column="select_count" />
+		<result property="uploadPath" column="upload_path"/>
+		<result property="productCategory" column="product_category"/>
+		<result property="productName" column="product_name"/>
+	</resultMap>
+	<insert id="insertBasket" >
+		insert into basket values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.userId}, #{item.productNo}, #{item.selectSize}, #{item.productPrice}, #{item.selectCount})
+		</foreach>
+	</insert>
+	
+	<select id="getBasketList" resultMap="basketItemVO">
+		select b.user_id ,b.product_no,b.select_size,b.product_price,b.select_count,image.upload_path,
+		(select product_category from product where product_no = b.product_no),
+		(select product_name from product where product_no = b.product_no)
+		from basket as b ,product_image as image
+		where user_id = #{userId} and image.product_no=b.product_no and image.main_image=1
+	</select>
+	
+	<select id="getItemInfo" resultMap="basketItemVO">
+		select pro.product_name,pro.product_price, pro.product_category, image.upload_path 
+		from product as pro , product_image as image
+		where image.main_image = 1 and pro.product_no = image.product_no
+		and pro.product_no = #{productNo}
+	</select>
+	
+	<delete id="deleteUserBasket">
+		delete from basket where user_id = #{userId} and product_no = #{productNo} and select_size = #{selectSize}
+	</delete>
+	
+	<update id="updateUserBasket">
+		update basket set select_count = (select select_count from basket where user_id=#{userId} and product_no = #{productNo} and select_size = #{selectSize})
+		<if test="type == 'plus'">
+			+1
+		</if>
+		<if test="type == 'minus'">
+			-1
+		</if>
+		where user_id=#{userId} and product_no = #{productNo} and select_size = #{selectSize}
+	</update>
+	
+</mapper>

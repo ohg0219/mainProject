@@ -1,9 +1,5 @@
 package com.thisisthat.admin.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,24 +13,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thisisthat.admin.notice.service.NoticeService;
-import com.thisisthat.admin.notice.vo.NoticeVO;
 import com.thisisthat.admin.service.AdminService;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
-import com.thisisthat.user.register.vo.TestVO;
 
 @Controller
 
 public class AdminController {
 	
-	
-	
-	
 	@Autowired
 	AdminService dao;
 
 	@RequestMapping("/admin/main.mdo")
-	public String mainView() {
+	public String mainView(Model model) {
+		
 		return "/admin/main";
 	}
 
@@ -57,14 +48,12 @@ public class AdminController {
 			@RequestParam(value="autoLogin",defaultValue= "false")boolean autoLogin,
 			HttpServletResponse response) {
 		UserVO user = dao.idCheck(vo.getUserId());
-		System.out.println(autoLogin);
 		if(user == null) {
 			
 		}else if(BCrypt.checkpw(vo.getUserPw(), user.getUserPw())) {
 			if(user.getUserRole()<21) {
-				session.setAttribute("userId", user);
+				session.setAttribute("adminId", user);
 				if(autoLogin) {
-					System.out.println("쿠키");
 					Cookie cookie = new Cookie("userVO", user.getUserId());
 					cookie.setMaxAge(60*60*24*30);//한달설정
 					cookie.setPath("/");
@@ -72,13 +61,11 @@ public class AdminController {
 				}
 				return "/admin/main";
 			}else {
-				System.out.println("권한없음");
 				model.addAttribute("msg","roleFail");
 				return "/admin/login";
 			}
 		}
 		
-		System.out.println("로그인 실패");
 		model.addAttribute("msg","pwFail");
 		return "/admin/login";
 	}

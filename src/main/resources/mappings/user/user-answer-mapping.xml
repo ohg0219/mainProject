@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="answerDAO">
+	<resultMap type="answerVO" id="answerResult">
+		<id column="board_no" property="boardNo" />
+		<result column="board_title" property="boardTitle" />
+		<result column="board_content" property="boardContent" />
+		<result column="board_writer" property="boardWriter" />
+		<result column="reg_date" property="regDate" />
+		<result column="update_date" property="updateDate" />
+		<result column="product_no" property="productNo" />
+		<result column="board_state" property="boardState" />
+		<result column="board_secret" property="boardSecret" />
+		<result column="result_no" property="resultNo" />
+		<result column="board_img1" property="boardImg1" />
+		<result column="board_img2" property="boardImg2" />
+		<result column="board_img3" property="boardImg3" />
+		<result column="board_img4" property="boardImg4" />
+		<result column="board_type" property="boardType" />
+	</resultMap>
+
+	<select id="getAnswerList" resultMap="answerResult"
+		resultType="answerVO" parameterType="hashmap">
+		select * from answer_board where board_state != '답글'
+
+		<if test="searchDate != 'all'">
+			and reg_date <![CDATA[>]]>
+			#{now}
+		</if>
+		<if test="searchType != 'all'">
+			and
+			<if test="searchType == 'id'">
+				board_writer
+			</if>
+			<if test="searchType == 'title'">
+				board_title
+			</if>
+			<if test="searchType == 'content'">
+				board_content
+			</if>
+			<if test="searchKeyword != 'all'">
+				like '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchKeyword == 'all'">
+				like '%%'
+			</if>
+		</if>
+
+		order by board_no desc OFFSET #{start} limit #{cntPerPage} ;
+
+	</select>
+
+	<select id="getAnswer" resultMap="answerResult"
+		resultType="answerVO" parameterType="Integer">
+		select * from
+		answer_board where
+		board_no = #{boardNo};
+	</select>
+	<select id="getCount" resultType="Integer">
+		select count(*) from answer_board where board_state != '답글'
+		<if test="searchDate != 'all'">
+			and reg_date <![CDATA[>]]>
+			#{nowDate}
+		</if>
+		<if test="searchType != 'all'">
+			and
+			<if test="searchType == 'id'">
+				board_writer
+			</if>
+			<if test="searchType == 'title'">
+				board_title
+			</if>
+			<if test="searchType == 'content'">
+				board_content
+			</if>
+
+			<if test="searchKeyword != 'all'">
+				like '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchKeyword == 'all'">
+				like '%%'
+			</if>
+		</if>
+	</select>
+	<select id="getAnswer1" resultMap="answerResult"
+		resultType="answerVO" parameterType="Integer">
+		select * from answer_board where board_no = #{boardNo};
+	</select>
+	<insert id="insertAnswer">
+		insert into answer_board (board_no,board_title,
+		board_content, board_writer,
+		reg_date, board_state, board_secret,
+		board_img1, board_img2,
+		board_img3, board_img4, board_type)
+		VALUES
+		(#{boardNo},#{boardTitle}, #{boardContent}, #{boardWriter},
+		#{regDate}, '확인전', #{boardSecret}, #{boardImg1}, #{boardImg2},
+		#{boardImg3}, #{boardImg4}, '기타문의');
+	</insert>
+	<select id="seq" resultType="Integer">
+		select
+		nextval('question_board_board_no_seq');
+	</select>
+</mapper>

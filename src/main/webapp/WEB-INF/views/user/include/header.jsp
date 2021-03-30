@@ -14,8 +14,7 @@
 							<a href="/itemList/category/${menus }.do">${menus}</a>
 						</li>
 					</c:forEach>
-				</ul>
-			</li>
+				</ul></li>
 			<li><a href="#">LOOK BOOK</a></li>
 			<li><a href="#">ARCHIVE</a></li>
 		</ul>
@@ -50,11 +49,11 @@
 								<li><a href="/logout.do">LOGOUT</a></li>
 							</c:if>
 						</c:if>	
-						<li><a href="/mypage.do">MYPAGE</a></li>
+						<li><a href="/mypage/mypage.do">MYPAGE</a></li>	
 					</c:if>	
 				</c:if>
 				<li><a href="#">ORDERS</a></li>
-				<li><a href="#">BAG</a></li>
+				<li><a href="/basket.do">BAG</a></li>
 			</ul>
 		</div> 
 		<br style="clear: both" />
