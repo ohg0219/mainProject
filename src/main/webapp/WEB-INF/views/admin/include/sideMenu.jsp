@@ -114,9 +114,19 @@
             </li>
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales" aria-expanded="false" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>매출현황</span></a>
+                    <span>매출현황</span>
+                </a>
+                <div id="collapseSales" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">전체 월별 매출현황</a>
+                        <a class="collapse-item" href="#">전체 일별 매출현황</a>
+                        <a class="collapse-item" href="#">카테고리별 월별 매출현황</a>
+                        <a class="collapse-item" href="#">카테고리별 일별 매출현황</a>
+                        <a class="collapse-item" href="#">매출분석표</a>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/admin/getBanner.mdo">

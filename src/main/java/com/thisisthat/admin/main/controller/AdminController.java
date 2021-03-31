@@ -1,4 +1,11 @@
-package com.thisisthat.admin.controller;
+package com.thisisthat.admin.main.controller;
+
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thisisthat.admin.service.AdminService;
+import com.thisisthat.admin.main.service.AdminService;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 @Controller
@@ -25,7 +32,22 @@ public class AdminController {
 
 	@RequestMapping("/admin/main.mdo")
 	public String mainView(Model model) {
-		
+		DecimalFormat df = new DecimalFormat("###,###");
+		model.addAttribute("thisMonthSales",df.format(dao.getThisMonthSales()));
+		model.addAttribute("thisDaySales",df.format(dao.getThisDaySales()));
+		model.addAttribute("noAnswerCount",dao.noAnswerCount());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List<String> dateListString = new ArrayList<>();
+		List<Date> dateList = new ArrayList<Date>();
+		for(int i = 0;i<7;i++) {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, -i);
+			dateListString.add(sdf.format(cal.getTime()));
+			dateList.add(cal.getTime());
+		}
+		model.addAttribute("dateList",dateListString);
+		model.addAttribute("dataList",dao.getOneWeekSales(dateList));
+		model.addAttribute("todayCategorySales",dao.getTodayCatgorySales());
 		return "/admin/main";
 	}
 
@@ -59,7 +81,7 @@ public class AdminController {
 					cookie.setPath("/");
 					response.addCookie(cookie);
 				}
-				return "/admin/main";
+				return "redirect:/admin/main.mdo";
 			}else {
 				model.addAttribute("msg","roleFail");
 				return "/admin/login";

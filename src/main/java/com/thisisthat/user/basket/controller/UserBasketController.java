@@ -111,7 +111,8 @@ public class UserBasketController {
 	@ResponseBody
 	public String insertBasket(HttpSession session,
 			@RequestParam("productNo")long productNo,
-			@RequestParam("selectItem")String selectItem) {
+			@RequestParam("selectItem")String selectItem,
+			@RequestParam(value="direct",defaultValue = "no") String direct) {
 		String[] sizeAndCount = selectItem.split("/");
 		List<UserBasketItemVO> getItemList = new ArrayList<UserBasketItemVO>();
 		for(int i = 0;i<sizeAndCount.length;i++) {
@@ -159,6 +160,9 @@ public class UserBasketController {
 				}
 			}
 		};
+		if(direct.equals("ok")) {
+			return "direct";
+		}
 		return "ok";
 	}
 	

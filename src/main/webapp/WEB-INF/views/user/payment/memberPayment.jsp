@@ -157,6 +157,8 @@
 		});
 		
 		$("#paymentBtn").on("click",function(){
+			
+			
 			if($("input[name=receiveName]").val()==''){
 				alert("이름을 입력하세요."); return false;
 			}
@@ -171,6 +173,7 @@
 					alert("입금자명을 입력하세요");
 					return false;
 				}else{
+					$(".waiting").css("display","block");
 				    form.submit();
 				}
 			}
@@ -197,20 +200,29 @@
 						msg += '상점 거래ID : ' + rsp.merchant_uid;
 						msg += '결제 금액 : ' + rsp.paid_amount;
 						msg += '카드 승인번호 : ' + rsp.apply_num;
-						
+						$(".waiting").css("display","block");
 					    form.submit();
 					} else { // 실패시
 						var msg = '결제에 실패하였습니다.';
 						msg += '에러내용 : ' + rsp.error_msg;
+						$(".waiting").css("display","none");
 					}
 				});	
 			}
+			
+			
+			
 		});
 	});
 	
 </script>
 </head>
 <body>
+	<div class="waiting" style="display:none;position:fixed; z-index:99999; width: 100%;height: 100%;opacity:0.7; background-color: black">
+		<div style="text-align: center; margin-top:200px;">
+			<span style="background-color: white;padding: 10px;color:black;font-size: 20px; font-weight: 700">결제가 진행중입니다. 잠시만 기다려주세요.</span>
+		</div>
+	</div>
 	<div class="wrap">
 		<%@include file="../include/header.jsp" %>
 		<div class="content" style="margin-top: 100px; ">

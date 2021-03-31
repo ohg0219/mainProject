@@ -103,9 +103,6 @@ public class UserPaymentDAO {
 				flag = false;
 			}
 		}
-		
-		
-		
 		return flag;
 	}
 }
