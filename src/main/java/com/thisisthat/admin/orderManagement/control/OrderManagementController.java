@@ -27,6 +27,15 @@ public class OrderManagementController {
 		
 		return "redirect:getOrderManagementList.mdo";
 	}
+	@RequestMapping("selectOrderManagement.mdo")
+	public String selectOrderManagement(@RequestParam(value="order_state")String order_state, OrderManagementVO orderManagementVO, @RequestParam(value="order_no")String order_no,@RequestParam(value="invoice_no")String invoice_no) {
+		orderManagementVO.setInvoice_no(Integer.parseInt(invoice_no));
+		orderManagementVO.setOrder_no(Integer.parseInt(order_no));
+		orderManagementVO.setOrder_state(order_state);
+		orderManagementService.selectOrder(orderManagementVO);
+		
+		return "redirect:getOrderManagementList.mdo";
+	}
 	
 	@RequestMapping("getOrderManagementList.mdo")
 	public String oredrManagementlist(Model model ) {

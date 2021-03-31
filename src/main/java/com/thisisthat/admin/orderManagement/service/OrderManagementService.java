@@ -12,4 +12,8 @@ public interface OrderManagementService {
 
 	Object selectOrder_start(OrderManagementVO orderManagementVO);
 
+	Object selectOrder(OrderManagementVO orderManagementVO);
+
+
+
 }
