@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
+import com.thisisthat.user.payment.vo.UserAddressVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
 import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserOrderVO;
@@ -105,4 +106,11 @@ public class UserPaymentDAO {
 		}
 		return flag;
 	}
+	
+	
+	public List<UserAddressVO> getUserAddressList(String userId){
+		return paymentTemplate.selectList("PaymentDAO.getUserAddressList",userId);
+	}
+	
+	
 }

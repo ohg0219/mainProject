@@ -17,10 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.service.UserPaymentService;
+import com.thisisthat.user.payment.vo.UserAddressVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
 import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
@@ -34,6 +36,21 @@ public class UserPaymentController {
 
 	@Autowired
 	private JavaMailSenderImpl senderImpl;
+	
+	@RequestMapping("/addressBook.do")
+	public String addressBook(@RequestParam("userId")String userId,Model model) {
+		List<UserAddressVO> addressList = paymentService.getUserAddressList(userId);
+		for(UserAddressVO address : addressList) {
+			String phone = address.getUserPhone();
+			address.setPhone1(phone.substring(0,3));
+			address.setPhone2(phone.substring(3,7));
+			address.setPhone3(phone.substring(7));
+		}
+		model.addAttribute("addressList",addressList);
+		return "/user/payment/addressBook";
+	}
+	
+	
 	
 	/**
 	 * 결제하기 버튼 클릭시 세션 검사 후 회원과 비회원 페이지 분리

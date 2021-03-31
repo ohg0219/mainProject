@@ -10,6 +10,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
 	.leftItem{
 		float: left;
@@ -209,12 +210,44 @@
 					}
 				});	
 			}
-			
-			
-			
 		});
+		$(".address_btn").on("click",function(e){
+			e.preventDefault();
+			DaumPostcode();
+		});
+		$("#addressBookBtn").on("click",function(){
+			var userId = $("#userId").val();
+			window.open("/addressBook.do?userId="+userId, "childForm", "width=800, height=350, resizable = no, scrollbars = no");
+		});
+		
 	});
-	
+	function DaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            var addr = '';
+	            var extraAddr = '';
+	            if (data.userSelectedType === 'R') {
+	                addr = data.roadAddress;
+	            } else {
+	                addr = data.jibunAddress;
+	            }
+	            if(data.userSelectedType === 'R'){
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraAddr += data.bname;
+	                }
+	                if(data.buildingName !== '' && data.apartment === 'Y'){
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                if(extraAddr !== ''){
+	                    extraAddr = ' (' + extraAddr + ')';
+	                }
+	            }
+	            document.getElementById('zipcode').value = data.zonecode;
+	            document.getElementById("address1").value = addr + extraAddr;
+	            document.getElementById("address2").focus();
+	        }
+	    }).open();
+	}//end postcode function
 </script>
 </head>
 <body>
@@ -228,6 +261,7 @@
 		<div class="content" style="margin-top: 100px; ">
 			<form style="width: 100%;display: flex;" action="/memberPayment.do" method="post" name="payform">
 				<input type="hidden" value="${productList}" id="productList">
+				<input type="hidden" value="${sessionScope.userId}" id="userId">
 				<div class="divide" style="flex: 1; vertical-align: middle;">
 					<div class="shipping" style=" width: 250px; float: right; margin-right: 60px;">
 						<ul>

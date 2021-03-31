@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
+import com.thisisthat.user.payment.vo.UserAddressVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
 import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
@@ -24,4 +25,5 @@ public interface UserPaymentService {
 	UserPaymentVO userOrder(int orderNo);
 	boolean userBasketOrderCount(String userId);
 	boolean nonMemberBasketOrderCount(List<UserBasketItemVO> basketItem);
+	List<UserAddressVO> getUserAddressList(String userId);
 }
