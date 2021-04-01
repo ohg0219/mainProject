@@ -109,16 +109,16 @@ a {
 													<td align="center">${article.order_price }</td>
 													<td align="center">${article.order_select }</td>
 													<td align="center">${article.passbook_name }</td>
-													<td align="center"><input type="hidden"
-														class="articleNo" value="${article.order_no }"> <select
-														name="order_state" id="selectorder"
-														class="${article.order_no } selector">
-															<option value="${article.order_state }">${article.order_state }</option>
+													<td align="center">
+													<input type="hidden" class="articleNo" value="${article.order_no }">
+													 <select name="order_state" id="selectorder" class="${article.order_no } selector">
+															<option>${article.order_state }</option>
 															<option name="select" value="입금대기">입금대기</option>
 															<option name="select" value="결제완료">결제완료</option>
 															<option name="select" value="상품준비중">상품준비중</option>
 															<option name="select" value="배송준비중">배송준비중</option>
 															<option name="select" value="배송중">배송중</option>
+															<option name="select" value="배송완료">배송완료</option>
 													</select></td>
 													<td align="center">${article.invoice_no }</td>
 													<td align="center">${article.order_cancel }</td>
@@ -176,14 +176,13 @@ a {
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$(".selector").on("change",function(){
-			var select = $(".selector option:selected").val();
 			var number = $(this).siblings(".articleNo").val();
-			if(select=="상품준비중"){				
-			console.log("select : " + select );
-			var invoiceno = prompt("송장번호 입력");
-			console.log("invoiceno : " + invoiceno);
-			location.href="/admin/selectOrderManagement.mdo?order_state="+select+"&order_no="+number+"&invoice_no="+invoiceno;
-			}else{
+			var select = $("."+number+" option:selected").val();
+			console.log("select : " + select + "number : " + number);
+			if(select == "상품준비중"){
+				var invoiceno = prompt("송장번호 입력 : ");
+			location.href="/admin/selectOrderManagement.mdo?order_state="+select+"&order_no="+number+"&invoice_no="+invoiceno;				
+			}else{				
 			location.href="/admin/selectOrderManagementList.mdo?order_state="+select+"&order_no="+number;
 			}
 				
