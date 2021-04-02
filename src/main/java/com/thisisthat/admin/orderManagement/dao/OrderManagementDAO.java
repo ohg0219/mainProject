@@ -30,6 +30,22 @@ public class OrderManagementDAO {
 		return mybatis.update("orderManagementDAO.selectOrder", orderManagementVO);
 	}
 
+	public List<OrderManagementVO> allSearch(OrderManagementVO orderManagementVO) {
+		return mybatis.selectList("orderManagementDAO.allSearch", orderManagementVO);
+	}
+
+	public List<OrderManagementVO> ordernoSearch(OrderManagementVO orderManagementVO) {
+		return mybatis.selectList("orderManagementDAO.ordernoSearch", orderManagementVO);
+	}
+
+	public List<OrderManagementVO> useridSearch(OrderManagementVO orderManagementVO) {
+		return mybatis.selectList("orderManagementDAO.useridSearch", orderManagementVO);
+	}
+
+	public List<OrderManagementVO> invoicenoSearch(OrderManagementVO orderManagementVO) {
+		return mybatis.selectList("orderManagementDAO.invoicenoSearch", orderManagementVO);
+	}
+
 	
 	
 

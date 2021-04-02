@@ -37,6 +37,22 @@ public class OrderManagementVO {
 	//produc 테이블
 	private String product_category;//카테고리
 	private String product_name;//상품 명
+	
+	//검색 위한 키워드
+	private String keyword;
+	
+	
+	
+	
+	
+	
+
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public int getOrder_no() {
 		return order_no;
 	}
@@ -210,8 +226,12 @@ public class OrderManagementVO {
 				+ ", passbook_name=" + passbook_name + ", order_state=" + order_state + ", order_cancel=" + order_cancel
 				+ ", invoice_no=" + invoice_no + ", waiting_point=" + waiting_point + ", product_no=" + product_no
 				+ ", order_size=" + order_size + ", product_price=" + product_price + ", select_count=" + select_count
-				+ ", product_category=" + product_category + ", product_name=" + product_name + "]";
+				+ ", product_category=" + product_category + ", product_name=" + product_name + ", keyword=" + keyword
+				+ "]";
 	}
+	
+	
+	
 	
 	
 	

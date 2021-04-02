@@ -38,7 +38,7 @@ public class OrderManagementController {
 	}
 	
 	@RequestMapping("getOrderManagementList.mdo")
-	public String oredrManagementlist(Model model ) {
+	public String oredrManagementlist(Model model) {
 		OrderManagementVO orderManagementVO = new OrderManagementVO();
 		List<OrderManagementVO> orderList = orderManagementService.orderList(orderManagementVO);
 		model.addAttribute("orderList", orderList);
@@ -56,4 +56,59 @@ public class OrderManagementController {
 		return "/admin/orderManagement/getOrderManagement";
 	}
 
+	@RequestMapping("searchOrder.mdo")
+	public String searchOrder(Model model, @RequestParam(value="searchOption")String searchOption,@RequestParam(value="keyword")String keyword, OrderManagementVO orderManagementVO) {
+		if(searchOption.equals("all")) {
+			orderManagementVO.setKeyword(keyword);
+		
+			List<OrderManagementVO> orderList = orderManagementService.allSearch(orderManagementVO);
+			model.addAttribute("orderList", orderList);
+			
+			return "/admin/orderManagement/orderManagementList";
+		}else if(searchOption.equals("order_no")) {
+			orderManagementVO.setKeyword(keyword);
+			
+			List<OrderManagementVO> orderList = orderManagementService.ordernoSearch(orderManagementVO);
+			model.addAttribute("orderList", orderList);
+		
+			return "/admin/orderManagement/orderManagementList";
+		}else if(searchOption.equals("user_id")) {
+			orderManagementVO.setKeyword(keyword);
+		
+			List<OrderManagementVO> orderList = orderManagementService.useridSearch(orderManagementVO);
+			model.addAttribute("orderList", orderList);
+		
+			return "/admin/orderManagement/orderManagementList";
+		}else if(searchOption.equals("invoice_no")) {
+			orderManagementVO.setKeyword(keyword);
+		
+			List<OrderManagementVO> orderList = orderManagementService.invoicenoSearch(orderManagementVO);
+			model.addAttribute("orderList", orderList);
+		
+			return "/admin/orderManagement/orderManagementList";
+		}
+		
+		return null;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }//end class

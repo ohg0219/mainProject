@@ -35,6 +35,26 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 		return orderManagementDAO.selectOrder(orderManagementVO);
 	}
 
+	@Override
+	public List<OrderManagementVO> allSearch(OrderManagementVO orderManagementVO) {
+		return orderManagementDAO.allSearch(orderManagementVO);
+	}
+
+	@Override
+	public List<OrderManagementVO> ordernoSearch(OrderManagementVO orderManagementVO) {
+		return orderManagementDAO.ordernoSearch(orderManagementVO);
+	}
+
+	@Override
+	public List<OrderManagementVO> useridSearch(OrderManagementVO orderManagementVO) {
+		return orderManagementDAO.useridSearch(orderManagementVO);
+	}
+
+	@Override
+	public List<OrderManagementVO> invoicenoSearch(OrderManagementVO orderManagementVO) {
+		return orderManagementDAO.invoicenoSearch(orderManagementVO);
+	}
+
 
 	
 }

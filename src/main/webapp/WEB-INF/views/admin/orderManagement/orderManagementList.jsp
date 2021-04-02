@@ -129,7 +129,7 @@ a {
 										</c:if>
 										<c:if test="${empty orderList }">
 											<tr>
-												<td colspan="5" align="center">
+												<td colspan="12" align="center">
 													<h1>받은 주문이 없어요</h1>
 												</td>
 											</tr>
@@ -137,15 +137,12 @@ a {
 									</tbody>
 								</table>
 								<div>
-									<form
-										action="noticesearch.mdo?board_group=${article.board_group }"
-										method="get">
-										<input type="hidden" name="board_group" value="${where}">
+									<form action="searchOrder.mdo" method="post">
 										<select name="searchOption" aria-controls="example" class="">
 											<option value="all">전체</option>
-											<option value="board_writer">주문번호</option>
-											<option value="board_title">결제 상태</option>
-											<option value="board_content">송장번호</option>
+											<option value="order_no">주문번호</option>
+											<option value="user_id">아이디</option>
+											<option value="invoice_no">송장번호</option>
 										</select> <input type="text" name="keyword">
 
 										<button type="submit" class="btn btn-dark" id="searchBtn">

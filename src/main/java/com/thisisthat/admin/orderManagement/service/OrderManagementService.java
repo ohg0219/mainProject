@@ -14,6 +14,16 @@ public interface OrderManagementService {
 
 	Object selectOrder(OrderManagementVO orderManagementVO);
 
+	List<OrderManagementVO> allSearch(OrderManagementVO orderManagementVO);
+
+	List<OrderManagementVO> ordernoSearch(OrderManagementVO orderManagementVO);
+
+	List<OrderManagementVO> useridSearch(OrderManagementVO orderManagementVO);
+
+	List<OrderManagementVO> invoicenoSearch(OrderManagementVO orderManagementVO);
+
+
+
 
 
 }
