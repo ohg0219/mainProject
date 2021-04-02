@@ -5,8 +5,11 @@
 <mapper namespace="UserCouponDAO">
 	
 	<resultMap type="com.thisisthat.admin.usermanagement.vo.UserVO" id="UserVOMap">
-	<result property="userId" column="user_id"/>
+		<result property="userId" column="user_id"/>
 	</resultMap>
+	
+	
+	
 	
 	<select id="getUserIDList" resultMap="UserVOMap">
 		select user_id from this_user
@@ -55,8 +58,12 @@
 		select * from user_coupon where user_id like '%'||#{keyword}||'%' order by coupon_last  desc
 	</select>
 	
-	<delete id="userCouponDelete">
+	<delete id="userCouponDeleteSel" parameterType="CouponGrantVo">
 		delete from user_coupon where user_id = #{user_id} and coupon_no = #{coupon_no}
+	</delete>
+	
+	<delete id="userCouponDeleteAll" parameterType="CouponGrantVo">
+		delete from user_coupon where user_id = #{user_id}
 	</delete>
 	
 </mapper>

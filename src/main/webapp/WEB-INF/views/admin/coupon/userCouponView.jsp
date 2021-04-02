@@ -5,6 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style type="text/css">
+	
+	.soksung {
+	color: #ffffff;
+	background: black;
+	font-size: 1.2em;
+	padding: 0.3em 0.5em;
+	margin-right: 0.1em;
+	border-radius: 3px;
+	}
+	
+</style>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -40,17 +53,21 @@
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<tr>
-								<td>${userIdCoupon}님의쿠폰List!</td>
+								<td>[ ${user_Id} ] 회원님의 쿠폰List!</td>
 							</tr>
 						</table>
-
+						<form method="get">
+									<input type="hidden" name="user_id" value="${user_Id}"/>
+									<input class="btn btn-dark" type="submit" name="allDelete" value="전체삭제" formaction="userCouponDeleteAll.mdo">
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<c:if test="${not empty couponUserList}">
+										<!-- <tr><td><label><input type="checkbox" id="checkAll" class="chk"/>전체선택</label></td></tr> -->
 								<c:forEach var="couponList" items="${couponUserList}">
 									<tr>
+										<!-- <td><input type="checkbox"value="${couponList.coupon_no }" name="couponCheck" class="chk childChk">쿠폰 번호 : ${couponList.coupon_no }</td> -->
 										<td>쿠폰 번호 : ${couponList.coupon_no }</td>
-										<td>쿠폰명 : ${couponList.coupon_name }</td>
+										<td>쿠폰명 : <a href="grantCouponView.mdo?coupon_no=${couponList.coupon_no }">${couponList.coupon_name }</a></td>
 										<td>할인금액 : ${couponList.coupon_price }</td>
 										<td>쿠폰 기한 : <fmt:formatDate
 												value="${couponList.coupon_first }" pattern="yyyy-MM-dd " />
@@ -59,9 +76,14 @@
 												value="${couponList.coupon_last }" pattern="yyyy-MM-dd " />
 										</td>
 										<td>사용 유무 : ${couponList.used }</td>
+										<td><a class="btn btn-dark" href="userCouponDeleteSel.mdo?coupon_no=${couponList.coupon_no }&user_id=${user_Id}">삭제</a></td>
 									</tr>
 								</c:forEach>
 							</c:if>
+							</table>
+							</form>
+							<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
 							<c:if test="${empty couponUserList}">
 								<tr>
 									<td colspan="5" align="center">
@@ -70,9 +92,13 @@
 								</tr>
 							</c:if>
 						</table>
-						<br>
+						<!-- <button class="btn btn-dark" type="button" id="allDelete">쿠폰전체삭제</button> -->
+						
 						<button class="btn btn-dark" type="button"
 							onclick="location.href='grantCoupon.mdo' ">목록으로</button>
+						<button class="btn btn-dark" type="button"
+							onclick="location.href='userGrant.mdo' ">쿠폰 부여</button>
+							
 					</div>
 				</div>
 			</div>
@@ -90,6 +116,24 @@
 				location.href = "/admin/getCouponList.mdo"
 			});
 		});
+		
+		//맨위에 버튼을 클릭하면 전체 선택되는 제이쿼리 함수
+		$(function () {
+			$("#checkAll").click(function() {
+				//만약에 input태그안에checkbox의 name이 couponCheck인놈의 속성(.prop)가 checked면
+				if($("#checkAll").prop("checked")){
+					$("input[name=couponCheck]").prop("checked",true);
+				}else{
+					$("input[name=couponCheck]").prop("checked",false);
+				}	
+			})
+		});
+		//안씀
+		$(function () {
+			$("#allDelete").click(function () {
+				location.href = "userCouponDelete.mdo"
+			})
+		})
 	</script>
 	<%@include file="../include/js.jsp"%>
 

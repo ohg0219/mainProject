@@ -42,32 +42,33 @@
                             	
                             	<tr>
                             		<td colspan="2">
-                            			쿠폰번호 : [${grantVo.coupon_no}]
+                            			쿠폰번호 : ${grantVo.coupon_no}
 									</td>
                             	</tr>
                             	<tr>
                             		<td>
-                            			쿠폰명 : [${grantVo.coupon_name }]
+                            			쿠폰명 : ${grantVo.coupon_name }
                             		</td>
                             	</tr>
                             	<tr>
                             		<td>
-                            			할인금액 : [${grantVo.coupon_price }]
+                            			할인금액 : ${grantVo.coupon_price }
                             		</td>
                             	</tr>
                             	<tr>
                             		<td>
-                            			발급일자 : [<fmt:formatDate value="${grantVo.coupon_first }"  pattern="yyyy-MM-dd "/>]
+                            			발급일자 : <fmt:formatDate value="${grantVo.coupon_first }"  pattern="yyyy-MM-dd "/>
                             		</td>
                             	</tr>
                             	<tr>
                             		<td>
-                            			만료일자 : [<fmt:formatDate value="${grantVo.coupon_last }"  pattern="yyyy-MM-dd "/>]
+                            			만료일자 : <fmt:formatDate value="${grantVo.coupon_last }"  pattern="yyyy-MM-dd "/>
                             		</td>
                             	</tr>
                          	</table>
                          	<br>
-                         	<button class="btn btn-dark" type="button" onclick="location.href='grantCoupon.mdo' ">목록으로</button>
+                         	<input class="btn btn-dark" type="button" value="쿠폰List" onclick="history.back(-1);">
+                         	<button class="btn btn-dark" type="button" onclick="location.href='grantCoupon.mdo' ">현황List</button>
                          </div>
 				</div>
 			</div>

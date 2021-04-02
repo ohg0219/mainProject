@@ -40,7 +40,6 @@
                         <a class="collapse-item" href="/admin/getCouponList.mdo">회원쿠폰생성</a>
                         <a class="collapse-item" href="/admin/grantCoupon.mdo">회원쿠폰부여</a>
                         <a class="collapse-item" href="/admin/pointUserList.mdo">회원적립금관리</a>
-                        <a class="collapse-item" href="/admin/getCouponList.mdo">쿠폰생성</a>
                         <a class="collapse-item" href="/admin/getTermsList.mdo?state=information">개인정보 수집 및 이용 약관</a>
                         <a class="collapse-item" href="/admin/getTermsList.mdo?state=utilization">이용 약관</a>
 

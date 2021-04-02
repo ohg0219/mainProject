@@ -45,7 +45,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">쿠폰 지급 현황</h1>
+                    <h1 class="h3 mb-2 text-gray-800">쿠폰 부여 현황</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -58,7 +58,7 @@
                             <div class="table-responsive">
                                     <form action="userGrant.mdo" method="get">
                                     	<button type="submit" class="btn btn-dark" id="userGrant">
-                                    	회원 쿠폰 지급
+                                    	회원 쿠폰 부여
                                     	</button>
                                     </form>
                                     <br>

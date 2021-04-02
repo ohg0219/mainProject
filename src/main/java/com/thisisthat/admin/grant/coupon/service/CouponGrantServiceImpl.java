@@ -68,5 +68,13 @@ public class CouponGrantServiceImpl implements CouponGrantService {
 	public List<CouponGrantVO> IdCouponSearch(CouponGrantVO vo) {
 		return couponGrantDAO.IdCouponSearch(vo);
 	}
+
+	@Override
+	public void userCouponDeleteSel(CouponGrantVO vo) {
+		couponGrantDAO.userCouponDeleteSel(vo);
+	}
 	
+	public void userCouponDeleteAll(CouponGrantVO vo) {
+		couponGrantDAO.userCouponDeleteAll(vo);
+	}
 }

@@ -30,4 +30,10 @@ public interface CouponGrantService {
 	public List<CouponGrantVO> nameCouponSearch(CouponGrantVO vo);
 	
 	public List<CouponGrantVO> IdCouponSearch(CouponGrantVO vo);
+	
+	
+	//개별 삭제 메서드 
+	public void userCouponDeleteSel(CouponGrantVO vo);
+	//전체 삭제 메서드
+	public void userCouponDeleteAll(CouponGrantVO vo);
 }

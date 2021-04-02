@@ -96,10 +96,11 @@ public class GrantCouponController {
 		vo.setUser_id(user_id);
 		List<CouponGrantVO> couponUserList = couponGrantService.couponUserList(vo);
 		model.addAttribute("couponUserList", couponUserList);
-		model.addAttribute("userIdCoupon", user_id);
+		model.addAttribute("user_Id", user_id);
 		return "/admin/coupon/userCouponView";
 	}
 	
+	//쿠폰 검색하는 메서드
 	@GetMapping("couponSearch.mdo")
 	public String couponSearch(Model model,
 			@RequestParam("keyword")String keyword,
@@ -121,5 +122,24 @@ public class GrantCouponController {
 		return null;
 	}
 	
+	@RequestMapping("userCouponDeleteSel.mdo")
+	public String userCouponDeleteSel(@RequestParam("coupon_no") int coupon_no,
+			@RequestParam("user_id") String user_id,
+			CouponGrantVO vo) {
+
+		System.out.println(user_id);
+		vo.setUser_id(user_id);
+		vo.setCoupon_no(coupon_no);
+		couponGrantService.userCouponDeleteSel(vo);
+		return "redirect:couponUserList.mdo?user_id="+user_id;
+	}
+	
+	@RequestMapping("userCouponDeleteAll.mdo")
+	public String userCouponDeleteAll(@RequestParam("user_id") String user_id,
+			CouponGrantVO vo) {
+		vo.setUser_id(user_id);
+		couponGrantService.userCouponDeleteAll(vo);
+		return "redirect:grantCoupon.mdo";
+	}
 	
 }

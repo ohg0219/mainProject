@@ -1,6 +1,5 @@
 package com.thisisthat.admin.grant.coupon.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.thisisthat.admin.coupon.vo.CouponVO;
 import com.thisisthat.admin.grant.coupon.vo.CouponGrantVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
-import com.thisisthat.user.controller.UserController;
 
 @Repository
 public class UserCouponDAO {
@@ -54,6 +52,7 @@ public class UserCouponDAO {
 		return userCouponTemplate.selectList("UserCouponDAO.couponUserList", vo);
 	}
 	
+	//회원이 가진 쿠폰을 보여주는 메서드
 	public String userIdCoupon(String userId) {
 		return userCouponTemplate.selectOne("UserCouponDAO.userIdCoupon", userId);
 	}
@@ -64,6 +63,15 @@ public class UserCouponDAO {
 	
 	public List<CouponGrantVO> IdCouponSearch(CouponGrantVO vo){
 		return userCouponTemplate.selectList("UserCouponDAO.IdCouponSearch", vo);
+	}
+	
+	//회원이 가진 쿠폰을 개별삭제하는 메서드
+	public void userCouponDeleteSel(CouponGrantVO vo) {
+		userCouponTemplate.delete("UserCouponDAO.userCouponDeleteSel", vo);
+	}
+	//회원이 가진 쿠폰 전체삭제
+	public void userCouponDeleteAll(CouponGrantVO vo) {
+		userCouponTemplate.delete("UserCouponDAO.userCouponDeleteAll", vo);
 	}
 	
 }
