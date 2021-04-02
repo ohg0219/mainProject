@@ -50,6 +50,11 @@ public class ProductStockServiceImpl implements ProductStockService {
 	public List<ProductStockVO> productnameList(ProductStockVO productStockVO) {
 		return product_StockDAO.productnameList(productStockVO);
 	}
+
+	@Override
+	public ProductStockVO sizepro(ProductStockVO productStockVO) {
+		return product_StockDAO.sizepro(productStockVO);
+	}
 	
 	
 }

@@ -6,10 +6,18 @@ public class ProductStockVO {
 	private int product_no; // 자료형 확인해야함
 
 	// 상품 사이즈별 수량
-	private int xs, s, m, l, xl;
+	private int xs;
+	private int s;
+	private int m;
+	private int l;
+	private int xl;
 
 	// 상품 사이즈별 사용 유무
-	int xs_used, s_used, m_used, l_used, xl_used;
+	private int xs_used;
+	private int s_used;
+	private int m_used;
+	private int l_used;
+	private int xl_used;
 
 	// 상품 카테고리
 	private String product_category; // 자료형 확인해야함
@@ -17,6 +25,8 @@ public class ProductStockVO {
 	
 	//키워드
 	private String keyword;
+	
+	
 	
 	
 

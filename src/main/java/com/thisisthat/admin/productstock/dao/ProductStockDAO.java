@@ -45,6 +45,10 @@ public class ProductStockDAO {
 		return mybatis.selectList("Product_StockDAO.productnameList", productStockVO);
 	}
 
+	public ProductStockVO sizepro(ProductStockVO productStockVO) {
+		return mybatis.selectOne("Product_StockDAO.sizepro", productStockVO);
+	}
+
 	
 	
 	

@@ -20,4 +20,6 @@ public interface ProductStockService {
 
 	List<ProductStockVO> productnameList(ProductStockVO productStockVO);
 
+	ProductStockVO sizepro(ProductStockVO productStockVO);
+
 }

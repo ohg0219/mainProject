@@ -60,6 +60,7 @@ public class ProductStockController {
 
 	@RequestMapping("getProductStock.mdo")
 	public String getProductStock(Model model,@RequestParam(value="product_no")int product_no, ProductStockVO productStockVO) {
+	
 		productStockVO.setProduct_no(product_no);
 		ProductStockVO getStock =  productStockService.getStock(productStockVO);
 

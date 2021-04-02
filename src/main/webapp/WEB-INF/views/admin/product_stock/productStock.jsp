@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,17 +67,67 @@
 									<td width="45"><h3>l</h3></td>
 									<td width="45"><h3>xl</h3></td>
 								</tr>
-								<td><input type="text" value="${article.xs }"
+								
+								<td>
+								<c:set var="xs_used" value="${article.xs_used }"></c:set>
+								<c:if test="${xs_used eq 1}">
+								<input type="text" value="${article.xs }"
 									name="xs" class="form-control mt-4 mb-2" width="45" />
+								</c:if>
+								<c:if test="${xs_used eq 0}">
+								<input type="text" value="${article.xs }"
+									name="xs" class="form-control mt-4 mb-2" width="45" disabled />
+								</c:if>
 								</td>
-								<td><input type="text" value="${article.s }"
-									name="s" class="form-control mt-4 mb-2" /></td>
-								<td><input type="text" value="${article.m }"
-									name="m" class="form-control mt-4 mb-2" /></td>
-								<td><input type="text" value="${article.l }"
-									name="l" class="form-control mt-4 mb-2" /></td>
-								<td><input type="text" value="${article.xl }"
-									name="xl" class="form-control mt-4 mb-2" /></td>
+								
+								<td>
+								<c:set var="s_used" value="${article.s_used }"></c:set>
+								<c:if test="${s_used eq 1 }">
+								<input type="text" value="${article.s }"
+									name="s" class="form-control mt-4 mb-2" />
+								</c:if>
+								<c:if test="${s_used eq 0 }">
+								<input type="text" value="${article.s }"
+									name="s" class="form-control mt-4 mb-2" disabled/>
+								</c:if>
+								</td>
+								
+								<td>
+								<c:set var="m_used" value="${article.m_used }"></c:set>
+								<c:if test="${m_used eq 1 }">
+								<input type="text" value="${article.s }"
+									name="m" class="form-control mt-4 mb-2" />
+								</c:if>
+								<c:if test="${m_used eq 0 }">
+								<input type="text" value="${article.m }"
+									name="m" class="form-control mt-4 mb-2" disabled/>
+								</c:if>
+								</td>
+								
+								<td>
+								<c:set var="l_used" value="${article.l_used }"></c:set>
+								<c:if test="${l_used eq 1 }">
+								<input type="text" value="${article.l }"
+									name="l" class="form-control mt-4 mb-2" />
+								</c:if>
+								<c:if test="${l_used eq 0 }">
+								<input type="text" value="${article.l }"
+									name="l" class="form-control mt-4 mb-2" disabled/>
+								</c:if>
+								</td>
+								
+								<td>
+								<c:set var="xl_used" value="${article.xl_used }"></c:set>
+								<c:if test="${xl_used eq 1 }">
+								<input type="text" value="${article.xl }"
+									name="xl" class="form-control mt-4 mb-2" />
+								</c:if>
+								<c:if test="${xl_used eq 0 }">
+								<input type="text" value="${article.xl }"
+									name="xl" class="form-control mt-4 mb-2" disabled/>
+								</c:if>
+								</td>
+								
 								</tr>
 							</table>
 						</div>

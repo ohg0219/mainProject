@@ -9,7 +9,10 @@
 		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock  left join product using(product_no) order by product_no desc
 	</select>
 	<select id="getProductStock" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
-		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock left join product using(product_no) where product_no=#{product_no}
+		select * from product_stock left join product using(product_no) left join size_used using(product_no) where product_no=#{product_no}
+	</select>
+	<select id="sizepro" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
+		select * from size_used where product_no=#{product_no}
 	</select>
 	<update id="updateStock" >
 		update product_stock set xs=#{xs}, s=#{s}, m=#{m}, l=#{l}, xl=#{xl} where product_no=#{product_no}
