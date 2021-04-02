@@ -26,6 +26,16 @@ public class UserPointController {
 		if(session.getAttribute("userId") !=null) {
 			id = (String) session.getAttribute("userId");
 		}
+		
+		/**
+		 * 닉네임이랑 유저 이름 받아오기
+		 */
+		userPointVO.setUser_id(id);
+		UserPointVO namePoint = userPointService.namePoint(userPointVO);
+		
+		model.addAttribute("namePoint", namePoint);
+		
+		
 		/**
 		 *  총 포인트
 		 */

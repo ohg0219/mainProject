@@ -35,6 +35,21 @@ public class ProductStockServiceImpl implements ProductStockService {
 	public List<ProductStockVO> poductStockList(ProductStockVO productStockVO) {
 		return product_StockDAO.getProductStockList(productStockVO);
 	}
+
+	@Override
+	public List<ProductStockVO> allList(ProductStockVO productStockVO) {
+		return product_StockDAO.allList(productStockVO);
+	}
+
+	@Override
+	public List<ProductStockVO> productnoList(ProductStockVO productStockVO) {
+		return product_StockDAO.productnoList(productStockVO);
+	}
+
+	@Override
+	public List<ProductStockVO> productnameList(ProductStockVO productStockVO) {
+		return product_StockDAO.productnameList(productStockVO);
+	}
 	
 	
 }

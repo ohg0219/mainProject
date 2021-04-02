@@ -11,11 +11,23 @@
 	<select id="getProductStock" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
 		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock left join product using(product_no) where product_no=#{product_no}
 	</select>
-	<select id="updateStock" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
+	<update id="updateStock" >
 		update product_stock set xs=#{xs}, s=#{s}, m=#{m}, l=#{l}, xl=#{xl} where product_no=#{product_no}
-	</select>
+	</update>
 	<select id="getProductStockList" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
 		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock  left join product using(product_no) where product_category=#{product_category} order by product_no desc
+	</select>
+	
+	<select id="allList" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
+		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock  left join product using(product_no) where cast(product_no as varchar) like '%' || #{keyword} || '%' or product_name like '%' || #{keyword} || '%' order by product_no desc
+	</select>
+	
+	<select id="productnoList" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
+		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock  left join product using(product_no) where cast(product_no as varchar) like '%' || #{keyword} || '%' order by product_no desc
+	</select>
+	
+	<select id="productnameList" resultType="com.thisisthat.admin.productstock.vo.ProductStockVO">
+		select product_no,product_category,product_name,xs,s,m,l,xl from product_stock  left join product using(product_no) where product_name like '%' || #{keyword} || '%' order by product_no desc
 	</select>
 
 

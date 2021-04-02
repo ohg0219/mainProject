@@ -17,21 +17,35 @@ public class ProductStockController {
 
 	@Autowired
 	private ProductStockService productStockService;
+	
+
 
 	@RequestMapping("getStockList.mdo")
-	public String productStockList(Model model,@RequestParam(value="searchOption")String searchOption,ProductStockVO productStockVO){
+	public String productStockList(Model model,@RequestParam(value="searchOption")String searchOption,ProductStockVO productStockVO,@RequestParam(value="keyword")String keyword){
 		if(searchOption.equals("all")) {
-			return "redirect:getProductStockList.mdo";
-		}else  {
+
+			productStockVO.setKeyword(keyword);
+			
+			List<ProductStockVO> prodcutStockList = productStockService.allList(productStockVO);
+
+			model.addAttribute("prodcutStockList", prodcutStockList);
+			return "/admin/product_stock/productStockList";
+		}else if(searchOption.equals("product_no")) {
 			System.out.println(searchOption);
-			productStockVO.setProduct_category(searchOption);
-			List<ProductStockVO> prodcutStockList = productStockService.poductStockList(productStockVO);
+			productStockVO.setKeyword(keyword);
+			List<ProductStockVO> prodcutStockList = productStockService.productnoList(productStockVO);
+
+			model.addAttribute("prodcutStockList", prodcutStockList);
+			return "/admin/product_stock/productStockList";
+		}else if(searchOption.equals("product_name")) {
+			productStockVO.setKeyword(keyword);
+			List<ProductStockVO> prodcutStockList = productStockService.productnameList(productStockVO);
 
 			model.addAttribute("prodcutStockList", prodcutStockList);
 			return "/admin/product_stock/productStockList";
 		}
 			
-			
+			return null;
 
 	}
 	
