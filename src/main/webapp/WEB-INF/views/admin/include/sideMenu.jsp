@@ -120,11 +120,10 @@
                 </a>
                 <div id="collapseSales" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">전체 월별 매출현황</a>
-                        <a class="collapse-item" href="#">전체 일별 매출현황</a>
-                        <a class="collapse-item" href="#">카테고리별 월별 매출현황</a>
-                        <a class="collapse-item" href="#">카테고리별 일별 매출현황</a>
-                        <a class="collapse-item" href="#">매출분석표</a>
+                        <a class="collapse-item" href="/admin/montlySales.mdo">월별 매출현황</a>
+                        <a class="collapse-item" href="/admin/dailySales.mdo">일별 매출현황</a>
+                        <a class="collapse-item" href="/admin/categorySales.mdo">카테고리별 매출현황</a>
+                        <a class="collapse-item" href="/admin/datelySales.mdo">요일별 매출현황</a>
                     </div>
                 </div>
             </li>

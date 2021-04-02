@@ -39,7 +39,7 @@ public class AdminController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<String> dateListString = new ArrayList<>();
 		List<Date> dateList = new ArrayList<Date>();
-		for(int i = 0;i<7;i++) {
+		for(int i = 6;i>=0;i--) {
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DATE, -i);
 			dateListString.add(sdf.format(cal.getTime()));
