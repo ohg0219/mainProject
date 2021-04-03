@@ -226,8 +226,8 @@ function getData(){
    data: {
      labels: [<c:forEach items="${categorySales}" var="category">"${category.groupString}",</c:forEach>],
      datasets: [{
-       data: [<c:forEach items="${categorySales}" var="category">"${category.subtotal}",</c:forEach>],
-       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+       data: [<c:forEach items="${categorySales}" var="category">"${category.count}",</c:forEach>],
+       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#C70039','#FFC300','#D1C92B','#D12BB2'],
        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
        hoverBorderColor: "rgba(234, 236, 244, 1)",
      }],
