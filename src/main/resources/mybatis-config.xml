@@ -47,5 +47,7 @@
 		<mapper resource="mappings/admin/admin-role-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-banner-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-sales-mapping.xml"/>
+		
 	</mappers>
 </configuration>

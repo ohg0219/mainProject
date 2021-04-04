@@ -11,4 +11,5 @@ public interface UserBasketItemService {
 	UserBasketItemVO getItemInfo(long productNo);
 	void deleteUserBasket(UserBasketItemVO vo);
 	void updateUserBasket(UserBasketItemVO vo);
+	boolean getProductStock(List<UserBasketItemVO> basketItemList);
 }

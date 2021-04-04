@@ -3,10 +3,10 @@ package com.thisisthat.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thisisthat.admin.banner.vo.BannerVO;
 import com.thisisthat.user.service.UserService;
 
 @Controller
@@ -25,14 +25,15 @@ public class UserController {
 		return "/user/main";
 	}
 	
-	/**
-	 * 공지사항 페이지로 이동
-	 * @return
-	 */
-	@RequestMapping("/notice.do")
-	public String noticeView() {
-		return "/user/notice";
+	@GetMapping("/terms.do")
+	public String terms(Model model) {
+		model.addAttribute("utilization",userService.getUtilization());
+		return "/user/terms";
 	}
-	
+	@GetMapping("/privacy.do")
+	public String privacy(Model model) {
+		model.addAttribute("privacy",userService.getPrivacy());
+		return "/user/privacyPolicy";
+	}
 	
 }

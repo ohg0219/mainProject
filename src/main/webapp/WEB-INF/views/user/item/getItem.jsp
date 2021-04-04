@@ -206,8 +206,49 @@ $(document).ready(function(){
 				if(data=='fail'){
 					alert("장바구니에 중복된 상품이 있습니다.");
 					return false;
-				}else{
+				}else if(data=='stockOver'){
+					alert("재고가 부족합니다.");
+					return false;
+				}else if(data=='ok'){
 					location.href="/basket.do";
+				}else if(data=='direct'){
+					location.href="/paymentDivide.do";
+				}
+			}
+		});
+	});
+	$(document).on("click","#direct",function(){
+		var grpl = $(".selectSize").length;
+		//배열 생성
+		var selectSize = new Array(grpl);
+		var selectCount = new Array(grpl);
+		//배열에 값 주입
+		var selectItem = "";
+		var productNo = $("#productNo").val();
+		var productPrice = $("#productPrice").val();
+		for(var i=0; i<grpl; i++){                          
+			selectSize[i] = $(".selectSize").eq(i).text();
+			selectCount[i] = $(".select_count").eq(i).text();
+			selectItem += selectSize[i] + ":"+selectCount[i] + "/";
+	    }
+		if(selectItem == ''){
+			alert("구매하실 상품을 선택해주세요.");
+			return false;
+		}
+		$.ajax({
+			url : "/insertBasket.do?productNo="+productNo+"&selectItem="+selectItem+"&direct=ok",
+			type: 'GET',
+			success : function(data){
+				if(data=='fail'){
+					alert("장바구니에 중복된 상품이 있습니다.");
+					return false;
+				}else if(data=='stockOver'){
+					alert("재고가 부족합니다.");
+					return false;
+				}else if(data=='ok'){
+					location.href="/basket.do";
+				}else if(data=='direct'){
+					location.href="/paymentDivide.do";
 				}
 			}
 		});
@@ -333,7 +374,7 @@ $(document).ready(function(){
 					</div>
 					<div style="width: 250px;margin-bottom: 70px;">
 						<input id="basket" class="payBtn" type="button" style="border-right-style: hidden;" value="장바구니 담기">
-						<input class="payBtn" type="button" value="바로 구매하기">
+						<input id="direct" class="payBtn" type="button" value="바로 구매하기">
 					</div>
 					<p id="sizeGuideBtn">SIZE GUIDE</p>
 					<div style="width: 250px; display: none;" id="sizeGuide">

@@ -15,8 +15,8 @@
 						</li>
 					</c:forEach>
 				</ul></li>
-			<li><a href="#">LOOK BOOK</a></li>
-			<li><a href="#">ARCHIVE</a></li>
+			<li><a href="/notice.do">NOTICE</a></li>
+			<li><a href="/event.do">EVENT</a></li>
 		</ul>
 		<div class="condition">
 			<ul>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.dao.UserPaymentDAO;
+import com.thisisthat.user.payment.vo.UserAddressVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
 import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
@@ -72,6 +73,21 @@ public class UserPaymentServiceImpl implements UserPaymentService {
 	@Override
 	public UserPaymentVO userOrder(int orderNo) {
 		return paymentDAO.userOrder(orderNo);
+	}
+
+	@Override
+	public boolean userBasketOrderCount(String userId) {
+		return paymentDAO.userBasketOrderCount(userId);
+	}
+
+	@Override
+	public boolean nonMemberBasketOrderCount(List<UserBasketItemVO> basketItem) {
+		return paymentDAO.nonMemberBasketOrderCount(basketItem);
+	}
+
+	@Override
+	public List<UserAddressVO> getUserAddressList(String userId) {
+		return paymentDAO.getUserAddressList(userId);
 	}
 	
 	

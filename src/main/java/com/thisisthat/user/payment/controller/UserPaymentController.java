@@ -17,10 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.service.UserPaymentService;
+import com.thisisthat.user.payment.vo.UserAddressVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
 import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
@@ -35,17 +37,44 @@ public class UserPaymentController {
 	@Autowired
 	private JavaMailSenderImpl senderImpl;
 	
+	@RequestMapping("/addressBook.do")
+	public String addressBook(@RequestParam("userId")String userId,Model model) {
+		List<UserAddressVO> addressList = paymentService.getUserAddressList(userId);
+		for(UserAddressVO address : addressList) {
+			String phone = address.getUserPhone();
+			address.setPhone1(phone.substring(0,3));
+			address.setPhone2(phone.substring(3,7));
+			address.setPhone3(phone.substring(7));
+		}
+		model.addAttribute("addressList",addressList);
+		return "/user/payment/addressBook";
+	}
+	
+	
+	
 	/**
 	 * 결제하기 버튼 클릭시 세션 검사 후 회원과 비회원 페이지 분리
 	 * @param session
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@GetMapping("/paymentDivide.do")
 	public String paymentView(HttpSession session) {
 		if(session.getAttribute("userId")!=null) {
-			return "redirect:/memberPayment.do";
+			//회원 재고 < 선택수량
+			String userId = (String) session.getAttribute("userId");
+			if(paymentService.userBasketOrderCount(userId)) {
+				return "redirect:/memberPayment.do"; // 회원결제가기
+			}else{
+				return "/user/payment/paymentFail"; //재고 < 선택수량 
+			}
 		}else {
-			return "/user/payment/nonMember";
+			List<UserBasketItemVO> basketItem = (List<UserBasketItemVO>) session.getAttribute("basketItem");
+			if(paymentService.nonMemberBasketOrderCount(basketItem)) {
+				return "/user/payment/nonMember"; //비회원결제가기
+			}else {
+				return "/user/payment/paymentFail"; //재고 < 선택수량 
+			}
 		}
 	}
 	
