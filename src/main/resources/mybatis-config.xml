@@ -16,9 +16,9 @@
 		<typeAlias type="com.thisisthat.admin.terms.vo.InformationVO" alias="informationVO"/>
 		<typeAlias type="com.thisisthat.admin.terms.vo.UtilizationVO" alias="utilizationVO"/>
 		<typeAlias type="com.thisisthat.user.address.vo.AddressVO" alias="AddressVO"/>
+		<typeAlias type="com.thisisthat.user.item.vo.CommentVO" alias="commentVO"/>
 
 	</typeAliases>
-	
 	<mappers>
 		<!-- 매퍼파일 -->		
 		<mapper resource="mappings/user/user-point-mapping.xml"/>
