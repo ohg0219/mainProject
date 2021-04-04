@@ -2,6 +2,7 @@ package com.thisisthat.admin.sales.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,9 +12,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -47,7 +50,6 @@ public class AdminSalesController {
 
 	/**
 	 * 월별 매출현황
-	 * 
 	 * @param sDate
 	 * @param eDate
 	 * @param model
@@ -77,7 +79,6 @@ public class AdminSalesController {
 
 	/**
 	 * 일별 매출현황
-	 * 
 	 * @param sDate
 	 * @param eDate
 	 * @param model
@@ -107,7 +108,6 @@ public class AdminSalesController {
 
 	/**
 	 * 카테고리별 매출현황
-	 * 
 	 * @param sDate
 	 * @param eDate
 	 * @param model
@@ -134,7 +134,6 @@ public class AdminSalesController {
 
 	/**
 	 * 요일별 매출현황
-	 * 
 	 * @param sDate
 	 * @param eDate
 	 * @param model
@@ -195,7 +194,6 @@ public class AdminSalesController {
 
 	/**
 	 * 액셀 다운로드
-	 * 
 	 * @param sDate
 	 * @param eDate
 	 * @param type
@@ -275,7 +273,6 @@ public class AdminSalesController {
 
 	/**
 	 * 다운로드할 액셀파일 설정
-	 * 
 	 * @param response
 	 * @param type
 	 * @param salesList
@@ -291,6 +288,10 @@ public class AdminSalesController {
 		XSSFDataFormat df = (XSSFDataFormat) wb.createDataFormat();
 		XSSFCellStyle cs = (XSSFCellStyle) wb.createCellStyle();
 		cs.setDataFormat(df.getFormat("#,##0"));
+		XSSFCellStyle alignCenter = (XSSFCellStyle) wb.createCellStyle();
+		alignCenter.setAlignment(HorizontalAlignment.CENTER);
+		XSSFCellStyle alignRight = (XSSFCellStyle) wb.createCellStyle();
+		alignRight.setAlignment(HorizontalAlignment.RIGHT);
 		Row row = null;
 		Cell cell = null;
 		int rowNum = 0;
@@ -300,39 +301,63 @@ public class AdminSalesController {
 		String point = "포인트 사용";
 		String coupon = "쿠폰 사용";
 		String subTotalString = "실 결제금액";
+		String title = "";
 		// Header
 		if (type.equals("monthly")) {
 			fileName += " 월별 ";
 			typeString = "매출 월";
+			title += "월별 매출현황";
 		} else if (type.equals("daily")) {
 			fileName += " 일자별 ";
 			typeString = "매출 일자";
+			title += "일자별 매출현황";
 		} else if (type.equals("category")) {
 			fileName += " 카테고리별 ";
 			typeString = "카테고리";
+			title += "카테고리별 매출현황";
 		} else if (type.equals("dately")) {
 			fileName += " 요일별 ";
 			typeString = "요일구분";
+			title += "요일별 매출현황";
 		}
 		fileName += "매출현황";
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 5));
+		sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 5));
+		row = sheet.createRow(rowNum++);
+		cell = row.createCell(0);
+		cell.setCellValue(title);
+		cell.setCellStyle(alignCenter);
+		row = sheet.createRow(rowNum++);
+		cell = row.createCell(0);
+		cell.setCellValue("기간 : "+sDate + "~" + eDate);
+		cell.setCellStyle(alignRight);
 		row = sheet.createRow(rowNum++);
 		cell = row.createCell(0);
 		cell.setCellValue(typeString);
+		cell.setCellStyle(alignCenter);
 		cell = row.createCell(1);
 		cell.setCellValue(count);
+		cell.setCellStyle(alignCenter);
 		cell = row.createCell(2);
 		cell.setCellValue(originPrice);
+		cell.setCellStyle(alignCenter);
+		if(!type.equals("category")) {
 		cell = row.createCell(3);
 		cell.setCellValue(point);
+		cell.setCellStyle(alignCenter);
 		cell = row.createCell(4);
 		cell.setCellValue(coupon);
+		cell.setCellStyle(alignCenter);
 		cell = row.createCell(5);
 		cell.setCellValue(subTotalString);
+		cell.setCellStyle(alignCenter);
+		}
 		// Body
 		for (int i = 0; i < salesList.size(); i++) {
 			row = sheet.createRow(rowNum++);
 			cell = row.createCell(0);
 			cell.setCellValue(salesList.get(i).getGroupString());
+			cell.setCellStyle(alignCenter);
 			cell = row.createCell(1);
 			cell.setCellStyle(cs);
 			cell.setCellValue(salesList.get(i).getCount());
@@ -341,6 +366,7 @@ public class AdminSalesController {
 			cell.setCellValue(salesList.get(i).getOriginalPrice());
 			cell = row.createCell(3);
 			cell.setCellStyle(cs);
+			if(!type.equals("category")) {
 			cell.setCellValue(salesList.get(i).getUsePoint());
 			cell = row.createCell(4);
 			cell.setCellStyle(cs);
@@ -348,6 +374,7 @@ public class AdminSalesController {
 			cell = row.createCell(5);
 			cell.setCellStyle(cs);
 			cell.setCellValue(salesList.get(i).getSubtotal());
+			}
 		}
 		for (int i = 0; i <= 12; i++) {
 			sheet.autoSizeColumn(i);
@@ -473,12 +500,16 @@ public class AdminSalesController {
 				typeString = "요일구분";
 				title = "요일별 매출현황";
 			}
+			fileName+="매출현황";
 			response.setHeader("Content-Disposition","attachment;filename=" + URLEncoder.encode(fileName, "UTF-8") + ".pdf");
-			PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
+			PdfWriter.getInstance(document, response.getOutputStream());
 			document.open();
 			BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/malgun.ttf",BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 			Font font = new Font(baseFont, 12);
 			PdfPTable table = new PdfPTable(6);
+			if(type.equals("category")) {
+				table = new PdfPTable(3);
+			}
 			Chunk chunk = new Chunk(title,font);
 			Paragraph ph = new Paragraph(chunk);
 			ph.setAlignment(Element.ALIGN_CENTER);
@@ -495,31 +526,44 @@ public class AdminSalesController {
             cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
             PdfPCell cell3 = new PdfPCell(new Phrase("판매가",font));
             cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            if(!type.equals("category")) {
             PdfPCell cell4 = new PdfPCell(new Phrase("포인트 사용",font));
             cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
             PdfPCell cell5 = new PdfPCell(new Phrase("쿠폰 사용",font));
             cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
             PdfPCell cell6 = new PdfPCell(new Phrase("실 결제금액",font));
             cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(cell1);
-            table.addCell(cell2);
-            table.addCell(cell3);
             table.addCell(cell4);
             table.addCell(cell5);
             table.addCell(cell6);
+            }
+            
+           
+            DecimalFormat df = new DecimalFormat("###,###");
             for(int i =0;i<salesList.size();i++) {
             	PdfPCell cellType = new PdfPCell (new Phrase(salesList.get(i).getGroupString(),font));
-            	PdfPCell cellCount= new PdfPCell (new Phrase(salesList.get(i).getCount()+"",font));
-            	PdfPCell cellOriginPrice = new PdfPCell (new Phrase(salesList.get(i).getOriginalPrice()+"",font));
-            	PdfPCell cellUsePoint = new PdfPCell (new Phrase(salesList.get(i).getUsePoint()+"",font));
-            	PdfPCell cellUseCoupon = new PdfPCell (new Phrase(salesList.get(i).getUseCoupon()+"",font));
-            	PdfPCell cellSubTotal = new PdfPCell (new Phrase(salesList.get(i).getSubtotal()+"",font));
+            	PdfPCell cellCount= new PdfPCell (new Phrase(df.format(salesList.get(i).getCount()),font));
+            	PdfPCell cellOriginPrice = new PdfPCell (new Phrase(df.format(salesList.get(i).getOriginalPrice()),font));
+            	PdfPCell cellUsePoint = new PdfPCell (new Phrase(df.format(salesList.get(i).getUsePoint()),font));
+            	PdfPCell cellUseCoupon = new PdfPCell (new Phrase(df.format(salesList.get(i).getUseCoupon()),font));
+            	PdfPCell cellSubTotal = new PdfPCell (new Phrase(df.format(salesList.get(i).getSubtotal()),font));
+            	cellType.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            	cellCount.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            	cellOriginPrice.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            	cellUsePoint.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            	cellUseCoupon.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            	cellSubTotal.setHorizontalAlignment(Element.ALIGN_RIGHT);
             	table.addCell(cellType);
             	table.addCell(cellCount);
             	table.addCell(cellOriginPrice);
+            	if(!type.equals("category")) {
             	table.addCell(cellUsePoint);
             	table.addCell(cellUseCoupon);
             	table.addCell(cellSubTotal);
+            	}
             }
             document.add(table);
             document.close(); 

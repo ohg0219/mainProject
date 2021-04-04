@@ -173,7 +173,7 @@
                                     </div>
                                     <div class="mt-4 text-center small">
                                     	<c:forEach items="${todayCategorySales }" var="cate">
-                                    		<span style="text-transform: uppercase;">${cate.productCategory } : ${cate.count }개</span>&nbsp;
+                                    		<span style="text-transform: uppercase;">${cate.productCategory } : ${cate.count }개<br></span>&nbsp;
                                     	</c:forEach>
                                     	
                                     </div>
@@ -385,7 +385,7 @@
 	        labels: [<c:forEach items="${todayCategorySales}" var="cate">"${cate.productCategory}",</c:forEach>],
 	        datasets: [{
 	          data: [<c:forEach items="${todayCategorySales}" var="cate">"${cate.count}",</c:forEach>],
-	          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+	          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#C70039','#FFC300','#D1C92B','#D12BB2'],
 	          hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
 	          hoverBorderColor: "rgba(234, 236, 244, 1)",
 	        }],
