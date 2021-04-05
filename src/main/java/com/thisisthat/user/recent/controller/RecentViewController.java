@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
+import com.thisisthat.user.recent.service.RecentViewService;
 import com.thisisthat.user.recent.service.RecentViewServiceImpl;
 import com.thisisthat.user.recent.vo.DbBasketItemVO;
 import com.thisisthat.user.recent.vo.RecentBasketVO;
@@ -23,7 +24,7 @@ import com.thisisthat.user.recent.vo.RecentViewVO;
 public class RecentViewController {
 
 	@Autowired
-	private RecentViewServiceImpl service;
+	private RecentViewService service;
 
 	// 최근 본 상품 아이콘 눌렀을 때
 	@RequestMapping("/recentView.do")
