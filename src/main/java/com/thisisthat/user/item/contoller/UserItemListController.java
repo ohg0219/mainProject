@@ -1,6 +1,9 @@
 package com.thisisthat.user.item.contoller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +39,20 @@ public class UserItemListController {
 	public String getItem(
 			@RequestParam("productNo") int productNo,
 			@RequestParam("productCategory")String productCategory,
-			Model model) {
+			Model model, HttpSession session) {
+		
+		if(session.getAttribute("productNo") != null) {
+			List<Integer> list = (List<Integer>) session.getAttribute("productNo");
+			if(!list.contains(productNo)) {
+				list.add(productNo);
+				session.setAttribute("productNo", list);
+			}
+		} else {
+			List<Integer> list = new ArrayList<Integer>();
+			list.add(productNo);
+			session.setAttribute("productNo", list);
+		}
+		
 		String selectSizeGuideGroup = null;
 		List<UserItemSizeGuideVO> sizeGuideList = itemListService.getItemSizeGuide(productNo);
 		for(UserItemSizeGuideVO size : sizeGuideList) {
@@ -45,6 +61,7 @@ public class UserItemListController {
 				selectSizeGuideGroup = "top";
 			}else if(select.equals("waist")) {
 				selectSizeGuideGroup = "bottom";
+				
 			}
 			switch (select) {
 			case "length":model.addAttribute("length", size);break;

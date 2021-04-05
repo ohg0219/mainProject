@@ -184,7 +184,7 @@ $(document).ready(function(){
 		var selectItem = "";
 		var productNo = $("#productNo").val();
 		var productPrice = $("#productPrice").val();
-		for(var i=0; i<grpl; i++){                          
+		for(var i=0; i<grpl; i++){
 			selectSize[i] = $(".selectSize").eq(i).text();
 			selectCount[i] = $(".select_count").eq(i).text();
 			selectItem += selectSize[i] + ":"+selectCount[i] + "/";
@@ -202,6 +202,7 @@ $(document).ready(function(){
 					return false;
 				}else{
 					location.href="/basket.do";
+					
 				}
 			}
 		});
@@ -325,7 +326,7 @@ $(document).ready(function(){
 							
 						</table>
 					</div>
-					<div style="width: 250px;margin-bottom: 70px;">
+					<div style="width: 250px; margin-bottom: 70px;">
 						<input id="basket" class="payBtn" type="button" style="border-right-style: hidden;" value="장바구니 담기">
 						<input class="payBtn" type="button" value="바로 구매하기">
 					</div>

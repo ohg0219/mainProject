@@ -1,4 +1,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<style type="text/css">
+
+.rightMenu {
+    position: fixed;
+    bottom:190px;
+    left: 40px;
+    z-index: 100;
+}
+    
+    
+</style>
+</head>  
+<body>
 <div class="header">
 	<nav class="top_nav">
 		<ul class="menu">
@@ -8,7 +26,7 @@
 					<li><a href="/itemList/category/all.do"><p>ALL</p></a></li>
 					<li><a href="/itemList/category/new.do"><p>NEW</p></a></li>
 					
-					<!-- 여기를 메뉴  -->
+					<!-- ì¬ê¸°ë¥¼ ë©ë´  -->
 					<c:forEach items="${menu }" var="menus">
 						<li style="text-transform: uppercase;">
 							<a href="/itemList/category/${menus }.do">${menus}</a>
@@ -23,7 +41,7 @@
 				<c:if test="${sessionScope.userId == null}"> 
 					<li><a href="/login.do">LOGIN</a></li>					
 				</c:if>
-				<c:if test="${sessionScope.userId != null}"><!-- 로그인한 사용자 -->
+				<c:if test="${sessionScope.userId != null}"><!-- ë¡ê·¸ì¸í ì¬ì©ì -->
 					<c:if test="${sessionScope.userId != null || sessionScope.kakaoUserId != null || sessionScope.naverUserId != null || sessionScope.googleUserId != null }">	
 						<c:if test="${sessionScope.googleUserId != null }">
 							<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
@@ -58,4 +76,60 @@
 		</div> 
 		<br style="clear: both" />
 	</nav>
+	
+	<div class="rightMenu" style="display:block;">
+		<ul>
+			<li>
+				 <div style="font-size: 23px;">
+				 	<a href="/basket.do" style="color:gray">
+      					<i class="fas fa-cart-arrow-down"></i>
+      				</a>
+    			</div>
+			</li>
+			<li>
+				<div style="font-size: 23px;">
+					<a href="/recentView.do" style="color:gray">
+						<i class="fas fa-history"></i>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div style="font-size: 23px; color:gray;">
+					<a href="#" class="scrollTop" style="color:gray">
+						<i class="fas fa-angle-up"></i>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div style="font-size: 23px; color:gray;">
+					<a href="#" class="scrollBottom" style="color:gray;bottom" >
+						<i class="fas fa-angle-down"></i>
+					</a>
+				</div>	
+			</li>
+		</ul>
+	</div>
 </div>
+
+<!-- Scroll Top 맨 위로 이동 버튼 -->
+<script>
+
+$(document).ready(function(){
+
+		$('.scrollTop').click(function(){
+			$('html,body').animate({scrollTop:0},400);
+				return false;
+		});
+	
+		var scrollHeight = $(document).height();
+		$('.scrollBottom').click(function(){
+			$('html,body').animate({scrollTop: scrollHeight}, 400);
+				return false;
+		});
+});
+
+
+
+</script>
+ </body>
+</html>
