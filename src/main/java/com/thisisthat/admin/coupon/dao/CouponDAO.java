@@ -1,4 +1,4 @@
-package com.thisisthat.admin.coupon.dao;
+package com.thisisthat.admin.coupon.DAO;
 
 import java.util.List;
 

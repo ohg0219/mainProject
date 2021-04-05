@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.thisisthat.admin.coupon.dao.CouponDAO;
+import com.thisisthat.admin.coupon.DAO.CouponDAO;
 import com.thisisthat.admin.coupon.vo.CouponVO;
 
 @Service
 public class CouponServiceImpl implements CouponService {
-
+	
 	@Autowired
 	CouponDAO couponDAO;
 
