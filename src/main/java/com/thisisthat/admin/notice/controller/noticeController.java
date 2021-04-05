@@ -60,10 +60,8 @@ public class noticeController {
 			getUser =  (UserVO) session.getAttribute("adminId");
 			id=getUser.getNickName();
 		}
-		System.out.println(id + "= id");
 	
 		noticeVO.setBoard_writer(id);
-		System.out.println(noticeVO.getBoard_writer());
 		noticeService.insertNotice(noticeVO);
 		return "redirect:getArticleList.mdo?where="+board_group;
 	}

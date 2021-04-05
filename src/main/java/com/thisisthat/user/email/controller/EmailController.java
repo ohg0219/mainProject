@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
@@ -94,9 +95,8 @@ public class EmailController {
 		String user_pw = service.getPwEmail(paramMap);
 		int pw = (int)(Math.random()*100000000);
 		String bcryptPw =  BCrypt.hashpw(String.valueOf(pw), BCrypt.gensalt());
-		System.out.println("bcryptPw : " + bcryptPw);
 		if (user_pw != null) {	
-			session.setAttribute("userPw", bcryptPw);
+			session.setAttribute(id , bcryptPw);
 			StringBuffer ms =  new StringBuffer();
 			String url = "http://localhost:8080/changePw.do?pw="+ bcryptPw + "&id=" + id;
 			ms.append("<html><body>");
@@ -143,9 +143,9 @@ public class EmailController {
 	public String changePw(@RequestParam(value="pw") String bcryptPw,
 							@RequestParam(value="id") String id,
 								Model model, HttpSession session) {	
-		if(session.getAttribute("userPw") != null) {
+		if(session.getAttribute(id) != null) {
 			
-			if (session.getAttribute("userPw").equals(bcryptPw)) {
+			if (session.getAttribute(id).equals(bcryptPw)) {
 				model.addAttribute("id" , id);
 				return "/user/changePw";
 				
@@ -168,12 +168,15 @@ public class EmailController {
 	public String updatePw(Map<String, Object> map,
 							@RequestParam(value="id")String id,
 							@RequestParam(value="password", required=false)String pw,
-							UserRegisterVO vo) {
+							UserRegisterVO vo, HttpSession session) {
 		
 		vo.setPassword(BCrypt.hashpw(pw, BCrypt.gensalt()));
 		map.put("id", id);
 		map.put("pass", vo.getPassword());
 		service.updatePw(map);
+		if(session.getAttribute(id) != null) {
+			session.removeAttribute("userPw");
+		}
 		return "redirect:/login.do";
 	}
 	

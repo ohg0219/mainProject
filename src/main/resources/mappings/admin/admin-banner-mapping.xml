@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bannerDAO">
+	<resultMap type="bannerVO" id="bannerResult">
+		<id column="banner_no" property="bannerNo"/>
+		<result column="banner_uri" property="bannerUri"/>
+		<result column="banner_order" property="bannerOrder"/>
+		<result column="banner_name" property="bannerName"/>
+	</resultMap>
+	
+	<select id="getMaxBannerOrder" resultType="Integer">
+	select banner_order from main_banner where banner_order = ((select max(banner_order) from main_banner));
+	</select>
+	<select id="insertBanner" >
+		INSERT INTO public.main_banner(
+		banner_uri, banner_order, banner_name)
+		VALUES ( #{bannerUri}, #{bannerOrder}, #{bannerName});
+	</select>
+	
+	<select id="getBannerList" resultMap="bannerResult">
+		select * from main_banner order by banner_order ;
+	</select>
+	<update id="updateOrder">
+		update main_banner set banner_order = #{bannerOrder} where banner_uri = #{bannerUri}
+	</update>
+	<delete id="deleteBanner">
+		delete from main_banner where banner_order = #{bannerOrder};
+	</delete>
+</mapper>

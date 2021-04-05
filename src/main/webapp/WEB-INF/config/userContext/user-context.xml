@@ -3,9 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -13,7 +17,9 @@
 	</bean>
 	
 	<context:component-scan base-package="com.thisisthat.user" />
-
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<aop:config></aop:config>
+	<bean id="ServiceLog" class="com.thisisthat.log.ServiceLog" />
 	<!-- 고객용 추가 컨텍스트 필요시 추가 -->
 	<bean id="CategoryLoad" class="com.thisisthat.user.category.CategoryMenuLoad"></bean>
 	<mvc:interceptors>
@@ -22,4 +28,6 @@
 			<ref bean="CategoryLoad"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<mvc:annotation-driven></mvc:annotation-driven>
 </beans>

@@ -1,7 +1,9 @@
 package com.thisisthat.admin.usermanagement.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +30,7 @@ public class UserManagementController {
 
 	@GetMapping("/userList.mdo")
 	public String getUserList(Model model, UserVO vo) {
-		System.out.println("1 :"+ vo.getSelect());
-		System.out.println("2 :"+ vo.getSearch());
+		
 		List<UserVO> getUserList = userService.getUserList(vo);
 		List<UserVO> userList = new ArrayList<UserVO>();
 		for (UserVO userTemp : getUserList) {
@@ -60,8 +62,8 @@ public class UserManagementController {
 
 
 	@GetMapping("/getUser.mdo")
-	public String getUser(Model model, @RequestParam(value = "userId") String id){
-		UserVO uservo = userService.userManagement(id);
+	public String getUser(Model model, @ModelAttribute Map<String, String> map){
+		UserVO uservo = userService.userManagement(map.get("userId"));
 		if (uservo.getUserPhone() != null) {
 			StringBuffer temp = new StringBuffer();
 			temp.append(uservo.getUserPhone().substring(0, 3));
@@ -71,6 +73,8 @@ public class UserManagementController {
 			temp.append(uservo.getUserPhone().substring(7, 11));
 			uservo.setUserPhone(temp.toString());
 		}
+
+		model.addAttribute("msg","login");
 		model.addAttribute("user", uservo);
 		return "/admin/getUser";
 	}
@@ -80,11 +84,12 @@ public class UserManagementController {
 			@RequestParam("userPw")String userPw, 
 			HttpSession session,
 			RedirectAttributes model) {
-		System.out.println(userId);
-		System.out.println(userPw);
 		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
-			return "redirect:/admin/getUser.mdo?userId="+userId;
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("userId", userId);
+			model.addFlashAttribute("map",map);
+			return "redirect:/admin/getUser.mdo";
 		}else {
 			model.addFlashAttribute("msg","fail");
 			model.addFlashAttribute("failId",userId);
@@ -98,11 +103,13 @@ public class UserManagementController {
 			@RequestParam("userPw")String userPw, 
 			HttpSession session,
 			RedirectAttributes model) {
-		System.out.println(userId);
-		System.out.println(userPw);
 		UserVO sessionUser = (UserVO)session.getAttribute("adminId");
 		if(BCrypt.checkpw(userPw, sessionUser.getUserPw())) {
-			return "redirect:/admin/getStaff.mdo?userId="+userId;
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("userId", userId);
+			model.addFlashAttribute("map",map);
+			
+			return "redirect:/admin/getStaff.mdo";
 		}else {
 			model.addFlashAttribute("msg","fail");
 			model.addFlashAttribute("failId",userId);
@@ -113,7 +120,7 @@ public class UserManagementController {
 	}
 	@GetMapping("/staffList.mdo")
 	public String getStaffList(UserVO vo, Model model) {
-		
+
 		List<UserVO> userList = userService.staffList(vo);
 		List<UserVO> newUserList = new ArrayList<UserVO>();
 		for (UserVO user : userList) {
@@ -140,8 +147,11 @@ public class UserManagementController {
 	}
 
 	@GetMapping("/getStaff.mdo")
-	public String getStaff(Model model, @RequestParam(value = "userId") String id) {
-		UserVO uservo = userService.staffManagement(id);
+	public String getStaff(Model model, @ModelAttribute Map<String,String> map) {
+		
+			model.addAttribute("msg","login");
+		
+		UserVO uservo = userService.staffManagement(map.get("userId"));
 		String newPhone = "";
 		if (uservo.getUserPhone() != null) {
 			String phone1 = uservo.getUserPhone().substring(0, 3);
@@ -151,18 +161,20 @@ public class UserManagementController {
 			newPhone = phone1 + bar + phone2 + bar + phone3;
 			uservo.setUserPhone(newPhone);
 		}
-		System.out.println(uservo.toString());
 		model.addAttribute("user", uservo);
 		return "/admin/getStaff";
 	}
 
 	@GetMapping("/getUserUpdate.mdo")
-	public String getUserUpdate(UserVO vo, @RequestParam(value="userId") String id, @RequestParam("state") int state){
+	public String getUserUpdate(UserVO vo, @RequestParam(value="userId") String id, @RequestParam("state") int state,
+			RedirectAttributes attr){
 		vo.setUserId(id);
 		vo.setUserRole(state);
 		userService.userUpdate(vo);
-
-		return "redirect:/getUser.mdo?userId="+id;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", id);
+		attr.addFlashAttribute("map",map);
+		return "redirect:/admin/getUser.mdo";
 	}
 
 

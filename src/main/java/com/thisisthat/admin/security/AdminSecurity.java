@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.thisisthat.admin.service.AdminService;
+import com.thisisthat.admin.main.service.AdminService;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
 
 public class AdminSecurity extends HandlerInterceptorAdapter {

@@ -10,6 +10,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
 	.leftItem{
 		float: left;
@@ -131,23 +132,6 @@
 		var phone1 = $("#phone1 option:selected").val();
 		var phone2 = $("input[name=phone2]").val();
 		var phone3 = $("input[name=phone3]").val();
-		$("#newAddress").on("click",function(){
-			$("input[name=receiveName]").val("");
-			$("input[name=receiveZipcode]").val("");
-			$("input[name=receiveFirstAddress]").val("");
-			$("input[name=receiveLastAddress]").val("");
-			$("input[name=phone2]").val("");
-			$("input[name=phone3]").val("");
-			$("#orderMessage").val("");
-		});
-		$("#beforeAddress").on("click",function(){
-			$("input[name=receiveName]").val(receiveName);
-			$("input[name=receiveZipcode]").val(receiveZipcode);
-			$("input[name=receiveFirstAddress]").val(receiveFirstAddress);
-			$("input[name=receiveLastAddress]").val(receiveLastAddress);
-			$("input[name=phone2]").val(phone2);
-			$("input[name=phone3]").val(phone3);
-		});		
 		
 		$("#kakao").on("click",function(){
 			$("#nonPassbookInfo").css("display","none");
@@ -157,6 +141,7 @@
 		});
 		
 		$("#paymentBtn").on("click",function(){
+			
 			if($("input[name=receiveName]").val()==''){
 				alert("이름을 입력하세요."); return false;
 			}
@@ -206,7 +191,38 @@
 				});	
 			}
 		});
+		$(".address_btn").on("click",function(e){
+			e.preventDefault();
+			DaumPostcode();
+		});
 	});
+	function DaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            var addr = '';
+	            var extraAddr = '';
+	            if (data.userSelectedType === 'R') {
+	                addr = data.roadAddress;
+	            } else {
+	                addr = data.jibunAddress;
+	            }
+	            if(data.userSelectedType === 'R'){
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraAddr += data.bname;
+	                }
+	                if(data.buildingName !== '' && data.apartment === 'Y'){
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                if(extraAddr !== ''){
+	                    extraAddr = ' (' + extraAddr + ')';
+	                }
+	            }
+	            document.getElementById('zipcode').value = data.zonecode;
+	            document.getElementById("address1").value = addr + extraAddr;
+	            document.getElementById("address2").focus();
+	        }
+	    }).open();
+	}//end postcode function
 	
 </script>
 </head>
@@ -222,7 +238,7 @@
 							<li class="subTitle">주문자정보</li>
 							<li class="inputTitle">E-MAIL</li>
 							<li class="inputContent">
-								<input class="input" type="email" name="orderEmail" value="${userInfo.userEmail}">
+								<input class="input" type="email" name="orderEmail">
 							</li>
 							
 							<li class="inputTitle">PASSWORD</li>
@@ -247,30 +263,25 @@
 						<ul>
 							<li class="subTitle">배송정보</li>
 							<li>&nbsp;</li>
-							<li>
-								<label><input type="radio" id="beforeAddress" name="addressSelect" value="beforeAddress">기본 주소</label>
-								<label><input type="radio" id="newAddress" name="addressSelect" value="newAddress">새로 입력</label>
-								&nbsp;&nbsp;&nbsp;<input id="addressBookBtn" type="button" value="주소록" name="addressBook">
-							</li>
 							<li class="inputTitle">이름</li>
 							<li class="inputContent">
-								<input class="input" type="text" name="receiveName" value="${userInfo.userName }">
+								<input class="input" type="text" name="receiveName" >
 							</li>
 							<li class="inputTitle">주소</li>
 							<li class="inputContent">
-								<input size="6" class="zipcode otherInput" type="text" name="receiveZipcode" id="zipcode" readonly="readonly" value="${userInfo.zipCode }">
+								<input size="6" class="zipcode otherInput" type="text" name="receiveZipcode" id="zipcode" readonly="readonly" >
 								<input type="button" id="zipcodeBtn" class="address_btn" value="우편번호">	
 							</li>
 							<li>
-								<input class="address_ input" type="text" name="receiveFirstAddress" id="address1" value="${userInfo.firstAddress}">
+								<input class="address_ input" type="text" name="receiveFirstAddress" id="address1">
 							</li>
 							<li>
-								<input class="address_ input" type="text" name="receiveLastAddress" id="address2" value="${userInfo.lastAddress}">
+								<input class="address_ input" type="text" name="receiveLastAddress" id="address2">
 							</li>
 							<li class="inputTitle">휴대전화</li>
 							<li class="input_li z" >
 								<select class="input_tel" name="phone1" id="phone1">
-									<option <c:if test="${userInfo.phone1=='010' }">selected</c:if>>010</option>
+									<option>010</option>
 									<option>011</option>
 									<option>016</option>
 									<option>017</option>
@@ -278,9 +289,9 @@
 									<option>019</option>
 								</select>
 								<span>-</span>
-								<input class="input_phone otherInput" type="tel" name="phone2" size="4" value="${userInfo.phone2 }">
+								<input class="input_phone otherInput" type="tel" name="phone2" size="4" >
 								<span>-</span>
-								<input class="input_phone otherInput" type="tel" name="phone3" size="4" value="${userInfo.phone3 }">
+								<input class="input_phone otherInput" type="tel" name="phone3" size="4" >
 								<span id="phoneCheck" style="display: block;"></span>
 							</li>
 							<li class="inputTitle">배송메시지</li>
@@ -302,25 +313,9 @@
 								<span class="leftItem">할인 금액</span>
 								<span class="rightItem">&#8361;<span>0</span></span>
 							</li>
-							<li>
-								<span class="leftItem">포인트</span>
-								<div class="rightItem">
-								<c:if test="${userPoint != null }">
-									<input type="text" id="usePoint"  name="usePoint" value="0" >
-								</c:if>
-								<span>사용가능 포인트 : ₩ <fmt:formatNumber maxFractionDigits="3" value="${userPoint }"/></span>
-								<input type="hidden" id="userPoint" value="${userPoint }">
-								</div>
-							</li>
 						</ul>
 						<hr>
-						<ul>
-							<li>
-								<span class="leftItem">적립예정포인트</span>
-								<span class="rightItem"><span><fmt:formatNumber maxFractionDigits="3" value="${basketPoint }"/></span>P</span>
-							</li>
-						</ul>
-						<hr>
+						
 						<ul>
 							<li>
 								<span class="leftItem">SUBTOTAL</span>

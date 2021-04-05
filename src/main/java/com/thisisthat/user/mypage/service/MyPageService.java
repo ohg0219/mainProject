@@ -8,4 +8,6 @@ public interface MyPageService {
 
 	void modify(UserRegisterVO vo);
 	
+	void delUser(UserRegisterVO vo);
+	
 }

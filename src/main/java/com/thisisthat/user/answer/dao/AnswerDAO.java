@@ -41,7 +41,6 @@ public class AnswerDAO {
 
 
 	public int total(SearchVO searchvo) {
-		System.out.println((Integer)template.selectOne("answerDAO.getCount",searchvo));
 		if(!searchvo.getSearchDate().equals("all")) {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(new Date());

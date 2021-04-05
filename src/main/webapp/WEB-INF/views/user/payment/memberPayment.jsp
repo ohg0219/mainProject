@@ -10,6 +10,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
 	.leftItem{
 		float: left;
@@ -157,6 +158,8 @@
 		});
 		
 		$("#paymentBtn").on("click",function(){
+			
+			
 			if($("input[name=receiveName]").val()==''){
 				alert("이름을 입력하세요."); return false;
 			}
@@ -171,6 +174,7 @@
 					alert("입금자명을 입력하세요");
 					return false;
 				}else{
+					$(".waiting").css("display","block");
 				    form.submit();
 				}
 			}
@@ -197,25 +201,67 @@
 						msg += '상점 거래ID : ' + rsp.merchant_uid;
 						msg += '결제 금액 : ' + rsp.paid_amount;
 						msg += '카드 승인번호 : ' + rsp.apply_num;
-						
+						$(".waiting").css("display","block");
 					    form.submit();
 					} else { // 실패시
 						var msg = '결제에 실패하였습니다.';
 						msg += '에러내용 : ' + rsp.error_msg;
+						$(".waiting").css("display","none");
 					}
 				});	
 			}
 		});
+		$(".address_btn").on("click",function(e){
+			e.preventDefault();
+			DaumPostcode();
+		});
+		$("#addressBookBtn").on("click",function(){
+			var userId = $("#userId").val();
+			window.open("/addressBook.do?userId="+userId, "childForm", "width=800, height=350, resizable = no, scrollbars = no");
+		});
+		
 	});
-	
+	function DaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            var addr = '';
+	            var extraAddr = '';
+	            if (data.userSelectedType === 'R') {
+	                addr = data.roadAddress;
+	            } else {
+	                addr = data.jibunAddress;
+	            }
+	            if(data.userSelectedType === 'R'){
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraAddr += data.bname;
+	                }
+	                if(data.buildingName !== '' && data.apartment === 'Y'){
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                if(extraAddr !== ''){
+	                    extraAddr = ' (' + extraAddr + ')';
+	                }
+	            }
+	            document.getElementById('zipcode').value = data.zonecode;
+	            document.getElementById("address1").value = addr + extraAddr;
+	            document.getElementById("address2").focus();
+	        }
+	    }).open();
+	}//end postcode function
 </script>
 </head>
 <body>
+	<div class="waiting" style="display:none;position:fixed; z-index:99999; width: 100%;height: 100%;opacity:0.7; background-color: black">
+		<div style="text-align: center; margin-top:200px;">
+			<span style="background-color: white;padding: 10px;color:black;font-size: 20px; font-weight: 700">결제가 진행중입니다. 잠시만 기다려주세요.</span>
+		</div>
+	</div>
 	<div class="wrap">
 		<%@include file="../include/header.jsp" %>
 		<div class="content" style="margin-top: 100px; ">
 			<form style="width: 100%;display: flex;" action="/memberPayment.do" method="post" name="payform">
 				<input type="hidden" value="${productList}" id="productList">
+				<input type="hidden" value="${sessionScope.userId}" id="userId">
 				<div class="divide" style="flex: 1; vertical-align: middle;">
 					<div class="shipping" style=" width: 250px; float: right; margin-right: 60px;">
 						<ul>
@@ -253,11 +299,11 @@
 							<li class="input_li z" >
 								<select class="input_tel" name="phone1" id="phone1">
 									<option <c:if test="${userInfo.phone1=='010' }">selected</c:if>>010</option>
-									<option>011</option>
-									<option>016</option>
-									<option>017</option>
-									<option>018</option>
-									<option>019</option>
+									<option <c:if test="${userInfo.phone1=='011' }">selected</c:if>>011</option>
+									<option <c:if test="${userInfo.phone1=='016' }">selected</c:if>>016</option>
+									<option <c:if test="${userInfo.phone1=='017' }">selected</c:if>>017</option>
+									<option <c:if test="${userInfo.phone1=='018' }">selected</c:if>>018</option>
+									<option <c:if test="${userInfo.phone1=='019' }">selected</c:if>>019</option>
 								</select>
 								<span>-</span>
 								<input class="input_phone otherInput" type="tel" name="phone2" size="4" value="${userInfo.phone2 }">

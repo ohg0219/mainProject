@@ -14,6 +14,9 @@
 	.side-bar ul>li{
 		margin-bottom: 5px;
 	}
+	.soldout{
+		opacity: 0.5;
+	}
 </style>
 </head>
 <body>
@@ -68,14 +71,7 @@
 					</c:if>
 					<c:if test="${itemList != null }">
 						<c:forEach items="${itemList }" var="item">
-							<c:choose>
-								<c:when test="${item.productStockTotal == 0 }">
-									<li style="opacity: 0.5">
-								</c:when>
-								<c:otherwise>
-									<li>
-								</c:otherwise>
-							</c:choose>
+							<li class="<c:if test='${item.productStockTotal == 0 }'>soldout</c:if>">
 								<a href="/itemList/getItem.do?productNo=${item.productNo}&productCategory=${item.productCategory}" class="item">
 									<ul>
 										<li><img alt="" src="${item.uploadPath }"></li>
@@ -87,14 +83,13 @@
 													<p style="color: red;">품절</p>
 												</c:when>
 												<c:otherwise>
-													
+													&nbsp;
 												</c:otherwise>
 											</c:choose>
 										</li>
 									</ul>
 								</a>
 							</li>
-							
 						</c:forEach>
 					</c:if>
 				</ul>

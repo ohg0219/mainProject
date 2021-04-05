@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="termsDAO">
+	<resultMap type="utilizationVO" id="utilizationResult">
+		<id column="utilization_no" property="no"/>
+		<result column="utilization_content" property="content"/>
+		<result column="reg_date" property="regDate"/>
+	</resultMap>
+	<resultMap type="informationVO" id="informationResult">
+		<id column="information_no" property="no"/>
+		<result column="information_content" property="content"/>
+		<result column="reg_date" property="regDate"/>
+	</resultMap>
+	
+	<select id="getUtilizationList" resultMap="utilizationResult">
+		select * from utilization order by utilization_no desc offset #{start} limit #{cntPerPage};
+	</select>
+	<select id="getInformationList" resultMap="informationResult">
+		select * from information order by information_no desc offset #{start} limit #{cntPerPage};
+		
+	</select>
+	
+	<insert id="insertUtilization">
+		insert into Utilization (utilization_content, reg_date) values(#{content}, #{regDate});
+	</insert>
+	<insert id="insertInformation">
+		insert into Information (Information_content, reg_date) values(#{content}, #{regDate});
+	</insert>
+	<select id="getUtilizationTotal" resultType="Integer">
+		select count(*) from Utilization;
+	</select>
+	<select id="getInformationTotal" resultType="Integer">
+		select count(*) from Information;	
+	</select>
+	
+	<select id="getInformation" resultMap="informationResult">
+		select * from information where information_no = #{no}
+	</select>
+	
+	<select id="getUtilization" resultMap="utilizationResult">
+		select * from utilization where utilization_no = #{no} 
+	</select>
+	<select id="getTopUtilization" resultMap="utilizationResult">
+		select * from utilization where utilization_no = (select max(utilization_no) from utilization);
+	</select>
+	<select id="getTopInformation" resultMap="informationResult">
+		select * from information where information_no = (select max(information_no) from information);
+	</select>
+</mapper>

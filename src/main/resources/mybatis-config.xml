@@ -12,13 +12,15 @@
 		<typeAlias type="com.thisisthat.admin.usermanagement.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.thisisthat.admin.board.vo.AnswerBoardVO" alias="answerVO"/>
 		<typeAlias type="com.thisisthat.admin.point.vo.PointVO" alias="pointVO"/>
-		<typeAlias type="com.thisisthat.admin.orderManagement.vo.OrderManagementVO" alias="orderManagementVO"/>
-	
-		
-		
+		<typeAlias type="com.thisisthat.admin.banner.vo.BannerVO" alias="bannerVO"/>
+		<typeAlias type="com.thisisthat.admin.terms.vo.InformationVO" alias="informationVO"/>
+		<typeAlias type="com.thisisthat.admin.terms.vo.UtilizationVO" alias="utilizationVO"/>
+		<typeAlias type="com.thisisthat.user.address.vo.AddressVO" alias="AddressVO"/>
+		<typeAlias type="com.thisisthat.user.item.vo.CommentVO" alias="commentVO"/>
+		<typeAlias type="com.thisisthat.user.recent.vo.RecentViewVO" alias="RecentViewVO"/>
+		<typeAlias type="com.thisisthat.user.recent.vo.RecentBasketVO" alias="RecentBasketVO"/>
 
 	</typeAliases>
-	
 	<mappers>
 		<!-- 매퍼파일 -->		
 		<mapper resource="mappings/user/user-point-mapping.xml"/>
@@ -32,6 +34,9 @@
 		<mapper resource="mappings/user/user-itemlist-mapping.xml"/>
 		<mapper resource="mappings/user/user-basketlist-mapping.xml"/>
 		<mapper resource="mappings/user/user-payment-mapping.xml"/>
+		<mapper resource="mappings/user/user-address-mapping.xml"/>
+		<mapper resource="mappings/user/user-recent-mapping.xml"/>
+		
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
@@ -44,7 +49,9 @@
 		<mapper resource="mappings/admin/admin-register-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-point-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-role-mapping.xml"/>
-		<mapper resource="mappings/admin/admin-orderManagement-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-banner-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-sales-mapping.xml"/>
 		
 	</mappers>
 </configuration>

@@ -3,18 +3,12 @@
 <div id="footer">
 	<div class="inner">
 		<ul class="utilMenu">
-			<li><a href="/notice.do">notice</a></li>
-			<!-- 공지사항 -->
-			<li><a href="/event.do">event</a></li>
-			<!-- 이벤트 -->
 			<li><a href="/answerList.do">q &amp; a</a></li>
 			<!-- Q & A -->
-			<li><a href="#">terms</a></li>
+			<li><a href="/terms.do">terms</a></li>
 			<!-- 약관 -->
-			<li><a href="#">privacy policy</a></li>
+			<li><a href="/privacy.do">privacy policy</a></li>
 			<!-- 개인정보보호 -->
-			<li><a href="#">guide</a></li>
-			<!-- guide -->
 		</ul>
 		<div class="xans-element- xans-layout xans-layout-footerimg "></div>
 		<div class="xans-element- xans-layout xans-layout-footer ">

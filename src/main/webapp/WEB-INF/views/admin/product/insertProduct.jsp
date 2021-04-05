@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -11,7 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
 <title>thisisthat - 상품 등록</title>
 
 <%@include file="../include/css.jsp"%>
@@ -259,7 +258,7 @@
                     					<tr>
                     						<td>적립율</td>
                     						<td colspan="6">
-												<input type="number" value="product_point">
+												<input type="number" name="product_point" value="0">
 											</td>
                     					</tr>
                     					<tr>

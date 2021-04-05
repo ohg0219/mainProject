@@ -46,6 +46,7 @@ public class UserLoginOutController {
 			return "redirect:/login.do";
 		}else {
 			if(BCrypt.checkpw(password, dbPass)) {
+				session.removeAttribute("basketItem");
 				session.setAttribute("userId", id);
 				return "redirect:/main.do";
 			}else {

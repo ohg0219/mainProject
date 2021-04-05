@@ -59,7 +59,7 @@
 		<%@include file="../include/header.jsp"%>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>공지사항</h3>
+				<h3>Q&A</h3>
 				<form action="/answerList.do" method="get">
 					<select name="searchDate">
 						<option value="7">일주일

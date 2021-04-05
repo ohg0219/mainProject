@@ -74,7 +74,8 @@ $(document).ready(function(){
 		var userId = $(this).siblings("input[name=userId]").val();
 		var productNo = $(this).siblings("input[name=productNo]").val();
 		var selectSize = $(this).siblings("input[name=selectSize]").val();
-		location.href="/updateUserBasket.do?productNo="+productNo+"&userId="+userId+"&selectSize="+selectSize+"&type=plus";
+		var selectCount = $(this).siblings("#selectCount").text();
+		location.href="/updateUserBasket.do?productNo="+productNo+"&userId="+userId+"&selectSize="+selectSize+"&type=plus&selectCount="+selectCount;
 	});
 	$(".userMinus").on("click",function(){
 		var count = $(this).siblings("#selectCount").text();
@@ -91,7 +92,8 @@ $(document).ready(function(){
 	$(".plus").on("click",function(){
 		var productNo = $(this).siblings("input[name=productNo]").val();
 		var selectSize = $(this).siblings("input[name=selectSize]").val();
-		location.href="/updateBasket.do?productNo="+productNo+"&selectSize="+selectSize+"&type=plus";
+		var selectCount = $(this).siblings("#selectCount").text();
+		location.href="/updateBasket.do?productNo="+productNo+"&selectSize="+selectSize+"&type=plus&selectCount="+selectCount;
 	});
 	$(".minus").on("click",function(){
 		var count = $(this).siblings("#selectCount").text();
