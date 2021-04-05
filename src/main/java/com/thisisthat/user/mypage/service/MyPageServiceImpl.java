@@ -22,6 +22,11 @@ public class MyPageServiceImpl implements MyPageService {
 		dao.modify(vo);
 	}
 
+	@Override
+	public void delUser(UserRegisterVO vo) {
+		dao.delUser(vo);
+	}
+
 	 
 	
 	

@@ -296,9 +296,6 @@ li a:hover {
 }
 
 .main_image_area {
-	border-right: 1px solid #000000;
-	border-top: 1px solid #000000;
-	border-bottom: 1px solid #000000;
 	position: relative;
 }
 

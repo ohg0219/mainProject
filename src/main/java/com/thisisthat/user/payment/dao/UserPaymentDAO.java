@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
+import com.thisisthat.user.payment.vo.UserAddressVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
+import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserOrderVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
 import com.thisisthat.user.payment.vo.UserVO;
@@ -73,6 +75,41 @@ public class UserPaymentDAO {
 			paymentTemplate.update("PaymentDAO.updateProductStock",basket);
 		}
 		return seq;
+	}
+	
+	public List<UserMailVO> userOrderInfo(int orderNo){
+		return paymentTemplate.selectList("PaymentDAO.userOrderInfo",orderNo);
+	}
+	
+	public UserPaymentVO userOrder(int orderNo) {
+		return paymentTemplate.selectOne("PaymentDAO.userOrder",orderNo);
+	}
+	
+	public boolean userBasketOrderCount(String userId) {
+		boolean flag = true;
+		List<UserBasketVO> basketList = paymentTemplate.selectList("PaymentDAO.getBasketList",userId);
+		for(UserBasketVO basket : basketList) {
+			int stock = paymentTemplate.selectOne("PaymentDAO.getProductStock",basket);
+			if(basket.getSelectCount()>stock) {
+				flag = false;
+			}
+		}
+		return flag;
+	}
+	public boolean nonMemberBasketOrderCount(List<UserBasketItemVO> basketItem) {
+		boolean flag = true;
+		for(UserBasketItemVO basket : basketItem) {
+			int stock = paymentTemplate.selectOne("PaymentDAO.getProductStock",basket);
+			if(basket.getSelectCount()>stock) {
+				flag = false;
+			}
+		}
+		return flag;
+	}
+	
+	
+	public List<UserAddressVO> getUserAddressList(String userId){
+		return paymentTemplate.selectList("PaymentDAO.getUserAddressList",userId);
 	}
 	
 	

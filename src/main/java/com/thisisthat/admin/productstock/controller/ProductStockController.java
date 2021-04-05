@@ -23,7 +23,6 @@ public class ProductStockController {
 		if(searchOption.equals("all")) {
 			return "redirect:getProductStockList.mdo";
 		}else  {
-			System.out.println(searchOption);
 			productStockVO.setProduct_category(searchOption);
 			List<ProductStockVO> prodcutStockList = productStockService.poductStockList(productStockVO);
 

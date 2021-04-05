@@ -40,6 +40,8 @@
                         <a class="collapse-item" href="/admin/pointUserList.mdo">회원적립금관리</a>
                         <a class="collapse-item" href="/admin/getCouponList.mdo">쿠폰생성</a>
                         <a class="collapse-item" href="cards.html">회원쿠폰부여</a>
+                        <a class="collapse-item" href="/admin/getTermsList.mdo?state=information">개인정보 수집 및 이용 약관</a>
+                        <a class="collapse-item" href="/admin/getTermsList.mdo?state=utilization">이용 약관</a>
                     </div>
                 </div>
             </li>
@@ -112,9 +114,23 @@
             </li>
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales" aria-expanded="false" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>매출현황</span></a>
+                    <span>매출현황</span>
+                </a>
+                <div id="collapseSales" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/admin/montlySales.mdo">월별 매출현황</a>
+                        <a class="collapse-item" href="/admin/dailySales.mdo">일별 매출현황</a>
+                        <a class="collapse-item" href="/admin/categorySales.mdo">카테고리별 매출현황</a>
+                        <a class="collapse-item" href="/admin/datelySales.mdo">요일별 매출현황</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/getBanner.mdo">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>배너관리</span></a>
             </li>
 
             <!-- Divider -->

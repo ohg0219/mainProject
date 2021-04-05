@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.thisisthat.admin.terms.vo.InformationVO;
+import com.thisisthat.admin.terms.vo.UtilizationVO;
 import com.thisisthat.user.register.service.UserRegisterService;
 import com.thisisthat.user.register.vo.UserRegisterVO;
 
@@ -47,11 +49,13 @@ public class UserRegisterController {
 	 * @return
 	 */
 	@PostMapping("/register.do")
-	public String insertUser(UserRegisterVO vo, Model model,
+	public String insertUser( Model model,
+			
 			@RequestParam("phone1")String phone1,
 			@RequestParam("phone2")String phone2,
 			@RequestParam("phone3")String phone3,
-			@RequestParam("password")String password
+			@RequestParam("password")String password,
+			UserRegisterVO vo
 			) {
 		vo.setPhone(phone1+phone2+phone3);	
 		vo.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
@@ -64,9 +68,13 @@ public class UserRegisterController {
 	 * @return
 	 */
 	@GetMapping(value = {"/register.do"})
-	public String registerView() {
+	public String registerView(Model model) {
+		model.addAttribute("utilization",((UtilizationVO)userRegisterService.getToputilization()).getContent());
+		model.addAttribute("information",((InformationVO)userRegisterService.getTopInformation()).getContent());
+		
 		return "/user/loginAndRegister/register";
 	}
+	
 	
 	
 	

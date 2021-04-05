@@ -49,6 +49,24 @@
 		<result property="productPrice" column="product_price" />
 		<result property="selectCount" column="select_count" />
 	</resultMap>
+	<resultMap type="com.thisisthat.user.payment.vo.UserMailVO" id="userMailVO">
+		<result property="orderNo" column="order_no"/>
+		<result property="productNo" column="product_no"/>
+		<result property="productName" column="product_name"/>
+		<result property="orderSize" column="order_size"/>
+		<result property="productPrice" column="product_price"/>
+		<result property="selectCount" column="select_count"/>
+		<result property="productTotal" column="product_total"/>
+	</resultMap>
+	<resultMap type="com.thisisthat.user.payment.vo.UserAddressVO" id="userAddressVO">
+		<result property="userId" column="user_id"/>
+		<result property="addressName" column="address_name"/>
+		<result property="receiveName" column="receive_name"/>
+		<result property="zipcode" column="zip_code"/>
+		<result property="firstAddress" column="first_address"/>
+		<result property="lastAddress" column="last_address"/>
+		<result property="userPhone" column="user_phone"/>
+	</resultMap>
 	<select id="getUserInfo" resultMap="userVO">
 		select * from this_user where user_id = #{userId}
 	</select>	
@@ -91,5 +109,20 @@
 	<insert id="insertUsePoint">
 		insert into user_point (user_id,point_date,point,point_content) values(#{userId},now(),#{usePoint},#{pointContent})
 	</insert>
+	<select id="userOrderInfo" resultMap="userMailVO">
+		select o.order_no,o.product_no,p.product_name,o.order_size,o.product_price,o.select_count,(o.product_price*o.select_count) as product_total 
+		from order_product as o, product as p
+		where o.product_no = p.product_no and o.order_no = #{orderNo}
+	</select>
+	<select id="userOrder" resultMap="userPaymentVO">
+		select user_id,order_date,order_email,receive_name,original_price,use_point,use_coupon,order_price,order_select from order_table where order_no = #{orderNo}
+	</select>
+	<select id="getProductStock" resultType="int">
+		select ${selectSize} from product_stock where product_no = #{productNo}
+	</select>
+	
+	<select id="getUserAddressList" resultMap="userAddressVO">
+		select * from user_address where user_id = #{userId}
+	</select>
 	
 </mapper>

@@ -20,6 +20,10 @@
 		</foreach>
 	</insert>
 	
+	<select id="getProductStock" resultType="int">
+		select ${selectSize} from product_stock where product_no = #{productNo}
+	</select>
+	
 	<select id="getBasketList" resultMap="basketItemVO">
 		select b.user_id ,b.product_no,b.select_size,b.product_price,b.select_count,image.upload_path,
 		(select product_category from product where product_no = b.product_no),
@@ -49,5 +53,4 @@
 		</if>
 		where user_id=#{userId} and product_no = #{productNo} and select_size = #{selectSize}
 	</update>
-	
 </mapper>

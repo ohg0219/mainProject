@@ -33,4 +33,15 @@ public class UserBasketItemDAO {
 	public void updateUserBasket(UserBasketItemVO vo) {
 		sessionTemplate.update("BasketDAO.updateUserBasket",vo);
 	}
+	public boolean getProductStock(List<UserBasketItemVO> basketItemList) {
+		boolean flag = true;
+		for(UserBasketItemVO vo : basketItemList) {
+			int result = sessionTemplate.selectOne("BasketDAO.getProductStock",vo);
+			if(result<vo.getSelectCount()) {
+				flag = false;
+			}
+		}
+		return flag;
+	}	
+	
 }

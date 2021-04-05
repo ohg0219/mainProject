@@ -5,11 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 <title> ${category }</title>
+
 <link rel="stylesheet" href="/resources/user/css/common.css">
 <link rel="stylesheet" href="/resources/user/css/item_list.css">
+<link rel="stylesheet" href="/resources/user/css/comment.css?135553">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
 <style type="text/css">
 	.side-bar ul>li{
@@ -125,7 +131,7 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function (e){
-	$(document).on("click","img",function(){
+	$(document).on("click",".image",function(){
 		var path = $(this).attr('src')
 		showImage(path);
 	});//end click event
@@ -184,7 +190,7 @@ $(document).ready(function(){
 		var selectItem = "";
 		var productNo = $("#productNo").val();
 		var productPrice = $("#productPrice").val();
-		for(var i=0; i<grpl; i++){
+		for(var i=0; i<grpl; i++){                          
 			selectSize[i] = $(".selectSize").eq(i).text();
 			selectCount[i] = $(".select_count").eq(i).text();
 			selectItem += selectSize[i] + ":"+selectCount[i] + "/";
@@ -200,9 +206,49 @@ $(document).ready(function(){
 				if(data=='fail'){
 					alert("장바구니에 중복된 상품이 있습니다.");
 					return false;
-				}else{
+				}else if(data=='stockOver'){
+					alert("재고가 부족합니다.");
+					return false;
+				}else if(data=='ok'){
 					location.href="/basket.do";
-					
+				}else if(data=='direct'){
+					location.href="/paymentDivide.do";
+				}
+			}
+		});
+	});
+	$(document).on("click","#direct",function(){
+		var grpl = $(".selectSize").length;
+		//배열 생성
+		var selectSize = new Array(grpl);
+		var selectCount = new Array(grpl);
+		//배열에 값 주입
+		var selectItem = "";
+		var productNo = $("#productNo").val();
+		var productPrice = $("#productPrice").val();
+		for(var i=0; i<grpl; i++){                          
+			selectSize[i] = $(".selectSize").eq(i).text();
+			selectCount[i] = $(".select_count").eq(i).text();
+			selectItem += selectSize[i] + ":"+selectCount[i] + "/";
+	    }
+		if(selectItem == ''){
+			alert("구매하실 상품을 선택해주세요.");
+			return false;
+		}
+		$.ajax({
+			url : "/insertBasket.do?productNo="+productNo+"&selectItem="+selectItem+"&direct=ok",
+			type: 'GET',
+			success : function(data){
+				if(data=='fail'){
+					alert("장바구니에 중복된 상품이 있습니다.");
+					return false;
+				}else if(data=='stockOver'){
+					alert("재고가 부족합니다.");
+					return false;
+				}else if(data=='ok'){
+					location.href="/basket.do";
+				}else if(data=='direct'){
+					location.href="/paymentDivide.do";
 				}
 			}
 		});
@@ -326,9 +372,9 @@ $(document).ready(function(){
 							
 						</table>
 					</div>
-					<div style="width: 250px; margin-bottom: 70px;">
+					<div style="width: 250px;margin-bottom: 70px;">
 						<input id="basket" class="payBtn" type="button" style="border-right-style: hidden;" value="장바구니 담기">
-						<input class="payBtn" type="button" value="바로 구매하기">
+						<input id="direct" class="payBtn" type="button" value="바로 구매하기">
 					</div>
 					<p id="sizeGuideBtn">SIZE GUIDE</p>
 					<div style="width: 250px; display: none;" id="sizeGuide">
@@ -445,9 +491,286 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			
+				<div class="comment" id="cmt"></div>
+			<form action="/itemList/comment.do" method="post" enctype="multipart/form-data">
+				<input name="productNo" type="hidden" value="${itemInfo.productNo }">
+				<input name="category" type="hidden" value="${category }">
+				<div class="comment_list">
+					<div class="comment_store " onclick="isLogin()">
+						<input class="comment_btn" type="submit" value="댓글작성">
+						<textarea name="content" class="comment_area" id="text" required="required"></textarea>
+						<div class="img_area" id="img">
+						<img src="/resources/user/image/plus.png" onclick="fileClick()">
+						<input name="uploadFile" type="file" id="multiple" style= "display: none" multiple/>
+							<div id="main-preview"></div>
+						</div>
+						<img id="comment" class="comment_btn_img comment" alt="" src="/resources/user/image/comment.png">
+						<img id="camera" class="comment_btn_img camera" alt="" src="/resources/user/image/camera.png">
+					</div>
+				</div>
+				
+			</form>
+			<div class="comment">
+				<div class="comment_list" id="paging">
+				</div>
+			</div>
 		</div><!-- end Content -->
 		<%@include file="../include/footer.jsp"%>
 	</div>
 </body>
+
+<script type="text/javascript">
+	function delBtn(comment,boardNo){
+		if(confirm('정말로 삭제 하시겠습니까?')){
+			$.ajax({
+				url: "/itemList/delComment.do",
+				type : "POST",
+				data:{
+					'boardNo' : boardNo,
+					'commentNo' : comment
+				},success : function(){
+					alert('성공');
+					location.href = "/itemList/getItem.do?productNo="+boardNo+"&productCategory="+'${category}'
+				},error: function(){
+					alert('실패');
+				}
+				
+				
+			});
+		}
+	}
+	function changeSize(a){
+		if(document.getElementById(a).style.width == '50px'){
+			document.getElementById(a).style.width = '300px';
+		}else{
+			document.getElementById(a).style.width = '50px';
+		}
+	}
+
+	function fileClick(){
+		document.getElementById('multiple').click();
+	}
+	function isLogin(){
+		var userId = '${userId}';
+		if(userId ==''){
+		//	alert('로그인이 필요합니다');
+			//로그인 페이지로 보내기
+		}
+	}
+	
+	function commentList(boardNo, pageNum){
+		$.ajax({
+			url: "/itemList/commentList.do",
+			type : "POST",
+			dataType : "json",
+			data:{
+				'boardNo' : boardNo,
+				'page' : pageNum
+			},
+			success : function(data) {
+	              var a = '';
+	              var page = data.paging.nowPage;
+	              var startpage = data.paging.startPage;
+	              var endpage = data.paging.endPage;
+	              var commentList = data.commentList;
+
+	              $.each(commentList, function(key, value) {
+	                 a += '<div class="comment_list">';
+					 a += '<div class="profile">';
+					 a += '<img alt="User Picture" class="profile profile_img" src="/resources/user/image/1234.jpg">'; 
+					 a += '<span>'+value.writer+'</span>';
+					 a += '</div>';
+					 a += '<div class="comment_content">'+value.content;
+					 if('${userId}' == value.writer){
+						 a+='<input type = "button" onclick = delBtn('+value.commentNo+','+value.boardNo+') class = "comment_btn" value="삭제하기">';
+					 }
+					 
+						 a +='</div>';
+					 if(value.img != null){
+						 	a += '<br>'
+						 	a += '<div class="main-preview">';
+						 $.each(value.img, function(num, img){
+						    a += '<div style="display: inline-flex; padding: 10px;">';
+						 	a += '<img class="imgSize" onclick="changeSize('+num+')" id="'+num+'" src="'+img+'"  style="width:50px;" />';
+				            a += '</div>';
+						 });
+						 a += '</div>'
+					 }
+					 a += '<div class="comment_text"></div>';
+					 a += '</div></div>';
+	              });
+		            $('#cmt').html(a);
+		            var paging = '';
+		            if(startpage != 1){
+		            	var prev = startpage-1;
+		            	paging += '<a href="#" onclick="commentList(' + boardNo + ', ' + prev + '); return false;" class="paging_btn">' + "prev" + '</a>';
+		            }
+	              for (var num=startpage; num<=endpage; num++) {
+	                 if (num == page) {
+	                	 paging += '<a href="#" onclick="commentList(' + boardNo + ', ' + num + '); return false;" class="now_paging_btn">' + num + '</a>';
+	                 } else {
+	                	 paging += '<a href="#" onclick="commentList(' + boardNo + ', ' + num + '); return false;" class="paging_btn">' + num + '</a>';
+	                 }
+	              }
+	              if(endpage != data.paging.lastPage){
+	            	  var next = endpage+1; 
+		            	paging += '<a href="#" onclick="commentList(' + boardNo + ', ' + next + '); return false;" class="paging_btn">' + 'next' + '</a>';
+		            }
+					$('#paging').html(paging);
+	         },
+			error: function(){
+				alert('실패');
+			}
+		});
+	}
+	$(document).ready(function (e){
+	//파일6개 제한
+	commentList('${itemInfo.productNo }', '1');
+	
+	$("#multiple").change(function(e){
+		var x = document.getElementById("multiple");
+		var txt = "";
+		if ('files' in x) {
+		    if (x.files.length > 5) {
+		        alert("파일 개수가 초과되었습니다.");
+		        document.getElementById("multiple").value = "";
+		        return;
+		    }
+		}//파일6개 제한 end
+		
+		
+		//div 내용 비워주기
+		$('#main-preview').empty();
+		var files = e.target.files;
+		var arr =Array.prototype.slice.call(files);
+		//업로드 가능 파일인지 체크
+		for(var i=0;i<files.length;i++){
+			if(!checkExtension(files[i].name,files[i].size)){
+				
+				return false;
+			}
+		}
+		preview(arr);
+	});
+	 function checkExtension(fileName,fileSize){
+	      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	      var maxSize = 20971520;  //20MB
+	      if(fileSize >= maxSize){
+	        alert('파일 사이즈 초과');
+	        $(".multiple").val("");  //파일 초기화
+	        return false;
+	      }
+	      if(regex.test(fileName)){
+	        alert('업로드 불가능한 파일이 있습니다.');
+	        $(".multiple").val("");  //파일 초기화
+	        return false;
+	      }
+	      return true;
+	    }
+	    function preview(arr){
+	      arr.forEach(function(f){
+		        //파일명이 길면 파일명...으로 처리
+		        var fileName = f.name;
+		        if(fileName.length > 10){
+		          fileName = fileName.substring(0,7)+"...";
+	        }
+	        //div에 이미지 추가
+	        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
+	        str += '<span>'+fileName+'</span><br>';
+	        //이미지 파일 미리보기
+	        if(f.type.match('image.*')){
+	          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	        	  
+	            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=50 />';
+	            str += '</li></div>';
+	            $(str).appendTo('#main-preview');
+	          } 
+	          reader.readAsDataURL(f);
+	        }
+	      });//arr.forEach
+	    }
+	// file end
+	});
+	$(document).ready(
+		function(){
+			
+			$('.comment').css({
+				"background" : "#fff",
+				"border-top" : "0px solid #ddd"
+			});
+			$('.camera').css({
+				"background" : "#f3f3f3"
+			});
+				
+			
+		}	
+	)
+	
+	$('.comment_btn_img').on('click',function(){
+		var img = $(this).attr('id');
+		$(this).css({
+			"background" : "#fff",
+			"border-top" : "0px solid #ddd"
+		})
+		if($(this).attr('id') == 'comment'){
+			$(this).parent().children('#camera').css({
+				"background" : "#f3f3f3",
+				"border-top" : "1px solid #ddd"
+			});
+			$(this).parent().children('#img').css({
+				"display" : "none"
+			});
+			$(this).parent().children('#text').css({
+				"display" : "block"
+			});
+		}else{
+			$(this).parent().children('#comment').css({
+				"background" : "#f3f3f3",
+				"border-top" : "1px solid #ddd"
+			});
+			$(this).parent().children('#img').css({
+				"display" : "block"
+			});
+			$(this).parent().children('#text').css({
+				"display" : "none"
+			});
+		}
+		
+	});
+	
+	$('#test').on('click',function(){
+		$.ajax({
+			url: "/test.do",
+			type : "POST",
+			success: function(data){
+				$.each(data , function(index, item){
+					html += item;
+				});
+				
+				$('.comment_area').html(html);
+				alert(data);
+			},
+			error: function(){
+				alert('실패');
+			}
+		});
+	});
+	$(document).ready(function (e){
+		$(".mainUploadFile").change(function(e){
+			//div 내용 비워주기
+			$('#main-preview').empty();
+			var files = e.target.files;
+			var arr =Array.prototype.slice.call(files);
+			//업로드 가능 파일인지 체크
+			for(var i=0;i<files.length;i++){
+				if(!checkExtension(files[i].name,files[i].size)){
+					return false;
+				}
+			}
+			preview(arr);
+	    });//file change
+	   
+	});
+</script>
 </html>

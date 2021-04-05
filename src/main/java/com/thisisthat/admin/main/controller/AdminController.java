@@ -1,6 +1,9 @@
-package com.thisisthat.admin.controller;
+package com.thisisthat.admin.main.controller;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,11 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thisisthat.admin.notice.service.NoticeService;
-import com.thisisthat.admin.notice.vo.NoticeVO;
-import com.thisisthat.admin.service.AdminService;
+import com.thisisthat.admin.main.service.AdminService;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
-import com.thisisthat.user.register.vo.TestVO;
 
 @Controller
 
@@ -31,7 +31,23 @@ public class AdminController {
 	AdminService dao;
 
 	@RequestMapping("/admin/main.mdo")
-	public String mainView() {
+	public String mainView(Model model) {
+		DecimalFormat df = new DecimalFormat("###,###");
+		model.addAttribute("thisMonthSales",df.format(dao.getThisMonthSales()));
+		model.addAttribute("thisDaySales",df.format(dao.getThisDaySales()));
+		model.addAttribute("noAnswerCount",dao.noAnswerCount());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List<String> dateListString = new ArrayList<>();
+		List<Date> dateList = new ArrayList<Date>();
+		for(int i = 6;i>=0;i--) {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, -i);
+			dateListString.add(sdf.format(cal.getTime()));
+			dateList.add(cal.getTime());
+		}
+		model.addAttribute("dateList",dateListString);
+		model.addAttribute("dataList",dao.getOneWeekSales(dateList));
+		model.addAttribute("todayCategorySales",dao.getTodayCatgorySales());
 		return "/admin/main";
 	}
 
@@ -54,28 +70,24 @@ public class AdminController {
 			@RequestParam(value="autoLogin",defaultValue= "false")boolean autoLogin,
 			HttpServletResponse response) {
 		UserVO user = dao.idCheck(vo.getUserId());
-		System.out.println(autoLogin);
 		if(user == null) {
 			
 		}else if(BCrypt.checkpw(vo.getUserPw(), user.getUserPw())) {
 			if(user.getUserRole()<21) {
 				session.setAttribute("adminId", user);
 				if(autoLogin) {
-					System.out.println("쿠키");
 					Cookie cookie = new Cookie("userVO", user.getUserId());
 					cookie.setMaxAge(60*60*24*30);//한달설정
 					cookie.setPath("/");
 					response.addCookie(cookie);
 				}
-				return "/admin/main";
+				return "redirect:/admin/main.mdo";
 			}else {
-				System.out.println("권한없음");
 				model.addAttribute("msg","roleFail");
 				return "/admin/login";
 			}
 		}
 		
-		System.out.println("로그인 실패");
 		model.addAttribute("msg","pwFail");
 		return "/admin/login";
 	}

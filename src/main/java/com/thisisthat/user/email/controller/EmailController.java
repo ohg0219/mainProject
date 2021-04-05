@@ -95,7 +95,6 @@ public class EmailController {
 		String user_pw = service.getPwEmail(paramMap);
 		int pw = (int)(Math.random()*100000000);
 		String bcryptPw =  BCrypt.hashpw(String.valueOf(pw), BCrypt.gensalt());
-		System.out.println("bcryptPw : " + bcryptPw);
 		if (user_pw != null) {	
 			session.setAttribute(id , bcryptPw);
 			StringBuffer ms =  new StringBuffer();

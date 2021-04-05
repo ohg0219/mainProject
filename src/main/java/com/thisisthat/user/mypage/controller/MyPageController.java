@@ -6,6 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,12 +58,30 @@ public class MyPageController {
 		String id = null;
 		if (session.getAttribute("userId") != null)
 			id = (String) session.getAttribute("userId");
-		System.out.println(id);
 		UserRegisterVO user = service.modifyView(id);
 		model.addAttribute("modify", user);
 		return "/user/mypage/myMain";
 	}
-	
+	@GetMapping("/mypage/delUser.do")
+	public String delUser() {
+		return "/user/mypage/delUser";
+	}
+	@PostMapping("/mypage/delUser.do")
+	public String delUser(String userPw, HttpSession session,Model model) {
+		if((String)session.getAttribute("userId") == null) {
+			return "redirect:/main.do";
+		}
+		String userId = (String)session.getAttribute("userId");
+		UserRegisterVO user = service.modifyView(userId);
+		if(BCrypt.checkpw(userPw, user.getPassword())) {
+			service.delUser(user);
+			session.removeAttribute("userId");
+			return "redirect:/main.do?msg=delUser";
+		}else {
+			model.addAttribute("msg","fail");
+			return "/user/mypage/delUser";
+		}
+	}
 	
 	
 	
