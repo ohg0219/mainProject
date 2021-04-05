@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RecentViewDAO">
+
+	<resultMap type="RecentViewVO" id="productInfoMap">
+		<id property="productNo" column="product_no"/>
+		<result property="mainImage" column="image_name"/>
+		<result property="uploadPath" column="upload_path"/>
+		<result property="productName" column="product_name"/>
+		<result property="productCategory" column="product_category"/>
+		<result property="productPrice" column="product_price"/>
+		<result property="sizeXS" column="xs_used"/>
+		<result property="sizeS" column="s_used"/>
+		<result property="sizeM" column="m_used"/>
+		<result property="sizeL" column="l_used"/>		
+		<result property="sizeXL" column="xl_used"/>		
+	</resultMap>
+
+	<resultMap type="RecentBasketVO" id="productBasketMap">
+		<id property="productNo" column="product_no" />	
+		<result property="selectSize" column="select_size" />	
+		<result property="productPrice" column="product_price" />	
+	</resultMap>
+	
+	<resultMap type="com.thisisthat.user.recent.vo.DbBasketItemVO" id="basketItemVO">
+		<result property="userId" column="user_id" />
+		<result property="productNo" column="product_no" />
+		<result property="productPrice" column="product_price" />
+		<result property="selectSize" column="select_size" />
+		<result property="selectCount" column="select_count" />
+		<result property="uploadPath" column="upload_path"/>
+		<result property="productCategory" column="product_category"/>
+		<result property="productName" column="product_name"/>
+	</resultMap>
+
+	<select id="getRecentList" resultMap="productInfoMap">
+		select i.upload_path, s.xs_used, s.s_used, s.m_used, s.l_used, s.xl_used,
+		(select i.product_no from product where product_no=#{productNo}),
+		(select product_category from product where product_no=i.product_no),
+		(select product_name from product where product_no=i.product_no),
+		(select product_price from product where product_no=i.product_no)
+		from product_image as i, size_used as s
+		where i.product_no=s.product_no and i.main_image=1 and i.product_no=#{productNo}
+	</select>
+	
+	<insert id="insertBasket">
+		insert into basket values(#{userId}, #{productNo}, #{selectSize}, #{productPrice}, #{selectCount})
+	</insert>
+	
+	<select id="getBasketList" resultMap="basketItemVO">
+		select user_id, product_no,select_size,product_price,select_count
+		from basket	where user_id = #{userId}
+	</select>
+	
+	
+	
+	
+	
+</mapper>

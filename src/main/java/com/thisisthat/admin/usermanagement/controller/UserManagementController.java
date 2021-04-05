@@ -30,6 +30,7 @@ public class UserManagementController {
 
 	@GetMapping("/userList.mdo")
 	public String getUserList(Model model, UserVO vo) {
+		
 		List<UserVO> getUserList = userService.getUserList(vo);
 		List<UserVO> userList = new ArrayList<UserVO>();
 		for (UserVO userTemp : getUserList) {
