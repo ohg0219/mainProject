@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="logDAO">
+	<resultMap type="logVO" id="logResult">
+		<id column="log_no" property="logNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="admin_id" property="adminId"/>
+		<result column="performance_time" property="performanceTime"/>
+		<result column="performance_date" property="performanceDate"/>
+		<result column="performance_method" property="performanceMethod"/>
+	</resultMap>
+	
+	
+	<insert id="insertLog">
+		insert into performance_log (user_id, admin_id, performance_time, performance_date, performance_method)
+		values(#{userId}, #{adminId}, #{performanceTime}, #{performanceDate}, #{performanceMethod});
+	</insert>
+</mapper>

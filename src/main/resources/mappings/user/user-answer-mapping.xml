@@ -103,4 +103,7 @@
 		select
 		nextval('question_board_board_no_seq');
 	</select>
+	<select id="getReply" resultType="answerVO" resultMap="answerResult">
+		select * from answer_board where result_no = #{boardNo} 
+	</select>
 </mapper>

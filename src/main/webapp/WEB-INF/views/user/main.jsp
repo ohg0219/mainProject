@@ -14,7 +14,7 @@
 	width: 1000px;
 	height: 500px;
 	margin: 0 auto;
-	border : 2px solid;
+	border : 0px solid;
 	padding: 0;
 	overflow: hidden;
 }
@@ -65,9 +65,9 @@
 			<div class="main_image_area">
 				<div class="banner">
 					<ul>
-						<c:if test="${not empty bannerList }">
-							<c:forEach items="${bannerList}" var="banner">
-								<li><img alt="" src=${banner.bannerUri }></li>
+						<c:if test="${not empty MainBannerList }">
+							<c:forEach items="${MainBannerList}" var="banner">
+								<a href="${banner.bannerLocation }"><li><img alt="" src=${banner.bannerUri }></li></a>
 								
 							</c:forEach>
 						</c:if>
@@ -81,36 +81,17 @@
 				</div>
 
 			</div>
-			<div class="sub_image_area" style="margin-top: 5%">
-				<a href="#">
-					<div class="sub_image_text">
-						<p>SUB 1</p>
-					</div>
-					<div class="sub_image">
-						<img alt="" src="/resources/user/image/sub_1.jpg">
-					</div>
-				</a> <a href="#">
-					<div class="sub_image_text">
-						<p>SUB 2</p>
-					</div>
-					<div class="sub_image">
-						<img alt="" src="/resources/user/image/sub_2.jpg">
-					</div>
-				</a> <a href="#">
-					<div class="sub_image_text">
-						<p>SUB 3</p>
-					</div>
-					<div class="sub_image">
-						<img alt="" src="/resources/user/image/sub_3.jpg">
-					</div>
-				</a> <a href="#">
-					<div class="sub_image_text">
-						<p>SUB 4</p>
-					</div>
-					<div class="sub_image">
-						<img alt="" src="/resources/user/image/sub_4.jpg">
-					</div>
-				</a>
+			<div class="sub_image_area" style="border-top: 1px solid #000">
+				<c:forEach items="${subBannerList}" var="sub" varStatus="s">
+					<a href="${sub.bannerLocation }">
+						<div class="sub_image_text">
+							<p>${sub.bannerName }</p>
+						</div>
+						<div class="sub_image">
+							<img alt="" src="${sub.bannerUri }">
+						</div>
+					</a> 
+				</c:forEach>
 			</div>
 		</div>
 		<!-- end Content -->

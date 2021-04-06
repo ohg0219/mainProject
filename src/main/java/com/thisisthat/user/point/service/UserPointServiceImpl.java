@@ -33,6 +33,11 @@ public class UserPointServiceImpl implements UserPointService {
 	public UserPointVO totalPoint(UserPointVO userPointVO) {
 		return userPointDAO.totalPoint(userPointVO);
 	}
+
+	@Override
+	public UserPointVO namePoint(UserPointVO userPointVO) {
+		return userPointDAO.namePoint(userPointVO);
+	}
 	
 	
 }//end class

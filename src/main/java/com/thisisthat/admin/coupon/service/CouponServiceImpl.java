@@ -10,7 +10,7 @@ import com.thisisthat.admin.coupon.vo.CouponVO;
 
 @Service
 public class CouponServiceImpl implements CouponService {
-
+	
 	@Autowired
 	CouponDAO couponDAO;
 

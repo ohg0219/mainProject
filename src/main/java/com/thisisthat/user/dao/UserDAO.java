@@ -16,8 +16,8 @@ public class UserDAO {
 	@Autowired
 	SqlSessionTemplate userTemplate;
 	
-	public List<BannerVO> getBannerList(){
-		return userTemplate.selectList("bannerDAO.getBannerList");
+	public List<BannerVO> getBannerList(String state){
+		return userTemplate.selectList("bannerDAO.getBannerList", state);
 	}
 	
 	public UtilizationVO getUtilization() {

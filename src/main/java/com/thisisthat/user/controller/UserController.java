@@ -20,7 +20,9 @@ public class UserController {
 	 */
 	@RequestMapping(value = {"main.do"})
 	public String mainView(Model model, @RequestParam(value="msg", required = false)String msg) {
-		model.addAttribute("bannerList",userService.getBannerList());
+		model.addAttribute("MainBannerList",userService.getBannerList("main"));
+		model.addAttribute("subBannerList",userService.getBannerList("sub"));
+		
 		if(msg != null) model.addAttribute("msg",msg);
 		return "/user/main";
 	}

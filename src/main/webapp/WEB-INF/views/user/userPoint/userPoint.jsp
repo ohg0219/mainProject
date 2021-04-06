@@ -291,6 +291,8 @@ a.dual {
         	    	<div class="xans-element- xans-myshop xans-myshop-benefit">
         	    		<div class="infoWrap">
                 			<div class="myInfo">
+                				<strong class="name"><span>${namePoint.nick_name }</span></strong>
+                    			<strong class="group">[${namePoint.user_name }]</strong>
                				</div>
                			</div>
                		</div>

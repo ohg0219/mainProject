@@ -134,17 +134,25 @@
                        
                         <div class="card-body">
                             <form action="/admin/insertBanner.mdo" method="post" enctype="multipart/form-data">
+                            	<input type="hidden" name="bannerState" value="${state}">
 							 	<div class="table-responsive">
 	                           		<table class="table table-bordered" id="dataTable">
                     					<tr>
                     						<td>배너이름</td>
                     						<td>
-                    							<input type="text" name="bannerName" required="required">
+                    							<input type="text" size="80" name="bannerName" required="required">
+                    						</td>
+                    					</tr>
+                    					<tr>
+                    						<td>URI</td>
+                    						<td>
+                    							<input type="text" size="80" name="bannerLocation" required="required">
                     						</td>
                     					</tr>
                     					<tr>
                     						<td colspan="7">
-    	                						<p>이미지</p><label style="color: red">(2000 x 1000의 이미지인지 확인해 주세요)</label>
+    	                						<p>이미지</p><c:if test="${state == 'main' }"><label style="color: red">(2000 x 1000의 이미지인지 확인해 주세요)</label></c:if>
+    	                						<c:if test="${state == 'sub' }"><label style="color: red">(900 x 900의 이미지인지 확인해 주세요)</label></c:if>
                     							<div class="col-lg-12">
                     								<input type="file" name="mainUploadFile" id="mainUploadFile" required="required">
                     							</div>

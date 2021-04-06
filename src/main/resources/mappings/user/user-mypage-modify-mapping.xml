@@ -44,7 +44,7 @@
 	</select>
 	
 	<update id="delUser">
-		update this_user set user_role = #{user_role} ,out_date = #{outDate};
+		update this_user set user_role = #{user_role} ,out_date = #{outDate} where user_id = #{id}
 	</update>
 	
 	<select id="getMypage" resultMap="myPageMain">

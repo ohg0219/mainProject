@@ -553,8 +553,8 @@ $(document).ready(function(){
 	function isLogin(){
 		var userId = '${userId}';
 		if(userId ==''){
-		//	alert('로그인이 필요합니다');
-			//로그인 페이지로 보내기
+		alert('로그인이 필요합니다');
+		location.href= "/login.do";
 		}
 	}
 	

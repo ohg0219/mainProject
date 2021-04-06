@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.thisisthat.admin.usermanagement.dao.UserManagementDAO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
+import com.thisisthat.util.PagingVO;
 
 @Service
 public class UserManagementServiceImpl implements UserManagementService{
@@ -16,8 +17,8 @@ public class UserManagementServiceImpl implements UserManagementService{
 	
 	
 	@Override
-	public List<UserVO> getUserList(UserVO vo) {
-		return userDAO.getUserList(vo);
+	public List<UserVO> getUserList(UserVO vo, PagingVO paging) {
+		return userDAO.getUserList(vo, paging);
 	}
 
 	@Override
@@ -26,8 +27,8 @@ public class UserManagementServiceImpl implements UserManagementService{
 	}
 	
 	@Override
-	public List<UserVO> staffList(UserVO vo) {
-		return userDAO.getStaffList(vo);
+	public List<UserVO> staffList(UserVO vo, PagingVO paging) {
+		return userDAO.getStaffList(vo,paging);
 	}
 	
 	@Override
@@ -38,6 +39,17 @@ public class UserManagementServiceImpl implements UserManagementService{
 	@Override
 	public void userUpdate(UserVO vo) {
 		userDAO.getUserUpdate(vo);
+	}
+
+	@Override
+	public int getUserCount(UserVO vo) {
+		return userDAO.getUserCount(vo);
+	}
+
+	@Override
+	public int getStaffCount(UserVO vo) {
+		// TODO Auto-generated method stub
+		return userDAO.getStaffCount(vo);
 	}
 
 	
