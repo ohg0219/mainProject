@@ -258,7 +258,7 @@
                     					<tr>
                     						<td>적립율</td>
                     						<td colspan="6">
-												<input type="number" value="product_point">
+												<input type="number" name="product_point" value="0">
 											</td>
                     					</tr>
                     					<tr>

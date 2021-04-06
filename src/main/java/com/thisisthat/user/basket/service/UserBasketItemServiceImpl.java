@@ -39,4 +39,9 @@ public class UserBasketItemServiceImpl implements UserBasketItemService {
 		basketItemDAO.updateUserBasket(vo);
 	}
 
+	@Override
+	public boolean getProductStock(List<UserBasketItemVO> basketItemList) {
+		return basketItemDAO.getProductStock(basketItemList);
+	}
+
 }

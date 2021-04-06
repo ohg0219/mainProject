@@ -13,13 +13,13 @@ public class BannerDAO {
 	@Autowired
 	SqlSessionTemplate bannerTemplate;
 	
-	public List<BannerVO> getBannerList() {
+	public List<BannerVO> getBannerList(String state) {
 		
-		return bannerTemplate.selectList("bannerDAO.getBannerList");
+		return bannerTemplate.selectList("bannerDAO.getBannerList", state);
 	}
 
 	public void insertBanner(BannerVO banner) {
-		Integer order = bannerTemplate.selectOne("bannerDAO.getMaxBannerOrder");
+		Integer order = bannerTemplate.selectOne("bannerDAO.getMaxBannerOrder",banner);
 		
 		if(order == null) order = 0;
 		banner.setBannerOrder(order + 1);

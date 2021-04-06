@@ -48,7 +48,7 @@ a {
     <link href="/resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>배너 관리</title>
 </head>
 <body id="page-top">
 
@@ -82,6 +82,7 @@ a {
                         </div>
                         -->
 					<a id="${user.userId }" class="btn btn-dark pointbt" data-target="#insertUsersPointModal" data-toggle="modal">전체 포인트부여</a>
+					
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%"

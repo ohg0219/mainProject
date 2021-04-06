@@ -74,7 +74,8 @@ $(document).ready(function(){
 		var userId = $(this).siblings("input[name=userId]").val();
 		var productNo = $(this).siblings("input[name=productNo]").val();
 		var selectSize = $(this).siblings("input[name=selectSize]").val();
-		location.href="/updateUserBasket.do?productNo="+productNo+"&userId="+userId+"&selectSize="+selectSize+"&type=plus";
+		var selectCount = $(this).siblings("#selectCount").text();
+		location.href="/updateUserBasket.do?productNo="+productNo+"&userId="+userId+"&selectSize="+selectSize+"&type=plus&selectCount="+selectCount;
 	});
 	$(".userMinus").on("click",function(){
 		var count = $(this).siblings("#selectCount").text();
@@ -91,7 +92,8 @@ $(document).ready(function(){
 	$(".plus").on("click",function(){
 		var productNo = $(this).siblings("input[name=productNo]").val();
 		var selectSize = $(this).siblings("input[name=selectSize]").val();
-		location.href="/updateBasket.do?productNo="+productNo+"&selectSize="+selectSize+"&type=plus";
+		var selectCount = $(this).siblings("#selectCount").text();
+		location.href="/updateBasket.do?productNo="+productNo+"&selectSize="+selectSize+"&type=plus&selectCount="+selectCount;
 	});
 	$(".minus").on("click",function(){
 		var count = $(this).siblings("#selectCount").text();
@@ -113,7 +115,7 @@ $(document).ready(function(){
 			<div class="basket" align="center" style="margin-top: 100px;">
 				<div class="basket_item">
 				<c:choose>
-					<c:when test="${sessionScope.userId != null }">
+					<c:when test="${not empty sessionScope.userId}">
 						<c:set var = "subtotal" value="0" />
 						<c:forEach items="${basketList }" var="basket">
 						<table class="itemTable">
@@ -145,7 +147,7 @@ $(document).ready(function(){
 						<c:set var="subtotal" value="${subtotal+ (basket.productPrice * basket.selectCount)}" />
 						</c:forEach>
 					</c:when>
-					<c:when test="${sessionScope.userId == null }">
+					<c:when test="${empty sessionScope.userId}">
 						<c:forEach items="${sessionScope.basketItem }" var="sessionBasket">
 						<table class="itemTable">
 							<tr>

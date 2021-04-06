@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thisisthat.user.item.dao.UserItemListDAO;
+import com.thisisthat.user.item.vo.CommentVO;
 import com.thisisthat.user.item.vo.UserItemImageVO;
 import com.thisisthat.user.item.vo.UserItemListVO;
 import com.thisisthat.user.item.vo.UserItemSizeGuideVO;
 import com.thisisthat.user.item.vo.UserItemSizeUsedVO;
 import com.thisisthat.user.item.vo.UserItemVO;
+import com.thisisthat.util.PagingVO;
 
 @Service
 public class UserItemListServiceImpl implements UserItemListService {
@@ -41,6 +43,25 @@ public class UserItemListServiceImpl implements UserItemListService {
 	@Override
 	public UserItemSizeUsedVO getItemSizeUsed(long productNo) {
 		return itemListDAO.getItemSizeUsed(productNo);
+	}
+
+	@Override
+	public void insertComment(CommentVO comment) {
+		itemListDAO.insertComment(comment);
+	}
+	@Override
+	public int commentCount(int boardNo) {
+		return itemListDAO.commentCount(boardNo);
+	}
+
+	@Override
+	public List<CommentVO> getCommentList(PagingVO paging, int boardId) {
+		return itemListDAO.getCommentList(paging, boardId);
+	}
+
+	@Override
+	public void delComment(int commentNo) {
+		itemListDAO.delComment(commentNo);
 	}
 
 }

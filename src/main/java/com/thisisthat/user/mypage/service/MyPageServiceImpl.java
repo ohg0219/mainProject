@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thisisthat.user.mypage.dao.MyPageDAO;
+import com.thisisthat.user.mypage.vo.MyPageVO;
 import com.thisisthat.user.register.vo.UserRegisterVO;
 
 @Service
@@ -22,6 +23,15 @@ public class MyPageServiceImpl implements MyPageService {
 		dao.modify(vo);
 	}
 
+	@Override
+	public void delUser(UserRegisterVO vo) {
+		dao.delUser(vo);
+	}
+	
+	@Override
+	public MyPageVO getMypage(String userId) {
+		return dao.getMyMain(userId);
+	}
 	 
 	
 	

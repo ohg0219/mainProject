@@ -61,6 +61,7 @@ public class AnswerController {
 			for(AnswerBoardVO answer : answerList) {
 				AnswerBoardVO reply = answerService.getReply(answer.getBoardNo());
 				if(reply !=null) {
+					System.out.println(reply);
 					replyList.add(reply);
 				}
 			}

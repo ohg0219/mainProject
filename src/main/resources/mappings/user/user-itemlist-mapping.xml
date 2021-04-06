@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ItemDAO">
+	
 	<resultMap type="com.thisisthat.user.item.vo.UserItemListVO" id="itemListVO">
 		<result property="productCategory" column="product_category"/>
 		<result property="productNo" column="product_no"/>
@@ -29,6 +30,18 @@
 		<result property="imageName" column="image_name"/>
 		<result property="mainImage" column="main_image"/>
 	</resultMap>
+	<resultMap type="commentVO" id="commentResult">
+		<id column="comment_no" property="commentNo"/>
+		<result column="board_no" property="boardNo"/>
+		<result column="comment_content" property="content"/>
+		<result column="comment_writer" property="writer"/>
+		<result column="reg_date" property="regDate"/>
+		<result column="delete_date" property="deleteDate"/>
+		<result column="parent_no" property="parentNo"/>
+		<result column="comment_img" property="img" typeHandler="org.apache.ibatis.type.ArrayTypeHandler"/>
+		
+	</resultMap>
+	
 	<select id="getItemList" resultMap="itemListVO">
 			select 
 				pro.product_category as product_category, 
@@ -67,6 +80,20 @@
 	<select id="getItemSizeUsed" parameterType="Long" resultType="com.thisisthat.user.item.vo.UserItemSizeUsedVO">
 		select * from size_used where product_no = #{productNo}
 	</select>
+	<insert id="insertComment">
+		INSERT INTO product_comment(
+		board_no, comment_content, comment_writer, reg_date, comment_img)
+		VALUES (#{boardNo}, #{content}, #{writer}, #{regDate}, #{img});
+	</insert>
 	
+	<select id="commentCount" resultType="Integer">
+		select count(*) from product_comment where delete_date is null and board_no =#{boardNo} 
+	</select>
+	<select id="getCommentList" resultMap="commentResult">
+		select * from product_comment where delete_date is null and board_no =#{boardId} order by comment_no desc OFFSET #{start} limit #{cntPerPage}
+	</select>
+	<update id="delComment">
+		update product_comment set delete_date = #{nowDate} where comment_no = #{commentNo}
+	</update>
 	
 </mapper>

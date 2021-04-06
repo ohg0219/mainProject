@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orderManagementDAO">
+
+	<select id="orderList" resultType="orderManagementVO">
+		select * from order_table order by order_state asc, invoice_no asc
+	</select>
+	
+	<select id="allSearch" resultType="orderManagementVO">
+		select * from order_table where cast(order_no as varchar) like '%' || #{keyword} || '%' or user_id like '%' || #{keyword} || '%' or cast(invoice_no as varchar) like '%' || #{keyword} || '%' order by order_state asc, invoice_no asc
+	</select>
+
+	<select id="ordernoSearch" resultType="orderManagementVO">
+		select * from order_table where cast(order_no as varchar) like '%' || #{keyword} || '%' order by order_state asc, invoice_no asc
+	</select>
+
+	<select id="useridSearch" resultType="orderManagementVO">
+		select * from order_table where user_id like '%' || #{keyword} || '%' order by order_state asc, invoice_no asc
+	</select>
+
+	<select id="invoicenoSearch" resultType="orderManagementVO">
+		select * from order_table where cast(invoice_no as varchar) like '%' || #{keyword} || '%' order by order_state asc, invoice_no asc
+	</select>
+
+	<select id="getOrder" resultType="orderManagementVO">
+		select * from order_product join order_table
+		using(order_no) join product using(product_no) where order_no=#{order_no} order by
+		order_state
+		asc,invoice_no asc
+	</select>
+
+	<update id="selectOrder_start">
+		update order_table set order_state=#{order_state}
+		where order_no = #{order_no}
+	</update>
+	
+	<update id="selectOrder">
+		update order_table set order_state=#{order_state}, invoice_no=#{invoice_no}
+		where order_no = #{order_no}
+	</update>
+
+
+
+</mapper>

@@ -55,12 +55,12 @@
 							<li>휴대전화 *</li>
 							<li class="input_li">
 								<select class="input_tel" name="phone1">
-									<option>010</option>
-									<option>011</option>
-									<option>016</option>
-									<option>017</option>
-									<option>018</option>
-									<option>019</option>
+									<option <c:if test="${phone1 =='010' }">selected</c:if>>010</option>
+									<option <c:if test="${phone1 =='011' }">selected</c:if>>011</option>
+									<option <c:if test="${phone1 =='016' }">selected</c:if>>016</option>
+									<option <c:if test="${phone1 =='017' }">selected</c:if>>017</option>
+									<option <c:if test="${phone1 =='018' }">selected</c:if>>018</option>
+									<option <c:if test="${phone1 =='019' }">selected</c:if>>019</option>
 								</select>
 								<span>-</span>
 								<input class="input_phone" type="tel" name="phone2" size="4" value="${phone2}">
@@ -76,7 +76,7 @@
 							</li>
 							<li>E-MAIL *</li>
 							<li class="">
-								<input class="input" type="email" name="email">
+								<input class="input" type="email" name="email" value="${modify.email }">
 								<span id="emailCheck"></span>
 							</li>
 							<li>E-MAIL 수신</li>
@@ -91,8 +91,8 @@
 						</ul>
 						
 						<h3>
-							<a href="#" style="border-bottom: 1px solid #111; padding-bottom: 4px; text-decoration: none; color: black">
-								<strong>회원 탈퇴하기</strong>
+							<a href="delUser.do" style="border-bottom: 1px solid #111; padding-bottom: 4px; text-decoration: none; color: black">
+								<strong class="input_li">회원 탈퇴하기</strong>
 							</a>
 						</h3>
 												
@@ -100,8 +100,15 @@
 			 	</div> 
 				
 			</div>
+							
 		</div><!-- end Content -->
+		
 		<%@include file="../include/footer.jsp" %>
 	</div>
 </body>
+<script type="text/javascript">
+	function checkPW(){
+		document.getElementById('userDelTable').style.display = 'block';
+	}
+</script>
 </html>

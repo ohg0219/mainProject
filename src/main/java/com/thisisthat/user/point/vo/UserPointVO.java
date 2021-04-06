@@ -12,6 +12,23 @@ public class UserPointVO {
 	private int sum;
 	private int usingsum;
 	
+	private String nick_name;
+	private String user_name;
+	
+	
+	
+	public String getNick_name() {
+		return nick_name;
+	}
+	public void setNick_name(String nick_name) {
+		this.nick_name = nick_name;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -59,7 +76,7 @@ public class UserPointVO {
 	public String toString() {
 		return "UserPointVO [user_id=" + user_id + ", point_date=" + point_date + ", point=" + point
 				+ ", point_content=" + point_content + ", point_num=" + point_num + ", sum=" + sum + ", usingsum="
-				+ usingsum + "]";
+				+ usingsum + ", nick_name=" + nick_name + ", user_name=" + user_name + "]";
 	}
 	
 	

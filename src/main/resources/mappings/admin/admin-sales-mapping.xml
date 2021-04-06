@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminSalesDAO">
+	<resultMap type="com.thisisthat.admin.sales.vo.AdminSalesDataVO" id="salesDataVO">
+		<result property="grouping" column="grouping"/>
+		<result property="originalPrice" column="originalprice"/>
+		<result property="count" column="count"/>
+		<result property="usePoint" column="usepoint"/>
+		<result property="useCoupon" column="usecoupon"/>
+		<result property="groupString" column="groupstring"/>
+		<result property="subtotal" column="subtotal"/>
+	</resultMap>
+	<select id="getMontlySales" resultType="com.thisisthat.admin.sales.vo.AdminSalesDataVO">
+		<![CDATA[
+		select date_trunc('month',order_date) as grouping,
+		COALESCE(sum(original_price),0) as originalprice,
+		COALESCE(sum(use_point),0) as usepoint,
+		COALESCE(sum(use_coupon),0) as usecoupon,
+		COALESCE(sum(order_price),0) as subtotal
+		from order_table as t
+		where (order_state != '입금대기' and order_state != '환불완료')  and 
+			order_date >= #{startMonth}
+			and 
+			order_date <  #{endMonth}::date+INTERVAL'+1 month'
+		GROUP by grouping
+		order by grouping
+		]]>
+	</select>
+	<select id="getMonthlySalesCount" resultType="com.thisisthat.admin.sales.vo.AdminSalesDataVO">
+		<![CDATA[
+		select COALESCE(sum(o.select_count),0) as count,
+		date_trunc('month',order_date) as grouping
+		from order_product as o right outer join order_table as t on( o.order_no = t.order_no)
+		where (order_state != '입금대기' and order_state != '환불완료')  and 
+			order_date >= #{startMonth}::date
+			and 
+			order_date <  #{endMonth}::date+INTERVAL'+1 month'
+		GROUP by grouping
+		order by grouping
+		]]>
+	</select>
+	<select id="getDailySales" resultType="com.thisisthat.admin.sales.vo.AdminSalesDataVO">
+		<![CDATA[
+		select date_trunc('day',order_date) as grouping,
+		COALESCE(sum(original_price),0) as originalprice,
+		COALESCE(sum(use_point),0) as usepoint,
+		COALESCE(sum(use_coupon),0) as usecoupon,
+		COALESCE(sum(order_price),0) as subtotal
+		from order_table as t
+		where (order_state != '입금대기' and order_state != '환불완료')  and 
+			order_date >= #{startDay}
+			and 
+			order_date <  #{endDay}::date+INTERVAL'+1 day'
+		GROUP by grouping
+		order by grouping
+		]]>
+	</select>
+	<select id="getDailySalesCount" resultType="com.thisisthat.admin.sales.vo.AdminSalesDataVO">
+		<![CDATA[
+		select COALESCE(sum(o.select_count),0) as count,
+		date_trunc('day',order_date) as grouping
+		from order_product as o right outer join order_table as t on( o.order_no = t.order_no)
+		where (order_state != '입금대기' and order_state != '환불완료')  and 
+			order_date >= #{startDay}::date
+			and 
+			order_date <  #{endDay}::date+INTERVAL'+1 day'
+		GROUP by grouping
+		order by grouping
+		]]>
+	</select>
+	<select id="getCategorySales" resultType="com.thisisthat.admin.sales.vo.AdminSalesDataVO">
+		<![CDATA[
+		select (select product_category from product as p where p.product_no = o.product_no) as groupString,
+		sum(o.select_count) as count,
+		sum((o.product_price*o.select_count)) as originalprice
+		from product as p, order_product as o,order_table as t 
+		where p.product_no = o.product_no and o.order_no = t.order_no
+			and (t.order_state != '입금대기' and t.order_state != '환불완료')  and 
+			t.order_date >= #{startDay}::date
+			and 
+			t.order_date <  #{endDay}::date+INTERVAL'+1 day'
+		group by groupString
+		]]> 		
+	</select>
+	
+	<select id="getDatelySales" resultMap="salesDataVO">
+		<![CDATA[
+		select to_char(order_date ,'Day')as groupstring,
+		COALESCE(sum(original_price),0) as originalprice,
+		COALESCE(sum(use_point),0) as usepoint,
+		COALESCE(sum(use_coupon),0) as usecoupon,
+		COALESCE(sum(order_price),0) as subtotal
+		from order_table as t 
+		where (order_state != '입금대기' and order_state != '환불완료')  and 
+			order_date >= #{startDay}::date 
+			and 
+			order_date < #{endDay}::date+INTERVAL'+1 day'
+		group by groupstring
+		]]>
+	</select>
+	<select id="getDatelySalesCount" resultMap="salesDataVO">
+		<![CDATA[
+		select COALESCE(sum(o.select_count),0) as count,
+		to_char(order_date ,'Day')as groupstring
+		from order_product as o right outer join order_table as t on( o.order_no = t.order_no)
+		where (order_state != '입금대기' and order_state != '환불완료')  and 
+			order_date >= #{startDay}::date
+			and 
+			order_date <  #{endDay}::date+INTERVAL'+1 day'
+		GROUP by groupstring
+		]]>
+	</select>
+</mapper>

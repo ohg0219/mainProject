@@ -6,11 +6,13 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.user.mypage.service.MyPageService;
+import com.thisisthat.user.mypage.vo.MyPageVO;
 import com.thisisthat.user.register.vo.UserRegisterVO;
 
 @Controller
@@ -52,20 +54,48 @@ public class MyPageController {
 		return "redirect:/mypage/modify.do";
 	}
 	
-	@RequestMapping("/mypage/mypage.do")
-	public String mypageMain(HttpSession session, Model model) {
-		String id = null;
-		if (session.getAttribute("userId") != null)
-			id = (String) session.getAttribute("userId");
-		System.out.println(id);
-		UserRegisterVO user = service.modifyView(id);
-		model.addAttribute("modify", user);
-		return "/user/mypage/myMain";
+	
+	@GetMapping("/mypage/delUser.do")
+	public String delUser() {
+		return "/user/mypage/delUser";
+	}
+	@PostMapping("/mypage/delUser.do")
+	public String delUser(String userPw, HttpSession session,Model model) {
+		if((String)session.getAttribute("userId") == null) {
+			return "redirect:/main.do";
+		}
+		String userId = (String)session.getAttribute("userId");
+		UserRegisterVO user = service.modifyView(userId);
+		if(BCrypt.checkpw(userPw, user.getPassword())) {
+			service.delUser(user);
+			session.removeAttribute("userId");
+			return "redirect:/main.do?msg=delUser";
+		}else {
+			model.addAttribute("msg","fail");
+			return "/user/mypage/delUser";
+		}
 	}
 	
+//	@RequestMapping("/mypage/mypage.do")
+//	public String mypageMain(HttpSession session, Model model) {
+//		String userId = null;
+//		if (session.getAttribute("userId") != null)
+//			userId = (String) session.getAttribute("userId");
+//		UserRegisterVO user = service.modifyView(userId);
+//		model.addAttribute("modify", user);
+//		model.addAttribute("userId", user.getId());
+		
+//		return "/user/mypage/myMain";
+//	}
 	
-	
-	
+	@RequestMapping("/mypage/mypage.do")
+	public String getMypageMain(HttpSession session, MyPageVO vo, Model model) {
+ 		String userId = (String) session.getAttribute("userId");
+		MyPageVO info = service.getMypage(userId);
+		model.addAttribute("info", info);
+		model.addAttribute("userId", userId);
+		return "/user/mypage/myMain";
+	}
 	
 
 }

@@ -62,7 +62,6 @@ public class GrantCouponController {
 								CouponGrantVO vo , UserVO vo1) {
 		if(userId.equals("all")) {
 			List<UserVO> userIdList=couponGrantService.getUserIDList(vo1);
-			System.out.println("여기까지는 된다.");
 			couponGrantService.userAllGrantCoupon(userIdList, coupon);
 		}else {
 			vo.setUser_id(userId);
