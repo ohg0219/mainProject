@@ -56,10 +56,4 @@ public class CouponVO {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
 }//end class

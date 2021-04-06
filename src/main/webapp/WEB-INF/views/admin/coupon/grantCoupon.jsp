@@ -45,7 +45,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">쿠폰 생성 목록</h1>
+                    <h1 class="h3 mb-2 text-gray-800">쿠폰 부여 현황</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -56,76 +56,77 @@
                         -->
                         <div class="card-body">
                             <div class="table-responsive">
+                                    <form action="userGrant.mdo" method="get">
+                                    	<button type="submit" class="btn btn-dark" id="userGrant">
+                                    	회원 쿠폰 부여
+                                    	</button>
+                                    </form>
+                                    <br>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <strong>회원쿠폰 지급 목록</strong>
                                     <thead>
                                         <tr>
-                                            <th>쿠폰 번호</th>
-                                            <th>쿠폰 명</th>
-                                            <th>할인 금액(단위 원)</th>
-                                            <th>시작 일자</th>
-                                            <th>종료 일자</th>
+                                            <th>사용자 아이디</th>
+                                            <th>쿠폰넘버</th>
+                                            <th>쿠폰 이름</th>
+                                            <th>쿠폰 적용 금액</th>
+                                            <th>발급일</th>
+                                            <th>만료일</th>
+                                            <th>사용 유무</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     
                                     	 
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
-                                    	<c:if test="${not empty couponList}" >
-	                                        <c:forEach var="article" items="${couponList}">
+                                    	<c:if test="${not empty userCouponList}" >
+	                                        <c:forEach var="couponlist" items="${userCouponList}">
 		                                        <tr>
-			                                        <td width="45">${article.coupon_no }</td>
-			                                        <td width="295"><a href="viewCoupon.mdo?coupon_no=${article.coupon_no }">${article.coupon_name }</a></td>
-			                                        <td width="140">${article.coupon_price }</td>
-			                                        <td width="115"><fmt:formatDate value="${article.coupon_first }" pattern="yyyy-MM-dd "/></td>
-			                                        <td width="45"><fmt:formatDate value="${article.coupon_last }" pattern="yyyy-MM-dd "/></td>
+			                                        <td width="100"><a href="couponUserList.mdo?user_id=${couponlist.user_id }">${couponlist.user_id }</a></td>
+			                                        <td width="80">${couponlist.coupon_no }</td>
+			                                        <td width="140"><a href="grantCouponView.mdo?coupon_no=${couponlist.coupon_no }">${couponlist.coupon_name }</a></td>
+			                                        <td width="115">${couponlist.coupon_price }</td>
+			                                        <td width="45"><fmt:formatDate value="${couponlist.coupon_first }" pattern="yyyy-MM-dd "/></td>
+			                                        <td width="45"><fmt:formatDate value="${couponlist.coupon_last }" pattern="yyyy-MM-dd "/></td>
+			                                        <td width="45">${couponlist.used }</td>
 			                                    </tr>
 	                                        </c:forEach>
                                         
 
                                         </c:if>
-                                        <c:if test="${empty couponList }">
+                                        <c:if test="${empty userCouponList }">
                                         	<tr>
                                         		<td colspan="5" align="center">
-                                        		<h1> 게시글이 없어요</h1>
+                                        		<h1> 내역이 없습니다. </h1>
                                         		</td>
                                         	</tr>
                                         </c:if>
                                     </tbody>
-                                </table>
-                                <div>	
-                                <form action="couponSearch.mdo" method="get">
                                     
-									<select name="searchOption" aria-controls="example" class="">
-										<option value="coupon_name">쿠폰 명</option>
-										<option value="coupon">시작 일자</option>
-										<option value="coupon_last">종료 일자</option>
-									</select>
-										                                    		
-									<input type="text" name="keyword">
-
-									<button type="submit" class="btn btn-dark" id="searchBtn">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										쿠폰 검색 
-									</button>
-
-									<button type="button" class="btn btn-dark"  id="insertCoupon">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										쿠폰 생성
-									</button>
-                                </form>
-									<br>
-									<div align="center">
-									<a href="#">1</a>
-									<a href="#">2</a>
-									<a href="#">3</a>
-									<a href="#">4</a>
-									<a href="#">5</a>
-									<a href="#">6</a>
-									<a href="#">7</a>
-									<a href="#">8</a>
-									<a href="#">9</a>
-									<a href="#">10</a>
-									</div>
+                                </table>
+                                
+                                	<form action="couponSearch.mdo" method="get">
+										<table class="noticeTable">
+											<tr>
+												<td align="right">
+													<select name="searchOption">
+														<option value="user_id">회원ID
+														<option value="coupon_name">쿠폰이름
+													</select>
+													<input type="text" name="keyword"/>
+													<input type="submit" value="검색"/>
+											</td>
+										</tr>
+									</table>
+									</form>
+                                    <br>
+                                    
+                    
+                                    <button class="btn btn-dark" type="button" onclick="location.href='/admin/main.mdo' ">메인으로</button>
+                    				            
+                                <div>	
+                                
+								</div>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +136,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+		
+		    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 	<script>
 	//--------------------검색하는 함수
 		$(function(){

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myOrderDAO">
+	<resultMap type="com.thisisthat.user.order.vo.UserOrderVO" id="userOrderVO">
+		<result property="userId" column="user_id"/>
+		<result property="receiveName" column="receive_name"/>
+		<result property="orderPassword" column="order_password"/>
+		<result property="orderDate" column="order_date"/>
+		<result property="orderNo" column="order_no"/>
+		<result property="productName" column="product_name"/>
+		<result property="productPrice" column="product_price"/>
+		<result property="orderSize" column="order_size"/>
+		<result property="selectCount" column="select_count"/>
+		<result property="originalPrice" column="original_price"/>
+		<result property="usePoint" column="use_point"/>
+		<result property="useCoupon" column="use_coupon"/>
+		<result property="orderPrice" column="order_price"/>
+		<result property="orderState" column="order_state"/>
+		<result property="invoiceNo" column="invoice_no"/>
+		<result property="count" column="count"/>
+	</resultMap>
+	<select id="getOrderCount" resultType="int">
+		select count(order_no) from order_table where user_id = #{userId}
+		<if test="sDate != null and eDate != null">
+		<![CDATA[
+		and order_date >= #{sDate}
+			and 
+			order_date <  #{eDate}::date+INTERVAL'+1 day'
+			]]>
+		</if>
+		<if test="sDate == null and eDate == null">
+		<![CDATA[
+		and order_date >= now()::date+INTERVAL'-7 day'
+			and 
+			order_date <  now()::date+INTERVAL'+1 day'
+			]]>
+		</if>
+	</select>
+	<select id="getOrderList" parameterType="String" resultMap="userOrderVO">
+		select 
+		t.user_id as user_id,
+		t.receive_name as receive_name,
+		t.order_password as order_password,
+		t.order_date as order_date,
+		t.order_no as order_no,
+		t.order_price as order_price,
+		t.order_state as order_state,
+		t.invoice_no as invoice_no
+		from order_table as t
+		where
+		user_id = #{userId}
+		<if test="sDate != null and eDate != null">
+		<![CDATA[
+		and order_date >= #{sDate}
+			and 
+			order_date <  #{eDate}::date+INTERVAL'+1 day'
+			]]>
+		</if>
+		<if test="sDate == null and eDate == null">
+		<![CDATA[
+		and order_date >= now()::date+INTERVAL'-7 day'
+			and 
+			order_date <  now()::date+INTERVAL'+1 day'
+			]]>
+		</if>
+		order by order_date desc
+		limit 10
+		offset #{start}
+	</select>
+	<select id="getOrder" resultMap="userOrderVO">
+		select 
+		t.user_id as user_id,
+		t.receive_name as receive_name,
+		t.order_password as order_password,
+		t.order_date as order_date,
+		t.order_no as order_no,
+		pro.product_name as product_name,
+		pro.product_price as product_price,
+		p.order_size as order_size,
+		p.select_count as select_count,
+		t.original_price as original_price,
+		t.use_point as use_point,
+		t.use_coupon as use_coupon,
+		t.order_price as order_price,
+		t.order_state as order_state,
+		t.invoice_no as invoice_no
+		from order_table as t, order_product as p,product as pro 
+		where t.order_no = p.order_no and p.product_no = pro.product_no and t.order_no = #{orderNo}
+		
+		
+	</select>
+	<select id="getPassword" resultType="String">
+		select order_password from order_table where order_no = #{orderNo}
+	</select>
+	<update id="updateState">
+		update order_table
+		<if test="state.equals('orderCancel')">
+		set order_state = '환불완료' , order_cancel = 1
+		</if>
+		<if test="state.equals('refund')">
+		set order_state = '환불요청'
+		</if>
+		<if test="state.equals('trade')">
+		set order_state = '교환요청'
+		</if>
+		where order_no = #{orderNo}
+	</update>
+</mapper>

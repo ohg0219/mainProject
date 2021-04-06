@@ -50,7 +50,7 @@
 		<%@include file="include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>NOTICE</h3>
+				<h4>NOTICE</h4>
 				<script type="text/javascript">
 					$(function(){
 						$()
@@ -59,10 +59,10 @@
 				<table class="noticeTable">
 					<tr>
 						<th width="60px">NO.</th>
-						<th width="250px">SUBJECT</th>
-						<th width="60px">이름</th>
-						<th width="100px">DATE</th>
-						<th width="60px">HIT</th>
+						<th width="200px">SUBJECT</th>
+						<th width="100px">이름</th>
+						<th width="80px">DATE</th>
+						<th width="50px">HIT</th>
 					</tr>
 					<c:if test="${not empty noticeList}">
 						<c:forEach var="notice" items="${noticeList}">
