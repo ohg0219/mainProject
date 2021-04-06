@@ -115,7 +115,7 @@ $(document).ready(function(){
 			<div class="basket" align="center" style="margin-top: 100px;">
 				<div class="basket_item">
 				<c:choose>
-					<c:when test="${sessionScope.userId != null }">
+					<c:when test="${not empty sessionScope.userId}">
 						<c:set var = "subtotal" value="0" />
 						<c:forEach items="${basketList }" var="basket">
 						<table class="itemTable">
@@ -147,7 +147,7 @@ $(document).ready(function(){
 						<c:set var="subtotal" value="${subtotal+ (basket.productPrice * basket.selectCount)}" />
 						</c:forEach>
 					</c:when>
-					<c:when test="${sessionScope.userId == null }">
+					<c:when test="${empty sessionScope.userId}">
 						<c:forEach items="${sessionScope.basketItem }" var="sessionBasket">
 						<table class="itemTable">
 							<tr>

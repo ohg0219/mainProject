@@ -184,7 +184,7 @@ td {
 													<c:if test="${recent.sizeL == 1}">
 														<option value="L">L</option>
 													</c:if>
-													<c:if test="${recent.sizeXS == 1}">	
+													<c:if test="${recent.sizeXL == 1}">	
 														<option value="XL">XL</option>
 													</c:if>
 												</select>

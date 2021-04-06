@@ -19,6 +19,8 @@
 		<typeAlias type="com.thisisthat.user.item.vo.CommentVO" alias="commentVO"/>
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentViewVO" alias="RecentViewVO"/>
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentBasketVO" alias="RecentBasketVO"/>
+		<typeAlias type="com.thisisthat.user.mypage.vo.MyPageVO" alias="MyPageVO"/>
+
 
 	</typeAliases>
 	<mappers>
