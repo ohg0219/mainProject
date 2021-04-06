@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="MyPage">
+<mapper namespace="MyPageDAO">
 
 	<resultMap type="UserRegisterVO" id="myPageModify">
 		<id property="id" column="user_id"/>
@@ -18,21 +18,24 @@
 		<result property="emailOk" column="email_ok"/>	
 	</resultMap>
 
+	<resultMap type="MyPageVO" id="myPageMain">
+		<id property="id" column="user_id"></id>		
+		<result property="userName" column="user_name" />
+		<result property="nickName" column="nick_name" />
+		<result property="orderPrice" column="order_price" />
+		<result property="point" column="point"/>
+		<result property="used" column="used"/>
+		<result property="couponLast" column="coupon_last"/>		
+	</resultMap>
+
+
 	<select id="modifyView" resultMap="myPageModify">
 		select * from this_user where user_id=#{id}
 	</select>
 
 	<update id="modify">
-		update this_user 
-		set 
-		user_pass=#{password}, 
-		zip_code=#{zipcode}, 
-		first_address=#{address1}, 
-		last_address=#{address2}, 
-		user_phone=#{phone}, 
-		user_email=#{email},
-		sms_ok=#{smsOk},
-		email_ok=#{emailOk} 
+		update this_user set user_pass=#{password},	zip_code=#{zipcode}, first_address=#{address1},	last_address=#{address2}, 
+		user_phone=#{phone}, user_email=#{email}, sms_ok=#{smsOk}, email_ok=#{emailOk}
 		where user_name=#{name}
 	</update>
 	
@@ -43,4 +46,17 @@
 	<update id="delUser">
 		update this_user set user_role = #{user_role} ,out_date = #{outDate} where user_id = #{id}
 	</update>
+	
+	<select id="getMypage" resultMap="myPageMain">
+		select count(*) as countCoupon,
+		(select nick_name from this_user where user_id=#{userId}),
+		(select user_name from this_user where user_id=#{userId}),
+		(select sum(order_price) as totalPrice from order_table where user_id=#{userId}),
+		(select count(*) as orderCount from order_table where user_id=#{userId}),
+		(select sum(point) as totalPoint from user_point where user_id=#{userId})
+		from user_coupon
+		where user_id=#{userId}
+	</select>
+	
+
 </mapper>

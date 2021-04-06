@@ -53,7 +53,7 @@ public class UserItemListController {
 	public String getItem(
 			@RequestParam("productNo") int productNo,
 			@RequestParam("productCategory")String productCategory,
-			Model model) {
+			Model model, HttpSession session) {
 		String selectSizeGuideGroup = null;
 		List<UserItemSizeGuideVO> sizeGuideList = itemListService.getItemSizeGuide(productNo);
 		for(UserItemSizeGuideVO size : sizeGuideList) {
@@ -73,6 +73,19 @@ public class UserItemListController {
 			case "hem":model.addAttribute("hem", size);break;
 			}
 		}
+		
+        if(session.getAttribute("productNo") != null) {
+            List<Integer> list = (List<Integer>) session.getAttribute("productNo");
+            if(!list.contains(productNo)) {
+                list.add(productNo);
+                session.setAttribute("productNo", list);
+            }
+        } else {
+            List<Integer> list = new ArrayList<Integer>();
+            list.add(productNo);
+            session.setAttribute("productNo", list);
+        }
+		
 		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
 		model.addAttribute("sizeUsed",itemListService.getItemSizeUsed(productNo));
 		model.addAttribute("itemInfo",itemListService.getItemInfo(productNo));

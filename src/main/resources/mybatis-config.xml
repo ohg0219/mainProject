@@ -20,6 +20,7 @@
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentViewVO" alias="RecentViewVO"/>
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentBasketVO" alias="RecentBasketVO"/>
 		<typeAlias type="com.thisisthat.log.vo.LogVO" alias="logVO"/>
+		<typeAlias type="com.thisisthat.user.mypage.vo.MyPageVO" alias="MyPageVO"/>
 	</typeAliases>
 	<mappers>
 		<!-- 매퍼파일 -->		

@@ -2,6 +2,7 @@ package com.thisisthat.user.recent.vo;
 
 public class RecentViewVO {
 
+	private String type;
 	private String userId;
 	private int select_count;
 	private int productNo;
@@ -15,8 +16,16 @@ public class RecentViewVO {
 	private int sizeM;
 	private int sizeL;
 	private int sizeXL;
+	private String select_size;
 	
 	
+	
+	public String getSelect_size() {
+		return select_size;
+	}
+	public void setSelect_size(String select_size) {
+		this.select_size = select_size;
+	}
 	public String getUserId() {
 		return userId;
 	}
