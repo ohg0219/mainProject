@@ -15,8 +15,8 @@ public class BannerServiceImpl implements BannerService {
 	BannerDAO dao;
 	
 	@Override
-	public List<BannerVO> getBannerList() {
-		return dao.getBannerList();
+	public List<BannerVO> getBannerList(String state) {
+		return dao.getBannerList(state);
 	}
 
 	@Override

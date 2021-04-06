@@ -142,11 +142,30 @@ a {
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i> 검색버튼
 									</button>
 									<br>
-									<div align="center">
-										<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
-											href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a
-											href="#">7</a> <a href="#">8</a> <a href="#">9</a> <a
-											href="#">10</a>
+									<div style="display: block; text-align: center;">
+										<c:if test="${paging.startPage != 1 }">
+											<a
+												href="/admin/userList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}
+												search=${userVO.search}&select=${userVO.select}">&lt;</a>
+										</c:if>
+										<c:forEach begin="${paging.startPage }"
+											end="${paging.endPage }" var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<b>${p }</b>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<a
+														href="/admin/userList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}
+														search=${userVO.search}&select=${userVO.select}">${p }</a>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										<c:if test="${paging.endPage != paging.lastPage}">
+											<a
+												href="/admin/userList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}
+												search=${userVO.search}&select=${userVO.select}">&gt;</a>
+										</c:if>
 									</div>
 								</div>
 							</div>
@@ -208,7 +227,7 @@ a {
 				        val = select.options[i].value;
 				        break;
 				    }
-				}location.href="userList.mdo?search="+search+"&select="+val;
+				}location.href="/admin/userList.mdo?search="+search+"&select="+val;
 			});
 			
 			$('#search').keypress(function(event){

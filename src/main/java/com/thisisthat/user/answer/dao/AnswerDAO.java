@@ -56,7 +56,7 @@ public class AnswerDAO {
 
 	public AnswerBoardVO getReply(int boardNo) {
 
-		return null;
+		return template.selectOne("answerBoardDAO.getReply",boardNo);
 	}
 	public void insertAnswer(AnswerBoardVO vo) {
 		template.insert("answerDAO.insertAnswer",vo);

@@ -1,12 +1,15 @@
 package com.thisisthat.admin.productstock.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thisisthat.admin.productstock.dao.ProductStockDAO;
 import com.thisisthat.admin.productstock.vo.ProductStockVO;
+import com.thisisthat.util.PagingVO;
 
 @Service("ProductStockService")
 public class ProductStockServiceImpl implements ProductStockService {
@@ -32,8 +35,13 @@ public class ProductStockServiceImpl implements ProductStockService {
 	}
 
 	@Override
-	public List<ProductStockVO> poductStockList(ProductStockVO productStockVO) {
-		return product_StockDAO.getProductStockList(productStockVO);
+	public List<ProductStockVO> poductStockList(ProductStockVO productStockVO,PagingVO paging) {
+		return product_StockDAO.getProductStockList(productStockVO, paging);
+	}
+
+	@Override
+	public int getCount(ProductStockVO productStockVO) {
+		return product_StockDAO.getCount(productStockVO);
 	}
 	
 	

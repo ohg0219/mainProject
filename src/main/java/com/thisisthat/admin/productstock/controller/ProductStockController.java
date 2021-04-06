@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.admin.productstock.service.ProductStockService;
 import com.thisisthat.admin.productstock.vo.ProductStockVO;
+import com.thisisthat.util.PagingVO;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -19,21 +20,24 @@ public class ProductStockController {
 	private ProductStockService productStockService;
 
 	@RequestMapping("getStockList.mdo")
-	public String productStockList(Model model,@RequestParam(value="searchOption")String searchOption,ProductStockVO productStockVO){
-		if(searchOption.equals("all")) {
-			return "redirect:getProductStockList.mdo";
-		}else  {
-			productStockVO.setProduct_category(searchOption);
-			List<ProductStockVO> prodcutStockList = productStockService.poductStockList(productStockVO);
+	public String productStockList(Model model,@RequestParam(value="searchOption")String searchOption,
+			@RequestParam(value="nowPage", required = false)Integer nowPage
+			,ProductStockVO productStockVO){
+		if(nowPage == null) nowPage = 1;
+		productStockVO.setProduct_category(searchOption);
+		PagingVO paging = new PagingVO(productStockService.getCount(productStockVO), nowPage, 15);
+		List<ProductStockVO> prodcutStockList = productStockService.poductStockList(productStockVO, paging);
+		
+		model.addAttribute("searchOption", searchOption);
+		model.addAttribute("paging",paging);
+		model.addAttribute("prodcutStockList", prodcutStockList);
+		return "/admin/product_stock/productStockList";
 
-			model.addAttribute("prodcutStockList", prodcutStockList);
-			return "/admin/product_stock/productStockList";
-		}
-			
-			
+
+
 
 	}
-	
+
 	@RequestMapping("getProductStockList.mdo")
 	public String getProductStockList(Model model) {
 		ProductStockVO productStockVO = new ProductStockVO();
@@ -51,12 +55,12 @@ public class ProductStockController {
 		model.addAttribute("article", getStock);
 		return "/admin/product_stock/productStock";
 	}//상세보기
-	
+
 	@RequestMapping("updateStock.mdo")
 	public String updateProductStock(@RequestParam(value="product_no")int product_no, @RequestParam(value="xs")int xs, @RequestParam(value="s")int s, @RequestParam(value="m")int m, @RequestParam(value="l")int l, @RequestParam(value="xl")int xl, ProductStockVO productStockVO) {
 		productStockService.updateStock(productStockVO);
-		
-		
+
+
 		return "redirect:productStockList.mdo";
 	}
 

@@ -17,6 +17,7 @@
 		<typeAlias type="com.thisisthat.admin.terms.vo.UtilizationVO" alias="utilizationVO"/>
 		<typeAlias type="com.thisisthat.user.address.vo.AddressVO" alias="AddressVO"/>
 		<typeAlias type="com.thisisthat.user.item.vo.CommentVO" alias="commentVO"/>
+		<typeAlias type="com.thisisthat.log.vo.LogVO" alias="logVO"/>
 
 	</typeAliases>
 	<mappers>
@@ -49,5 +50,7 @@
 		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-sales-mapping.xml"/>
 		
+
+		<mapper resource="mappings/log/log-mapping.xml"/>
 	</mappers>
 </configuration>

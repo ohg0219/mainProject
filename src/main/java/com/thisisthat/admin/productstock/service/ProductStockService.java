@@ -3,15 +3,18 @@ package com.thisisthat.admin.productstock.service;
 import java.util.List;
 
 import com.thisisthat.admin.productstock.vo.ProductStockVO;
+import com.thisisthat.util.PagingVO;
 
 public interface ProductStockService {
-
+	
+	int getCount(ProductStockVO productStockVO);
+	
 	List<ProductStockVO> stockList(ProductStockVO productStockVO);
 
 	ProductStockVO getStock(ProductStockVO productStockVO);
 
 	void updateStock(ProductStockVO productStockVO);
 
-	List<ProductStockVO> poductStockList(ProductStockVO productStockVO);
+	List<ProductStockVO> poductStockList(ProductStockVO productStockVO, PagingVO paging);
 
 }

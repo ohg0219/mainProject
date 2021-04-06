@@ -86,7 +86,7 @@
 								<tr>
 									<td>${answer.boardNo}</td>
 									<td align="center"><strong><a id="${answer.boardWriter }" class="img-circle" onclick="userCheck()"
-											href="getAnswer.do?boardNo=${answer.boardNo}">${answer.boardTitle}
+											href="/getAnswer.do?boardNo=${answer.boardNo}">${answer.boardTitle}
 										<c:if test="${answer.boardSecret }" >
 											<img alt="이미지를 불러오지 못했습니다" width="10" height="10"
 																id="img" name="true"
@@ -96,9 +96,18 @@
 										</c:if>
 										<c:if test="${!answer.boardSecret }" >
 											<input type="hidden" id="img" class="${boardWriter}">
+										</c:if></a>
+										
+										<c:if test="${not empty replyList}">
+											<c:forEach var="ans" items="${replyList}">
+												<c:if test="${ans.resultNo == answer.boardNo}">
+													<br>&nbsp;&nbsp;&nbsp;<a
+														href="/getAnswer.do?boardNo=${ans.boardNo}">└${ans.boardTitle }</a>
+												</c:if>
+											</c:forEach>
 										</c:if>
-									
-									</a></strong></td>
+
+									</strong></td>
 									<td>${answer.boardWriter}</td>
 									<td><fmt:formatDate value="${answer.regDate}"
 											pattern="yyyy-MM-dd " /><br>
@@ -156,7 +165,7 @@
     margin-left: 230px;
     border: 1px solid #111;
     text-decoration: none;
-    padding: 0px 80px;">글쓰기</a> <a class="img-circle">qweqwe</a>
+    padding: 0px 80px;">글쓰기</a> 
 					</div>
 				</form>
 			</div>

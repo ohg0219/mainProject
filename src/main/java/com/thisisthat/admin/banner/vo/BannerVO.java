@@ -5,13 +5,28 @@ public class BannerVO {
 	private String bannerUri;
 	private int bannerOrder;
 	private String bannerName;
+	private String bannerState;
+	private String bannerLocation;
 	
 	
 	
 	@Override
 	public String toString() {
 		return "BannerVO [bannerNo=" + bannerNo + ", bannerUri=" + bannerUri + ", bannerOrder=" + bannerOrder
-				+ ", bannerName=" + bannerName + "]";
+				+ ", bannerName=" + bannerName + ", bannerState=" + bannerState + ", bannerLocation=" + bannerLocation
+				+ "]";
+	}
+	public String getBannerLocation() {
+		return bannerLocation;
+	}
+	public void setBannerLocation(String bannerLocation) {
+		this.bannerLocation = bannerLocation;
+	}
+	public String getBannerState() {
+		return bannerState;
+	}
+	public void setBannerState(String bannerState) {
+		this.bannerState = bannerState;
 	}
 	public int getBannerNo() {
 		return bannerNo;

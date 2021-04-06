@@ -17,9 +17,9 @@ public class UserServiceImpl implements UserService {
 	UserDAO dao;
 	
 	@Override
-	public List<BannerVO> getBannerList() {
+	public List<BannerVO> getBannerList(String state) {
 		
-		return dao.getBannerList();
+		return dao.getBannerList(state);
 	}
 
 	@Override

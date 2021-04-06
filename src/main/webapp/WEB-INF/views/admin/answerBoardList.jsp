@@ -39,7 +39,6 @@ a {
 </style>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body id="page-top">
 
@@ -200,7 +199,7 @@ a {
 									<div style="display: block; text-align: center;">
 										<c:if test="${paging.startPage != 1 }">
 											<a
-												href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}&type=${type}
+												href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }
 												&searchType=${search.searchType}&parameter=${search.parameter}">&lt;</a>
 										</c:if>
 										<c:forEach begin="${paging.startPage }"
@@ -211,14 +210,14 @@ a {
 												</c:when>
 												<c:when test="${p != paging.nowPage }">
 													<a
-														href="/admin/answerBoardList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}&type=${type}
+														href="/admin/answerBoardList.mdo?nowPage=${p }
 												&searchType=${search.searchType}&parameter=${search.parameter}">${p }</a>
 												</c:when>
 											</c:choose>
 										</c:forEach>
 										<c:if test="${paging.endPage != paging.lastPage}">
 											<a
-												href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}&type=${type}
+												href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }
 										&searchType=${search.searchType}&parameter=${search.parameter}">&gt;</a>
 										</c:if>
 									</div>

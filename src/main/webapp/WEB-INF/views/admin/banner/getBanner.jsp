@@ -61,8 +61,15 @@
                     	배너 관리
                     </h1>
                     	<div>
-                    	
-	                    	<a class="btn btn-dark" href="/admin/insertBanner.mdo">배너 추가</a>
+	                    	<a class="btn btn-dark" href="/admin/insertBanner.mdo?state=${state}">배너 추가</a>
+	                    	<div style="float: right;">
+								<select id="bannerState"  onchange="selChange()">
+									<option value="main"
+										<c:if test="${state == 'main'}">selected</c:if>>메인배너</option>
+									<option value="sub"
+										<c:if test="${state == 'sub'}">selected</c:if>>서브배너</option>
+								</select>
+							</div>
                     	</div> 
 
                     <!-- Content Row -->
@@ -74,6 +81,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                             <form action="/admin/bannerOrder.mdo">
+                            	<input type="hidden" name="state" value= "${state}">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -91,7 +99,7 @@
 		                                        <input type="hidden" value=${banner.bannerUri } name="bannerUri"></td>
 		                                        <td align="center"><img style="width: 70px" alt="" src="${banner.bannerUri }"> </td>
 		                                        <td><input type="text" name="bannerOrder" value="${banner.bannerOrder}"></td>
-		                                       <td><a href="/admin/deleteBanner.mdo?bannerOrder=${banner.bannerOrder}" class="btn btn-dark">삭제</a></td>
+		                                       <td><a href="/admin/deleteBanner.mdo?bannerOrder=${banner.bannerOrder}&key=${banner.bannerUri}" class="btn btn-dark">삭제</a></td>
 		                                        
 		                                    </tr>
 	                                    </c:forEach>
@@ -147,6 +155,13 @@
 	}
 	if(msg == 'success'){
 		alert('성공')
+	}
+	function selChange() {
+		var state = document.getElementById('bannerState').value;
+		
+		location.href = "/admin/getBanner.mdo?state="+state;
+				
+
 	}
 </script>
 </html>
