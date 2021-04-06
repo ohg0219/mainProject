@@ -19,7 +19,7 @@
 		<typeAlias type="com.thisisthat.user.item.vo.CommentVO" alias="commentVO"/>
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentViewVO" alias="RecentViewVO"/>
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentBasketVO" alias="RecentBasketVO"/>
-
+		<typeAlias type="com.thisisthat.log.vo.LogVO" alias="logVO"/>
 	</typeAliases>
 	<mappers>
 		<!-- 매퍼파일 -->		
@@ -52,6 +52,7 @@
 		<mapper resource="mappings/admin/admin-banner-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-sales-mapping.xml"/>
+		<mapper resource="mappings/log/log-mapping.xml"/>
 		
 	</mappers>
 </configuration>
