@@ -60,6 +60,9 @@ public class UserManagementController {
 				userTemp.setUserName(temp.toString());
 			}
 			userList.add(userTemp);
+			
+			
+			
 		}
 		System.out.println(paging);
 		model.addAttribute("userVO",vo);
@@ -134,6 +137,7 @@ public class UserManagementController {
 		if(vo.getSearch() == null) vo.setSearch("");
 		PagingVO paging = new PagingVO(userService.getStaffCount(vo), nowPage, 15);
 		List<UserVO> userList = userService.staffList(vo,paging);
+		System.out.println("staffList : "+userList.toString());
 		List<UserVO> newUserList = new ArrayList<UserVO>();
 		for (UserVO user : userList) {
 			if (user.getUserPhone() != null) {

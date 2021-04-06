@@ -24,54 +24,54 @@
 		select * from this_user where user_id = #{userId}
 	</select>
 	<select id="getUserList" resultMap="resultUser">
-		select * from this_user where <![CDATA[ user_role > 99  ]]>
+		select * from this_user where user_role <![CDATA[ > ]]>99  
 		<if test="select=='id'">
 			and user_id like '%'||#{search}||'%'
 		</if>
 		<if test="select=='nickname'">
 			and nick_name like '%'||#{search}||'%'
 		</if>
-		<if test="select == 'all'">
-		and user_id like '%'||#{search}||'%' or nick_name like '%'||#{search}||'%'
+		<if test="select=='all'">
+		and (user_id like '%'||#{search}||'%' or nick_name like '%'||#{search}||'%')
 		</if>
 		order by in_date desc OFFSET #{start} limit #{cntPerPage}
 	</select>
 	<select id="getUserCount" resultType="Integer">
-		select count(*) from this_user where <![CDATA[ user_role > 99  ]]>
+		select count(*) from this_user where user_role <![CDATA[ > ]]>99 
 		<if test="select=='id'">
 			and user_id like '%'||#{search}||'%'
 		</if>
 		<if test="select=='nickname'">
 			and nick_name like '%'||#{search}||'%'
 		</if>
-		<if test="select == 'all'">
-		and user_id like '%'||#{search}||'%' or nick_name like '%'||#{search}||'%'
+		<if test="select=='all'">
+		and (user_id like '%'||#{search}||'%' or nick_name like '%'||#{search}||'%')
 		</if>
 	</select>	
 	<select id="getStaffCount" resultType="Integer">
-		select count(*) from this_user where <![CDATA[ user_role < 51  ]]>
+		select count(*) from this_user where user_role <![CDATA[ < ]]>21 
 		<if test="select=='id'">
 			and user_id like '%'||#{search}||'%'
 		</if>
 		<if test="select=='nickname'">
 			and nick_name like '%'||#{search}||'%'
 		</if>
-		<if test="select == 'all'">
-		and user_id like '%'||#{search}||'%' or nick_name like '%'||#{search}||'%'
+		<if test="select=='all'">
+		and (user_id like '%'||#{search}||'%' or nick_name like '%'||#{search}||'%')
 		</if>
 	</select>	
 	
 	
 	<select id="getStaffList" resultMap="resultUser" resultType="UserVO">
-		select * from this_user where <![CDATA[ user_role < 51 ]]>
+		select * from this_user where user_role <![CDATA[ < ]]>21 
 		<if test="select=='id'">
 			and user_id like '%'||#{search}||'%'
 		</if>
 		<if test="select=='nickname'">
 			and nick_name like '%'||#{search}||'%'
 		</if>
-		<if test="select == 'all'">
-		and user_id like '%'||#{search}||'%' or nick_name like '%'||#{search}||'%'
+		<if test="select=='all'">
+		and (user_id like '%'||#{search}||'%' or nick_name like '%'||#{search}||'%')
 		</if>
 		order by in_date desc OFFSET #{start} limit #{cntPerPage}
 	</select>

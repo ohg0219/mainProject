@@ -113,9 +113,15 @@ a {
 													<c:if test="${not empty user.outDate}">
 														<td width="75">탈퇴</td>
 													</c:if>
-													<c:if test="${empty user.outDate }">
-														<td width="75">회원</td>
+													<c:if test="${empty user.outDate}">
+														<c:if test="${user.userRole == 100}">
+															<td width="75">회원</td>
+														</c:if>
+														<c:if test="${user.userRole == 110}">
+															<td width="75">정지</td>
+														</c:if>
 													</c:if>
+												
 												</tr>
 											</c:forEach>
 										</c:if>

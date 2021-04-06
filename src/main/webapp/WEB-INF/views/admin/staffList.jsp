@@ -104,7 +104,7 @@ a {
 														<td width="75">퇴사</td>
 													</c:if>
 													<c:if test="${empty user.outDate }">
-														<td width="75">회원</td>
+														<td width="75">직원</td>
 													</c:if>
 												</tr>
 											</c:forEach>
