@@ -281,7 +281,7 @@ a.dual {
         				<div id="boxsize">
        				    	<a href="/mypage/mypage.do" class="sltd"><strong>my</strong></a>
             				<a href="/mypage/modify.do">profile</a>
-            				<a href="/mypage/addr.do">address book</a>
+            				<a href="/mypage/address.do">address book</a>
 							<a href="/mypage/orderlist.do">orders</a>
             				<a href="/mypage/point.do">point</a>
             				<a href="/mypage/coupon.do">coupon</a>
@@ -291,6 +291,8 @@ a.dual {
         	    	<div class="xans-element- xans-myshop xans-myshop-benefit">
         	    		<div class="infoWrap">
                 			<div class="myInfo">
+                				<strong class="name"><span>${namePoint.nick_name }</span></strong>
+                    			<strong class="group">[${namePoint.user_name }]</strong>
                				</div>
                			</div>
                		</div>

@@ -18,6 +18,8 @@ public class ProductStockController {
 
 	@Autowired
 	private ProductStockService productStockService;
+	
+
 
 	@RequestMapping("getStockList.mdo")
 	public String productStockList(Model model,@RequestParam(value="searchOption")String searchOption,
@@ -33,10 +35,9 @@ public class ProductStockController {
 		model.addAttribute("prodcutStockList", prodcutStockList);
 		return "/admin/product_stock/productStockList";
 
-
-
-
 	}
+
+
 
 	@RequestMapping("getProductStockList.mdo")
 	public String getProductStockList(Model model) {
@@ -49,6 +50,7 @@ public class ProductStockController {
 
 	@RequestMapping("getProductStock.mdo")
 	public String getProductStock(Model model,@RequestParam(value="product_no")int product_no, ProductStockVO productStockVO) {
+	
 		productStockVO.setProduct_no(product_no);
 		ProductStockVO getStock =  productStockService.getStock(productStockVO);
 

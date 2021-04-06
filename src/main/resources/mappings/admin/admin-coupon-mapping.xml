@@ -14,15 +14,15 @@
 	<select id="viewCoupon" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
 		select * from admin_coupon where coupon_no=#{coupon_no}
 	</select>
-	<select id="insertCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
+	<insert id="insertCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
 		insert into admin_coupon(coupon_name, coupon_price, coupon_first, coupon_last) values(#{coupon_name},#{coupon_price},#{coupon_first},#{coupon_last})
-	</select>
-	<select id="deleteCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
+	</insert>
+	<delete id="deleteCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
 		delete from admin_coupon where coupon_no=#{coupon_no}
-	</select>
-	<select id="updateCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
+	</delete>
+	<update id="updateCoupon" parameterType="com.thisisthat.admin.coupon.vo.CouponVO">
 		update admin_coupon set coupon_name=#{coupon_name},coupon_price=#{coupon_price},coupon_first=#{coupon_first},coupon_last=#{coupon_last} where coupon_no=#{coupon_no}
-	</select>
+	</update>
 	
 	
 </mapper>

@@ -17,7 +17,8 @@
 		<typeAlias type="com.thisisthat.admin.terms.vo.UtilizationVO" alias="utilizationVO"/>
 		<typeAlias type="com.thisisthat.user.address.vo.AddressVO" alias="AddressVO"/>
 		<typeAlias type="com.thisisthat.user.item.vo.CommentVO" alias="commentVO"/>
-		<typeAlias type="com.thisisthat.log.vo.LogVO" alias="logVO"/>
+		<typeAlias type="com.thisisthat.user.recent.vo.RecentViewVO" alias="RecentViewVO"/>
+		<typeAlias type="com.thisisthat.user.recent.vo.RecentBasketVO" alias="RecentBasketVO"/>
 
 	</typeAliases>
 	<mappers>
@@ -34,6 +35,8 @@
 		<mapper resource="mappings/user/user-basketlist-mapping.xml"/>
 		<mapper resource="mappings/user/user-payment-mapping.xml"/>
 		<mapper resource="mappings/user/user-address-mapping.xml"/>
+		<mapper resource="mappings/user/user-recent-mapping.xml"/>
+		
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
@@ -50,7 +53,5 @@
 		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-sales-mapping.xml"/>
 		
-
-		<mapper resource="mappings/log/log-mapping.xml"/>
 	</mappers>
 </configuration>

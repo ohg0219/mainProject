@@ -15,6 +15,8 @@ public interface UserPointService {
 
 	UserPointVO totalPoint(UserPointVO userPointVO);
 
+	UserPointVO namePoint(UserPointVO userPointVO);
+
 	
 
 }

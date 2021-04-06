@@ -17,4 +17,12 @@ public interface ProductStockService {
 
 	List<ProductStockVO> poductStockList(ProductStockVO productStockVO, PagingVO paging);
 
+	List<ProductStockVO> allList(ProductStockVO productStockVO);
+
+	List<ProductStockVO> productnoList(ProductStockVO productStockVO);
+
+	List<ProductStockVO> productnameList(ProductStockVO productStockVO);
+
+	ProductStockVO sizepro(ProductStockVO productStockVO);
+
 }

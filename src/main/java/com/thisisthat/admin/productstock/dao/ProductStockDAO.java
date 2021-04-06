@@ -44,6 +44,22 @@ public class ProductStockDAO {
 		return mybatis.selectOne("Product_StockDAO.getCount",productStockVO);
 	}
 
+	public List<ProductStockVO> allList(ProductStockVO productStockVO) {
+		return mybatis.selectList("Product_StockDAO.allList", productStockVO);
+	}
+
+	public List<ProductStockVO> productnoList(ProductStockVO productStockVO) {
+		return mybatis.selectList("Product_StockDAO.productnoList", productStockVO);
+	}
+
+	public List<ProductStockVO> productnameList(ProductStockVO productStockVO) {
+		return mybatis.selectList("Product_StockDAO.productnameList", productStockVO);
+	}
+
+	public ProductStockVO sizepro(ProductStockVO productStockVO) {
+		return mybatis.selectOne("Product_StockDAO.sizepro", productStockVO);
+	}
+
 	
 	
 	

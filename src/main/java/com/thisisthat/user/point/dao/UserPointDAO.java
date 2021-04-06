@@ -30,6 +30,10 @@ public class UserPointDAO {
 	public UserPointVO totalPoint(UserPointVO userPointVO) {
 		return mybatis.selectOne("userPointDAO.totalPoint", userPointVO);
 	}
+
+	public UserPointVO namePoint(UserPointVO userPointVO) {
+		return mybatis.selectOne("userPointDAO.namePoint", userPointVO);
+	}
 	
 
 	

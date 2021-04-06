@@ -113,10 +113,21 @@ a {
 												</tr>
 											</c:forEach>
 										
-										
 									</tbody>
 								</table>
 								<div>
+									<form action="getStockList.mdo" method="post">
+										<select name="searchOption" aria-controls="example" class="">
+											<option value="all">전체</option>
+											<option value="product_no">상품번호</option>
+											<option value="product_name">상품명</option>
+										</select>
+										<input type="text" name="keyword">
+										<button type="submit" class="btn btn-dark" id="searchBtn">
+										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
+										검색버튼
+									</button>
+									</form>
 									<br>
 									<div style="display: block; text-align: center;">
 										<c:if test="${paging.startPage != 1 }">
