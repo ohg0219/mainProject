@@ -184,20 +184,10 @@ a {
 			location.href="/admin/selectOrderManagement.mdo?order_state="+select+"&order_no="+number+"&invoice_no="+invoiceno;				
 			}else{				
 			location.href="/admin/selectOrderManagementList.mdo?order_state="+select+"&order_no="+number;
-			}
-				
-			
+			}	
 		});
 	});
-	
-	
-	
-	
-	
 	</script>
-
-
-
 
 </body>
 </html>
