@@ -69,11 +69,18 @@ public class ProductStockController {
 	}//상세보기
 	
 	@RequestMapping("updateStock.mdo")
-	public String updateProductStock(@RequestParam(value="product_no")int product_no, @RequestParam(value="xs")int xs, @RequestParam(value="s")int s, @RequestParam(value="m")int m, @RequestParam(value="l")int l, @RequestParam(value="xl")int xl, ProductStockVO productStockVO) {
+	public String updateProductStock(
+			@RequestParam(value="product_no")int product_no, 
+			@RequestParam(value="xs",defaultValue = "0")int xs, 
+			@RequestParam(value="s",defaultValue = "0")int s, 
+			@RequestParam(value="m",defaultValue = "0")int m, 
+			@RequestParam(value="l",defaultValue = "0")int l, 
+			@RequestParam(value="xl",defaultValue = "0")int xl, 
+			ProductStockVO productStockVO) {
 		productStockService.updateStock(productStockVO);
 		
 		
-		return "redirect:productStockList.mdo";
+		return "redirect:getProductStockList.mdo";
 	}
 
 }// end class

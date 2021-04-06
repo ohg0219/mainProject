@@ -36,6 +36,7 @@
 		<mapper resource="mappings/user/user-payment-mapping.xml"/>
 		<mapper resource="mappings/user/user-address-mapping.xml"/>
 		<mapper resource="mappings/user/user-recent-mapping.xml"/>
+		<mapper resource="mappings/user/user-order-mapping.xml"/>
 		
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />

@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -70,7 +72,7 @@
 						<li><a href="/mypage/mypage.do">MYPAGE</a></li>	
 					</c:if>	
 				</c:if>
-				<li><a href="#">ORDERS</a></li>
+				<li><a href="/orders.do">ORDERS</a></li>
 				<li><a href="/basket.do">BAG</a></li>
 			</ul>
 		</div> 
