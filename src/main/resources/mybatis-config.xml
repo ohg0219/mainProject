@@ -15,6 +15,7 @@
 		<typeAlias type="com.thisisthat.admin.banner.vo.BannerVO" alias="bannerVO"/>
 		<typeAlias type="com.thisisthat.admin.terms.vo.InformationVO" alias="informationVO"/>
 		<typeAlias type="com.thisisthat.admin.terms.vo.UtilizationVO" alias="utilizationVO"/>
+		<typeAlias type="com.thisisthat.admin.orderManagement.vo.OrderManagementVO" alias="orderManagementVO"/>
 		<typeAlias type="com.thisisthat.user.address.vo.AddressVO" alias="AddressVO"/>
 		<typeAlias type="com.thisisthat.user.item.vo.CommentVO" alias="commentVO"/>
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentViewVO" alias="RecentViewVO"/>
@@ -54,6 +55,7 @@
 		<mapper resource="mappings/admin/admin-banner-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-sales-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-orderManagement-mapping.xml"/>
 		<mapper resource="mappings/log/log-mapping.xml"/>
 		
 	</mappers>

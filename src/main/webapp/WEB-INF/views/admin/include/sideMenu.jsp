@@ -79,24 +79,15 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/admin/categoryList.mdo">카테고리 관리</a>
                         <a class="collapse-item" href="/admin/productList.mdo">상품 관리</a>
-                        <a class="collapse-item" href="register.html">상품수정/삭제</a>
-                        <a class="collapse-item" href="/admin/getProductStockList.mdo">상품재고관리</a>
+                        <a class="collapse-item" href="/admin/getStockList.mdo">상품재고관리</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="charts.html" data-toggle="collapse" data-target="#order" aria-expanded="true">
+			<li class="nav-item">
+                <a class="nav-link" href="/admin/getOrderManagementList.mdo">
                     <i class="fas fa-fw fa-truck"></i>
-                    <span>주문관리</span>
-                </a>
-                <div id="order" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/admin/getOrderManagementList.mdo">주문내역</a>
-                        <a class="collapse-item" href="register.html">배송관리</a>
-                    </div>
-                </div>
+                    <span>주문관리</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoards" aria-expanded="false" aria-controls="collapsePages">
@@ -107,7 +98,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/admin/articleGate.mdo?where=notice">공지사항</a>
                         <a class="collapse-item" href="/admin/articleGate.mdo?where=event">이벤트</a>
-                        <a class="collapse-item" href="404.html">상품문의관리</a>
                         <a class="collapse-item" href="/admin/answerBoardList.mdo">Q&A</a>
                         <a class="collapse-item" href="blank.html">후기관리</a>
                     </div>

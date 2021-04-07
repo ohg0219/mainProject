@@ -22,7 +22,7 @@ public class ProductStockController {
 
 
 	@RequestMapping("getStockList.mdo")
-	public String productStockList(Model model,@RequestParam(value="searchOption")String searchOption,
+	public String productStockList(Model model,@RequestParam(value="searchOption",defaultValue = "all")String searchOption,
 			@RequestParam(value="nowPage", required = false)Integer nowPage
 			,ProductStockVO productStockVO){
 		if(nowPage == null) nowPage = 1;

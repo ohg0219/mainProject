@@ -18,6 +18,7 @@ public class UserPaymentVO {
 	private int originalPrice;
 	private int usePoint;
 	private int useCoupon;
+	private long couponNo;
 	private int orderPrice;
 	private String orderSelect;
 	private String passbookName;
@@ -136,6 +137,14 @@ public class UserPaymentVO {
 
 	public void setUseCoupon(int useCoupon) {
 		this.useCoupon = useCoupon;
+	}
+
+	public long getCouponNo() {
+		return couponNo;
+	}
+
+	public void setCouponNo(long couponNo) {
+		this.couponNo = couponNo;
 	}
 
 	public int getOrderPrice() {

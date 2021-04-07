@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.vo.UserAddressVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
+import com.thisisthat.user.payment.vo.UserCouponVO;
 import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserOrderVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
@@ -32,6 +33,12 @@ public class UserPaymentDAO {
 	}
 	public int getUserPoint(String userId) {
 		return paymentTemplate.selectOne("PaymentDAO.getUserPoint",userId);
+	}
+	public List<UserCouponVO> getCouponList(String userId){
+		return paymentTemplate.selectList("PaymentDAO.getCouponList",userId);
+	}
+	public void updateCoupon(UserPaymentVO vo) {
+		paymentTemplate.update("PaymentDAO.updateCoupon",vo);
 	}
 	public int basketPointSum(String userId) {
 		return paymentTemplate.selectOne("PaymentDAO.basketPointSum",userId);

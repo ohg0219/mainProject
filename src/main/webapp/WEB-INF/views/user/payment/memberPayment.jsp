@@ -70,6 +70,14 @@
 		cursor: pointer;
 		text-align: center;
 	}
+	#couponBtn{
+		all:unset;
+		background-color: black;
+		cursor: pointer;
+		text-align: center;
+		color: white;
+		padding: 4px;
+	}
 	#paymentBtn{
 		padding: 7px 0px;
 		width: 100%;
@@ -108,6 +116,7 @@
 		var userPoint = $("#userPoint").val();
 		$("#usePoint").on("blur",function(){
 			var use = $("#usePoint").val();
+			var couponPrice = $("#couponPrice").text();
 			if(parseInt(use) > parseInt(userPoint)){
 				$("#usePoint").val(0);
 				alert("사용가능포인트보다 많은 포인트는 입력할 수 없습니다.");
@@ -118,9 +127,15 @@
 					alert("결제금액보다 많은 포인트는 입력할 수 없습니다.");
 					return false;
 				}else{
-					$("#totalPrice").text(total-use);
+					$("#pointCoupon").text(parseInt(use)+parseInt(couponPrice));
+					$("#totalPrice").text(total-use-couponPrice);
+					$("#resultPrice").text(total-use-couponPrice);
 				}
 			}
+		});
+		$("#couponBtn").on("click",function(){
+			var userId = $("#userId").val();
+			window.open("/couponBook.do?userId="+userId, "childForm", "width=800, height=350, resizable = no, scrollbars = no");
 		});
 		var form = document.payform;
 		var product = $("#productList").val();
@@ -158,7 +173,10 @@
 		});
 		
 		$("#paymentBtn").on("click",function(){
-			
+			if($("#totalPrice").text() == '0'){
+				$(".waiting").css("display","block");
+				form.submit();
+			}
 			
 			if($("input[name=receiveName]").val()==''){
 				alert("이름을 입력하세요."); return false;
@@ -183,6 +201,10 @@
 				return false;
 			}
 			if($("input[name='orderSelect']:checked").val()=='카카오페이'){
+				if($("#totalPrice").text() == '0'){
+					$(".waiting").css("display","block");
+					return false;
+				}
 				IMP.request_pay({
 				    pg : 'kakao', // 결제방식
 				    pay_method : 'card',	// 결제 수단
@@ -336,9 +358,20 @@
 								<c:if test="${userPoint != null }">
 									<input type="text" id="usePoint"  name="usePoint" value="0" >
 								</c:if>
-								<span>사용가능 포인트 : ₩ <fmt:formatNumber maxFractionDigits="3" value="${userPoint }"/></span>
+								<span>사용가능 포인트 : &#8361; <fmt:formatNumber maxFractionDigits="3" value="${userPoint }"/></span>
 								<input type="hidden" id="userPoint" value="${userPoint }">
 								</div>
+							</li>
+							<li>
+								<div class="rightItem">
+									<input type="button" id="couponBtn" value="쿠폰조회">
+								</div>
+							</li>
+							<li>
+								<span class="leftItem">쿠폰금액</span>
+								<input type="hidden" name="couponNo" value="0">
+								<input id="useCoupon" type="hidden" name="useCoupon" value="0">
+								<span class="rightItem" id="couponPrice">0</span>
 							</li>
 						</ul>
 						<hr>
@@ -354,7 +387,7 @@
 								<span class="leftItem">SUBTOTAL</span>
 								<span class="rightItem">&#8361;
 									<c:if test="${subTotal != null }">
-									<span><fmt:formatNumber maxFractionDigits="3" value="${subTotal }"/></span>
+									<span><span id="subTotal">${subTotal }</span></span>
 									</c:if>
 									<c:if test="${subTotal == null }">
 										
@@ -362,12 +395,12 @@
 								</span>
 							</li>
 							<li>
-								<span class="leftItem">할인 금액</span>
-								<span class="rightItem">&#8361;<span>0</span></span>
+								<span class="leftItem">포인트 및 쿠폰금액</span>
+								<span class="rightItem">&#8361;<span id="pointCoupon">0</span></span>
 							</li>
 							<li>
 								<span class="leftItem">TOTAL</span>
-								<span class="rightItem">&#8361; <span><fmt:formatNumber maxFractionDigits="3" value="${subTotal }"/></span></span>
+								<span class="rightItem">&#8361; <span id="resultPrice">${subTotal }</span></span>
 							</li>
 						</ul>
 						<hr>
@@ -382,7 +415,7 @@
 								<span class="leftItem" style="height: 25px;">입금자명</span>
 								<span class="rightItem" style="height: 25px;"><input class="passbookName" type="text" name="passbookName"></span>
 								<span class="leftItem" style="height: 25px">입금은행</span>
-								<span class="rightItem"><select><option>XX은행:123-123456-1234</option></select></span>
+								<span class="rightItem">XX은행:123-123456-1234</span>
 							</li>
 							<!-- end 무통장 -->
 						</ul>

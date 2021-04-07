@@ -139,9 +139,10 @@
 	color: #111;
 }
 
-.xans-myshop-benefit .myInfo {
+.xans-myshop-benefit .selectDate {
 	padding: 0;
 	font-size: 11px;
+	text-align: center;
 }
 
 .xans-myshop-bankbook {
@@ -301,7 +302,7 @@ function getData(){
 		}
 	}
 	if(sDate == '' || eDate == ''){
-		alert("조회 일자를 선택해주세요");
+		alert("조회 기간을 선택해주세요");
 		return false;
 	}
 	location.href="/mypage/orderlist.do?sDate="+sDate+"&eDate="+eDate;
@@ -330,7 +331,7 @@ function getData(){
 						<div class="w-2">
 							<div class="xans-element- xans-myshop xans-myshop-benefit">
 								<div class="infoWrap">
-									<div class="myInfo">
+									<div class="selectDate">
 										조회 기간 : 
 										<input class="btn btn-dark" type="text" id="sDate" autocomplete="off" name="sDate" value="${sDate }">
 										 ~ 
@@ -340,7 +341,7 @@ function getData(){
 								</div>
 							</div>
 							<div class="xans-element- xans-myshop xans-myshop-bankbook">
-								<table border="1" style="border-collapse: collapse;">
+								<table border="1" style="border-collapse: collapse;width: 100%;">
 									<tr>
 										
 										<th style="padding: 8px;">주문일자</th>
@@ -369,7 +370,7 @@ function getData(){
 									</tr>
 									</c:forEach>
 								</table>
-								<div align="center">
+								<div align="center" style="margin-top: 10px;">
 									<c:if test="${paging.startPage != 1 }">
 										<a href="/mypage/orderlist.do?nowPage=${paging.startPage - 1 }&sDate=${sDate}&eDate=${eDate}">&lt;</a>
 									</c:if>
