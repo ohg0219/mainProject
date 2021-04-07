@@ -82,6 +82,13 @@
                     						<td colspan="2" height="300"><textarea name="content" rows="30px" style="resize: none; width: 100%;" required="required"></textarea></td>
                     					
                     					</tr>
+                    					<tr>
+                    						<td align="center" colspan="500"><strong>수정사항</strong></td>
+                    					</tr>
+                    					<tr>
+                    						<td colspan="2" height="300"><textarea name="corrections" rows="10px" style="resize: none; width: 100%;" required="required"></textarea></td>
+                    					
+                    					</tr>
                     					
                     					
                     					<tr>
