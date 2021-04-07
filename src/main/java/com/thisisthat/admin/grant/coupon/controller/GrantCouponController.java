@@ -31,7 +31,9 @@ public class GrantCouponController {
 	 * 쿠폰 부여 현황 페이지가 보여짐
 	 */
 	@RequestMapping("grantCoupon.mdo")
-	public String grantCouponList(Model model, CouponGrantVO vo, UserVO vo1) {
+	public String grantCouponList(Model model, CouponGrantVO vo, UserVO vo1,
+			@RequestParam(value = "nowPage")int nowPage) {
+		
 		List<CouponGrantVO> userCouponList = couponGrantService.userCouponList(vo);
 		model.addAttribute("userCouponList", userCouponList);
 		return "/admin/coupon/grantCoupon";

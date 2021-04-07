@@ -9,10 +9,7 @@ $(document).ready(function(){
 	}
 	btn_off();
 	$("input[name=id]").focus();
-	$(".address_btn").on("click",function(e){
-		e.preventDefault();
-		DaumPostcode();
-	});
+	
 	$(".register_btn").on("click",function(){
 		if($("input[name=id]").val().trim() == ''){
 			$("input[name=id]").focus();

@@ -18,6 +18,22 @@
 		<id property="inDate" column="in_date"/>
 		<id property="outDate" column="out_date"/>
 	</resultMap>
+	<resultMap type="UserVO" id="resultUser">
+		<id property="userId" column="user_id"></id>
+		<result property="userName" column="user_name"/>
+		<result property="nickName" column="nick_name"/>
+		<result property="userPw" column="user_pass"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="userEmail" column="user_email"/>
+		<result property="zipCode" column="zip_code"/>
+		<result property="firstAddress" column="first_address"/>
+		<result property="lastAddress" column="last_address"/>
+		<result property="userRole" column="user_role"/>
+		<result property="inDate" column="in_date"/>
+		<result property="outDate" column="out_date"/>
+		<result property="userImg" column="user_img"/>
+		<result property="social" column="social_login"/>		
+	</resultMap>
 	
 	<select id="idCheck" parameterType="String" resultType="int" >
 		select count(user_id) from this_user where user_id = #{userId}
@@ -33,5 +49,8 @@
 		#{phone},#{email},#{zipcode},
 		#{address1},#{address2},20); 
 	</insert>
+	<update id="modifyStaff">
+		update this_user set user_pass = #{userPw}, user_phone = #{userPhone}, user_email = #{userEmail}, zip_code =#{zipCode}, first_address = #{firstAddress}, last_address = #{lastAddress} where user_id = #{userId}
+	</update>
 	
 </mapper>

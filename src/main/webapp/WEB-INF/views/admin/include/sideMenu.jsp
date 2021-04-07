@@ -129,14 +129,14 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales" aria-expanded="false" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>기타</span>
                 </a>
-                <div id="collapseSales" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+                <div id="collapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/admin/getBanner.mdo">배너 관리</a>
-                        <a class="collapse-item" href="/admin/dailySales.mdo">내정보 수정</a>
+                        <a class="collapse-item" href="/admin/modifyStaff.mdo">내정보 수정</a>
                     </div>
                 </div>
             </li>
