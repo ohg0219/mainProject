@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.thisisthat.admin.terms.dao.TermsDAO;
 import com.thisisthat.admin.terms.vo.InformationVO;
 import com.thisisthat.admin.terms.vo.UtilizationVO;
+import com.thisisthat.admin.usermanagement.vo.UserVO;
 import com.thisisthat.util.PagingVO;
 
 @Service
@@ -57,6 +58,11 @@ public class TermsServiceImpl implements TermsService {
 	@Override
 	public InformationVO getInformation(int no) {
 		return termsDAO.getInformation(no);
+	}
+
+	@Override
+	public List<UserVO> getUserList() {
+		return termsDAO.getUserList();
 	}
 
 }

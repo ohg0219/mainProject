@@ -259,7 +259,8 @@ tbody {
 								<a href="/mypage/modify.do">profile</a> 
 								<a href="/mypage/address.do"><strong>address book</strong></a> 
 								<a href="/mypage/orderlist.do">orders</a>
-								<a href="/mypage/point.do">point</a> <a href="/mypage/coupon.do">coupon</a>
+								<a href="/mypage/userPoint.do">point</a> 
+								<a href="/mypage/coupon.do">coupon</a>
 							</div>
 						</div>
 						<div class="w-1">

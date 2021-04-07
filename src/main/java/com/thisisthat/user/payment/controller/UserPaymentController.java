@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.user.basket.vo.UserBasketItemVO;
@@ -37,7 +36,13 @@ public class UserPaymentController {
 	@Autowired
 	private JavaMailSenderImpl senderImpl;
 	
-	@RequestMapping("/addressBook.do")
+	/**
+	 * 회원 주소록 새창띄우기
+	 * @param userId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/addressBook.do")
 	public String addressBook(@RequestParam("userId")String userId,Model model) {
 		List<UserAddressVO> addressList = paymentService.getUserAddressList(userId);
 		for(UserAddressVO address : addressList) {
@@ -48,6 +53,19 @@ public class UserPaymentController {
 		}
 		model.addAttribute("addressList",addressList);
 		return "/user/payment/addressBook";
+	}
+	
+	/**
+	 * 회원 쿠폰목록 새창띄우기
+	 * @param userId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/couponBook.do")
+	public String couponBook(@RequestParam("userId")String userId,Model model) {
+		model.addAttribute("couponList",paymentService.getCouponList(userId));
+		System.out.println(paymentService.getCouponList(userId).toString());
+		return "/user/payment/couponBook";
 	}
 	
 	
@@ -132,12 +150,15 @@ public class UserPaymentController {
 		vo.setOrderDate(new Date());
 		vo.setOrderPrice(vo.getOriginalPrice()-vo.getUsePoint()-vo.getUseCoupon());
 		vo.setWaitingPoint(paymentService.basketPointSum(userId));
+		
 		if(vo.getOrderSelect().equals("카카오페이")) {
 			vo.setOrderState("결제완료");
 		}else if(vo.getOrderSelect().equals("무통장")) {
 			vo.setOrderState("입금대기");
 		}
-		//쿠폰 테이블 미적용
+		if(vo.getUseCoupon()>0) {
+			paymentService.updateCoupon(vo);
+		}
 		if(vo.getUsePoint()>0) {
 			paymentService.insertUsePoint(vo);
 		}
@@ -145,7 +166,6 @@ public class UserPaymentController {
 		model.addAttribute("orderNo",orderNo);
 		model.addAttribute("orderDate",paymentService.getOrderDate(orderNo));
 		mailSend(orderNo);
-		
 		return "/user/payment/paymentResult";
 	}
 	
@@ -263,6 +283,12 @@ public class UserPaymentController {
 		sb.append("<td width='100px'>결제수단</td>");
 		sb.append("<td width='100px'>"+orderInfo.getOrderSelect()+"</td>");
 		sb.append("</tr>");
+		if(orderInfo.getOrderSelect().equals("무통장")) {
+			sb.append("<tr>");
+			sb.append("<td colspan='2' width='200px'>입금계좌</td>");
+			sb.append("<td colspan='2' width='200px'>XX은행:123-123456-1234</td>");
+			sb.append("</tr>");
+		}
 		sb.append("</table>");
 		sb.append("</div>");
 		sb.append("</body></html>");

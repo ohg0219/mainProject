@@ -112,7 +112,7 @@ $(document).ready(function(){
 	<div class="wrap">
 		<%@include file="../include/header.jsp" %>
 		<div class="content">
-			<div class="basket" align="center" style="margin-top: 100px;">
+			<div class="basket" align="center" style="margin-top: 100px; height: 300px">
 				<div class="basket_item">
 				<c:choose>
 					<c:when test="${not empty sessionScope.userId}">
@@ -178,7 +178,7 @@ $(document).ready(function(){
 					</c:when>
 				</c:choose>
 				</div>
-					<div class="basket_total" style="width:492px">
+					<div class="basket_total" style="width:492px;">
 						<c:choose>
 							<c:when test="${not empty sessionScope.basketItem || not empty basketList}">
 								<table style="float: right;">

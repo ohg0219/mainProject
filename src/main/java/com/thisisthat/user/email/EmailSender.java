@@ -10,7 +10,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 public class EmailSender {
 
     public void SendEmail(JavaMailSender mailSender, Email email) throws Exception {
-    	System.out.println("들어오니? : " + mailSender);
         MimeMessage msg = mailSender.createMimeMessage();
         try {
             msg.setSubject(email.getSubject());

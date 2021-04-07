@@ -265,48 +265,7 @@ a.dual {
 }
 </style>
 <script type="text/javascript">
-$(document).ready(function () {
-	$("#sDate").datepicker({
-		dateFormat: "yy-mm-dd",
-		dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		maxDate:0
-	});
-	$("#eDate").datepicker({
-		dateFormat: "yy-mm-dd",
-		dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		maxDate:0
-	});
-});
-function getData(){
-	var sDate = $("#sDate").val();
-	var eDate = $("#eDate").val();
-	
-	var split1 = sDate.split("-");
-	var split2 = eDate.split("-");
-	if(parseInt(split1[0])>parseInt(split2[0])){
-		alert("종료일이 시작일보다 클 수 없습니다.");
-		return false;
-	}else if(parseInt(split1[0])==parseInt(split2[0])){
-		if(parseInt(split1[1])>parseInt(split2[1])){
-			alert("종료일이 시작일보다 클 수 없습니다.");
-			return false;
-		}else if(parseInt(split1[1])==parseInt(split2[1])){
-			if(parseInt(split1[2])>parseInt(split2[2])){
-				alert("종료일이 시작일보다 클 수 없습니다.");
-				return false;
-			}
-		}
-	}
-	if(sDate == '' || eDate == ''){
-		alert("조회 기간을 선택해주세요");
-		return false;
-	}
-	location.href="/mypage/orderlist.do?sDate="+sDate+"&eDate="+eDate;
-}
+
 </script>
 </head>
 <body>
@@ -316,66 +275,42 @@ function getData(){
 			<div id="container">
 				<div id="contents">
 					<div class="inr">
-						<div id="myshopMain"
-							class="xans-element- xans-myshop xans-myshop-main ">
-
+						<div id="myshopMain" class="xans-element- xans-myshop xans-myshop-main ">
 							<div id="boxsize">
 								<a href="/mypage/mypage.do" class="sltd">my</a> 
 								<a href="/mypage/modify.do">profile</a> 
 								<a href="/mypage/address.do">address book</a> 
-								<a href="/mypage/orderlist.do"><strong>orders</strong></a> 
+								<a href="/mypage/orderlist.do">orders</a> 
 								<a href="/mypage/userPoint.do">point</a> 
-								<a href="/mypage/coupon.do">coupon</a>
+								<a href="/mypage/coupon.do"><strong>coupon</strong></a>
 							</div>
 						</div>
 						<div class="w-2">
 							<div class="xans-element- xans-myshop xans-myshop-benefit">
 								<div class="infoWrap">
-									<div>
-										<strong class="group">내 주문조회</strong>
-									</div>
-									<div class="selectDate">
-										조회 기간 : 
-										<input class="btn btn-dark" type="text" id="sDate" autocomplete="off" name="sDate" value="${sDate }">
-										 ~ 
-										<input class="btn btn-dark" type="text" id="eDate" autocomplete="off" name="eDate" value="${eDate }">
-          				         		&nbsp;&nbsp;&nbsp;&nbsp;<input class="btn btn-dark" type="button" value="조회" onclick="getData()">
-									</div>
+									<div class="myInfo">
+		                				<strong class="group">내 쿠폰조회</strong>
+		               				</div>
 								</div>
 							</div>
 							<div class="xans-element- xans-myshop xans-myshop-bankbook">
 								<table border="1" style="border-collapse: collapse;width: 100%;">
 									<tr>
-										
-										<th style="padding: 8px;">주문일자</th>
-										<th style="padding: 8px;" width="80px;">주문번호</th>
-										<th style="padding: 8px;" width="80px;">결제금액</th>
-										<th style="padding: 8px;">상태</th>
-										<th style="padding: 8px;" width="100px;">송장번호</th>
-										<th style="padding: 8px;">상세보기</th>
+										<th style="padding: 8px;" width="80px;">쿠폰명</th>
+										<th style="padding: 8px;" width="80px;">쿠폰금액</th>
+										<th style="padding: 8px;" width="80px;">사용기한</th>
 									</tr>
-									<c:forEach items="${orderList }" var="order">
+									<c:forEach items="${couponList }" var="coupon">
 									<tr>
-										<td style="padding: 8px;"><fmt:formatDate value="${order.orderDate }" pattern="yyyy-MM-dd"/></td>
-										<td style="padding: 8px;text-align: center">${order.orderNo }</td>
-										<td style="padding: 8px;text-align: center"><fmt:formatNumber maxFractionDigits="3" value="${order.orderPrice }"/>원</td>
-										<td style="padding: 8px;text-align: center">${order.orderState }</td>
-										<td style="padding: 8px;text-align: center" >
-											<c:if test="${order.invoiceNo == 0 }">
-												-
-											</c:if>
-											<c:if test="${order.invoiceNo != 0 }">
-												${order.invoiceNo }
-											</c:if>
-											
-										</td>
-										<td style="padding: 8px;text-align: center"><a href="/mypage/getorder.do?orderNo=${order.orderNo }">상세보기</a></td>
+										<td style="padding: 8px;text-align: center">${coupon.couponName }</td>
+										<td style="padding: 8px;text-align: center"><fmt:formatNumber maxFractionDigits="3" value="${coupon.couponPrice }"/>원</td>
+										<td style="padding: 8px;"><fmt:formatDate value="${coupon.couponLast }" pattern="yyyy-MM-dd"/></td>
 									</tr>
 									</c:forEach>
 								</table>
 								<div align="center" style="margin-top: 10px;">
 									<c:if test="${paging.startPage != 1 }">
-										<a href="/mypage/orderlist.do?nowPage=${paging.startPage - 1 }&sDate=${sDate}&eDate=${eDate}">&lt;</a>
+										<a href="/mypage/couponList.do?nowPage=${paging.startPage - 1 }">&lt;</a>
 									</c:if>
 									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 										<c:choose>
@@ -383,12 +318,12 @@ function getData(){
 												<b>${p }</b>
 											</c:when>
 											<c:when test="${p != paging.nowPage }">
-												<a href="/mypage/orderlist.do?nowPage=${p }&sDate=${sDate}&eDate=${eDate}">${p }</a>
+												<a href="/mypage/couponList.do?nowPage=${p }">${p }</a>
 											</c:when>
 										</c:choose>
 									</c:forEach>
 									<c:if test="${paging.endPage != paging.lastPage}">
-										<a href="/mypage/orderlist.do?nowPage=${paging.endPage+1 }&sDate=${sDate}&eDate=${eDate}">&gt;</a>
+										<a href="/mypage/couponList.do?nowPage=${paging.endPage+1 }">&gt;</a>
 									</c:if>
 								</div>
 							</div>
