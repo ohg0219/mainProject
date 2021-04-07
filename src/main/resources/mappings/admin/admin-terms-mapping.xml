@@ -13,7 +13,22 @@
 		<result column="information_content" property="content"/>
 		<result column="reg_date" property="regDate"/>
 	</resultMap>
-	
+	<resultMap type="UserVO" id="resultUser">
+		<id property="userId" column="user_id"></id>
+		<result property="userName" column="user_name"/>
+		<result property="nickName" column="nick_name"/>
+		<result property="userPw" column="user_pass"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="userEmail" column="user_email"/>
+		<result property="zipCode" column="zip_code"/>
+		<result property="firstAddress" column="first_address"/>
+		<result property="lastAddress" column="last_address"/>
+		<result property="userRole" column="user_role"/>
+		<result property="inDate" column="in_date"/>
+		<result property="outDate" column="out_date"/>
+		<result property="userImg" column="user_img"/>
+		<result property="social" column="social_login"/>		
+	</resultMap>
 	<select id="getUtilizationList" resultMap="utilizationResult">
 		select * from utilization order by utilization_no desc offset #{start} limit #{cntPerPage};
 	</select>
@@ -47,5 +62,10 @@
 	</select>
 	<select id="getTopInformation" resultMap="informationResult">
 		select * from information where information_no = (select max(information_no) from information);
+	</select>
+	
+	<select id="termsDAO.getUserList" resultMap="resultUser">
+		select user_email from this_user where <![CDATA[ user_role > 50 and user_role <110 and user_email is not null and user_email != '' and email_ok = 1 group by user_email
+		]]>
 	</select>
 </mapper>
