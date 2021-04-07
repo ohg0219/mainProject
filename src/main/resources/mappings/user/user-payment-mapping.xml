@@ -67,6 +67,13 @@
 		<result property="lastAddress" column="last_address"/>
 		<result property="userPhone" column="user_phone"/>
 	</resultMap>
+	<resultMap type="com.thisisthat.user.payment.vo.UserCouponVO" id="userCouponVO">
+		<result property="userId" column="user_id"/>
+		<result property="couponNo" column="coupon_no"/>
+		<result property="couponName" column="coupon_name"/>
+		<result property="couponPrice" column="coupon_price"/>
+		<result property="couponDate" column="coupon_last"/>
+	</resultMap>
 	<select id="getUserInfo" resultMap="userVO">
 		select * from this_user where user_id = #{userId}
 	</select>	
@@ -109,6 +116,15 @@
 	<insert id="insertUsePoint">
 		insert into user_point (user_id,point_date,point,point_content) values(#{userId},now(),#{usePoint},#{pointContent})
 	</insert>
+	
+	<select id="getCouponList" resultMap="userCouponVO">
+		<![CDATA[
+		select * from user_coupon where coupon_last > now() and used = 0 and user_id = #{userId}
+		]]>
+	</select>
+	<update id="updateCoupon">
+		update user_coupon set used_date = now(), used = 1 where user_id = #{userId} and coupon_no = #{couponNo}
+	</update>
 	<select id="userOrderInfo" resultMap="userMailVO">
 		select o.order_no,o.product_no,p.product_name,o.order_size,o.product_price,o.select_count,(o.product_price*o.select_count) as product_total 
 		from order_product as o, product as p
