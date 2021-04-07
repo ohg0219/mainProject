@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.admin.coupon.service.CouponService;
 import com.thisisthat.admin.coupon.vo.CouponVO;
+import com.thisisthat.util.PagingVO;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -29,25 +30,26 @@ public class CouponController {
 		return "/admin/coupon/couponList";
 	}// end couponList
 
+	
+	
+	
 	@RequestMapping("insertCoupon.mdo")
 	public String insertCoupon() {
 		return "/admin/coupon/insertCoupon";
 	}
 
 	@RequestMapping("couponSearch.mdo")
-	public String couponSearch(Model model, @RequestParam(value = "searchOption") String searchOption,
-			@RequestParam(value = "keyword") String keyword, CouponVO couponVO) {
+	public String couponSearch(Model model,  CouponVO couponVO,
+								@RequestParam(value = "searchOption") String searchOption,
+								@RequestParam(value = "keyword") String keyword) {
 		if (searchOption.equals("coupon_name")) {
 			couponVO.setKeyword(keyword);
+			
 			List<CouponVO> couponList = couponService.nameSearch(couponVO);
 			model.addAttribute("couponList", couponList);
+			PagingVO pagingVO = new PagingVO();
 			return "/admin/coupon/couponList";
-		} else if (searchOption.equals("coupon_first")) {
-
-		} else if (searchOption.equals("coupon_last")) {
-
 		}
-
 		return null;
 	}
 

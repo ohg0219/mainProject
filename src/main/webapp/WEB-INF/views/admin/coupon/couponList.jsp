@@ -97,8 +97,6 @@
                                     
 									<select name="searchOption" aria-controls="example" class="">
 										<option value="coupon_name">쿠폰 명</option>
-										<option value="coupon">시작 일자</option>
-										<option value="coupon_last">종료 일자</option>
 									</select>
 										                                    		
 									<input type="text" name="keyword">

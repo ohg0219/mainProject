@@ -105,7 +105,7 @@
                                     
                                 </table>
                                 
-                                	<form action="couponSearch.mdo" method="get">
+                                	<form action="userCouponSearch.mdo" method="get">
 										<table class="noticeTable">
 											<tr>
 												<td align="right">

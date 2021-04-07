@@ -46,7 +46,7 @@ public class UserOrderController {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		}
+		}			
 		String userId = (String) session.getAttribute("userId");
 		vo.setUserId(userId);
 		int orderCount = service.getOrderCount(vo);

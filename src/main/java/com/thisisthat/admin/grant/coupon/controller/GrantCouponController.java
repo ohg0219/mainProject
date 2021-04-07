@@ -100,7 +100,7 @@ public class GrantCouponController {
 	}
 	
 	//쿠폰 검색하는 메서드
-	@GetMapping("couponSearch.mdo")
+	@GetMapping("userCouponSearch.mdo")
 	public String couponSearch(Model model,
 			@RequestParam("keyword")String keyword,
 			@RequestParam("searchOption")String searchOption,
