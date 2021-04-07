@@ -279,11 +279,11 @@ a.dual {
 							</p>
         				</div>
         				<div id="boxsize">
-       				    	<a href="/mypage/mypage.do" class="sltd"><strong>my</strong></a>
+       				    	<a href="/mypage/mypage.do" class="sltd">my</a>
             				<a href="/mypage/modify.do">profile</a>
             				<a href="/mypage/address.do">address book</a>
 							<a href="/mypage/orderlist.do">orders</a>
-            				<a href="/mypage/point.do">point</a>
+            				<a href="/mypage/point.do"><strong>point</strong></a>
             				<a href="/mypage/coupon.do">coupon</a>
         				</div>
 					</div>
@@ -301,15 +301,15 @@ a.dual {
    					<ul>
 						<li class=" ">
                 			<strong class="title">총 포인트</strong>
-                			<strong class="data use">${totalPoint.sum }P</strong>
+                			<strong class="data use"><fmt:formatNumber maxFractionDigits="3" value="${totalPoint.sum }"/> P</strong>
             			</li>
             			<li class="">
                 			<strong class="title">사용가능 포인트</strong>
-                			<strong class="data">${pointSum.sum }P</strong>
+                			<strong class="data"><fmt:formatNumber maxFractionDigits="3" value="${pointSum.sum }"/> P</strong>
             			</li>
             			<li class="">
                 			<strong class="title">사용된 포인트</strong>
-                			<strong class="data">${usingSum.sum }P</strong>
+                			<strong class="data"><fmt:formatNumber maxFractionDigits="3" value="${usingSum.sum }"/> P</strong>
             			</li>
             			<li class="etc">
                 			<strong class="title">미가용 포인트</strong>

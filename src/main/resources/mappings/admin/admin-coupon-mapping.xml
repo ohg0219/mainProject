@@ -29,5 +29,12 @@
 		update admin_coupon set coupon_name=#{coupon_name},coupon_price=#{coupon_price},coupon_first=#{coupon_first},coupon_last=#{coupon_last} where coupon_no=#{coupon_no}
 	</select>
 	
+	<select id="couponCount" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select count(*) admin_coupon
+		<if test="select='coupon_name'">
+			and coupon_name like '%'||#{keyword}||'%'
+		</if>
+	</select>
+	
 	
 </mapper>
