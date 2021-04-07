@@ -9,6 +9,7 @@ import com.thisisthat.admin.coupon.vo.CouponVO;
 import com.thisisthat.admin.grant.coupon.dao.UserCouponDAO;
 import com.thisisthat.admin.grant.coupon.vo.CouponGrantVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
+import com.thisisthat.util.PagingVO;
 
 
 @Service
@@ -34,10 +35,6 @@ public class CouponGrantServiceImpl implements CouponGrantService {
 		couponGrantDAO.userGrantCoupon(vo);
 	}
 
-	@Override
-	public List<CouponGrantVO> userCouponList(CouponGrantVO vo) {
-		return couponGrantDAO.userCouponList(vo);
-	}
 
 	@Override
 	public void userAllGrantCoupon(List<UserVO> userIdList, int coupon) {
@@ -59,15 +56,15 @@ public class CouponGrantServiceImpl implements CouponGrantService {
 		return couponGrantDAO.userIdCoupon(userId);
 	}
 
-	@Override
-	public List<CouponGrantVO> nameCouponSearch(CouponGrantVO vo) {
-		return couponGrantDAO.nameCouponSearch(vo);
-	}
-
-	@Override
-	public List<CouponGrantVO> IdCouponSearch(CouponGrantVO vo) {
-		return couponGrantDAO.IdCouponSearch(vo);
-	}
+//	@Override
+//	public List<CouponGrantVO> nameCouponSearch(CouponGrantVO vo) {
+//		return couponGrantDAO.nameCouponSearch(vo);
+//	}
+//
+//	@Override
+//	public List<CouponGrantVO> IdCouponSearch(CouponGrantVO vo) {
+//		return couponGrantDAO.IdCouponSearch(vo);
+//	}
 
 	@Override
 	public void userCouponDeleteSel(CouponGrantVO vo) {
@@ -76,5 +73,15 @@ public class CouponGrantServiceImpl implements CouponGrantService {
 	
 	public void userCouponDeleteAll(CouponGrantVO vo) {
 		couponGrantDAO.userCouponDeleteAll(vo);
+	}
+	@Override
+	
+	public List<CouponGrantVO> userCouponList(PagingVO paging, String searchOption, String keyword) {
+		return couponGrantDAO.userCouponList(paging, searchOption, keyword);
+	}
+
+	@Override
+	public int couponCount(String searchOption, String keyword) {
+		return couponGrantDAO.couponCount( searchOption, keyword);
 	}
 }

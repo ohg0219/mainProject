@@ -78,7 +78,6 @@
                                     <tbody>
                                     
                                     	 
-                                    <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
                                     	<c:if test="${not empty userCouponList}" >
 	                                        <c:forEach var="couponlist" items="${userCouponList}">
 		                                        <tr>
@@ -104,14 +103,39 @@
                                     </tbody>
                                     
                                 </table>
-                                
-                                	<form action="userCouponSearch.mdo" method="get">
+                                	<div style="display: block; text-align: center;">
+										<c:if test="${paging.startPage != 1 }">
+											<a
+												href="/admin/grantCoupon.mdo?nowPage=${paging.startPage - 1 }
+												&keyword=${keyword}&searchOption=${searchOption}">&lt;</a>
+										</c:if>
+										<c:forEach begin="${paging.startPage }"
+											end="${paging.endPage }" var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<b>${p }</b>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<a
+														href="/admin/grantCoupon.mdo?nowPage=${p }
+												&keyword=${keyword}&searchOption=${searchOption}">${p }</a>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										<c:if test="${paging.endPage != paging.lastPage}">
+											<a
+												href="/admin/grantCoupon.mdo?nowPage=${paging.endPage+1 }
+										&keyword=${keyword}&searchOption=${searchOption}">&gt;</a>
+										</c:if>
+									</div>
+                                	<form action="/admin/grantCoupon.mdo" method="get">
 										<table class="noticeTable">
 											<tr>
 												<td align="right">
 													<select name="searchOption">
-														<option value="user_id">회원ID
-														<option value="coupon_name">쿠폰이름
+														<option value="all">회원Id + 쿠폰이름</option>
+														<option value="user_id">회원ID</option>
+														<option value="coupon_name">쿠폰이름</option>
 													</select>
 													<input type="text" name="keyword"/>
 													<input type="submit" value="검색"/>

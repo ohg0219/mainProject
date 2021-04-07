@@ -13,6 +13,7 @@ import com.thisisthat.admin.coupon.vo.CouponVO;
 import com.thisisthat.admin.grant.coupon.service.CouponGrantService;
 import com.thisisthat.admin.grant.coupon.vo.CouponGrantVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
+import com.thisisthat.util.PagingVO;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -31,11 +32,31 @@ public class GrantCouponController {
 	 * 쿠폰 부여 현황 페이지가 보여짐
 	 */
 	@RequestMapping("grantCoupon.mdo")
-	public String grantCouponList(Model model, CouponGrantVO vo, UserVO vo1,
-			@RequestParam(value = "nowPage")int nowPage) {
+	public String grantCouponList(Model model,
+			@RequestParam(value = "keyword", required = false, defaultValue = "")String keyword,
+			@RequestParam(value = "searchOption", required = false, defaultValue = "all")String searchOption,
+			@RequestParam(value = "nowPage", required = false)Integer nowPage,
+			CouponGrantVO vo) {
+		if(nowPage == null) nowPage = 1;
+		System.out.println(keyword);
+		System.out.println(searchOption);
+		PagingVO paging = new PagingVO(couponGrantService.couponCount(searchOption, keyword), nowPage, 15);
 		
-		List<CouponGrantVO> userCouponList = couponGrantService.userCouponList(vo);
-		model.addAttribute("userCouponList", userCouponList);
+//		if(searchOption.equals("user_id")) {
+//			vo.setKeyword(keyword);
+//			List<CouponGrantVO> searchId = couponGrantService.IdCouponSearch(vo);
+//			model.addAttribute("userCouponList", searchId);
+//			return "/admin/coupon/grantCoupon";
+//		}else if(searchOption.equals("coupon_name")) {
+//			vo.setKeyword(keyword);
+//			List<CouponGrantVO> searchCoupon = couponGrantService.nameCouponSearch(vo);
+//			model.addAttribute("userCouponList", searchCoupon);
+//			return "/admin/coupon/grantCoupon";
+//		}
+		model.addAttribute("userCouponList", couponGrantService.userCouponList(paging, searchOption, keyword));
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchOption",searchOption);
+		model.addAttribute("paging",paging);
 		return "/admin/coupon/grantCoupon";
 	}
 	/**
@@ -102,26 +123,26 @@ public class GrantCouponController {
 	}
 	
 	//쿠폰 검색하는 메서드
-	@GetMapping("userCouponSearch.mdo")
-	public String couponSearch(Model model,
-			@RequestParam("keyword")String keyword,
-			@RequestParam("searchOption")String searchOption,
-			CouponGrantVO vo) {
-		System.out.println("searchOption : "+searchOption);
-		System.out.println("keyword : "+keyword);
-		if(searchOption.equals("user_id")) {
-			vo.setKeyword(keyword);
-			List<CouponGrantVO> searchId = couponGrantService.IdCouponSearch(vo);
-			model.addAttribute("userCouponList", searchId);
-			return "/admin/coupon/grantCoupon";
-		}else if(searchOption.equals("coupon_name")) {
-			vo.setKeyword(keyword);
-			List<CouponGrantVO> searchCoupon = couponGrantService.nameCouponSearch(vo);
-			model.addAttribute("userCouponList", searchCoupon);
-			return "/admin/coupon/grantCoupon";
-		}
-		return null;
-	}
+//	@GetMapping("couponSearch.mdo")
+//	public String couponSearch(Model model,
+//			@RequestParam("keyword")String keyword,
+//			@RequestParam("searchOption")String searchOption,
+//			CouponGrantVO vo) {
+//		System.out.println("searchOption : "+searchOption);
+//		System.out.println("keyword : "+keyword);
+//		if(searchOption.equals("user_id")) {
+//			vo.setKeyword(keyword);
+//			List<CouponGrantVO> searchId = couponGrantService.IdCouponSearch(vo);
+//			model.addAttribute("userCouponList", searchId);
+//			return "/admin/coupon/grantCoupon";
+//		}else if(searchOption.equals("coupon_name")) {
+//			vo.setKeyword(keyword);
+//			List<CouponGrantVO> searchCoupon = couponGrantService.nameCouponSearch(vo);
+//			model.addAttribute("userCouponList", searchCoupon);
+//			return "/admin/coupon/grantCoupon";
+//		}
+//		return null;
+//	}
 	
 	@RequestMapping("userCouponDeleteSel.mdo")
 	public String userCouponDeleteSel(@RequestParam("coupon_no") int coupon_no,

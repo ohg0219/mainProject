@@ -29,6 +29,12 @@
 			<ref bean="CategoryLoad"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
+	<bean id="AdminInterceptor" class="com.thisisthat.user.security.UserSecurity"></bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/mypage/**"/>
+			<ref bean="AdminInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<mvc:annotation-driven></mvc:annotation-driven>
 </beans>

@@ -1,6 +1,8 @@
 package com.thisisthat.admin.grant.coupon.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.thisisthat.admin.coupon.vo.CouponVO;
 import com.thisisthat.admin.grant.coupon.vo.CouponGrantVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
+import com.thisisthat.util.PagingVO;
 
 @Repository
 public class UserCouponDAO {
@@ -39,9 +42,7 @@ public class UserCouponDAO {
 		}
 	}
 
-	public List<CouponGrantVO> userCouponList(CouponGrantVO vo) {
-		return userCouponTemplate.selectList("UserCouponDAO.userCouponList", vo);
-	}
+	
 
 	public CouponVO getAdminCouponInfo(CouponVO vo) {
 		return (CouponVO) userCouponTemplate.selectOne("UserCouponDAO.getAdminCouponInfo", vo);
@@ -57,13 +58,13 @@ public class UserCouponDAO {
 		return userCouponTemplate.selectOne("UserCouponDAO.userIdCoupon", userId);
 	}
 
-	public List<CouponGrantVO> nameCouponSearch(CouponGrantVO vo) {
-		return userCouponTemplate.selectList("UserCouponDAO.nameCouponSearch", vo);
-	}
-
-	public List<CouponGrantVO> IdCouponSearch(CouponGrantVO vo) {
-		return userCouponTemplate.selectList("UserCouponDAO.IdCouponSearch", vo);
-	}
+//	public List<CouponGrantVO> nameCouponSearch(CouponGrantVO vo) {
+//		return userCouponTemplate.selectList("UserCouponDAO.nameCouponSearch", vo);
+//	}
+//
+//	public List<CouponGrantVO> IdCouponSearch(CouponGrantVO vo) {
+//		return userCouponTemplate.selectList("UserCouponDAO.IdCouponSearch", vo);
+//	}
 
 	// 회원이 가진 쿠폰을 개별삭제하는 메서드
 	public void userCouponDeleteSel(CouponGrantVO vo) {
@@ -73,6 +74,24 @@ public class UserCouponDAO {
 	// 회원이 가진 쿠폰 전체삭제
 	public void userCouponDeleteAll(CouponGrantVO vo) {
 		userCouponTemplate.delete("UserCouponDAO.userCouponDeleteAll", vo);
+	}
+	public int couponCount(String searchOption, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		System.out.println((Integer)userCouponTemplate.selectOne("UserCouponDAO.couponCount",map));
+		return userCouponTemplate.selectOne("UserCouponDAO.couponCount",map);
+	}
+	public List<CouponGrantVO> userCouponList(PagingVO paging, String searchOption, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(paging.toString());
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		map.put("cntPerPage", paging.getCntPerPage());
+		map.put("start", paging.getStart());
+		List<CouponGrantVO> ad = userCouponTemplate.selectList("UserCouponDAO.userCouponList", map);
+		System.out.println(ad.size());
+		return userCouponTemplate.selectList("UserCouponDAO.userCouponList", map);
 	}
 
 }

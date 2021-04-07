@@ -37,9 +37,6 @@
 		select * from admin_coupon where coupon_no =  #{coupon_no}
 	</select>
 	
-	<select id="userCouponList" resultType="CouponGrantVO">
-		select * from user_coupon order by coupon_last desc
-	</select>
 	
 	<select id="userIdCoupon">
 		select user_id from this_user where user_id = #{userId}
@@ -65,5 +62,34 @@
 	<delete id="userCouponDeleteAll" parameterType="CouponGrantVo">
 		delete from user_coupon where user_id = #{user_id}
 	</delete>
+	<select id="userCouponList" resultType="CouponGrantVO">
+		select * from user_coupon where
+		 
+		<if test="searchOption == 'all'">
+			user_id like '%'||#{keyword}||'%' or coupon_name like '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="searchOption == 'user_id'">
+			user_id like '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="searchOption == 'coupon_name'">
+			coupon_name like '%'||#{keyword}||'%'
+		</if>
+		
+		order by coupon_last desc offset #{start} limit #{cntPerPage};
+	</select>
+	<select id="couponCount" resultType="Integer" >
+		select count(*) from user_coupon where 
+		<if test="searchOption == 'all'">
+			user_id like '%'||#{keyword}||'%' or coupon_name like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'user_id'">
+			user_id like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'coupon_name'">
+			coupon_name like '%'||#{keyword}||'%'
+		</if>
+	</select>
 	
 </mapper>
