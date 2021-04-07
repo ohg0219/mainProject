@@ -23,9 +23,16 @@ public class UserItemListDAO {
 	@Autowired
 	private SqlSessionTemplate itemListTemplate;
 	
+	public int getItemCount(String categoryName) {
+		return itemListTemplate.selectOne("ItemDAO.getItemCount",categoryName);
+	}
 	
-	public List<UserItemListVO> getItemList(String categoryName){
-		return itemListTemplate.selectList("ItemDAO.getItemList",categoryName);
+	public List<UserItemListVO> getItemList(PagingVO pagingvo,String categoryName,String select){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryName", categoryName);
+		map.put("select", select);
+		map.put("start", pagingvo.getStart());
+		return itemListTemplate.selectList("ItemDAO.getItemList",map);
 	}
 	
 	public UserItemVO getItemInfo(long productNo) {

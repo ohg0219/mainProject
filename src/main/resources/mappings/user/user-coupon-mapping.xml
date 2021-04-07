@@ -10,6 +10,7 @@
 	</resultMap>
 	<select id="getCouponList" resultMap="userCouponVO">
 		select * from user_coupon where used = 0 and coupon_last>now() and user_id = #{userId}
+		order by coupon_last asc
 		limit 10
 		offset #{start}
 	</select>

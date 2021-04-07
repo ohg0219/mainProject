@@ -41,16 +41,34 @@
 		<result column="comment_img" property="img" typeHandler="org.apache.ibatis.type.ArrayTypeHandler"/>
 		
 	</resultMap>
-	
+	<select id="getItemCount" resultType="int">
+		select count(pro.product_no) from product_image as image, 
+				product as pro left outer join category as cate on pro.product_category = cate.category_name
+			where pro.product_no = image.product_no 
+				and image.main_image = 1 
+				and pro.product_used = 1
+				and cate.category_used = 1
+		<if test="!categoryName.equals('all') and !categoryName.equals('new')">
+			and pro.product_category = #{categoryName}
+		</if>
+	</select>
 	<select id="getItemList" resultMap="itemListVO">
 			select 
+			<if test="count == null">
 				pro.product_category as product_category, 
 				pro.product_no as product_no,
 				image.upload_path as upload_path,
 				pro.product_name as product_name,
 				pro.product_price as product_price,
 				(select xs+s+m+l+xl as product_stock_total from product_stock where product_no = pro.product_no),
-				cate.category_used
+				cate.category_used,
+				COALESCE((select sum(o.select_count) from order_product as o right outer join order_table as t on( o.order_no = t.order_no)
+				where t.order_date > (now()::date+INTERVAL'-7 day') and o.product_no = pro.product_no
+				group by o.product_no),0) as count
+			</if>
+			<if test="count != null">
+				count(pro.product_no)
+			</if>
 			from product_image as image, 
 				product as pro left outer join category as cate on pro.product_category = cate.category_name
 			where pro.product_no = image.product_no 
@@ -60,9 +78,15 @@
 		<if test="!categoryName.equals('all') and !categoryName.equals('new')">
 			and pro.product_category = #{categoryName}
 		</if>
+		<if test="select.equals('sales')">
+			order by count desc
+		</if>
+		<if test="select.equals('new')">
 			order by pro.product_no desc
-		<if test="categoryName.equals('new')">
-			limit 12
+		</if>
+		limit 12
+		<if test="!categoryName.equals('new')">
+		offset #{start}
 		</if>
 	</select>
 	

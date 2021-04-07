@@ -21,8 +21,8 @@ public class UserItemListServiceImpl implements UserItemListService {
 	private UserItemListDAO itemListDAO;
 	
 	@Override
-	public List<UserItemListVO> getItemList(String categoryName) {
-		return itemListDAO.getItemList(categoryName);
+	public List<UserItemListVO> getItemList(PagingVO pagingvo,String categoryName,String select) {
+		return itemListDAO.getItemList(pagingvo,categoryName,select);
 	}
 
 	@Override
@@ -62,6 +62,11 @@ public class UserItemListServiceImpl implements UserItemListService {
 	@Override
 	public void delComment(int commentNo) {
 		itemListDAO.delComment(commentNo);
+	}
+
+	@Override
+	public int getItemCount(String categoryName) {
+		return itemListDAO.getItemCount(categoryName);
 	}
 
 }
