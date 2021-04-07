@@ -9,12 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.thisisthat.admin.usermanagement.vo.UserVO;
 import com.thisisthat.user.point.service.UserPointService;
 import com.thisisthat.user.point.vo.UserPointVO;
 
 @Controller
-@RequestMapping("/user/*")
+@RequestMapping("/mypage/*")
 public class UserPointController {
 	
 	@Autowired
