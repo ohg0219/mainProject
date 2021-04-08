@@ -38,8 +38,6 @@ public class GrantCouponController {
 			@RequestParam(value = "nowPage", required = false)Integer nowPage,
 			CouponGrantVO vo) {
 		if(nowPage == null) nowPage = 1;
-		System.out.println(keyword);
-		System.out.println(searchOption);
 		PagingVO paging = new PagingVO(couponGrantService.couponCount(searchOption, keyword), nowPage, 15);
 		
 //		if(searchOption.equals("user_id")) {

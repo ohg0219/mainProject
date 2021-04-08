@@ -64,4 +64,10 @@ public class UserItemListServiceImpl implements UserItemListService {
 		itemListDAO.delComment(commentNo);
 	}
 
+	@Override
+	public boolean isBuyer(String userId,int productNo) {
+		
+		return itemListDAO.isBuyer(userId, productNo);
+	}
+
 }

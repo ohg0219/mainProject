@@ -495,7 +495,7 @@ $(document).ready(function(){
 			<form action="/itemList/comment.do" method="post" enctype="multipart/form-data">
 				<input name="productNo" type="hidden" value="${itemInfo.productNo }">
 				<input name="category" type="hidden" value="${category }">
-				<div class="comment_list">
+				<div class="comment_list" id= "comment_store">
 					<div class="comment_store " onclick="isLogin()">
 						<input class="comment_btn" type="submit" value="댓글작성">
 						<textarea name="content" class="comment_area" id="text" required="required"></textarea>
@@ -557,7 +557,14 @@ $(document).ready(function(){
 		location.href= "/login.do";
 		}
 	}
-	
+	function isBuyer(){
+		var buyer = '${buyer}';
+		if(buyer != 'buyer'){
+			$('#comment_store').css({
+				"display" : "none"
+			});
+		}
+	}
 	function commentList(boardNo, pageNum){
 		$.ajax({
 			url: "/itemList/commentList.do",
@@ -626,7 +633,7 @@ $(document).ready(function(){
 	$(document).ready(function (e){
 	//파일6개 제한
 	commentList('${itemInfo.productNo }', '1');
-	
+	isBuyer();
 	$("#multiple").change(function(e){
 		var x = document.getElementById("multiple");
 		var txt = "";

@@ -79,18 +79,15 @@ public class UserCouponDAO {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		System.out.println((Integer)userCouponTemplate.selectOne("UserCouponDAO.couponCount",map));
 		return userCouponTemplate.selectOne("UserCouponDAO.couponCount",map);
 	}
 	public List<CouponGrantVO> userCouponList(PagingVO paging, String searchOption, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(paging.toString());
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		map.put("cntPerPage", paging.getCntPerPage());
 		map.put("start", paging.getStart());
 		List<CouponGrantVO> ad = userCouponTemplate.selectList("UserCouponDAO.userCouponList", map);
-		System.out.println(ad.size());
 		return userCouponTemplate.selectList("UserCouponDAO.userCouponList", map);
 	}
 

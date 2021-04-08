@@ -95,5 +95,9 @@
 	<update id="delComment">
 		update product_comment set delete_date = #{nowDate} where comment_no = #{commentNo}
 	</update>
+	<select id="isBuyer" resultType="int">
+		select count(*) from order_table as t  right join order_product as p on t.order_no = p.order_no where user_id = #{userId} and product_no = #{productNo} 
+	and order_state = '배송완료'
+	</select>
 	
 </mapper>

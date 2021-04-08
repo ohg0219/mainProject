@@ -61,5 +61,18 @@ public class UserItemListDAO {
 		map.put("nowDate", new Date());
 		itemListTemplate.update("delComment",map);
 	}
+	public boolean isBuyer(String userId, int productNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("productNo", productNo);
+		int count = itemListTemplate.selectOne("isBuyer",map);
+		System.out.println(count);
+		if(count >0) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 	
 }

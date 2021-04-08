@@ -85,6 +85,12 @@ public class UserItemListController {
             list.add(productNo);
             session.setAttribute("productNo", list);
         }
+        
+        if(session.getAttribute("userId") != null) {
+        	if(itemListService.isBuyer((String)session.getAttribute("userId"),productNo)) {
+        		model.addAttribute("buyer", "buyer");
+        	}
+        }
 		
 		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
 		model.addAttribute("sizeUsed",itemListService.getItemSizeUsed(productNo));
@@ -96,8 +102,6 @@ public class UserItemListController {
 	@PostMapping("/itemList/comment.do")
 	public String comment(HttpSession session, MultipartFile[] uploadFile, String content
 			, int productNo, String category) {
-		System.out.println(content);
-		System.out.println(uploadFile.length);
 		String uploadFolder = "https://thisisthat.s3.ap-northeast-2.amazonaws.com/";
 		CommentVO comment = new CommentVO();
 		comment.setContent(content);
@@ -143,8 +147,6 @@ public class UserItemListController {
 	@ResponseBody
 	public void delComment(@RequestParam(value = "commentNo")int commentNo) {
 		itemListService.delComment(commentNo);
-		
-		
 	}
 	
 }

@@ -17,10 +17,18 @@
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
 <style type="text/css">
- a:link { color: red; text-decoration: none;}
- a:visited { color: blue; text-decoration: none;}
- a:hover { color: red; text-decoration: underline;}
- a {color:black;}
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	color: blue;
+	text-decoration: none;
+}
+
+a:hover {
+	cursor: pointer;
+}
 </style>
 
 

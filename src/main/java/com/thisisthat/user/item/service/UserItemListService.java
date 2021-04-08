@@ -21,5 +21,5 @@ public interface UserItemListService {
 	int commentCount(int boardNo);
 	List<CommentVO> getCommentList(PagingVO paging, int boardId);
 	void delComment(int commentNo);
-	
+	public boolean isBuyer(String userId, int productNo);
 }
