@@ -31,8 +31,8 @@ public class PagingVO {
 		if (getLastPage() < getEndPage()) {
 			setEndPage(getLastPage());
 		}
-		setStartPage(getEndPage() - cntPage + 1);
-		if (getStartPage() < 1) {
+		setStartPage(((int)(getEndPage() / cntPage))*cntPage  + 1);
+		if (endPage<=10) {
 			setStartPage(1);
 		}
 	}

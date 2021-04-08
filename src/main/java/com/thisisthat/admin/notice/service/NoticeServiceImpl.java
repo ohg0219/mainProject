@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.thisisthat.admin.notice.dao.NoticeDAO;
 import com.thisisthat.admin.notice.vo.NoticeVO;
+import com.thisisthat.admin.notice.vo.SearchVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
+import com.thisisthat.util.PagingVO;
 
 @Service("NoticeService")
 public class NoticeServiceImpl implements NoticeService {
@@ -36,33 +38,18 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<NoticeVO> noticeList(NoticeVO noticeVO) {
-		 return noticeDAO.noticeList(noticeVO);
-	}
-
-	@Override
-	public List<NoticeVO> allNotice(NoticeVO noticeVO) {
-		return noticeDAO.allNotice(noticeVO);
-	}
-
-	@Override
-	public List<NoticeVO> titleNotice(NoticeVO noticeVO) {
-		return noticeDAO.titleNotice(noticeVO);
-	}
-
-	@Override
-	public List<NoticeVO> writerNotice(NoticeVO noticeVO) {
-		return noticeDAO.writerNotice(noticeVO);
-	}
-
-	@Override
-	public List<NoticeVO> contentNotice(NoticeVO noticeVO) {
-		return noticeDAO.contentNotice(noticeVO);
+	public List<NoticeVO> noticeList(PagingVO vo, SearchVO search, NoticeVO noticeVO) {
+		 return noticeDAO.noticeList(vo, search, noticeVO);
 	}
 
 	@Override
 	public String nickname(NoticeVO noticeVO) {
 		return noticeDAO.nickname(noticeVO);
+	}
+
+	@Override
+	public int totalCount(SearchVO search, NoticeVO noticeVO) {
+		return noticeDAO.totalCount(search, noticeVO);
 	}
 	
 }

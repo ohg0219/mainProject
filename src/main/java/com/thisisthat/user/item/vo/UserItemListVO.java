@@ -6,6 +6,7 @@ public class UserItemListVO {
 	private long productNo;
 	private String uploadPath;
 	private String productName;
+	private String keyword;
 	private long productPrice;
 	private long productStockTotal;
 
@@ -37,6 +38,14 @@ public class UserItemListVO {
 		return productName;
 	}
 
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
@@ -48,7 +57,7 @@ public class UserItemListVO {
 	public void setProductPrice(long productPrice) {
 		this.productPrice = productPrice;
 	}
-	
+
 	public long getProductStockTotal() {
 		return productStockTotal;
 	}
@@ -60,9 +69,8 @@ public class UserItemListVO {
 	@Override
 	public String toString() {
 		return "UserItemListVO [productCategory=" + productCategory + ", productNo=" + productNo + ", uploadPath="
-				+ uploadPath + ", productName=" + productName + ", productPrice=" + productPrice
-				+ ", productStockTotal=" + productStockTotal + "]";
+				+ uploadPath + ", productName=" + productName + ", keyword=" + keyword + ", productPrice="
+				+ productPrice + ", productStockTotal=" + productStockTotal + "]";
 	}
 
-	
 }

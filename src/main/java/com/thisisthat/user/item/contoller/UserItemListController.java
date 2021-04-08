@@ -42,16 +42,18 @@ public class UserItemListController {
 	@GetMapping("/itemList/category/{category}.do")
 	public String itemListView(
 			@PathVariable String category,
+			@RequestParam(value = "keyword",required = false) String keyword,
 			@RequestParam(value = "nowPage",required = false,defaultValue = "1") int nowPage,
 			@RequestParam(value = "select",defaultValue = "new") String select,
 			Model model) {
-		int itemCount = itemListService.getItemCount(category);
+		int itemCount = itemListService.getItemCount(category,keyword);
 		PagingVO pagingvo = new PagingVO(itemCount, nowPage, 12);
-		List<UserItemListVO> itemList = itemListService.getItemList(pagingvo,category,select);
+		List<UserItemListVO> itemList = itemListService.getItemList(pagingvo,category,keyword,select);
 		model.addAttribute("paging",pagingvo);
 		model.addAttribute("itemList",itemList);
 		model.addAttribute("category",category);
 		model.addAttribute("select",select);
+		model.addAttribute("keyword",keyword);
 		return "/user/item/itemList";
 	}
 
@@ -91,6 +93,12 @@ public class UserItemListController {
             list.add(productNo);
             session.setAttribute("productNo", list);
         }
+        
+        if(session.getAttribute("userId") != null) {
+        	if(itemListService.isBuyer((String)session.getAttribute("userId"),productNo)) {
+        		model.addAttribute("buyer", "buyer");
+        	}
+        }
 		
 		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
 		model.addAttribute("sizeUsed",itemListService.getItemSizeUsed(productNo));
@@ -102,8 +110,6 @@ public class UserItemListController {
 	@PostMapping("/itemList/comment.do")
 	public String comment(HttpSession session, MultipartFile[] uploadFile, String content
 			, int productNo, String category) {
-		System.out.println(content);
-		System.out.println(uploadFile.length);
 		String uploadFolder = "https://thisisthat.s3.ap-northeast-2.amazonaws.com/";
 		CommentVO comment = new CommentVO();
 		comment.setContent(content);
@@ -149,8 +155,6 @@ public class UserItemListController {
 	@ResponseBody
 	public void delComment(@RequestParam(value = "commentNo")int commentNo) {
 		itemListService.delComment(commentNo);
-		
-		
 	}
 	
 }

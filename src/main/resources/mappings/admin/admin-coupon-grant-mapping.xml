@@ -79,7 +79,7 @@
 			coupon_name like '%'||#{keyword}||'%'
 		</if>
 		
-		order by coupon_last desc offset #{start} limit #{cntPerPage};
+		order by coupon_first desc offset #{start} limit #{cntPerPage};
 	</select>
 	
 	<select id="couponCount" resultType="Integer" >

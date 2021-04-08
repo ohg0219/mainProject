@@ -48,7 +48,10 @@
 				and image.main_image = 1 
 				and pro.product_used = 1
 				and cate.category_used = 1
-		<if test="!categoryName.equals('all') and !categoryName.equals('new')">
+		<if test="categoryName.equals('searchItem')">
+			and product_name ilike '%'||#{keyword}||'%'
+		</if>
+		<if test="!categoryName.equals('all') and !categoryName.equals('new') and !categoryName.equals('searchItem')">
 			and pro.product_category = #{categoryName}
 		</if>
 	</select>
@@ -75,7 +78,10 @@
 				and image.main_image = 1 
 				and pro.product_used = 1
 				and cate.category_used = 1
-		<if test="!categoryName.equals('all') and !categoryName.equals('new')">
+		<if test="categoryName.equals('searchItem')">
+			and product_name ilike '%'||#{keyword}||'%'
+		</if>
+		<if test="!categoryName.equals('all') and !categoryName.equals('new') and !categoryName.equals('searchItem')">
 			and pro.product_category = #{categoryName}
 		</if>
 		<if test="select.equals('sales')">
@@ -119,5 +125,9 @@
 	<update id="delComment">
 		update product_comment set delete_date = #{nowDate} where comment_no = #{commentNo}
 	</update>
+	<select id="isBuyer" resultType="int">
+		select count(*) from order_table as t  right join order_product as p on t.order_no = p.order_no where user_id = #{userId} and product_no = #{productNo} 
+	and order_state = '배송완료'
+	</select>
 	
 </mapper>

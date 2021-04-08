@@ -55,17 +55,30 @@
 	$(document).ready(function(){
 		var category = $("#category").text();
 		$("#new").on("click",function(){
-			location.href="/itemList/category/"+category+".do?select=new";
+			var keyword = $("#keyword").val();
+			location.href="/itemList/category/"+category+".do?select=new&keyword="+keyword;
 		});
 		$("#sales").on("click",function(){
-			location.href="/itemList/category/"+category+".do?select=sales";
+			var keyword = $("#keyword").val();
+			location.href="/itemList/category/"+category+".do?select=sales&keyword="+keyword;
+		});
+		$("#keyword").keydown(function(key) {
+	        if (key.keyCode == 13) {
+	        	var select = $("#select").val();
+				var keyword = $("#keyword").val();
+				if(keyword == ''){
+					return false;
+				}
+				location.href="/itemList/category/searchItem.do?select="+select+"&keyword="+keyword;
+	        }
 		});
 		$("#searchBtn").on("click",function(){
+			var select = $("#select").val();
 			var keyword = $("#keyword").val();
 			if(keyword == ''){
 				return false;
 			}
-			location.href="searchItem.do?keyword="+keyword;
+			location.href="/itemList/category/searchItem.do?select="+select+"&keyword="+keyword;
 		});
 	});
 </script>
@@ -120,8 +133,9 @@
 				<div style="display:<c:if test="${category == 'new' }">none;</c:if>">
 					<input class="orderSelect <c:if test="${select == 'new' }">orderSelected</c:if> " id="new" type="button" value="최신순" >
 					<input class="orderSelect <c:if test="${select == 'sales' }">orderSelected</c:if>" id="sales" type="button" value="판매순">
+					<input id="select" type="hidden" value="${select }">
 					<span class="search">
-						<input id="keyword" type="text" name="search" placeholder="상품명">&nbsp;<input id="searchBtn" type="button" value="검색">
+						<input id="keyword" type="text" name="search" placeholder="상품명" value="${keyword }">&nbsp;<input id="searchBtn" type="button" value="검색">
 					</span>
 				</div>
 			</div>

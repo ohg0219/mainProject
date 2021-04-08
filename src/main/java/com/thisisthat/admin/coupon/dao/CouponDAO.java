@@ -1,6 +1,7 @@
 package com.thisisthat.admin.coupon.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,8 @@ public class CouponDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public List<CouponVO> couponList(CouponVO couponVO) {
-		return mybatis.selectList("CouponDAO.couponList",couponVO);
-	}
-
-	public List<CouponVO> nameSearch(CouponVO couponVO) {
-		return mybatis.selectList("CouponDAO.nameSearch", couponVO);
+	public List<CouponVO> couponList(Map<String, Object> map) {
+		return mybatis.selectList("CouponDAO.couponList", map);
 	}
 
 	public CouponVO viewCoupon(CouponVO couponVO) {
@@ -38,4 +35,12 @@ public class CouponDAO {
 		mybatis.update("CouponDAO.updateCoupon", couponVO);
 	}
 
+	public int getCouponCount(CouponVO couponVO) {
+		return mybatis.selectOne("CouponDAO.couponCount", couponVO);
+	}
+	
+	
+	
+	
+	
 }

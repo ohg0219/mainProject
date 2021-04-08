@@ -23,13 +23,17 @@ public class UserItemListDAO {
 	@Autowired
 	private SqlSessionTemplate itemListTemplate;
 	
-	public int getItemCount(String categoryName) {
-		return itemListTemplate.selectOne("ItemDAO.getItemCount",categoryName);
-	}
-	
-	public List<UserItemListVO> getItemList(PagingVO pagingvo,String categoryName,String select){
+	public int getItemCount(String categoryName,String keyword) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("categoryName", categoryName);
+		map.put("keyword", keyword);
+		return itemListTemplate.selectOne("ItemDAO.getItemCount",map);
+	}
+	
+	public List<UserItemListVO> getItemList(PagingVO pagingvo,String categoryName,String keyword,String select){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryName", categoryName);
+		map.put("keyword", keyword);
 		map.put("select", select);
 		map.put("start", pagingvo.getStart());
 		return itemListTemplate.selectList("ItemDAO.getItemList",map);
@@ -67,6 +71,19 @@ public class UserItemListDAO {
 		map.put("commentNo", commentNo);
 		map.put("nowDate", new Date());
 		itemListTemplate.update("delComment",map);
+	}
+	public boolean isBuyer(String userId, int productNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("productNo", productNo);
+		int count = itemListTemplate.selectOne("isBuyer",map);
+		System.out.println(count);
+		if(count >0) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 	
 }
