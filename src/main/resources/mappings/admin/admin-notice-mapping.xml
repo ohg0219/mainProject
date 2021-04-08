@@ -54,7 +54,7 @@
 		</if>
 	</select>
 	<select id="noticeList" resultMap="noticeResult" resultType="noticeVO" parameterType="hashmap">
-		select * from notice_board where board_group=#{board_group} 
+		select * from notice_board where board_group = #{board_group} 
 		<if test="!searchOption.equals('')">
 			and
 			<if test="searchOption == 'board_writer'">

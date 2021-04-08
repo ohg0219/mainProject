@@ -67,7 +67,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
+                                    <input type="hidden" value="${where}" id="where">
                                     	 
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
                                     	<c:if test="${not empty articleList}" >
@@ -93,17 +93,14 @@
                                     </tbody>
                                 </table>
                                 <div>	
-                                <form action="getArticleList.mdo?board_group=${article.board_group }" method="get">
-                                    <input type="hidden" name="board_group" value="${where}">
-									<select name="searchOption" aria-controls="example" class="">
+                                	<select name="searchOption" aria-controls="example" id="searchOption">
 										<option value="board_writer">작성자</option>
 										<option value="board_title">제목</option>
 										<option value="board_content">내용</option>
-									</select>
-										                                    		
-									<input type="text" name="keyword">
+									</select>										                                    		
+									<input type="text" name="keyword" id="search">
 
-									<button type="submit" class="btn btn-dark" id="searchBtn">
+									<button type="button" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										검색버튼
 									</button>
@@ -145,10 +142,18 @@
 	<script>
 	//--------------------검색하는 함수
 		$(function(){
-		
-			//-------------------검색하는 함수end			
 			$("#insertArticle").click(function(){
 				location.href="/admin/insertArticle.mdo"
+			});
+			//-------------------검색하는 함수end			
+			$("#searchBtn").click(function(){
+				var keyword = $('#search').val();
+				var searchOption = document.getElementById('searchOption').value;
+				var where = document.getElementById('where').value;
+				location.href="/admin/getArticleList.mdo?searchOption="
+						+ searchOption
+						+"&keyword=" + keyword + "&where="+where;
+				console.log(search); 
 			});
 		});
 	

@@ -129,17 +129,17 @@ public class noticeController {
 		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage="1";
-			cntPerPage = "10";
+			cntPerPage = "15";
 		}else if(nowPage == null) {
 			nowPage = "1";
 		}else if(cntPerPage == null) {
-			cntPerPage = "10";
+			cntPerPage = "15";
 		}
 		
 		if(keyword == null) {
-			search = new SearchVO(BoardTypeProtocol.filter(searchOption),searchOption);
+			search = new SearchVO(BoardTypeProtocol.filter(searchOption),keyword);
 		}else {
-			search = new SearchVO(BoardTypeProtocol.filter(searchOption),searchOption);
+			search = new SearchVO(BoardTypeProtocol.filter(searchOption),keyword);
 		}
 		
 		int total = noticeService.totalCount(search, noticeVO);
@@ -147,7 +147,7 @@ public class noticeController {
 		vo.setType(BoardTypeProtocol.filter(searchOption));
 		
 		List<NoticeVO> noticeList = noticeService.noticeList(vo, search, noticeVO);
-		
+
 		model.addAttribute("total", total);
 		model.addAttribute("paging", vo);
 		model.addAttribute("search", search);

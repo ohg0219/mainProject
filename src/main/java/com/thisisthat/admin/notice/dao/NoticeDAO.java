@@ -69,8 +69,7 @@ public class NoticeDAO {
 		HashMap<String, Object>total = new HashMap<String, Object>();
 		total.put("board_group", noticeVO.getBoard_group());
 		total.put("searchOption", search.getSearchOption());
-		System.out.println("보드그룹"+noticeVO.getBoard_group());
-		System.out.println("서치옵션:"+search.getSearchOption());
+		total.put("keyword", search.getKeyword());
 		return mybatis.selectOne("NoticeDAO.totalCount", total);
 	}
 	
