@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.scribejava.core.model.Parameter;
+import com.thisisthat.admin.notice.protocol.BoardTypeProtocol;
 import com.thisisthat.admin.notice.service.NoticeService;
 import com.thisisthat.admin.notice.vo.NoticeVO;
+import com.thisisthat.admin.notice.vo.SearchVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
+import com.thisisthat.util.PagingVO;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -23,15 +27,14 @@ public class noticeController {
 	@Autowired
 	private NoticeService noticeService;
 
-
-
 	@RequestMapping("deleteGate.mdo")
-	public String deleteGate(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_group")String board_group) {
+	public String deleteGate(NoticeVO noticeVO, @RequestParam("board_no") Long board_no,
+			@RequestParam("board_group") String board_group) {
 
-		if(board_group.equals("notice")) {
+		if (board_group.equals("notice")) {
 			noticeService.deleteNotice(noticeVO);
 			return "redirect:getArticleList.mdo?where=notice";
-		}else if(board_group.equals("event")) {
+		} else if (board_group.equals("event")) {
 			noticeService.deleteNotice(noticeVO);
 			return "redirect:getArticleList.mdo?where=event";
 
@@ -40,11 +43,13 @@ public class noticeController {
 	}
 
 	@RequestMapping("updateNotice.mdo")
-	public String updateNotice(NoticeVO noticeVO,@RequestParam("board_no")Long board_no,@RequestParam("board_title")String board_title,@RequestParam("board_content")String board_content,@RequestParam("board_group")String board_group)throws IOException{
-		if(board_group.equals("notice")) {
+	public String updateNotice(NoticeVO noticeVO, @RequestParam("board_no") Long board_no,
+			@RequestParam("board_title") String board_title, @RequestParam("board_content") String board_content,
+			@RequestParam("board_group") String board_group) throws IOException {
+		if (board_group.equals("notice")) {
 			noticeService.updateNotice(noticeVO);
 			return "redirect:getArticleList.mdo?where=notice";
-		}else if(board_group.equals("event")) {
+		} else if (board_group.equals("event")) {
 			noticeService.updateNotice(noticeVO);
 			return "redirect:getArticleList.mdo?where=event";
 		}
@@ -52,18 +57,19 @@ public class noticeController {
 	}
 
 	@RequestMapping("insertNotice.mdo")
-	public String insertNotice(HttpSession session,UserVO userVO, NoticeVO noticeVO,@RequestParam("board_group")String board_group)throws IOException{
+	public String insertNotice(HttpSession session, UserVO userVO, NoticeVO noticeVO,
+			@RequestParam("board_group") String board_group) throws IOException {
 		String id = null;
 		UserVO getUser = null;
-		if(session.getAttribute("adminId") !=null) {
-			
-			getUser =  (UserVO) session.getAttribute("adminId");
-			id=getUser.getNickName();
+		if (session.getAttribute("adminId") != null) {
+
+			getUser = (UserVO) session.getAttribute("adminId");
+			id = getUser.getNickName();
 		}
-	
+
 		noticeVO.setBoard_writer(id);
 		noticeService.insertNotice(noticeVO);
-		return "redirect:getArticleList.mdo?where="+board_group;
+		return "redirect:getArticleList.mdo?where=" + board_group;
 	}
 
 	@RequestMapping("insertArticle.mdo")
@@ -72,28 +78,27 @@ public class noticeController {
 	}
 
 	@RequestMapping("noticeGate.mdo")
-	public String noticeGate(@RequestParam(value="board_no")Long board_no) {
-		return "redirect:article.mdo?board_no="+board_no;
+	public String noticeGate(@RequestParam(value = "board_no") Long board_no) {
+		return "redirect:article.mdo?board_no=" + board_no;
 	}
 
-
 	@GetMapping("article.mdo")
-	public String getNotice(Model model,@RequestParam(value="board_no")Long board_no,NoticeVO noticeVO) {
-		NoticeVO article  = noticeService.notice(noticeVO);
+	public String getNotice(Model model, @RequestParam(value = "board_no") Long board_no, NoticeVO noticeVO) {
+		NoticeVO article = noticeService.notice(noticeVO);
 
 		model.addAttribute("article", article);
 		model.addAttribute("board_no", board_no);
-		return "/admin/article";			
+		return "/admin/article";
 	}
 
 	@RequestMapping("updateGate.mdo")
-	public String updateGate(@RequestParam(value="board_no")Long board_no) {
-		return "redirect:updateArticle.mdo?board_no="+board_no;
+	public String updateGate(@RequestParam(value = "board_no") Long board_no) {
+		return "redirect:updateArticle.mdo?board_no=" + board_no;
 	}
 
 	@RequestMapping("updateArticle.mdo")
-	public String updateArticle(Model model,@RequestParam(value="board_no")Long board_no,NoticeVO noticeVO) {
-		NoticeVO article  = noticeService.notice(noticeVO);
+	public String updateArticle(Model model, @RequestParam(value = "board_no") Long board_no, NoticeVO noticeVO) {
+		NoticeVO article = noticeService.notice(noticeVO);
 
 		model.addAttribute("article", article);
 		model.addAttribute("board_no", board_no);
@@ -102,100 +107,53 @@ public class noticeController {
 	}
 
 	@RequestMapping("articleGate.mdo")
-	public String articleGate(@RequestParam(value="where")String where) {
+	public String articleGate(@RequestParam(value = "where") String where) {
 
-		return "redirect:getArticleList.mdo?where="+where;
+		return "redirect:getArticleList.mdo?where=" + where;
 	}
 
 	@RequestMapping("getArticleList.mdo")
-	public String getNoticeList(Model model,@RequestParam(value="where")String where) {
+	public String getNoticeList(Model model, @RequestParam(value = "where") String where, PagingVO vo,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage,
+			@RequestParam(value = "searchOption", required = false) String searchOption,
+			@RequestParam(value = "keyword", required = false) String keyword) {
+	
 		NoticeVO noticeVO = new NoticeVO();
 		noticeVO.setBoard_group(where);
-		List<NoticeVO> noticeList = noticeService.noticeList(noticeVO);
-
-
-		model.addAttribute("articleList",noticeList);
+		SearchVO search;
+		
+		if(searchOption == null) {
+			searchOption = "all";
+		}
+		
+		if(nowPage == null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage = "10";
+		}else if(nowPage == null) {
+			nowPage = "1";
+		}else if(cntPerPage == null) {
+			cntPerPage = "10";
+		}
+		
+		if(keyword == null) {
+			search = new SearchVO(BoardTypeProtocol.filter(searchOption),searchOption);
+		}else {
+			search = new SearchVO(BoardTypeProtocol.filter(searchOption),searchOption);
+		}
+		
+		int total = noticeService.totalCount(search, noticeVO);
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		vo.setType(BoardTypeProtocol.filter(searchOption));
+		
+		List<NoticeVO> noticeList = noticeService.noticeList(vo, search, noticeVO);
+		
+		model.addAttribute("total", total);
+		model.addAttribute("paging", vo);
+		model.addAttribute("search", search);
+		model.addAttribute("articleList", noticeList);
 		model.addAttribute("where", where);
 		return "/admin/articleList";
 	}
 
-	@RequestMapping("noticesearch.mdo")
-	public String noticeList(Model model, @RequestParam(value="board_group")String board_group, @RequestParam(value="searchOption")String searchOption,@RequestParam(value="keyword")String keyword, NoticeVO noticeVO) {
-		if(board_group.equals("notice")) {
-			if(searchOption.equals("all")) {
-				noticeVO.setKeyword(keyword);
-				noticeVO.setBoard_group(board_group);
-				List<NoticeVO> noticeList = noticeService.allNotice(noticeVO);
-				
-				model.addAttribute("articleList",noticeList);
-				model.addAttribute("where", board_group);
-				return "/admin/articleList";
-			}else if(searchOption.equals("board_title")) {
-				noticeVO.setKeyword(keyword);
-				noticeVO.setBoard_group(board_group);
-				List<NoticeVO> noticeList = noticeService.titleNotice(noticeVO);
-				
-				model.addAttribute("articleList",noticeList);
-				model.addAttribute("where", board_group);
-				return "/admin/articleList";
-			}else if(searchOption.equals("board_writer")) {
-				noticeVO.setKeyword(keyword);
-				noticeVO.setBoard_group(board_group);
-				List<NoticeVO> noticeList = noticeService.writerNotice(noticeVO);
-				
-				model.addAttribute("articleList",noticeList);
-				model.addAttribute("where", board_group);
-				return "/admin/articleList";
-			}else if(searchOption.equals("board_content")) {
-				noticeVO.setKeyword(keyword);
-				noticeVO.setBoard_group(board_group);
-				List<NoticeVO> noticeList =	noticeService.contentNotice(noticeVO);
-				
-				model.addAttribute("articleList",noticeList);
-				model.addAttribute("where", board_group);
-				return "/admin/articleList";
-			}
-
-		}else if(board_group.equals("event")) {
-			if(searchOption.equals("all")) {
-				noticeVO.setKeyword(keyword);
-				noticeVO.setBoard_group(board_group);
-				List<NoticeVO> noticeList = noticeService.allNotice(noticeVO);
-				
-				model.addAttribute("articleList",noticeList);
-				model.addAttribute("where", board_group);
-				return "/admin/articleList";
-			}else if(searchOption.equals("board_title")) {
-				noticeVO.setKeyword(keyword);
-				noticeVO.setBoard_group(board_group);
-				List<NoticeVO> noticeList = noticeService.titleNotice(noticeVO);
-				
-				model.addAttribute("articleList",noticeList);
-				model.addAttribute("where", board_group);
-				return "/admin/articleList";
-			}else if(searchOption.equals("board_writer")) {
-				noticeVO.setKeyword(keyword);
-				noticeVO.setBoard_group(board_group);
-				List<NoticeVO> noticeList = noticeService.writerNotice(noticeVO);
-				
-				model.addAttribute("articleList",noticeList);
-				model.addAttribute("where", board_group);
-				return "/admin/articleList";
-			}else if(searchOption.equals("board_content")) {
-				noticeVO.setKeyword(keyword);
-				noticeVO.setBoard_group(board_group);
-				List<NoticeVO> noticeList =	noticeService.contentNotice(noticeVO);
-				
-				model.addAttribute("articleList",noticeList);
-				model.addAttribute("where", board_group);
-				return "/admin/articleList";
-			}
-		}
-		return null;
-
-		
-		
-	}
-
-
-}//end class
+}// end class
