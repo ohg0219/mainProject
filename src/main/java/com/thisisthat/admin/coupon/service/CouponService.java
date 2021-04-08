@@ -1,14 +1,13 @@
 package com.thisisthat.admin.coupon.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.thisisthat.admin.coupon.vo.CouponVO;
 
 public interface CouponService {
 
-	List<CouponVO> couponList(CouponVO couponVO);
-
-	List<CouponVO> nameSearch(CouponVO couponVO);
+	List<CouponVO> couponList(Map<String, Object> map);
 
 	CouponVO viewCoupon(CouponVO couponVO);
 
@@ -18,7 +17,8 @@ public interface CouponService {
 
 	void updateCoupon(CouponVO couponVO);
 
-	
+	int couponCount(CouponVO couponVO);
+
 		
 	
 	
