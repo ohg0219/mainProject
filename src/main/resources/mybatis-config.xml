@@ -22,6 +22,7 @@
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentBasketVO" alias="RecentBasketVO"/>
 		<typeAlias type="com.thisisthat.log.vo.LogVO" alias="logVO"/>
 		<typeAlias type="com.thisisthat.user.mypage.vo.MyPageVO" alias="MyPageVO"/>
+        <typeAlias type="com.thisisthat.admin.notice.vo.NoticeVO" alias="noticeVO"/>
 	</typeAliases>
 	<mappers>
 		<!-- 매퍼파일 -->		

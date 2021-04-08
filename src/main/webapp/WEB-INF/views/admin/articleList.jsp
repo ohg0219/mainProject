@@ -67,23 +67,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
+                                    <input type="hidden" value="${where}" id="where">
                                     	 
                                     <!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
                                     	<c:if test="${not empty articleList}" >
-	                                        <c:forEach var="article" items="${articleList}">
+	                                        <c:forEach var="board" items="${articleList}">
 		                                        <tr>
-			                                        <td width="45">${article.board_no}</td>
-			                                        <td width="295"><a href="noticeGate.mdo?board_no=${article.board_no }" style="">${article.board_title }<!--댓글수--> </a></td>
-			                                        <td width="140">${article.board_writer }</td>
-			                                        <td width="115"><fmt:formatDate value="${article.reg_Date}" pattern="yyyy-MM-dd HH:mm"/></td>
-			                                        <td width="45">${article.board_cnt }</td>
+			                                        <td width="45">${board.board_no}</td>
+			                                        <td width="295"><a href="noticeGate.mdo?board_no=${board.board_no }" style="">${board.board_title }<!--댓글수--> </a></td>
+			                                        <td width="140">${board.board_writer }</td>
+			                                        <td width="115"><fmt:formatDate value="${board.reg_Date}" pattern="yyyy-MM-dd HH:mm"/></td>
+			                                        <td width="45">${board.board_cnt }</td>
 			                                    </tr>
 	                                        </c:forEach>
                                         
 
                                         </c:if>
-                                        <c:if test="${empty articleList }">
+                                        <c:if test="${empty articleList}">
                                         	<tr>
                                         		<td colspan="5" align="center">
                                         		<h1> 게시글이 없어요</h1>
@@ -93,18 +93,14 @@
                                     </tbody>
                                 </table>
                                 <div>	
-                                <form action="noticesearch.mdo?board_group=${article.board_group }" method="get">
-                                    <input type="hidden" name="board_group" value="${where}">
-									<select name="searchOption" aria-controls="example" class="">
-										<option value="all">전체</option>
+                                	<select name="searchOption" aria-controls="example" id="searchOption">
 										<option value="board_writer">작성자</option>
 										<option value="board_title">제목</option>
 										<option value="board_content">내용</option>
-									</select>
-										                                    		
-									<input type="text" name="keyword">
+									</select>										                                    		
+									<input type="text" name="keyword" id="search">
 
-									<button type="submit" class="btn btn-dark" id="searchBtn">
+									<button type="button" class="btn btn-dark" id="searchBtn">
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										검색버튼
 									</button>
@@ -116,16 +112,22 @@
                                 </form>
 									<br>
 									<div align="center">
-									<a href="#">1</a>
-									<a href="#">2</a>
-									<a href="#">3</a>
-									<a href="#">4</a>
-									<a href="#">5</a>
-									<a href="#">6</a>
-									<a href="#">7</a>
-									<a href="#">8</a>
-									<a href="#">9</a>
-									<a href="#">10</a>
+										<c:if test="${paging.startPage != 1 }">
+											<a href="/admin/getArticleList.mdo?nowPage=${paging.startPage -1 }&cntPerPage=${paging.cntPerPage }&where=${where}&searchOption=${search.searchOption }&keyword=${search.keyword} "> &lt;</a>
+										</c:if>
+										<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<b>${p}</b>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<a href="/admin/getArticleList.mdo?nowPage=${p}&cntPerPage=${paging.cntPerPage}&where=${where}&searchOption=${search.searchOption}&keyword=${keyword}">${p}</a>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										<c:if test="${paging.endPage != paging.lastPage}">
+											<a href="/admin/getArticleList.mdo?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}&where=${where}&searchOption=${search.searchOption}&keyword=${keyword}">&gt;</a>
+										</c:if>
 									</div>
                                 </div>
                             </div>
@@ -140,10 +142,18 @@
 	<script>
 	//--------------------검색하는 함수
 		$(function(){
-		
-			//-------------------검색하는 함수end			
 			$("#insertArticle").click(function(){
 				location.href="/admin/insertArticle.mdo"
+			});
+			//-------------------검색하는 함수end			
+			$("#searchBtn").click(function(){
+				var keyword = $('#search').val();
+				var searchOption = document.getElementById('searchOption').value;
+				var where = document.getElementById('where').value;
+				location.href="/admin/getArticleList.mdo?searchOption="
+						+ searchOption
+						+"&keyword=" + keyword + "&where="+where;
+				console.log(search); 
 			});
 		});
 	

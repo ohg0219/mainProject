@@ -4,13 +4,8 @@
 
 <mapper namespace="CouponDAO">
 
-	
 	<select id="couponList" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
-		select * from admin_coupon order by coupon_last desc
-	</select>
-	
-	<select id="nameSearch" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
-		select * from admin_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_last desc
+		select * from admin_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_no asc offset #{start} limit #{cntPerPage}
 	</select>
 	
 	<select id="viewCoupon" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
@@ -29,11 +24,8 @@
 		update admin_coupon set coupon_name=#{coupon_name},coupon_price=#{coupon_price},coupon_first=#{coupon_first},coupon_last=#{coupon_last} where coupon_no=#{coupon_no}
 	</select>
 	
-	<select id="couponCount" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
-		select count(*) admin_coupon
-		<if test="select='coupon_name'">
-			and coupon_name like '%'||#{keyword}||'%'
-		</if>
+	<select id="couponCount" resultType="Integer">
+		select count(*) from admin_coupon where coupon_name like '%'||#{keyword}||'%'	
 	</select>
 	
 	

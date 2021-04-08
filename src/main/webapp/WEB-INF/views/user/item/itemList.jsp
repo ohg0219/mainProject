@@ -17,7 +17,71 @@
 	.soldout{
 		opacity: 0.5;
 	}
+	.orderSelect{
+		all:unset;
+		border: 1px solid black;
+		padding: 10px;
+		cursor: pointer;
+	}
+	.orderSelect:hover{
+		color: white;
+		background-color: black;
+	}
+	.orderSelected{
+		color: white;
+		background-color: black;
+	}
+	.search{
+		border: 1px solid black;
+		padding: 12px;
+	}
+	#keyword{
+		all : unset;
+		border: 1px solid black;
+		padding: 4px;
+	}
+	#searchBtn{
+		all:unset;
+		border: 1px solid black;
+		padding : 4px;
+		cursor: pointer;
+	}
+	#searchBtn:hover{
+		color: white;
+		background-color: black;
+	}
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var category = $("#category").text();
+		$("#new").on("click",function(){
+			var keyword = $("#keyword").val();
+			location.href="/itemList/category/"+category+".do?select=new&keyword="+keyword;
+		});
+		$("#sales").on("click",function(){
+			var keyword = $("#keyword").val();
+			location.href="/itemList/category/"+category+".do?select=sales&keyword="+keyword;
+		});
+		$("#keyword").keydown(function(key) {
+	        if (key.keyCode == 13) {
+	        	var select = $("#select").val();
+				var keyword = $("#keyword").val();
+				if(keyword == ''){
+					return false;
+				}
+				location.href="/itemList/category/searchItem.do?select="+select+"&keyword="+keyword;
+	        }
+		});
+		$("#searchBtn").on("click",function(){
+			var select = $("#select").val();
+			var keyword = $("#keyword").val();
+			if(keyword == ''){
+				return false;
+			}
+			location.href="/itemList/category/searchItem.do?select="+select+"&keyword="+keyword;
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -64,7 +128,17 @@
 			</div>
 			
 			<div class="item-list" style="width: 85%; display: inline-block; float: left; min-height: 400px;" >
-			<h2 align="center" style="text-transform: uppercase;">${category }</h2>
+			<div>
+				<h2 align="center" id="category" style="text-transform: uppercase;">${category }</h2>
+				<div style="display:<c:if test="${category == 'new' }">none;</c:if>">
+					<input class="orderSelect <c:if test="${select == 'new' }">orderSelected</c:if> " id="new" type="button" value="최신순" >
+					<input class="orderSelect <c:if test="${select == 'sales' }">orderSelected</c:if>" id="sales" type="button" value="판매순">
+					<input id="select" type="hidden" value="${select }">
+					<span class="search">
+						<input id="keyword" type="text" name="search" placeholder="상품명" value="${keyword }">&nbsp;<input id="searchBtn" type="button" value="검색">
+					</span>
+				</div>
+			</div>
 				<ul>
 					<c:if test="${empty itemList}">
 						<h4 style="text-align: center; left: -15%">등록된 상품이 없습니다.</h4>
@@ -94,6 +168,26 @@
 					</c:if>
 				</ul>
 			</div><!-- end item-list -->
+				<c:if test="${category != 'new'}">
+				<div align="center" style="margin-top: 10px;">
+					<c:if test="${paging.startPage != 1 }">
+						<a href="/itemList/category/${category}.do?nowPage=${paging.startPage - 1 }&select=${select}">&lt;</a>
+					</c:if>
+					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+						<c:choose>
+							<c:when test="${p == paging.nowPage }">
+								<b>${p }</b>
+							</c:when>
+							<c:when test="${p != paging.nowPage }">
+								<a href="/itemList/category/${category}.do?nowPage=${p }&select=${select}">${p }</a>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${paging.endPage != paging.lastPage}">
+						<a href="/itemList/category/${category}.do?nowPage=${paging.endPage+1 }&select=${select}">&gt;</a>
+					</c:if>
+				</div>
+				</c:if>
 		</div><!-- end Content -->
 		<%@include file="../include/footer.jsp"%>
 	</div>

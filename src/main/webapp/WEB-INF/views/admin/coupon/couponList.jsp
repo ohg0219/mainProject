@@ -101,12 +101,12 @@ a:hover {
                                     </tbody>
                                 </table>
                                 <div>	
-                                <form action="couponSearch.mdo" method="get">
+                                <form action="getCouponList.mdo" method="get">
                                     
 									<select name="searchOption" aria-controls="example" class="">
 										<option value="coupon_name">쿠폰 명</option>
 									</select>
-										                                    		
+                              		
 									<input type="text" name="keyword">
 
 									<button type="submit" class="btn btn-dark" id="searchBtn">
@@ -118,19 +118,28 @@ a:hover {
 										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
 										쿠폰 생성
 									</button>
-                                </form>
+                                	</form>
 									<br>
+									
+									
 									<div align="center">
-									<a href="#">1</a>
-									<a href="#">2</a>
-									<a href="#">3</a>
-									<a href="#">4</a>
-									<a href="#">5</a>
-									<a href="#">6</a>
-									<a href="#">7</a>
-									<a href="#">8</a>
-									<a href="#">9</a>
-									<a href="#">10</a>
+										<c:if test="${paging.startPage != 1} ">
+											<a href="getCouponList.mdo?nowPage=${paging.startPage - 1}
+												&search=${coupon.search}">&lt;</a>
+										</c:if>
+										<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+											<c:if test="${paging.nowPage == p }">
+													<b>${p}</b>
+											</c:if>
+											<c:if test="${paging.nowPage != p }">
+												<a href="getCouponList.mdo?nowPage=${p}
+													&search=${coupon.search}">${p}</a>
+											</c:if>									
+										</c:forEach>
+										<c:if test="${paging.endPage != paging.lastPage}">
+											<a href="getCouponList.mdo?nowPage=${paging.endPage + 1 }
+												&search=${coupon.search}">&gt;</a>
+										</c:if>
 									</div>
                                 </div>
                             </div>

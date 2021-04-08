@@ -119,6 +119,9 @@ a {
 															<option name="select" value="배송준비중">배송준비중</option>
 															<option name="select" value="배송중">배송중</option>
 															<option name="select" value="배송완료">배송완료</option>
+															<option name="select" value="교환요청">교환요청</option>
+															<option name="select" value="환불요청">환불요청</option>
+															<option name="select" value="환불완료">환불완료</option>
 													</select></td>
 													<td align="center">${article.invoice_no }</td>
 													<td align="center">${article.order_cancel }</td>
@@ -181,20 +184,10 @@ a {
 			location.href="/admin/selectOrderManagement.mdo?order_state="+select+"&order_no="+number+"&invoice_no="+invoiceno;				
 			}else{				
 			location.href="/admin/selectOrderManagementList.mdo?order_state="+select+"&order_no="+number;
-			}
-				
-			
+			}	
 		});
 	});
-	
-	
-	
-	
-	
 	</script>
-
-
-
 
 </body>
 </html>

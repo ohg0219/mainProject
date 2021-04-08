@@ -127,16 +127,16 @@
 										</c:if>
 										<c:forEach begin="${paging.startPage }"
 											end="${paging.endPage }" var="p">
-											<c:choose>
-												<c:when test="${p == paging.nowPage }">
+											
+												<c:if test="${p == paging.nowPage }">
 													<b>${p }</b>
-												</c:when>
-												<c:when test="${p != paging.nowPage }">
+												</c:if>
+												<c:if test="${p != paging.nowPage }">
 													<a
 														href="/admin/userList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}
 														search=${userVO.search}&select=${userVO.select}">${p }</a>
-												</c:when>
-											</c:choose>
+												</c:if>
+											
 										</c:forEach>
 										<c:if test="${paging.endPage != paging.lastPage}">
 											<a

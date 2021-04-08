@@ -21,8 +21,8 @@ public class UserItemListServiceImpl implements UserItemListService {
 	private UserItemListDAO itemListDAO;
 	
 	@Override
-	public List<UserItemListVO> getItemList(String categoryName) {
-		return itemListDAO.getItemList(categoryName);
+	public List<UserItemListVO> getItemList(PagingVO pagingvo,String categoryName,String keyword,String select) {
+		return itemListDAO.getItemList(pagingvo,categoryName,keyword,select);
 	}
 
 	@Override
@@ -68,6 +68,9 @@ public class UserItemListServiceImpl implements UserItemListService {
 	public boolean isBuyer(String userId,int productNo) {
 		
 		return itemListDAO.isBuyer(userId, productNo);
+	}
+	public int getItemCount(String categoryName,String keyword) {
+		return itemListDAO.getItemCount(categoryName,keyword);
 	}
 
 }

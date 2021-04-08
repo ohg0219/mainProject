@@ -3,7 +3,9 @@ package com.thisisthat.admin.notice.service;
 import java.util.List;
 
 import com.thisisthat.admin.notice.vo.NoticeVO;
+import com.thisisthat.admin.notice.vo.SearchVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
+import com.thisisthat.util.PagingVO;
 
 public interface NoticeService {
 	
@@ -15,17 +17,11 @@ public interface NoticeService {
 	
 	NoticeVO notice(NoticeVO noticeVO);
 	
-	List<NoticeVO> noticeList(NoticeVO noticeVO);
-
-	List<NoticeVO> allNotice(NoticeVO noticeVO);
-	
-	List<NoticeVO> titleNotice(NoticeVO noticeVO);
-	
-	List<NoticeVO> writerNotice(NoticeVO noticeVO);
-	
-	List<NoticeVO> contentNotice(NoticeVO noticeVO);
+	List<NoticeVO> noticeList(PagingVO vo, SearchVO search, NoticeVO noticeVO);
 
 	String nickname(NoticeVO noticeVO);
+
+	int totalCount(SearchVO search, NoticeVO noticeVO);
 	
 }
 
