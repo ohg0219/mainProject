@@ -3,6 +3,7 @@ package com.thisisthat.user.notice.service;
 import java.util.List;
 
 import com.thisisthat.user.notice.vo.UserNoticeVO;
+import com.thisisthat.util.PagingVO;
 
 public interface UserNoticeService {
 
@@ -23,6 +24,7 @@ public interface UserNoticeService {
 	void plusCnt(int board_no);
 	
 	//검색기능 메서드
+	/*
 	List<UserNoticeVO> allNotice(UserNoticeVO vo);
 	
 	List<UserNoticeVO> titleNotice(UserNoticeVO vo);
@@ -30,6 +32,12 @@ public interface UserNoticeService {
 	List<UserNoticeVO> writerNotice(UserNoticeVO vo);
 	
 	List<UserNoticeVO> contentNotice(UserNoticeVO vo);
+	*/
 	
+	public int noticeCount(String searchOption, String keyword);
+	
+	public List<UserNoticeVO> noticeList(PagingVO paging, String searchOption, String keyword);
+	
+	public List<UserNoticeVO> eventList(PagingVO paging, String searchOption, String keyword);
 	
 }

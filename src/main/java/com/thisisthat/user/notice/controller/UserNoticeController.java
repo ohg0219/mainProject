@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.thisisthat.admin.notice.vo.NoticeVO;
 import com.thisisthat.user.notice.service.UserNoticeService;
 import com.thisisthat.user.notice.vo.UserNoticeVO;
+import com.thisisthat.util.PagingVO;
 
 @Controller
 public class UserNoticeController {
@@ -20,17 +21,39 @@ public class UserNoticeController {
 	
 	//공지사항 페이지
 	@GetMapping("/notice.do")
-	public String noticePage(UserNoticeVO vo, Model model) {
-		List<UserNoticeVO> getNoticeList = userNoticeService.getNoticeList(vo);
-		model.addAttribute("noticeList", getNoticeList);
+	public String noticeList(UserNoticeVO vo,
+			Model model,
+			@RequestParam(value = "keyword", required = false, defaultValue = "")String keyword,
+			@RequestParam(value = "searchOption" ,required = false, defaultValue = "all")String searchOption,
+			@RequestParam(value = "nowPage", required = false)Integer nowPage) {
+		if(nowPage == null) nowPage = 1; //처음들어오면 1페이지 
+		System.out.println(keyword);
+		System.out.println(searchOption);
+		PagingVO paging = new PagingVO(userNoticeService.noticeCount(searchOption, keyword),nowPage,15);
+		List<UserNoticeVO> noticeList = userNoticeService.noticeList(paging, searchOption, keyword);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchOption",searchOption);
+		model.addAttribute("paging", paging);
 		return "/user/notice";
 	}
 
 	//이벤트 페이지
 	@GetMapping("/event.do")
-	public String eventPage(UserNoticeVO vo, Model model) {
-		List<UserNoticeVO> getEventList = userNoticeService.getEventList(vo);
-		model.addAttribute("eventList", getEventList);
+	public String eventList(UserNoticeVO vo,
+			Model model,
+			@RequestParam(value = "keyword", required = false, defaultValue = "")String keyword,
+			@RequestParam(value = "searchOption" ,required = false, defaultValue = "all")String searchOption,
+			@RequestParam(value = "nowPage", required = false)Integer nowPage) {
+		if(nowPage == null) nowPage = 1;
+		System.out.println(keyword);
+		System.out.println(searchOption);
+		PagingVO paging = new PagingVO(userNoticeService.noticeCount(searchOption, keyword),nowPage,15);
+		List<UserNoticeVO> eventList = userNoticeService.eventList(paging, searchOption, keyword);
+		model.addAttribute("eventList", eventList);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchOption",searchOption);
+		model.addAttribute("paging", paging);
 		return "/user/event";
 	}
 	
@@ -57,7 +80,7 @@ public class UserNoticeController {
 		model.addAttribute("event", noticeVO);
 		return "/user/eventView";
 	}
-	
+	/*
 	//공지사항 글 검색
 	@RequestMapping("/noticesearch.do")
 	public String noticesearch(Model model, 
@@ -120,7 +143,7 @@ public class UserNoticeController {
 		}
 		return null;
 	}
-
+*/
 	
 	
 }
