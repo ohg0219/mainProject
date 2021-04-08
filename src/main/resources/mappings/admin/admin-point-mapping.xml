@@ -47,7 +47,7 @@
 		</if>
 		<if test="searchType == 'all' and parameter !=''">
 		and
-			user_id like '%'||#{parameter}||'%' or nick_name like '%'||#{parameter}||'%' or user_name like '%'||#{parameter}||'%'
+			<![CDATA[(]]>user_id like '%'||#{parameter}||'%' or nick_name like '%'||#{parameter}||'%' or user_name like '%'||#{parameter}||'%'<![CDATA[)]]>
 		</if>
 		
 		 order by in_date desc OFFSET #{start} limit #{cntPerPage} ;

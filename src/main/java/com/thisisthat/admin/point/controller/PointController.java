@@ -51,6 +51,20 @@ public class PointController {
 			if(point !=null) {
 				pointList.add(point);
 			}
+			if(user.getUserName().length() == 2) {
+				StringBuffer temp = new StringBuffer();
+				temp.append(user.getUserName().substring(0, 1));
+				temp.append("*");
+				user.setUserName(temp.toString());
+			}else if(user.getUserName().length()>2) {
+				StringBuffer temp = new StringBuffer();
+				temp.append(user.getUserName().substring(0, 1));
+				for(int i =0; i<user.getUserName().length()-2; i++) {
+					temp.append("*");
+				}
+				temp.append(user.getUserName().substring(user.getUserName().length()-1, user.getUserName().length()));
+				user.setUserName(temp.toString());
+			}
 		}
 		if(msg !=null) model.addAttribute("msg","insert");
 		model.addAttribute("paging",paging);

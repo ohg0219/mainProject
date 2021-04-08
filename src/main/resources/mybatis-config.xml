@@ -15,12 +15,14 @@
 		<typeAlias type="com.thisisthat.admin.banner.vo.BannerVO" alias="bannerVO"/>
 		<typeAlias type="com.thisisthat.admin.terms.vo.InformationVO" alias="informationVO"/>
 		<typeAlias type="com.thisisthat.admin.terms.vo.UtilizationVO" alias="utilizationVO"/>
+		<typeAlias type="com.thisisthat.admin.orderManagement.vo.OrderManagementVO" alias="orderManagementVO"/>
 		<typeAlias type="com.thisisthat.user.address.vo.AddressVO" alias="AddressVO"/>
 		<typeAlias type="com.thisisthat.user.item.vo.CommentVO" alias="commentVO"/>
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentViewVO" alias="RecentViewVO"/>
 		<typeAlias type="com.thisisthat.user.recent.vo.RecentBasketVO" alias="RecentBasketVO"/>
-		<typeAlias type="com.thisisthat.admin.notice.vo.NoticeVO" alias="noticeVO"/>
-
+		<typeAlias type="com.thisisthat.log.vo.LogVO" alias="logVO"/>
+		<typeAlias type="com.thisisthat.user.mypage.vo.MyPageVO" alias="MyPageVO"/>
+        <typeAlias type="com.thisisthat.admin.notice.vo.NoticeVO" alias="noticeVO"/>
 	</typeAliases>
 	<mappers>
 		<!-- 매퍼파일 -->		
@@ -37,10 +39,12 @@
 		<mapper resource="mappings/user/user-payment-mapping.xml"/>
 		<mapper resource="mappings/user/user-address-mapping.xml"/>
 		<mapper resource="mappings/user/user-recent-mapping.xml"/>
+		<mapper resource="mappings/user/user-order-mapping.xml"/>
+		<mapper resource="mappings/user/user-coupon-mapping.xml"/>
 		
 		<mapper resource="mappings/admin/admin-mapping.xml" />
-		<mapper resource="mappings/admin/coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
+		<mapper resource="mappings/admin/admin-coupon-grant-mapping.xml" />
 		<mapper resource="mappings/admin/admin-coupon-mapping.xml" />
 		<mapper resource="mappings/admin/admin-management-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-board-mapping.xml"/>
@@ -53,6 +57,8 @@
 		<mapper resource="mappings/admin/admin-banner-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-terms-mapping.xml"/>
 		<mapper resource="mappings/admin/admin-sales-mapping.xml"/>
+		<mapper resource="mappings/admin/admin-orderManagement-mapping.xml"/>
+		<mapper resource="mappings/log/log-mapping.xml"/>
 		
 	</mappers>
 </configuration>

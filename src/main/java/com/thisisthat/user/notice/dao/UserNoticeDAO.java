@@ -32,6 +32,8 @@ public class UserNoticeDAO {
 		userNoticeTemplate.update("UserNoticeM.plusCnt", board_no);
 	}
 	
+	
+	//서치하는 DAO 메서드
 	public List<UserNoticeVO> allNotice(UserNoticeVO vo){
 		return userNoticeTemplate.selectList("UserNoticeM.allNotice", vo);
 	}

@@ -29,7 +29,13 @@ public class AdminController {
 	
 	@Autowired
 	AdminService dao;
-
+	
+	
+	@RequestMapping("/admin/404.mdo")
+	public String test() {
+		return "/admin/404";
+	}
+	
 	@RequestMapping("/admin/main.mdo")
 	public String mainView(Model model) {
 		DecimalFormat df = new DecimalFormat("###,###");

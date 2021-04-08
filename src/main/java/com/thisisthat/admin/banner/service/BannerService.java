@@ -5,7 +5,7 @@ import java.util.List;
 import com.thisisthat.admin.banner.vo.BannerVO;
 
 public interface BannerService {
-	List<BannerVO> getBannerList();
+	List<BannerVO> getBannerList(String state);
 	void insertBanner(BannerVO banner);
 	void updateOrder(List<BannerVO> bannerList);
 	void deleteBanner(int bannerOrder);

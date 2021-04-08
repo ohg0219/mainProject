@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
+import org.apache.commons.codec.language.bm.Rule.RPattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,7 +66,7 @@ public class RecentViewController {
 
 	// 최근본 상품을 장바구니에 담기
 	@GetMapping("/insertRecentBasket.do")
-	public String insertBasket(HttpSession session, Model model, RecentViewVO vo, RecentBasketVO bo,
+	public String insertBasket(HttpSession session, Model model, RecentViewVO vo, RecentBasketVO bo, UserBasketItemVO uo , 
 									@RequestParam(value = "productNo") int productNo, 
 									@RequestParam(value = "size") String selectSize,
 									@RequestParam(value = "productPrice") int productPrice) {
@@ -126,12 +127,33 @@ public class RecentViewController {
 					model.addAttribute("errMsg", "사이즈를 선택해주세요");
 					return "user/recentSizeFail";
 					
-				} else {					
-					bo.setProductNo(productNo);
-					bo.setSelectCount(1);
-					bo.setProductPrice(productPrice);
-					bo.setSelectSize(selectSize);
-					session.setAttribute("basketItem", bo);
+				} else {
+					UserBasketItemVO basketItem = new UserBasketItemVO();
+					RecentViewVO item =  service.itemView(vo);
+					System.out.println("sadasd : "+vo.toString());
+					System.out.println("item : "+item.toString());
+					basketItem.setProductNo(item.getProductNo());
+					basketItem.setProductCategory(item.getProductCategory());
+					basketItem.setProductName(item.getProductName());
+					basketItem.setProductPrice(item.getProductPrice());
+					basketItem.setSelectCount(1);
+					basketItem.setUploadPath(item.getUploadPath());
+					basketItem.setSelectSize(selectSize);
+			
+					
+					// 장바구니에 다른 상품이 있을 때
+					if(session.getAttribute("basketItem") != null) {
+						List<UserBasketItemVO> basket = (List<UserBasketItemVO>) session.getAttribute("basketItem");
+						System.out.println("basket : " + basket.toString());
+						basket.add(basketItem);						
+						session.setAttribute("basketItem", basket);
+					
+					// 장바구니에 아무 상품도 없을 때
+					} else {
+						List<UserBasketItemVO> basket = new ArrayList<UserBasketItemVO>();
+						basket.add(basketItem);
+						session.setAttribute("basketItem", basket);
+					}
 				}
 				return "redirect:/basket.do";
 			
@@ -141,5 +163,5 @@ public class RecentViewController {
 			}
 		}
 	}
-		
+
 }

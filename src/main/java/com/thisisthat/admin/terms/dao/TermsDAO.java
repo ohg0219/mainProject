@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.thisisthat.admin.terms.vo.InformationVO;
 import com.thisisthat.admin.terms.vo.UtilizationVO;
+import com.thisisthat.admin.usermanagement.vo.UserVO;
 import com.thisisthat.util.PagingVO;
 
 @Repository
@@ -50,5 +51,9 @@ public class TermsDAO {
 		return termsTemplate.selectOne("termsDAO.getInformation",no);
 
 	}
+	public List<UserVO> getUserList() {
+		return termsTemplate.selectList("termsDAO.getUserList");
+	}
+
 	
 }

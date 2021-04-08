@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thisisthat.admin.usermanagement.service.UserManagementService;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
+import com.thisisthat.util.PagingVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,9 +30,13 @@ public class UserManagementController {
 	private UserManagementService userService;
 
 	@GetMapping("/userList.mdo")
-	public String getUserList(Model model, UserVO vo) {
-		
-		List<UserVO> getUserList = userService.getUserList(vo);
+	public String getUserList(Model model, UserVO vo,
+			@RequestParam(value = "nowPage", required = false)Integer nowPage) {
+		if(nowPage == null) nowPage = 1;
+		if(vo.getSelect() ==null) vo.setSelect("all");
+		if(vo.getSearch() == null) vo.setSearch("");
+		PagingVO paging = new PagingVO(userService.getUserCount(vo), nowPage, 15);
+		List<UserVO> getUserList = userService.getUserList(vo, paging);
 		List<UserVO> userList = new ArrayList<UserVO>();
 		for (UserVO userTemp : getUserList) {
 			StringBuffer temp = new StringBuffer();
@@ -55,7 +60,13 @@ public class UserManagementController {
 				userTemp.setUserName(temp.toString());
 			}
 			userList.add(userTemp);
+			
+			
+			
 		}
+		System.out.println(paging);
+		model.addAttribute("userVO",vo);
+		model.addAttribute("paging",paging);
 		model.addAttribute("userInfo", userList);
 		return "/admin/userList";
 	}
@@ -119,9 +130,14 @@ public class UserManagementController {
 
 	}
 	@GetMapping("/staffList.mdo")
-	public String getStaffList(UserVO vo, Model model) {
-
-		List<UserVO> userList = userService.staffList(vo);
+	public String getStaffList(UserVO vo, Model model,
+			@RequestParam(value = "nowPage", required = false)Integer nowPage) {
+		if(nowPage == null) nowPage = 1;
+		if(vo.getSelect() == null) vo.setSelect("all");
+		if(vo.getSearch() == null) vo.setSearch("");
+		PagingVO paging = new PagingVO(userService.getStaffCount(vo), nowPage, 15);
+		List<UserVO> userList = userService.staffList(vo,paging);
+		System.out.println("staffList : "+userList.toString());
 		List<UserVO> newUserList = new ArrayList<UserVO>();
 		for (UserVO user : userList) {
 			if (user.getUserPhone() != null) {
@@ -142,6 +158,8 @@ public class UserManagementController {
 			user.setUserName(newName);
 			newUserList.add(user);
 		}
+		model.addAttribute("userVO", vo);
+		model.addAttribute("paging",paging);
 		model.addAttribute("staffInfo", newUserList);
 		return "/admin/staffList";
 	}

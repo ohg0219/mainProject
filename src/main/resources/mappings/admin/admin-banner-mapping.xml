@@ -8,19 +8,24 @@
 		<result column="banner_uri" property="bannerUri"/>
 		<result column="banner_order" property="bannerOrder"/>
 		<result column="banner_name" property="bannerName"/>
+		<result column="banner_state" property="bannerState"/>
+		<result column="banner_location" property="bannerLocation"/>
+		
 	</resultMap>
 	
 	<select id="getMaxBannerOrder" resultType="Integer">
-	select banner_order from main_banner where banner_order = ((select max(banner_order) from main_banner));
+	select banner_order from main_banner where banner_order = 
+	((select max(banner_order) from main_banner where banner_state =#{bannerState}))
+	and banner_state =#{bannerState};
 	</select>
 	<select id="insertBanner" >
-		INSERT INTO public.main_banner(
-		banner_uri, banner_order, banner_name)
-		VALUES ( #{bannerUri}, #{bannerOrder}, #{bannerName});
+		insert into main_banner(
+		banner_uri, banner_order, banner_name, banner_state, banner_location)
+		VALUES ( #{bannerUri}, #{bannerOrder}, #{bannerName}, #{bannerState}, #{bannerLocation});
 	</select>
 	
 	<select id="getBannerList" resultMap="bannerResult">
-		select * from main_banner order by banner_order ;
+		select * from main_banner where banner_state = #{state} order by banner_order ;
 	</select>
 	<update id="updateOrder">
 		update main_banner set banner_order = #{bannerOrder} where banner_uri = #{bannerUri}

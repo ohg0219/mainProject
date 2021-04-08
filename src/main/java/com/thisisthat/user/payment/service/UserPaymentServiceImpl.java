@@ -10,6 +10,7 @@ import com.thisisthat.user.basket.vo.UserBasketItemVO;
 import com.thisisthat.user.payment.dao.UserPaymentDAO;
 import com.thisisthat.user.payment.vo.UserAddressVO;
 import com.thisisthat.user.payment.vo.UserBasketVO;
+import com.thisisthat.user.payment.vo.UserCouponVO;
 import com.thisisthat.user.payment.vo.UserMailVO;
 import com.thisisthat.user.payment.vo.UserPaymentVO;
 import com.thisisthat.user.payment.vo.UserVO;
@@ -88,6 +89,16 @@ public class UserPaymentServiceImpl implements UserPaymentService {
 	@Override
 	public List<UserAddressVO> getUserAddressList(String userId) {
 		return paymentDAO.getUserAddressList(userId);
+	}
+
+	@Override
+	public List<UserCouponVO> getCouponList(String userId) {
+		return paymentDAO.getCouponList(userId);
+	}
+
+	@Override
+	public void updateCoupon(UserPaymentVO vo) {
+		paymentDAO.updateCoupon(vo);
 	}
 	
 	

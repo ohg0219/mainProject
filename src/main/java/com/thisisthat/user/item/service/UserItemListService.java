@@ -12,7 +12,8 @@ import com.thisisthat.util.PagingVO;
 
 public interface UserItemListService {
 
-	List<UserItemListVO> getItemList(String categoryName);
+	int getItemCount(String categoryName,String keyword);
+	List<UserItemListVO> getItemList(PagingVO pagingvo,String categoryName,String keyword,String select);
 	UserItemVO getItemInfo(long productNo);
 	List<UserItemImageVO> getItemImage(long productNo);
 	List<UserItemSizeGuideVO> getItemSizeGuide(long productNo);

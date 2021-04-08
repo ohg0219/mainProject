@@ -1,6 +1,7 @@
 package com.thisisthat.admin.coupon.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +16,9 @@ public class CouponServiceImpl implements CouponService {
 	CouponDAO couponDAO;
 
 	@Override
-	public List<CouponVO> couponList(CouponVO couponVO) {
+	public List<CouponVO> couponList(Map<String, Object> map) {
 
-		return couponDAO.couponList(couponVO);
-	}
-
-	@Override
-	public List<CouponVO> nameSearch(CouponVO couponVO) {
-		return couponDAO.nameSearch(couponVO);
+		return couponDAO.couponList(map);
 	}
 
 	@Override
@@ -43,6 +39,11 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public void updateCoupon(CouponVO couponVO) {
 		couponDAO.updateCoupon(couponVO);
+	}
+
+	@Override
+	public int couponCount(CouponVO couponVO) {
+		return couponDAO.getCouponCount(couponVO);
 	}
 
 }

@@ -17,13 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.thisisthat.admin.product.controller.AwsS3;
-import com.thisisthat.admin.product.vo.AdminProductImageVO;
 import com.thisisthat.user.item.service.UserItemListService;
 import com.thisisthat.user.item.vo.CommentVO;
 import com.thisisthat.user.item.vo.UserItemListVO;
@@ -42,10 +40,20 @@ public class UserItemListController {
 	 * @return
 	 */
 	@GetMapping("/itemList/category/{category}.do")
-	public String itemListView(@PathVariable String category,Model model) {
-		List<UserItemListVO> itemList = itemListService.getItemList(category);
+	public String itemListView(
+			@PathVariable String category,
+			@RequestParam(value = "keyword",required = false) String keyword,
+			@RequestParam(value = "nowPage",required = false,defaultValue = "1") int nowPage,
+			@RequestParam(value = "select",defaultValue = "new") String select,
+			Model model) {
+		int itemCount = itemListService.getItemCount(category,keyword);
+		PagingVO pagingvo = new PagingVO(itemCount, nowPage, 12);
+		List<UserItemListVO> itemList = itemListService.getItemList(pagingvo,category,keyword,select);
+		model.addAttribute("paging",pagingvo);
 		model.addAttribute("itemList",itemList);
 		model.addAttribute("category",category);
+		model.addAttribute("select",select);
+		model.addAttribute("keyword",keyword);
 		return "/user/item/itemList";
 	}
 
@@ -53,7 +61,7 @@ public class UserItemListController {
 	public String getItem(
 			@RequestParam("productNo") int productNo,
 			@RequestParam("productCategory")String productCategory,
-			Model model) {
+			Model model, HttpSession session) {
 		String selectSizeGuideGroup = null;
 		List<UserItemSizeGuideVO> sizeGuideList = itemListService.getItemSizeGuide(productNo);
 		for(UserItemSizeGuideVO size : sizeGuideList) {
@@ -73,6 +81,19 @@ public class UserItemListController {
 			case "hem":model.addAttribute("hem", size);break;
 			}
 		}
+		
+        if(session.getAttribute("productNo") != null) {
+            List<Integer> list = (List<Integer>) session.getAttribute("productNo");
+            if(!list.contains(productNo)) {
+                list.add(productNo);
+                session.setAttribute("productNo", list);
+            }
+        } else {
+            List<Integer> list = new ArrayList<Integer>();
+            list.add(productNo);
+            session.setAttribute("productNo", list);
+        }
+		
 		model.addAttribute("selectSizeGuideGroup",selectSizeGuideGroup);
 		model.addAttribute("sizeUsed",itemListService.getItemSizeUsed(productNo));
 		model.addAttribute("itemInfo",itemListService.getItemInfo(productNo));

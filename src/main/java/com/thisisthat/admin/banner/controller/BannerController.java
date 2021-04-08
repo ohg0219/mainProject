@@ -28,15 +28,20 @@ public class BannerController {
 	
 	@GetMapping("/getBanner.mdo")
 	public String getBanner(Model model,
-			@RequestParam(value = "msg", required = false)String msg) {
-		
+			@RequestParam(value = "msg", required = false)String msg,
+			@RequestParam(value= "state", required = false)String state) {
 		if(msg != null) model.addAttribute("msg",msg);
-		model.addAttribute("bannerList",bannerService.getBannerList());
+		if(state == null) state = "main";
+		System.out.println(state);
+		model.addAttribute("bannerList",bannerService.getBannerList(state));
+		model.addAttribute("state",state);
+			
+		
 		return "/admin/banner/getBanner";
 	}
 	@GetMapping("/insertBanner.mdo")
-	public String insertBanner() {
-		
+	public String insertBanner(@RequestParam(value="state")String state,Model model) {
+		model.addAttribute("state",state);
 		return "/admin/banner/insertBanner";
 	}
 	
@@ -51,7 +56,6 @@ public class BannerController {
 			String contentType = mainUploadFile.getContentType();
 			long contentLength = mainUploadFile.getSize();
 			awsS3.upload(is, key, contentType, contentLength);
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -65,8 +69,9 @@ public class BannerController {
 	@GetMapping("/bannerOrder.mdo")
 	public String bannerOrder(
 			@RequestParam("bannerOrder")List<Integer> bannerOrder,
-			RedirectAttributes attr) {
-		List<BannerVO> bannerList = bannerService.getBannerList();
+			RedirectAttributes attr,
+			@RequestParam(value="state")String state) {
+		List<BannerVO> bannerList = bannerService.getBannerList(state);//여기
 		
 		//순서 중복체크
 		for(int i = 0; i<bannerOrder.size(); i++) {
@@ -84,8 +89,10 @@ public class BannerController {
 		return "redirect:/admin/getBanner.mdo";
 	}
 	@GetMapping("/deleteBanner.mdo")
-	public String deleteBanner(@RequestParam("bannerOrder")int bannerOrder,RedirectAttributes attr) {
+	public String deleteBanner(@RequestParam("bannerOrder")int bannerOrder,RedirectAttributes attr,
+			@RequestParam(value="key")String key) {
 		bannerService.deleteBanner(bannerOrder);
+		awsS3.delete(key);
 		attr.addFlashAttribute("msg","success");
 		return "redirect:/admin/getBanner.mdo";
 	}

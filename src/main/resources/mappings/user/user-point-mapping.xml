@@ -8,7 +8,7 @@
 		select * from user_point where user_id=#{user_id}
 	</select>
 	<select id="namePoint" resultType="userPointVO">
-		select * from user_point left join this_user using(user_id) where user_id=#{user_id}
+		select * from  this_user where user_id=#{user_id}
 	</select>
 	<select id="pointSum" resultType="userPointVO">
 		select sum(point) from user_point where user_id=#{user_id}

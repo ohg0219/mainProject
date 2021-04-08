@@ -134,7 +134,7 @@ a {
 																<label><input type="radio" name="state" value="110" checked="checked">정지회원</label>&nbsp;&nbsp;
 																<label><input type="radio" name="state" value="120" disabled="disabled">탈퇴회원</label>
 															</c:if>
-															<c:if test="${user.userRole == 120 }">
+															<c:if test="${user.userRole == 200 }">
 																<label><input type="radio" name="state" value="100" disabled="disabled">일반회원</label>&nbsp;&nbsp;
 																<label><input type="radio" name="state" value="110" disabled="disabled">정지회원</label>&nbsp;&nbsp;
 																<label><input type="radio" name="state" value="120" checked="checked">탈퇴회원</label>

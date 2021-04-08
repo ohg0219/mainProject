@@ -29,8 +29,7 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public AnswerBoardVO getReply(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getReply(boardNo);
 	}
 
 	@Override

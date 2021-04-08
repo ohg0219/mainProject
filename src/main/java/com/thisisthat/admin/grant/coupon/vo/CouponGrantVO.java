@@ -10,8 +10,9 @@ public class CouponGrantVO {
 	private int coupon_price;
 	private Date coupon_first;
 	private Date coupon_last;
-	private boolean used;
+	private int used;
 	private Date used_date;
+	private String keyword;
 
 	public String getUser_id() {
 		return user_id;
@@ -61,11 +62,11 @@ public class CouponGrantVO {
 		this.coupon_last = coupon_last;
 	}
 
-	public boolean isUsed() {
+	public int getUsed() {
 		return used;
 	}
 
-	public void setUsed(boolean used) {
+	public void setUsed(int used) {
 		this.used = used;
 	}
 
@@ -76,10 +77,19 @@ public class CouponGrantVO {
 	public void setUsed_date(Date used_date) {
 		this.used_date = used_date;
 	}
+	
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 	@Override
 	public String toString() {
-		return "userCouponVO [user_id=" + user_id + ", coupon_no=" + coupon_no + ", coupon_name=" + coupon_name
+		return "CouponGrantVO [user_id=" + user_id + ", coupon_no=" + coupon_no + ", coupon_name=" + coupon_name
 				+ ", coupon_price=" + coupon_price + ", coupon_first=" + coupon_first + ", coupon_last=" + coupon_last
 				+ ", used=" + used + ", used_date=" + used_date + "]";
 	}

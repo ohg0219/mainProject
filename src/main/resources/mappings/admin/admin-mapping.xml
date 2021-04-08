@@ -38,7 +38,7 @@
 	<select id="getThisMonthSales" resultType="long">
 		<![CDATA[
 		select COALESCE(sum(order_price),0) from order_table 
-		where (order_state != '입금대기') 
+		where (order_state != '입금대기' and order_state != '환불완료') 
 		and
 		order_date > cast(date_trunc('month',current_date) as date) 
 		and 
@@ -48,7 +48,7 @@
 	<select id="getThisDaySales" resultType="long">
 		<![CDATA[
 		select COALESCE(sum(order_price),0) from order_table
-		where (order_state != '입금대기') 
+		where (order_state != '입금대기' and order_state != '환불완료') 
 		and
 		order_date > cast(date_trunc('day',now()) as date) 
 		and 
@@ -60,7 +60,9 @@
 	</select>
 	<select id="getOneWeekSales" resultType="String">
 		<![CDATA[
-		select sum(order_price) from order_table where (order_state != '입금대기')  and 	
+		select sum(order_price) from order_table 
+		where (order_state != '입금대기' and order_state != '환불완료') 
+		and 	
 		order_date >= cast(date_trunc('day',#{date}::date) as date) 
 		and 
 		order_date <  (#{date}::date + INTERVAL '+ 1 day')
@@ -71,7 +73,8 @@
 		select sum(select_count) as count,
 			(select product_category from product as p where p.product_no = o.product_no) as product_category
 		from order_product as o right outer join order_table as t on( o.order_no = t.order_no)
-		where (order_state != '입금대기') and 
+		where (order_state != '입금대기' and order_state != '환불완료')  
+		and 
 			order_date > cast(date_trunc('day',current_date) as date) 
 			and 
 			order_date <  (date_trunc('day', current_date) + INTERVAL '+ 1 day')::date

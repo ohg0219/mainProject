@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserCouponDAO">
+	
+	<resultMap type="com.thisisthat.admin.usermanagement.vo.UserVO" id="UserVOMap">
+		<result property="userId" column="user_id"/>
+	</resultMap>
+	
+	
+	
+	
+	<select id="getUserIDList" resultMap="UserVOMap">
+		select user_id from this_user
+	</select>
+	
+	<select id="getAdminCoupon" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select coupon_no, coupon_name,coupon_price from admin_coupon
+	</select>
+	
+	<insert id="userGrantCoupon">
+		insert into user_coupon
+		(user_id,coupon_no,coupon_name,coupon_price,coupon_first,coupon_last,used)
+		values (
+		#{user_id},
+		#{coupon_no},
+		(select coupon_name from admin_coupon where coupon_no= #{coupon_no}),
+		(select coupon_price from admin_coupon where coupon_no= #{coupon_no}),
+		now(),
+		(select coupon_last from admin_coupon where coupon_no = #{coupon_no}),
+		0);
+	</insert>
+	
+	
+	<select id="getAdminCouponInfo" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
+		select * from admin_coupon where coupon_no =  #{coupon_no}
+	</select>
+	
+	
+	<select id="userIdCoupon">
+		select user_id from this_user where user_id = #{userId}
+	</select>
+	
+	<select id="couponUserList" resultType="CouponGrantVO">
+		select user_id, coupon_no, coupon_name, coupon_price, coupon_first, coupon_last,
+		used from user_coupon where user_id = #{user_id}
+	</select>
+	
+	<select id="nameCouponSearch" resultType="CouponGrantVO">
+		select * from user_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_last desc
+	</select>
+	
+	<select id="IdCouponSearch" resultType="CouponGrantVO">
+		select * from user_coupon where user_id like '%'||#{keyword}||'%' order by coupon_last  desc
+	</select>
+	
+	<delete id="userCouponDeleteSel" parameterType="CouponGrantVo">
+		delete from user_coupon where user_id = #{user_id} and coupon_no = #{coupon_no}
+	</delete>
+	
+	<delete id="userCouponDeleteAll" parameterType="CouponGrantVo">
+		delete from user_coupon where user_id = #{user_id}
+	</delete>
+	<select id="userCouponList" resultType="CouponGrantVO">
+		select * from user_coupon where
+		 
+		<if test="searchOption == 'all'">
+			user_id like '%'||#{keyword}||'%' or coupon_name like '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="searchOption == 'user_id'">
+			user_id like '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="searchOption == 'coupon_name'">
+			coupon_name like '%'||#{keyword}||'%'
+		</if>
+		
+		order by coupon_last desc offset #{start} limit #{cntPerPage};
+	</select>
+	<select id="couponCount" resultType="Integer" >
+		select count(*) from user_coupon where 
+		<if test="searchOption == 'all'">
+			user_id like '%'||#{keyword}||'%' or coupon_name like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'user_id'">
+			user_id like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'coupon_name'">
+			coupon_name like '%'||#{keyword}||'%'
+		</if>
+	</select>
+	
+</mapper>

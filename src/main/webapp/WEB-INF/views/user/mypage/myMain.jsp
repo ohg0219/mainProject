@@ -1,6 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +10,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
 <style type="text/css">
-#m19 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-}
-
 
 .wrap {
 	position: absolute;
@@ -57,12 +47,12 @@
 #myshopMain {
     display: block;
     position: relative;
-    width: 50%;
+    width: 350px;
     max-width: 720px;
     min-width: 560px;
     margin: 80px auto 40px;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 90px;
 }
 
 #myshopMain #boxsize {
@@ -103,9 +93,6 @@
 
 #myshopMain .xans-layout-statelogon {
     vertical-align: top;
-}
-
-#myshopMain .xans-layout-statelogon {
     position: absolute;
     top: 0;
     right: 20px;
@@ -120,7 +107,7 @@
     width: 50%;
     max-width: 720px;
     min-width: 560px;
-    padding: 0 20px !important;
+    padding: 0 100px !important;
 }
 .w-1, .w-2, .w-3 {
     box-sizing: border-box;
@@ -147,7 +134,7 @@
     background: transparent;
     width: 100%;
     margin: 0 auto 0;
-    display: ;
+    text-align: end;
     margin-top: 20px;
 }
 
@@ -157,7 +144,6 @@
 }
 .xans-myshop-bankbook li .data {
     float: right;
-    width: 35%;
     text-align: right;
     margin-right: 52px;
     font-size: 11px;
@@ -171,15 +157,15 @@
     display: inline-block;
     position: relative;
     overflow: auto;
-    width: 40%;
+    width: 350px;
     margin-right: 10%;
     line-height: 1.7;
-    float: left;
     vertical-align: top;
     *display: inline;
     *zoom: 1;
     padding: 5px 0;
     font-size: 11px;
+    
 }
 
 .xans-myshop-bankbook li .title {
@@ -190,7 +176,7 @@
     font-size: 11px;
     font-weight: 400;
     padding-bottom: 4px;
-    border-bottom: 1px solid #eee;
+    text-align: left;
 }
 
 .xans-myshop-benefit .infoWrap {
@@ -212,20 +198,7 @@ li a.dual {
     line-height: 1.3;
 }
 
-.xans-myshop-bankbook li {
-    display: inline-block;
-    position: relative;
-    overflow: auto;
-    width: 40%;
-    margin-right: 10%;
-    line-height: 1.7;
-    float: left;
-    vertical-align: top;
-    *display: inline;
-    *zoom: 1;
-    padding: 5px 0;
-    font-size: 11px;
-}
+
 .xans-myshop-bankbook li a {
     position: absolute;
     right: 4px;
@@ -251,8 +224,24 @@ a.dual {
 	float: center;
 	width: 250px;
 }
+
+.myInfo{
+	text-align: left;
+	border: none;
+	margin-bottom: 40px;
+
+}
 #boxsize a{
 	text-decoration: none;
+}
+
+.itemBox{
+	text-align: center;
+}
+
+.etc {
+    border-bottom: 1px solid #eee;
+
 }
 </style>
 </head>
@@ -270,43 +259,32 @@ a.dual {
             				<a href="/mypage/modify.do">profile</a>
             				<a href="/mypage/address.do">address book</a>
 							<a href="/mypage/orderlist.do">orders</a>
-            				<a href="/user/userPoint.do" >point</a>
+            				<a href="/mypage/userPoint.do" >point</a>
             				<a href="/mypage/coupon.do">coupon</a>
         				</div>
 					</div>
 				<div class="w-2">
-        	    	<div class="xans-element- xans-myshop xans-myshop-benefit">
-        	    		<div class="infoWrap">
-                			<div class="myInfo">
-                    			<strong class="name"><span>박진수</span></strong>
-                    			<strong class="group">[N01]</strong>
-               				</div>
-               			</div>
-               		</div>
                		
    					<div class="xans-element- xans-myshop xans-myshop-bankbook">
-   					<ul>
-						<li class=" ">
-                			<strong class="title">가용 포인트</strong>
-                			<strong class="data use">10,000P</strong>
-                			<a href="/myshop/mileage/historyList.html" class="dual">조회</a>
-            			</li>
-            			<li class="">
-                			<strong class="title">총 포인트</strong>
-                			<strong class="data">10,000P</strong>
-            			</li>
-            			<li class="">
-                			<strong class="title">사용 포인트</strong>
-                			<strong class="data">0P</strong>
-            			</li>
+   					<ul class="itemBox">
+   						<li class="myInfo">
+   							<strong class="name"><span>${info.userName}</span></strong>
+                    		<strong class="group">[${info.nickName}]</strong>
+   						</li>
+   						
             			<li class="etc">
                 			<strong class="title">총 주문</strong>
-                			<strong class="data">0(0회)</strong>
+                			<strong class="data"><fmt:formatNumber value="${info.totalPrice}" maxFractionDigits="3"></fmt:formatNumber>원 (${info.orderCount}회)</strong>
             			</li>
-            			<li class="etc ">
+            			<li class="etc">
+                			<strong class="title">총 포인트</strong>
+                			<strong class="data"><fmt:formatNumber value="${info.totalPoint}" maxFractionDigits="3"></fmt:formatNumber>p</strong>
+                			<a href="/user/userPoint.do" class="dual">조회</a>
+            			</li>
+            			<li class="etc">
                 			<strong class="title">coupon</strong>
-                			<strong class="data">1</strong>
-                			<a href="/user/userPoint.do" class="dual coup">조회</a>
+                			<strong class="data">${info.countCoupon }장</strong>
+                			<a href="/mypage/coupon.do" class="dual coup">조회</a>
             			</li>
         			 </ul>
         			 </div>

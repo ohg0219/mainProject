@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.user.mypage.service.MyPageService;
+import com.thisisthat.user.mypage.vo.MyPageVO;
 import com.thisisthat.user.register.vo.UserRegisterVO;
 
 @Controller
@@ -53,15 +54,7 @@ public class MyPageController {
 		return "redirect:/mypage/modify.do";
 	}
 	
-	@RequestMapping("/mypage/mypage.do")
-	public String mypageMain(HttpSession session, Model model) {
-		String id = null;
-		if (session.getAttribute("userId") != null)
-			id = (String) session.getAttribute("userId");
-		UserRegisterVO user = service.modifyView(id);
-		model.addAttribute("modify", user);
-		return "/user/mypage/myMain";
-	}
+	
 	@GetMapping("/mypage/delUser.do")
 	public String delUser() {
 		return "/user/mypage/delUser";
@@ -83,8 +76,26 @@ public class MyPageController {
 		}
 	}
 	
+//	@RequestMapping("/mypage/mypage.do")
+//	public String mypageMain(HttpSession session, Model model) {
+//		String userId = null;
+//		if (session.getAttribute("userId") != null)
+//			userId = (String) session.getAttribute("userId");
+//		UserRegisterVO user = service.modifyView(userId);
+//		model.addAttribute("modify", user);
+//		model.addAttribute("userId", user.getId());
+		
+//		return "/user/mypage/myMain";
+//	}
 	
-	
+	@RequestMapping("/mypage/mypage.do")
+	public String getMypageMain(HttpSession session, MyPageVO vo, Model model) {
+ 		String userId = (String) session.getAttribute("userId");
+		MyPageVO info = service.getMypage(userId);
+		model.addAttribute("info", info);
+		model.addAttribute("userId", userId);
+		return "/user/mypage/myMain";
+	}
 	
 
 }

@@ -3,6 +3,7 @@ package com.thisisthat.admin.coupon.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.admin.coupon.service.CouponService;
 import com.thisisthat.admin.coupon.vo.CouponVO;
+import com.thisisthat.util.PagingVO;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -21,43 +23,35 @@ public class CouponController {
 	private CouponService couponService;
 
 	@RequestMapping("getCouponList.mdo")
-	public String getCouponList(Model model) {
-		CouponVO couponVO = new CouponVO();
-		List<CouponVO> couponList = couponService.couponList(couponVO);
-
+	public String getCouponList(Model model, CouponVO couponVO, Map<String, Object> map,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword, 
+			@RequestParam(value = "nowPage", required = false) Integer nowPage ) {
+		
+		if (nowPage == null) nowPage = 1;
+		couponVO.setKeyword(keyword);		
+		PagingVO pagingVO = new PagingVO(couponService.couponCount(couponVO), nowPage, 15);
+		
+		map.put("keyword", keyword);
+		map.put("start", pagingVO.getStart());
+		map.put("cntPerPage", pagingVO.getCntPerPage());
+		List<CouponVO> couponList = couponService.couponList(map);
 		model.addAttribute("couponList", couponList);
+		model.addAttribute("paging", pagingVO);
+		model.addAttribute("couponVO", couponVO);
 		return "/admin/coupon/couponList";
 	}// end couponList
-
+	
+	
 	@RequestMapping("insertCoupon.mdo")
 	public String insertCoupon() {
 		return "/admin/coupon/insertCoupon";
 	}
 
-	@RequestMapping("couponSearch.mdo")
-	public String couponSearch(Model model, @RequestParam(value = "searchOption") String searchOption,
-			@RequestParam(value = "keyword") String keyword, CouponVO couponVO) {
-		if (searchOption.equals("coupon_name")) {
-			couponVO.setKeyword(keyword);
-			List<CouponVO> couponList = couponService.nameSearch(couponVO);
-			model.addAttribute("couponList", couponList);
-			return "/admin/coupon/couponList";
-		} else if (searchOption.equals("coupon_first")) {
-
-		} else if (searchOption.equals("coupon_last")) {
-
-		}
-
-		return null;
-	}
-
-	
-
 	@RequestMapping("insertCouponPro.mdo")
 	public String insertCoupon(CouponVO couponVO, @RequestParam(value = "first") String first,
 			@RequestParam(value = "last") String last) throws Exception {
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmm");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmm");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 
 		Date coupon_first = sdf1.parse(first);
 		couponVO.setCoupon_first(coupon_first);
@@ -100,7 +94,11 @@ public class CouponController {
 	}
 	
 	@RequestMapping("updateCouponPro.mdo")
-	public String updateCouponPro(@RequestParam("coupon_name")String coupon_name,@RequestParam("coupon_price")Long coupon_price,@RequestParam("coupon_no")Long coupon_no, @RequestParam(value="coupon_first")String first, @RequestParam(value="coupon_last")String last)throws Exception{
+	public String updateCouponPro(  @RequestParam("coupon_name")String coupon_name,
+									@RequestParam("coupon_price")Long coupon_price,
+									@RequestParam("coupon_no")Long coupon_no, 
+									@RequestParam(value="coupon_first")String first, 
+									@RequestParam(value="coupon_last")String last)throws Exception {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd");
 		
