@@ -37,7 +37,7 @@ public class UserNoticeController {
 		model.addAttribute("paging", paging);
 		return "/user/notice";
 	}
-
+	
 	//이벤트 페이지
 	@GetMapping("/event.do")
 	public String eventList(UserNoticeVO vo,
@@ -49,6 +49,7 @@ public class UserNoticeController {
 		System.out.println(keyword);
 		System.out.println(searchOption);
 		PagingVO paging = new PagingVO(userNoticeService.noticeCount(searchOption, keyword),nowPage,15);
+
 		List<UserNoticeVO> eventList = userNoticeService.eventList(paging, searchOption, keyword);
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("keyword", keyword);

@@ -98,5 +98,5 @@
 	<select id="contentNotice" resultType="UserNoticeVO">
 		SELECT * FROM notice_board WHERE board_content LIKE '%'||#{keyword}||'%' ORDER BY board_view asc, board_no desc
 	</select>
-	 -->
+	-->
 </mapper>

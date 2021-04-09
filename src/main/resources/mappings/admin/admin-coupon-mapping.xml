@@ -5,7 +5,7 @@
 <mapper namespace="CouponDAO">
 
 	<select id="couponList" resultType="com.thisisthat.admin.coupon.vo.CouponVO">
-		select * from admin_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_no asc offset #{start} limit #{cntPerPage}
+		select * from admin_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_no desc offset #{start} limit #{cntPerPage}
 	</select>
 	
 	<select id="viewCoupon" resultType="com.thisisthat.admin.coupon.vo.CouponVO">

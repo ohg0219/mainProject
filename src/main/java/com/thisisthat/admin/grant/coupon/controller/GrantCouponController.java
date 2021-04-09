@@ -39,7 +39,7 @@ public class GrantCouponController {
 			@RequestParam(value = "searchOption", required = false, defaultValue = "all")String searchOption,
 			@RequestParam(value = "nowPage", required = false)Integer nowPage,
 			CouponGrantVO vo) {
-		if(nowPage == null) nowPage = 1;//처음들어오면 1페이지  required가 빈값이면 처음 들어왔다는것
+		if(nowPage == null) nowPage = 1;
 		System.out.println(keyword);
 		System.out.println(searchOption);
 		PagingVO paging = new PagingVO(couponGrantService.couponCount(searchOption, keyword), nowPage, 15);
@@ -98,9 +98,7 @@ public class GrantCouponController {
 			vo.setUser_id(userId);
 			vo.setCoupon_no(coupon);
 			couponGrantService.userGrantCoupon(vo);
-		}
-		
-		
+		}	
 		return  "redirect:/admin/grantCoupon.mdo";
 	}
 	
@@ -132,7 +130,7 @@ public class GrantCouponController {
 	}
 	
 	
-	//쿠폰 검색하는 메서드(페이지 장인이 알려준 방법을 쓰자 그래야 페이징이랑 검색이 된다 두개는 한번에 가는것이다...)
+	//쿠폰 검색하는 메서드
 	
 //	@GetMapping("couponSearch.mdo")
 //	public String couponSearch(Model model,
