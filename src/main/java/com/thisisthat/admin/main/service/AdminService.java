@@ -13,4 +13,6 @@ public interface AdminService {
 	int noAnswerCount();
 	List<String> getOneWeekSales(List<Date> dateList); 
 	List<AdminDailyCategoryVO> getTodayCatgorySales();
+	boolean userCheck(UserVO user);
+	void updateUser(UserVO user);
 }	

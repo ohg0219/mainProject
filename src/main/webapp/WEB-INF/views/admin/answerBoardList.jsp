@@ -187,7 +187,7 @@ a {
 								<div>
 									<select id="searchSelect" aria-controls="example" class="">
 										<option value="아이디">아이디</option>
-										<option value="이름">이름</option>
+										<option value="제목">제목</option>
 									</select> <input type="text" id="search">
 
 									<button type="button" class="btn btn-dark" id="searchBtn">

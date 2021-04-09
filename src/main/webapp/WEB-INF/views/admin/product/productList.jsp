@@ -142,7 +142,7 @@
 									<br>
 									<div align="center">
 										<c:if test="${paging.startPage != 1 }">
-											<a href="/admin/productList.mdo?nowPage=${paging.startPage - 1 }">&lt;</a>
+											<a href="/admin/productList.mdo?nowPage=${paging.startPage - 1 }&searchKeyword=${searchKeyword}&category=${selectCategory}&check=${checkKey}">&lt;</a>
 										</c:if>
 										<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 											<c:choose>

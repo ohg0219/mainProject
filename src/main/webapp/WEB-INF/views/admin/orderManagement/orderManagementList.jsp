@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - ${where }</title>
+<title>thisisthat - 주문관리</title>
 
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
@@ -60,7 +60,7 @@ a {
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">${where}</h1>
+					<h1 class="h3 mb-2 text-gray-800">주문관리</h1>
 					<p class="mb-4">
 						<!-- 쓸 말 있으면 쓰는 곳 -->
 					</p>
@@ -115,6 +115,7 @@ a {
 															<option>${article.order_state }</option>
 															<option name="select" value="입금대기">입금대기</option>
 															<option name="select" value="결제완료">결제완료</option>
+															<option name="select" value="주문취소">주문취소</option>
 															<option name="select" value="상품준비중">상품준비중</option>
 															<option name="select" value="배송준비중">배송준비중</option>
 															<option name="select" value="배송중">배송중</option>
@@ -123,8 +124,16 @@ a {
 															<option name="select" value="환불요청">환불요청</option>
 															<option name="select" value="환불완료">환불완료</option>
 													</select></td>
-													<td align="center">${article.invoice_no }</td>
-													<td align="center">${article.order_cancel }</td>
+													<td align="center">
+														<c:if test="${article.invoice_no != 0}">
+															${article.invoice_no }
+														</c:if>
+													</td>
+													<td align="center">
+														<c:if test="${article.order_cancel == 1}">
+															취소
+														</c:if>
+													</td>
 												</tr>
 											</c:forEach>
 
@@ -140,28 +149,35 @@ a {
 									</tbody>
 								</table>
 								<div>
-									<form action="searchOrder.mdo" method="post">
+									<form action="getOrderManagementList.mdo" method="post">
 										<select name="searchOption" aria-controls="example" class="">
 											<option value="all">전체</option>
 											<option value="order_no">주문번호</option>
 											<option value="user_id">아이디</option>
 											<option value="invoice_no">송장번호</option>
 										</select> <input type="text" name="keyword">
-
 										<button type="submit" class="btn btn-dark" id="searchBtn">
 											<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i> 검색버튼
-										</button>
-
-										<button type="button" class="btn btn-dark" id="insertArticle">
-											<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i> 글쓰기
 										</button>
 									</form>
 									<br>
 									<div align="center">
-										<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
-											href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a
-											href="#">7</a> <a href="#">8</a> <a href="#">9</a> <a
-											href="#">10</a>
+										<c:if test="${paging.startPage != 1 }">
+											<a href="/admin/getOrderManagementList.mdo?nowPage=${paging.startPage - 1 }&searchOption=${searchOption}&keyword=${keyword}">&lt;</a>
+										</c:if>
+										<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<b>${p }</b>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<a href="/admin/getOrderManagementList.mdo?nowPage=${p }&searchOption=${searchOption}&keyword=${keyword}">${p }</a>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										<c:if test="${paging.endPage != paging.lastPage}">
+											<a href="/admin/getOrderManagementList.mdo?nowPage=${paging.endPage+1 }&searchOption=${searchOption}&keyword=${keyword}">&gt;</a>
+										</c:if>
 									</div>
 								</div>
 							</div>

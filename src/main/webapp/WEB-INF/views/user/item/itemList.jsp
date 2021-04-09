@@ -50,6 +50,22 @@
 		color: white;
 		background-color: black;
 	}
+	.pageBtn{
+		padding: 8px;
+		border: 1px solid black;
+		text-decoration: none;
+	}
+	.pageBtn:hover{
+		background-color: black;
+		color: white;
+	}
+	.nowpageBtn{
+		padding: 8px;
+		border: 1px solid black;
+		text-decoration: none;
+		background-color: black;
+		color: white;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -167,27 +183,27 @@
 						</c:forEach>
 					</c:if>
 				</ul>
-			</div><!-- end item-list -->
 				<c:if test="${category != 'new'}">
-				<div align="center" style="margin-top: 10px;">
+				<div align="center" style="clear:both; padding-top:40px;">
 					<c:if test="${paging.startPage != 1 }">
-						<a href="/itemList/category/${category}.do?nowPage=${paging.startPage - 1 }&select=${select}">&lt;</a>
+						<a class="pageBtn" href="/itemList/category/${category}.do?nowPage=${paging.startPage - 1 }&select=${select}">&lt;</a>
 					</c:if>
 					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 						<c:choose>
 							<c:when test="${p == paging.nowPage }">
-								<b>${p }</b>
+								<b class="nowpageBtn">${p }</b>
 							</c:when>
 							<c:when test="${p != paging.nowPage }">
-								<a href="/itemList/category/${category}.do?nowPage=${p }&select=${select}">${p }</a>
+								<a class="pageBtn" href="/itemList/category/${category}.do?nowPage=${p }&select=${select}">${p }</a>
 							</c:when>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${paging.endPage != paging.lastPage}">
-						<a href="/itemList/category/${category}.do?nowPage=${paging.endPage+1 }&select=${select}">&gt;</a>
+						<a class="pageBtn" href="/itemList/category/${category}.do?nowPage=${paging.endPage+1 }&select=${select}">&gt;</a>
 					</c:if>
 				</div>
 				</c:if>
+			</div><!-- end item-list -->
 		</div><!-- end Content -->
 		<%@include file="../include/footer.jsp"%>
 	</div>

@@ -40,30 +40,18 @@
                                             <img src="/resources/admin/img/mainlogo.png" style="width: 100%;" alt="">
                                         </h1>
                                     </div>
-                                    <form class="user" action="/login.mdo" method="post" >
+                                    <form class="user" action="/findPassword.mdo" method="post" >
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="id" aria-describedby="emailHelp" name="userId" required="required"
+                                                 aria-describedby="emailHelp" name="userId" required="required"
                                                 placeholder="ID">
                                         </div>
                                         <div class="form-group">
-                                            <input name="userPw" type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" required="required">
+                                            <input type="text" class="form-control form-control-user"
+                                                name="userEmail" placeholder="Eamil" required="required">
                                         </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" name="autoLogin" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">자동로그인</label>
-                                            </div>
-                                        </div>
-                                        <input type="submit" value="Login" class="btn btn-dark btn-user btn-block">
-                                            
-                                        
+                                        <input type="submit" value="메일발송" class="btn btn-dark btn-user btn-block">
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/findPassword.mdo">Forgot Password?</a>
-                                    </div>
                                     
                                 </div>
                             </div>
@@ -90,10 +78,13 @@
 </body>
 <script type="text/javascript">
 	var msg = "${msg}";
-	if(msg != ""){
-		alert(msg);
+	if(msg === "pwFail"){
+		alert("아이디, 비밀번호를 확인해 주세요");
 	}
-
+	if(msg === "roleFail"){
+		alert("권한이 없습니다")
+		location.href="/main.do"
+	}
 	
 </script>
 </html>

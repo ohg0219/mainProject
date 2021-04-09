@@ -3,25 +3,19 @@ package com.thisisthat.admin.orderManagement.service;
 import java.util.List;
 
 import com.thisisthat.admin.orderManagement.vo.OrderManagementVO;
+import com.thisisthat.util.PagingVO;
 
 public interface OrderManagementService {
 
-	List<OrderManagementVO> orderList(OrderManagementVO orderManagementVO);
+	int getOrderCount(String searchOption,String keyword);
+	List<OrderManagementVO> orderList(OrderManagementVO orderManagementVO,String searchOption,String keyword,PagingVO pagingVO);
 
-	List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO);
-
+	OrderManagementVO getOrder(OrderManagementVO orderManagementVO);
+	void insertPoint(String userId,int waitingPoint);
+	void deletePoint(String userId,int waitingPoint);
 	Object selectOrder_start(OrderManagementVO orderManagementVO);
 
 	Object selectOrder(OrderManagementVO orderManagementVO);
-
-	List<OrderManagementVO> allSearch(OrderManagementVO orderManagementVO);
-
-	List<OrderManagementVO> ordernoSearch(OrderManagementVO orderManagementVO);
-
-	List<OrderManagementVO> useridSearch(OrderManagementVO orderManagementVO);
-
-	List<OrderManagementVO> invoicenoSearch(OrderManagementVO orderManagementVO);
-
 
 
 
