@@ -46,7 +46,7 @@
 		select user_id, coupon_no, coupon_name, coupon_price, coupon_first, coupon_last,
 		used from user_coupon where user_id = #{user_id}
 	</select>
-	
+	<!-- 
 	<select id="nameCouponSearch" resultType="CouponGrantVO">
 		select * from user_coupon where coupon_name like '%'||#{keyword}||'%' order by coupon_last desc
 	</select>
@@ -54,7 +54,8 @@
 	<select id="IdCouponSearch" resultType="CouponGrantVO">
 		select * from user_coupon where user_id like '%'||#{keyword}||'%' order by coupon_last  desc
 	</select>
-	
+	 -->
+	 
 	<delete id="userCouponDeleteSel" parameterType="CouponGrantVo">
 		delete from user_coupon where user_id = #{user_id} and coupon_no = #{coupon_no}
 	</delete>
@@ -62,6 +63,7 @@
 	<delete id="userCouponDeleteAll" parameterType="CouponGrantVo">
 		delete from user_coupon where user_id = #{user_id}
 	</delete>
+	
 	<select id="userCouponList" resultType="CouponGrantVO">
 		select * from user_coupon where
 		 
@@ -79,6 +81,7 @@
 		
 		order by coupon_first desc offset #{start} limit #{cntPerPage};
 	</select>
+	
 	<select id="couponCount" resultType="Integer" >
 		select count(*) from user_coupon where 
 		<if test="searchOption == 'all'">

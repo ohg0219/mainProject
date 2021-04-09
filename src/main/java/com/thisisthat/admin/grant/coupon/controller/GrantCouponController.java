@@ -22,10 +22,12 @@ public class GrantCouponController {
 	@Autowired
 	private CouponGrantService couponGrantService;
 	
+	
 	@RequestMapping("mainGo.mdo")
 	public String mainGo() {
 		return "/admin/main.mdo";
 	}
+	
 	
 	/*
 	 * 관리자 페이지에서 쿠폰 부여 페이지를 요청 했을때 가는 요청 메서드
@@ -37,8 +39,17 @@ public class GrantCouponController {
 			@RequestParam(value = "searchOption", required = false, defaultValue = "all")String searchOption,
 			@RequestParam(value = "nowPage", required = false)Integer nowPage,
 			CouponGrantVO vo) {
-		if(nowPage == null) nowPage = 1;
+		if(nowPage == null) nowPage = 1;//처음들어오면 1페이지  required가 빈값이면 처음 들어왔다는것
+		System.out.println(keyword);
+		System.out.println(searchOption);
 		PagingVO paging = new PagingVO(couponGrantService.couponCount(searchOption, keyword), nowPage, 15);
+											//이것이 토탈 페이지 ↑
+		model.addAttribute("userCouponList", couponGrantService.userCouponList(paging, searchOption, keyword));
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchOption",searchOption);
+		model.addAttribute("paging",paging);
+		return "/admin/coupon/grantCoupon";
+		
 		
 //		if(searchOption.equals("user_id")) {
 //			vo.setKeyword(keyword);
@@ -51,17 +62,15 @@ public class GrantCouponController {
 //			model.addAttribute("userCouponList", searchCoupon);
 //			return "/admin/coupon/grantCoupon";
 //		}
-		model.addAttribute("userCouponList", couponGrantService.userCouponList(paging, searchOption, keyword));
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("searchOption",searchOption);
-		model.addAttribute("paging",paging);
-		return "/admin/coupon/grantCoupon";
 	}
+	
+	
 	/**
 	 * 고객에게 쿠폰 부여 페이지로 이동
 	 * 쿠폰 부여 페이지로가는 요청
 	 * @return
 	 */
+	
 	@GetMapping("userGrant.mdo")
 	public String userGrant(Model model, UserVO vo, CouponVO vo1) {
 		List<UserVO> userIdList = couponGrantService.getUserIDList(vo);
@@ -70,6 +79,7 @@ public class GrantCouponController {
 		model.addAttribute("selectCoupon", selectCoupon);
 		return "/admin/coupon/userGrant";
 	}
+	
 	
 	/**
 	 * 관리자 페이지에서 
@@ -93,6 +103,7 @@ public class GrantCouponController {
 		
 		return  "redirect:/admin/grantCoupon.mdo";
 	}
+	
 	
 	/**
 	 * 관리자 페이지에서 
@@ -120,7 +131,9 @@ public class GrantCouponController {
 		return "/admin/coupon/userCouponView";
 	}
 	
-	//쿠폰 검색하는 메서드
+	
+	//쿠폰 검색하는 메서드(페이지 장인이 알려준 방법을 쓰자 그래야 페이징이랑 검색이 된다 두개는 한번에 가는것이다...)
+	
 //	@GetMapping("couponSearch.mdo")
 //	public String couponSearch(Model model,
 //			@RequestParam("keyword")String keyword,
@@ -142,6 +155,8 @@ public class GrantCouponController {
 //		return null;
 //	}
 	
+	
+	//회원의 쿠폰 List에서 쿠폰선택 삭제를 할 수 있는 메서드
 	@RequestMapping("userCouponDeleteSel.mdo")
 	public String userCouponDeleteSel(@RequestParam("coupon_no") int coupon_no,
 			@RequestParam("user_id") String user_id,
@@ -154,6 +169,8 @@ public class GrantCouponController {
 		return "redirect:couponUserList.mdo?user_id="+user_id;
 	}
 	
+	
+	//한 회원이 가진 쿠폰 전체를 삭제 할 수 있는 메서드
 	@RequestMapping("userCouponDeleteAll.mdo")
 	public String userCouponDeleteAll(@RequestParam("user_id") String user_id,
 			CouponGrantVO vo) {
@@ -161,5 +178,6 @@ public class GrantCouponController {
 		couponGrantService.userCouponDeleteAll(vo);
 		return "redirect:grantCoupon.mdo";
 	}
+	
 	
 }

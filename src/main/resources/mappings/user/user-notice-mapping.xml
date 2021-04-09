@@ -12,6 +12,7 @@
 		SELECT * FROM notice_board WHERE board_no = #{board_no} and board_group='event'
 	</select>
 	
+	<!-- 
 	<select id="getNoticeList" parameterType="UserNoticeVO" resultType="UserNoticeVO" >
 		SELECT * FROM notice_board WHERE board_group= 'notice' ORDER BY board_no DESC
 	</select>
@@ -19,11 +20,68 @@
 	<select id="getEventList" parameterType="UserNoticeVO" resultType="UserNoticeVO">
 		SELECT * FROM notice_board WHERE board_group= 'event' ORDER BY board_no DESC
 	</select>
-	
+	 -->
+	 
 	<update id="plusCnt">
 		UPDATE notice_board SET board_cnt = board_cnt + 1 WHERE board_no = #{board_no}
 	</update>
 	
+	<select id="noticeList" resultType="UserNoticeVO">
+		select * from notice_board where board_group = 'notice'
+		<if test="searchOption == 'all'">
+			and (board_title like '%'||#{keyword}||'%' or board_writer like '%'||#{keyword}||'%'
+			or board_content like '%'||#{keyword}||'%')
+		</if>
+		<if test="searchOption == 'board_title'">
+			and board_title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'board_writer'">
+			and board_writer like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'board_content'">
+			and board_content like '%'||#{keyword}||'%'
+		</if>
+		
+		order by board_view asc, board_no desc offset #{start} limit #{cntPerPage};
+	</select>
+	
+	<select id="eventList" resultType="UserNoticeVO">
+		select * from notice_board where board_group = 'event'
+		<if test="searchOption == 'all'">
+			and (board_title like '%'||#{keyword}||'%' or board_writer like '%'||#{keyword}||'%'
+			or board_content like '%'||#{keyword}||'%')
+		</if>
+		<if test="searchOption == 'board_title'">
+			and board_title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'board_writer'">
+			and board_writer like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'board_content'">
+			and board_content like '%'||#{keyword}||'%'
+		</if>
+		
+		order by board_view asc, board_no desc offset #{start} limit #{cntPerPage};
+	</select>
+	
+	<select id="noticeCount" resultType="Integer">
+		select count(*) from notice_board where
+		<if test="searchOption == 'all'">
+			(board_title like '%'||#{keyword}||'%' or board_writer like '%'||#{keyword}||'%'
+			or board_content like '%'||#{keyword}||'%')
+		</if>
+		<if test="searchOption == 'board_title'">
+			board_title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'board_writer'">
+			board_writer like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption == 'board_content'">
+			board_content like '%'||#{keyword}||'%'
+		</if>
+	</select>
+	
+	<!-- 
 	<select id="allNotice" resultType="UserNoticeVO">
 		SELECT * FROM notice_board WHERE board_title 
 		LIKE '%'||#{keyword}||'%' OR board_writer LIKE '%'||#{keyword}||'%' OR board_content LIKE '%'||#{keyword}||'%' ORDER BY board_view asc, board_no desc
@@ -40,5 +98,5 @@
 	<select id="contentNotice" resultType="UserNoticeVO">
 		SELECT * FROM notice_board WHERE board_content LIKE '%'||#{keyword}||'%' ORDER BY board_view asc, board_no desc
 	</select>
-	
+	 -->
 </mapper>

@@ -75,6 +75,8 @@ public class UserCouponDAO {
 	public void userCouponDeleteAll(CouponGrantVO vo) {
 		userCouponTemplate.delete("UserCouponDAO.userCouponDeleteAll", vo);
 	}
+	
+	//--------------------------------------------------------------------------------------
 	public int couponCount(String searchOption, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);

@@ -97,7 +97,7 @@
 	<update id="updateState">
 		update order_table
 		<if test="state.equals('orderCancel')">
-		set order_state = '환불완료' , order_cancel = 1
+		set order_state = '주문취소' , order_cancel = 1
 		</if>
 		<if test="state.equals('refund')">
 		set order_state = '환불요청'

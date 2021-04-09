@@ -13,7 +13,7 @@
 <style type="text/css">
 	.contentWrap{
 		margin-top: 50px;
-		margin-left: 20px;
+		margin-left: 30%;
 	}
 	.noticeTable{
     	border-collapse: collapse;
@@ -78,8 +78,33 @@
 						</tr>
 					</c:if>
 				</table>
-				
-				<form action="/eventsearch.do" method="get">
+				<br>
+									<div style="width:490px; display: block; text-align: center;">
+										<c:if test="${paging.startPage != 1 }">
+											<a
+												href="/event.do?nowPage=${paging.startPage - 1 }
+												&keyword=${keyword}&searchOption=${searchOption}">&lt;</a>
+										</c:if>
+										<c:forEach begin="${paging.startPage }"
+											end="${paging.endPage }" var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<b>${p }</b>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<a
+														href="/event.do?nowPage=${p }
+												&keyword=${keyword}&searchOption=${searchOption}">${p }</a>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										<c:if test="${paging.endPage != paging.lastPage}">
+											<a
+												href="/event.do?nowPage=${paging.endPage+1 }
+										&keyword=${keyword}&searchOption=${searchOption}">&gt;</a>
+										</c:if>
+									</div>
+				<form action="/event.do" method="get">
 				<table class="noticeTable">
 					<tr>
 						<td align="right">
