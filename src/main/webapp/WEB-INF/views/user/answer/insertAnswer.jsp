@@ -74,7 +74,11 @@ a {
 						<br><br><br><br><br><br><br><br>
 						
 						
-						
+						<tr><td><select id="type" name="boardType">
+													<option value="상품문의">상품문의</option>
+													<option value="배송문의">배송문의</option>
+													<option value="기타문의">기타문의</option>
+											</select></td></tr>
 						<tr>
 							<td><input required="required" type="text" name="boardTitle" placeholder="제목"
 							style="width: 418px;"></td>

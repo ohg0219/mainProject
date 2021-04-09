@@ -33,5 +33,13 @@
 		insert into this_user (user_id,user_pass,nick_name,user_name,user_phone,user_email,zip_code,first_address,last_address,sms_ok,email_ok)
 		values(#{id},#{password},#{nickName},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},#{smsOk},#{emailOk}); 
 	</insert>
+	<insert id="insertCoupon">
+		insert into user_coupon (user_id,coupon_no,coupon_name,coupon_price,coupon_first,coupon_last,used)
+		values(#{id},0,'가입감사쿠폰',10000,now(),now()+INTERVAL'+7day',0)
+	</insert>
+	<insert id="insertPoint">
+		insert into user_point (user_id,point_date,point,point_content)
+		values(#{id},now(),10000,'가입감사포인트')
+	</insert>
 	
 </mapper>

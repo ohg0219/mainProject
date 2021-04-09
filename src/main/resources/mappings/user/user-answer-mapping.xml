@@ -97,7 +97,7 @@
 		VALUES
 		(#{boardNo},#{boardTitle}, #{boardContent}, #{boardWriter},
 		#{regDate}, '확인전', #{boardSecret}, #{boardImg1}, #{boardImg2},
-		#{boardImg3}, #{boardImg4}, '기타문의');
+		#{boardImg3}, #{boardImg4}, #{boardType});
 	</insert>
 	<select id="seq" resultType="Integer">
 		select

@@ -62,7 +62,7 @@
 						<li><input type="number" name="orderNo"></li>
 						<li><br></li>
 						<li>비밀번호</li>
-						<li><input type="text" name="password"></li>
+						<li><input type="password" name="password"></li>
 						<li><br></li>
 						<li><input class="submit" type="submit" value="조회"></li>
 					</ul>

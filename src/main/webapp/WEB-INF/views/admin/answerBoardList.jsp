@@ -30,7 +30,6 @@ a:visited {
 a:hover {
 	color: red;
 	text-decoration: underline;
-	font-size: 17px;
 }
 
 a {
@@ -191,7 +190,7 @@ a {
 									</select> <input type="text" id="search">
 
 									<button type="button" class="btn btn-dark" id="searchBtn">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i> 검색버튼
+										<i class="fas fa-search fa-sm mr-2 text-gray-400"></i> 검색
 									</button>
 
 									<br>
@@ -199,7 +198,7 @@ a {
 									<div style="display: block; text-align: center;">
 										<c:if test="${paging.startPage != 1 }">
 											<a
-												href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }
+												href="/admin/answerBoardList.mdo?nowPage=${paging.startPage - 1 }&type=${type}&cntPerPage=${paging.cntPerPage}
 												&searchType=${search.searchType}&parameter=${search.parameter}">&lt;</a>
 										</c:if>
 										<c:forEach begin="${paging.startPage }"
@@ -210,14 +209,14 @@ a {
 												</c:when>
 												<c:when test="${p != paging.nowPage }">
 													<a
-														href="/admin/answerBoardList.mdo?nowPage=${p }
+														href="/admin/answerBoardList.mdo?nowPage=${p }&type=${type}&cntPerPage=${paging.cntPerPage}
 												&searchType=${search.searchType}&parameter=${search.parameter}">${p }</a>
 												</c:when>
 											</c:choose>
 										</c:forEach>
 										<c:if test="${paging.endPage != paging.lastPage}">
 											<a
-												href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }
+												href="/admin/answerBoardList.mdo?nowPage=${paging.endPage+1 }&type=${type}&cntPerPage=${paging.cntPerPage}
 										&searchType=${search.searchType}&parameter=${search.parameter}">&gt;</a>
 										</c:if>
 									</div>
@@ -236,7 +235,7 @@ a {
 		function selChange() {
 			var sel = document.getElementById('cntPerPage').value;
 			var type = document.getElementById('type').value;
-			location.href = "/admin/answerBoardList.mdo?nowPage=${paging.nowPage}&cntPerPage="
+			location.href = "/admin/answerBoardList.mdo?nowPage=${paging.nowPage}&cntPerPage=${paging.cntPerPage}"
 					+ sel + "&type=" + type;
 
 		}

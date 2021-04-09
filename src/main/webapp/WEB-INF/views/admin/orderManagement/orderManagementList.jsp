@@ -73,28 +73,24 @@ a {
                         -->
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable"
-									cellspacing="0">
+								<table class="table table-bordered" id="dataTable" style="font-size: 10pt" >
 									<thead>
 										<tr align="center">
-											<th>주문 번호</th>
+											<th>주문<br>번호</th>
 											<th>주문일</th>
 											<th width="30">아이디</th>
-											<th>우편번호</th>
+											<th>우편<br>번호</th>
 											<th>주소</th>
-											<th>상세주소</th>
-											<th>결제 금액</th>
-											<th>결제 정보</th>
-											<th>무통장 이름</th>
-											<th>현재 상태</th>
-											<th>송장 번호</th>
-											<th>취소 유무</th>
+											<th>상세<br>주소</th>
+											<th>결제<br>금액</th>
+											<th>결제<br>정보</th>
+											<th>무통장<br>이름</th>
+											<th>현재<br>상태</th>
+											<th>송장<br>번호</th>
+											<th>취소<br>유무</th>
 										</tr>
 									</thead>
 									<tbody>
-
-
-										<!-- 모든 변수명은 상황에 따라서 바꿔도 됩니당  ex)aritcle, articleList-->
 										<c:if test="${not empty orderList}">
 											<c:forEach var="article" items="${orderList}">
 												<tr>
@@ -106,7 +102,7 @@ a {
 													<td align="center">${article.receive_zipcode }</td>
 													<td align="center">${article.receive_first_address }</td>
 													<td align="center">${article.receive_last_address }</td>
-													<td align="center">${article.order_price }</td>
+													<td align="center"><fmt:formatNumber maxFractionDigits="3" value="${article.order_price }"/></td>
 													<td align="center">${article.order_select }</td>
 													<td align="center">${article.passbook_name }</td>
 													<td align="center">
@@ -136,8 +132,6 @@ a {
 													</td>
 												</tr>
 											</c:forEach>
-
-
 										</c:if>
 										<c:if test="${empty orderList }">
 											<tr>
@@ -149,7 +143,7 @@ a {
 									</tbody>
 								</table>
 								<div>
-									<form action="getOrderManagementList.mdo" method="post">
+									<form action="getOrderManagementList.mdo" method="get">
 										<select name="searchOption" aria-controls="example" class="">
 											<option value="all">전체</option>
 											<option value="order_no">주문번호</option>
@@ -157,7 +151,7 @@ a {
 											<option value="invoice_no">송장번호</option>
 										</select> <input type="text" name="keyword">
 										<button type="submit" class="btn btn-dark" id="searchBtn">
-											<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i> 검색버튼
+											<i class="fas fa-search fa-sm mr-2 text-gray-400"></i> 검색
 										</button>
 									</form>
 									<br>
@@ -197,9 +191,12 @@ a {
 			console.log("select : " + select + "number : " + number);
 			if(select == "상품준비중"){
 				var invoiceno = prompt("송장번호 입력 : ");
-			location.href="/admin/selectOrderManagement.mdo?order_state="+select+"&order_no="+number+"&invoice_no="+invoiceno;				
+				if(invoiceno == null){
+					return false;
+				}
+				location.href="/admin/selectOrderManagement.mdo?order_state="+select+"&order_no="+number+"&invoice_no="+invoiceno;				
 			}else{				
-			location.href="/admin/selectOrderManagementList.mdo?order_state="+select+"&order_no="+number;
+				location.href="/admin/selectOrderManagementList.mdo?order_state="+select+"&order_no="+number;
 			}	
 		});
 	});

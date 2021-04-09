@@ -139,7 +139,7 @@ public class AnswerController {
 		vo.setBoardWriter((String)session.getAttribute("userId"));
 		vo.setRegDate(new Date());
 		answerService.insertAnswer(vo);
-		return "/user/answer/answerList";
+		return "redirect:/answerList.do";
 	}
 
 	@GetMapping("/getAnswer.do")

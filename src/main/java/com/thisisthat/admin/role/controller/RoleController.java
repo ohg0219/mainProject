@@ -50,7 +50,12 @@ public class RoleController {
 			@RequestParam(value="id", required = false)String userId,
 			@RequestParam(value="nowPage", required = false)String nowPage,
 			@RequestParam(value="searchType", required = false)String searchType,
-			@RequestParam(value="parameter", required = false)String parameter) {
+			@RequestParam(value="parameter", required = false)String parameter,
+			HttpSession session) {
+		UserVO admin = (UserVO)session.getAttribute("adminId");
+		if(admin.getUserRole()>5) {
+			return "redirect:/admin/main.mdo";
+		}
 		UserVO user = new UserVO();
 		user.setUserRole(Integer.parseInt(userRole));
 		user.setUserId(userId);

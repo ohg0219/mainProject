@@ -70,7 +70,7 @@
 					</tr>
 					<tr>
 						<td>
-							<a href="anwerList.do"><strong>List</strong></a>
+							<a href="/answerList.do"><strong>List</strong></a>
 						</td>
 					</tr>
 				</table>

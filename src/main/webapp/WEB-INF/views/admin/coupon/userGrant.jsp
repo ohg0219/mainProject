@@ -64,14 +64,6 @@
                                     		<th>쿠폰 부여</th>
                                     	</tr>
                                     </thead>
-                                   <!--  <tbody>
-                                    	<c:forEach var="userIdList" items="${userIdList }">
-                          					<tr>
-                          						<td width="100">${userIdList.userId }</td>
-                          					</tr>
-                                    	</c:forEach>
-                                    </tbody>
-                                     -->
                                 </table>
                                 
                                     	<form action="userGrant.mdo" method="post">

@@ -114,7 +114,6 @@ td {
 
 table {
 	table-layout: fixed;
-	width: 100%;
 }
 
 #zipcode {
@@ -182,8 +181,16 @@ option {
     font-size: 10px;
     line-height: 16px;
     letter-spacing: 0.05em;
-
-
+}
+.btn-1{
+	all:unset;
+	padding:8px;
+	border: 1px solid black;
+	cursor: pointer;
+}
+.btn-1:hover{
+	background-color: black;
+	color: white;
 }
 
 
@@ -250,7 +257,7 @@ option {
 											</table>
 										</div>
 										<div class="btnArea">
-											<input type="submit" class="btn-1" value="save" style="text-decoration: none">
+											<input type="submit" class="btn-1" value="save">
 										</div>
 									</div>
 								</form>	
