@@ -264,26 +264,12 @@ a.dual {
  	           <div id="contents">
                	  <div class="inr">
 					<div id="myshopMain" class="xans-element- xans-myshop xans-myshop-main ">
-						<div class="loginstate">
-            			    <p class="xans-element- xans-layout xans-layout-statelogon ">
-            			    	<a href="/exec/front/Member/logout/" class="btnlogin log" id="bigin-logout">logout</a>
-								<!-- GTM FOR BIGIN START-->
-								<script>
-                    				document.querySelector('#bigin-logout').addEventListener('click',function(){
-                        				dataLayer.push(
-                            			{'data': undefined},
-                            			{'event': "logout"});
-                    				})
-                				</script>
-								<!-- GTM FOR BIGIN END-->
-							</p>
-        				</div>
         				<div id="boxsize">
        				    	<a href="/mypage/mypage.do" class="sltd">my</a>
             				<a href="/mypage/modify.do">profile</a>
             				<a href="/mypage/address.do">address book</a>
 							<a href="/mypage/orderlist.do">orders</a>
-            				<a href="/mypage/point.do"><strong>point</strong></a>
+            				<a href="/mypage/userPoint.do"><strong>point</strong></a>
             				<a href="/mypage/coupon.do">coupon</a>
         				</div>
 					</div>
@@ -300,7 +286,7 @@ a.dual {
    					<div class="xans-element- xans-myshop xans-myshop-bankbook">
    					<ul>
 						<li class=" ">
-                			<strong class="title">총 포인트</strong>
+                			<strong class="title">누적 포인트</strong>
                 			<strong class="data use"><fmt:formatNumber maxFractionDigits="3" value="${totalPoint.sum }"/> P</strong>
             			</li>
             			<li class="">
@@ -309,35 +295,25 @@ a.dual {
             			</li>
             			<li class="">
                 			<strong class="title">사용된 포인트</strong>
-                			<strong class="data"><fmt:formatNumber maxFractionDigits="3" value="${usingSum.sum }"/> P</strong>
-            			</li>
-            			<li class="etc">
-                			<strong class="title">미가용 포인트</strong>
-                			<strong class="data">0(0회)</strong>
-            			</li>
-            			<li class="etc ">
-                			<strong class="title">환불예정 포인트</strong>
-                			<strong class="data">1</strong>
+                			<strong class="data"><fmt:formatNumber maxFractionDigits="3" value="${(-1)*usingSum.sum }"/> P</strong>
             			</li>
         			 </ul>
         			 </div>
         			 	<table align="center" border="1" width="550">
-        			 		<tr hight="500">
+        			 		<tr >
         			 			<td colspan="4" align="center">
 			        			 	<strong class="title">적립내역 보기</strong>
         			 			</td>
         			 		</tr>
-        			 		<tr hight="500">
+        			 		<tr >
 		        			 	<td align="center">주문날짜</td>
 		        			 	<td align="center">포인트</td>
-		        			 	<td align="center">관련 주문</td>
 		        			 	<td align="center">적립 내용</td>
         			 		</tr>
         			 		<c:forEach var="article" items="${article }">
-	        			 		<tr hight="500">
+	        			 		<tr >
     	    			 			<td align="center"><fmt:formatDate value="${article.point_date }" pattern="yyyy-MM-dd "/></td>
-    	    			 			<td align="center">${article.point}</td>
-    	    			 			<td align="center"></td>
+    	    			 			<td align="center"><fmt:formatNumber maxFractionDigits="3" value="${article.point}"/> P</td>
     	    			 			<td align="center">${article.point_content}</td>
         				 		</tr>
         			 		</c:forEach>

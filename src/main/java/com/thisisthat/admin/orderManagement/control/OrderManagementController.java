@@ -23,14 +23,17 @@ public class OrderManagementController {
 	public String selectOrderManagementlist(@RequestParam(value="order_state")String order_state, OrderManagementVO orderManagementVO, @RequestParam(value="order_no")String order_no) {
 		orderManagementVO.setOrder_no(Integer.parseInt(order_no));
 		orderManagementVO.setOrder_state(order_state);
+		OrderManagementVO vo = orderManagementService.getOrderInfo(orderManagementVO);
 		
 		if(order_state.equals("배송완료")) {
-			OrderManagementVO vo = (OrderManagementVO) orderManagementService.getOrder(orderManagementVO);
 			orderManagementService.insertPoint(vo.getUser_id(), vo.getWaiting_point());
 		}
 		if(order_state.equals("환불완료")) {
-			OrderManagementVO vo = (OrderManagementVO) orderManagementService.getOrder(orderManagementVO);
+			orderManagementVO.setOrder_cancel(1);
 			orderManagementService.deletePoint(vo.getUser_id(), (-1)*vo.getWaiting_point());
+		}
+		if(order_state.equals("주문취소")) {
+			orderManagementVO.setOrder_cancel(1);
 		}
 		orderManagementService.selectOrder_start(orderManagementVO);
 		
@@ -67,8 +70,9 @@ public class OrderManagementController {
 		OrderManagementVO orderManagementVO = new OrderManagementVO();
 		orderManagementVO.setOrder_no(order_no);
 		
-		OrderManagementVO getOrder = orderManagementService.getOrder(orderManagementVO);
+		List<OrderManagementVO> getOrder = orderManagementService.getOrder(orderManagementVO);
 		model.addAttribute("getorder", getOrder);
+		model.addAttribute("orderNo",order_no);
 		return "/admin/orderManagement/getOrderManagement";
 	}
 

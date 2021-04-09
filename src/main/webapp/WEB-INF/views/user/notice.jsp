@@ -11,38 +11,54 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/user/js/common.js"></script>
 <style type="text/css">
-	.contentWrap{
-		margin-top: 50px;
-		margin-left: 30%;
-	}
-	.noticeTable{
-    	border-collapse: collapse;
-	}
-	.noticeTable tr{
-		border-bottom: 1px solid #D5DBDB
-	}
-	.noticeTable td{
-		padding: 5px;
-		padding-top: 16px;
-		padding-bottom: 16px;
-	}
-	.noticeTable th{
-		padding-bottom: 10px;
-	}
-	.noticeTable a{
-		text-decoration: none;
-		color: black;
-	}
-	.noticeTable a:hover{
-		text-decoration: underline;
-		font-weight: 600;
-	}
-	.noticeTable td{
-		text-align: center;
-	}
-	.noticeTable td:nth-child(2) {
-		text-align: left;
-	}
+.contentWrap{
+	margin-top: 50px;
+	margin-left: 30%;
+}
+.noticeTable{
+   	border-collapse: collapse;
+}
+.noticeTable tr{
+	border-bottom: 1px solid #D5DBDB
+}
+.noticeTable td{
+	padding: 5px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+.noticeTable th{
+	padding-bottom: 10px;
+}
+.noticeTable a{
+	text-decoration: none;
+	color: black;
+}
+.noticeTable a:hover{
+	text-decoration: underline;
+	font-weight: 600;
+}
+.noticeTable td{
+	text-align: center;
+}
+.noticeTable td:nth-child(2) {
+	text-align: left;
+}
+.pageBtn{
+	padding: 8px;
+	border: 1px solid black;
+	text-decoration: none;
+}
+.pageBtn:hover{
+	background-color: black;
+	color: white;
+}
+.nowpageBtn{
+	padding: 8px;
+	border: 1px solid black;
+	text-decoration: none;
+	background-color: black;
+	color: white;
+}
 </style>
 </head>
 <body>
@@ -86,27 +102,21 @@
 				<br>
 				<div style="width:490px;display: block; text-align: center;">
 					<c:if test="${paging.startPage != 1 }">
-						<a
-							href="/notice.do?nowPage=${paging.startPage - 1 }
-							&keyword=${keyword}&searchOption=${searchOption}">&lt;</a>
+						<a class="pageBtn" href="/notice.do?nowPage=${paging.startPage - 1 }&keyword=${keyword}&searchOption=${searchOption}">&lt;</a>
 					</c:if>
 					<c:forEach begin="${paging.startPage }"
 						end="${paging.endPage }" var="p">
 						<c:choose>
 							<c:when test="${p == paging.nowPage }">
-								<b>${p }</b>
+								<b class="nowpageBtn">${p }</b>
 							</c:when>
 							<c:when test="${p != paging.nowPage }">
-								<a
-									href="/notice.do?nowPage=${p }
-							&keyword=${keyword}&searchOption=${searchOption}">${p }</a>
+								<a class="pageBtn" href="/notice.do?nowPage=${p }&keyword=${keyword}&searchOption=${searchOption}">${p }</a>
 							</c:when>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${paging.endPage != paging.lastPage}">
-						<a
-							href="/notice.do?nowPage=${paging.endPage+1 }
-					&keyword=${keyword}&searchOption=${searchOption}">&gt;</a>
+						<a class="pageBtn" href="/notice.do?nowPage=${paging.endPage+1 }&keyword=${keyword}&searchOption=${searchOption}">&gt;</a>
 					</c:if>
 				</div>
 				<form action="/notice.do" method="get">

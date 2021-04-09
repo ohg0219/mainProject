@@ -26,6 +26,8 @@ public class UserRegisterDAO {
 	
 	public void insertUser(UserRegisterVO vo) {
 		userRegisterTemplate.insert("UserRegister.insertUser",vo);
+		userRegisterTemplate.insert("UserRegister.insertCoupon",vo);
+		userRegisterTemplate.insert("UserRegister.insertPoint",vo);
 	}
 	
 	public InformationVO getTopInformation() {

@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>thisisthat - ${where }</title>
+<title>thisisthat - 주문상세</title>
 
 <%@include file="../include/css.jsp"%>
 <%@include file="../include/js.jsp"%>
@@ -45,7 +45,7 @@
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">${where}</h1>
+                    <h1 class="h3 mb-2 text-gray-800">주문번호 : ${orderNo }</h1>
                     <p class="mb-4"><!-- 쓸 말 있으면 쓰는 곳 --></p>
 
                     <!-- DataTales Example -->
@@ -102,25 +102,7 @@
                                     </tbody>
                                 </table>
                                 <div>	
-                                <form action="noticesearch.mdo?board_group=${article.board_group }" method="get">
-                                    <input type="hidden" name="board_group" value="${where}">
-									
-
-										                                    		
-									<input type="text" name="keyword">
-
-									<button type="submit" class="btn btn-dark" id="searchBtn">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										검색버튼
-									</button>
-
-									<button type="button" class="btn btn-dark"  id="insertArticle">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										글쓰기
-									</button>
-                                </form>
-									<br>
-									
+                                	<input class="btn btn-dark" type="button" value="목록으로" onclick="location.href='/admin/getOrderManagementList.mdo'">
                                 </div>
                             </div>
                         </div>

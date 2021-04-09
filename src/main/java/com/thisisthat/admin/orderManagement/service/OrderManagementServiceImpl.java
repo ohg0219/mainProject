@@ -22,7 +22,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 	}
 
 	@Override
-	public OrderManagementVO getOrder(OrderManagementVO orderManagementVO) {
+	public List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO) {
 		return orderManagementDAO.getOrder(orderManagementVO);
 	}
 
@@ -49,6 +49,11 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 	@Override
 	public void deletePoint(String userId, int waitingPoint) {
 		orderManagementDAO.deletePoint(userId, waitingPoint);
+	}
+
+	@Override
+	public OrderManagementVO getOrderInfo(OrderManagementVO orderManagementVO) {
+		return orderManagementDAO.getOrderInfo(orderManagementVO);
 	}
 
 	
