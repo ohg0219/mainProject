@@ -46,6 +46,18 @@ public class AdminServiceImpl implements AdminService{
 		return dao.getTodayCatgorySales();
 	}
 
+	@Override
+	public boolean userCheck(UserVO user) {
+		// TODO Auto-generated method stub
+		return dao.userCheck(user);
+	}
+
+	@Override
+	public void updateUser(UserVO user) {
+		dao.updateUser(user);
+		
+	}
+
 
 
 }

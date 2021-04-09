@@ -82,4 +82,10 @@
 		]]>
 	</select>
 	
+	<select id="userCheck" resultType="int">
+		select count(*) from this_user where user_id = #{userId} and user_email = #{userEmail}
+	</select>
+	<select id="updateUser">
+		update this_user set user_pass = #{userPw} where user_id = #{userId}
+	</select>
 </mapper>

@@ -130,7 +130,7 @@ $(document).ready(function(){
 	    var regType2 = /^[A-za-z0-9]{8,16}/g;
 	    if(!regType2.test(password)){
 	        $('#passwordRegChk').text('영문 대,소문자/숫자  8~16자로 입력해 주세요.');
-	        $("#passwordRegChk").css("color", "red",);
+	        $("#passwordRegChk").css("color", "red");
 	        $("input[name=userPw]").focus();
 	        btn_off();
 	    }else{

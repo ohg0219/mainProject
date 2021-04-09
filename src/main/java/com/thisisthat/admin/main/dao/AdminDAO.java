@@ -43,5 +43,13 @@ public class AdminDAO {
 	public List<AdminDailyCategoryVO> getTodayCatgorySales(){
 		return adminTemplate.selectList("AdminDAO.getTodayCatgorySales");
 	}
-	
+	public boolean userCheck(UserVO user) {
+		if(((int)(adminTemplate.selectOne("AdminDAO.userCheck", user)) == 1)) {
+			return true;
+		}
+		return false; 
+	}
+	public void updateUser(UserVO user) {
+		 adminTemplate.update("AdminDAO.updateUser",user);
+	}
 }
