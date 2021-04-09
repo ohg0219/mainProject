@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.thisisthat.admin.orderManagement.dao.OrderManagementDAO;
 import com.thisisthat.admin.orderManagement.vo.OrderManagementVO;
+import com.thisisthat.util.PagingVO;
 
 
 @Service
@@ -16,12 +17,12 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 	private OrderManagementDAO orderManagementDAO;
 	
 	@Override
-	public List<OrderManagementVO> orderList(OrderManagementVO orderManagementVO) {
-		return orderManagementDAO.orderList(orderManagementVO);
+	public List<OrderManagementVO> orderList(OrderManagementVO orderManagementVO,String searchOption,String keyword,PagingVO pagingVO) {
+		return orderManagementDAO.orderList(orderManagementVO,searchOption,keyword,pagingVO);
 	}
 
 	@Override
-	public List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO) {
+	public OrderManagementVO getOrder(OrderManagementVO orderManagementVO) {
 		return orderManagementDAO.getOrder(orderManagementVO);
 	}
 
@@ -36,25 +37,20 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 	}
 
 	@Override
-	public List<OrderManagementVO> allSearch(OrderManagementVO orderManagementVO) {
-		return orderManagementDAO.allSearch(orderManagementVO);
+	public int getOrderCount(String searchOption, String keyword) {
+		return orderManagementDAO.getOrderCount(searchOption, keyword);
 	}
 
 	@Override
-	public List<OrderManagementVO> ordernoSearch(OrderManagementVO orderManagementVO) {
-		return orderManagementDAO.ordernoSearch(orderManagementVO);
+	public void insertPoint(String userId, int waitingPoint) {
+		orderManagementDAO.insertPoint(userId, waitingPoint);
 	}
 
 	@Override
-	public List<OrderManagementVO> useridSearch(OrderManagementVO orderManagementVO) {
-		return orderManagementDAO.useridSearch(orderManagementVO);
+	public void deletePoint(String userId, int waitingPoint) {
+		orderManagementDAO.deletePoint(userId, waitingPoint);
 	}
-
-	@Override
-	public List<OrderManagementVO> invoicenoSearch(OrderManagementVO orderManagementVO) {
-		return orderManagementDAO.invoicenoSearch(orderManagementVO);
-	}
-
 
 	
+
 }

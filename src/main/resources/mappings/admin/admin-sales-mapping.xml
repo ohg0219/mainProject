@@ -19,7 +19,7 @@
 		COALESCE(sum(use_coupon),0) as usecoupon,
 		COALESCE(sum(order_price),0) as subtotal
 		from order_table as t
-		where (order_state != '입금대기' and order_state != '환불완료')  and 
+		where (order_state != '입금대기' and order_state != '환불완료' and order_state != '주문취소')  and 
 			order_date >= #{startMonth}
 			and 
 			order_date <  #{endMonth}::date+INTERVAL'+1 month'
@@ -32,7 +32,7 @@
 		select COALESCE(sum(o.select_count),0) as count,
 		date_trunc('month',order_date) as grouping
 		from order_product as o right outer join order_table as t on( o.order_no = t.order_no)
-		where (order_state != '입금대기' and order_state != '환불완료')  and 
+		where (order_state != '입금대기' and order_state != '환불완료' and order_state != '주문취소')  and 
 			order_date >= #{startMonth}::date
 			and 
 			order_date <  #{endMonth}::date+INTERVAL'+1 month'
@@ -48,7 +48,7 @@
 		COALESCE(sum(use_coupon),0) as usecoupon,
 		COALESCE(sum(order_price),0) as subtotal
 		from order_table as t
-		where (order_state != '입금대기' and order_state != '환불완료')  and 
+		where (order_state != '입금대기' and order_state != '환불완료' and order_state != '주문취소')  and 
 			order_date >= #{startDay}
 			and 
 			order_date <  #{endDay}::date+INTERVAL'+1 day'
@@ -61,7 +61,7 @@
 		select COALESCE(sum(o.select_count),0) as count,
 		date_trunc('day',order_date) as grouping
 		from order_product as o right outer join order_table as t on( o.order_no = t.order_no)
-		where (order_state != '입금대기' and order_state != '환불완료')  and 
+		where (order_state != '입금대기' and order_state != '환불완료' and order_state != '주문취소')  and 
 			order_date >= #{startDay}::date
 			and 
 			order_date <  #{endDay}::date+INTERVAL'+1 day'
@@ -76,7 +76,7 @@
 		sum((o.product_price*o.select_count)) as originalprice
 		from product as p, order_product as o,order_table as t 
 		where p.product_no = o.product_no and o.order_no = t.order_no
-			and (t.order_state != '입금대기' and t.order_state != '환불완료')  and 
+			and (t.order_state != '입금대기' and t.order_state != '환불완료' and order_state != '주문취소')  and 
 			t.order_date >= #{startDay}::date
 			and 
 			t.order_date <  #{endDay}::date+INTERVAL'+1 day'
@@ -92,7 +92,7 @@
 		COALESCE(sum(use_coupon),0) as usecoupon,
 		COALESCE(sum(order_price),0) as subtotal
 		from order_table as t 
-		where (order_state != '입금대기' and order_state != '환불완료')  and 
+		where (order_state != '입금대기' and order_state != '환불완료' and order_state != '주문취소')  and 
 			order_date >= #{startDay}::date 
 			and 
 			order_date < #{endDay}::date+INTERVAL'+1 day'
@@ -104,7 +104,7 @@
 		select COALESCE(sum(o.select_count),0) as count,
 		to_char(order_date ,'Day')as groupstring
 		from order_product as o right outer join order_table as t on( o.order_no = t.order_no)
-		where (order_state != '입금대기' and order_state != '환불완료')  and 
+		where (order_state != '입금대기' and order_state != '환불완료' and order_state != '주문취소')  and 
 			order_date >= #{startDay}::date
 			and 
 			order_date <  #{endDay}::date+INTERVAL'+1 day'

@@ -4,26 +4,54 @@
 
 <mapper namespace="orderManagementDAO">
 
+	<select id="getOrderCount" resultType="int">
+		select count(*) from order_table 
+		<if test="searchOption.equals('all')">
+			where cast(order_no as varchar) like '%'||#{keyword}||'%' 
+				or user_id ilike '%'||#{keyword}||'%' 
+				or cast(invoice_no as varchar) like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption.equals('order_no')">
+			where cast(order_no as varchar) like '%'||#{keyword}||'%' 
+		</if>
+		<if test="searchOption.equals('user_id')">
+			where user_id ilike '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption.equals('invoice_no')">
+			where cast(invoice_no as varchar) like '%'||#{keyword}||'%'
+		</if>
+	</select>
+
 	<select id="orderList" resultType="orderManagementVO">
-		select * from order_table order by order_state asc, invoice_no asc
+		select * from order_table 
+		<if test="searchOption.equals('all')">
+			where cast(order_no as varchar) like '%'||#{keyword}||'%' 
+				or user_id ilike '%'||#{keyword}||'%' 
+				or cast(invoice_no as varchar) like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption.equals('order_no')">
+			where cast(order_no as varchar) like '%'||#{keyword}||'%' 
+		</if>
+		<if test="searchOption.equals('user_id')">
+			where user_id ilike '%'||#{keyword}||'%'
+		</if>
+		<if test="searchOption.equals('invoice_no')">
+			where cast(invoice_no as varchar) like '%'||#{keyword}||'%'
+		</if>
+		order by order_date desc offset #{start} limit 15
 	</select>
 	
-	<select id="allSearch" resultType="orderManagementVO">
-		select * from order_table where cast(order_no as varchar) like '%' || #{keyword} || '%' or user_id like '%' || #{keyword} || '%' or cast(invoice_no as varchar) like '%' || #{keyword} || '%' order by order_state asc, invoice_no asc
-	</select>
+	
+	<insert id="insertPoint">
+		insert into user_point (user_id,point_date,point,point_content)
+		values(#{userId},now(),#{point},'구매에 따른 포인트 적립')
+	</insert>
 
-	<select id="ordernoSearch" resultType="orderManagementVO">
-		select * from order_table where cast(order_no as varchar) like '%' || #{keyword} || '%' order by order_state asc, invoice_no asc
-	</select>
-
-	<select id="useridSearch" resultType="orderManagementVO">
-		select * from order_table where user_id like '%' || #{keyword} || '%' order by order_state asc, invoice_no asc
-	</select>
-
-	<select id="invoicenoSearch" resultType="orderManagementVO">
-		select * from order_table where cast(invoice_no as varchar) like '%' || #{keyword} || '%' order by order_state asc, invoice_no asc
-	</select>
-
+	<insert id="deletePoint">
+		insert into user_point (user_id,point_date,point,point_content)
+		values(#{userId},now(),#{point},'환불에 따른 포인트 회수')
+	</insert>
+	
 	<select id="getOrder" resultType="orderManagementVO">
 		select * from order_product join order_table
 		using(order_no) join product using(product_no) where order_no=#{order_no} order by

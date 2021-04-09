@@ -25,7 +25,7 @@ public class OrderManagementVO {
 	private String passbook_name;//무통장 입금 이름
 	private String order_state;//주문 상태
 	private int order_cancel;//취소유무
-	private int invoice_no;//송장 번호
+	private long invoice_no;//송장 번호
 	private int waiting_point;//적립 예정 포인트
 	
 	//order_product테이블
@@ -167,10 +167,11 @@ public class OrderManagementVO {
 	public void setOrder_cancel(int order_cancel) {
 		this.order_cancel = order_cancel;
 	}
-	public int getInvoice_no() {
+	
+	public long getInvoice_no() {
 		return invoice_no;
 	}
-	public void setInvoice_no(int invoice_no) {
+	public void setInvoice_no(long invoice_no) {
 		this.invoice_no = invoice_no;
 	}
 	public int getWaiting_point() {

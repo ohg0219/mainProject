@@ -1,5 +1,6 @@
 package com.thisisthat.admin.orderManagement.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.thisisthat.admin.orderManagement.vo.OrderManagementVO;
+import com.thisisthat.util.PagingVO;
 
 @Repository
 public class OrderManagementDAO {
@@ -14,12 +16,36 @@ public class OrderManagementDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public List<OrderManagementVO> orderList(OrderManagementVO orderManagementVO) {
-		return mybatis.selectList("orderManagementDAO.orderList", orderManagementVO);
+	public int getOrderCount(String searchOption, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return mybatis.selectOne("orderManagementDAO.getOrderCount",map);
+	}
+	
+	public List<OrderManagementVO> orderList(OrderManagementVO orderManagementVO,String searchOption,String keyword,PagingVO pagingVO) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		map.put("start", pagingVO.getStart());
+		return mybatis.selectList("orderManagementDAO.orderList", map);
 	}
 
-	public List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO) {
-		return mybatis.selectList("orderManagementDAO.getOrder", orderManagementVO);
+	public void insertPoint(String userId,int waitingPoint) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("point", waitingPoint);
+		mybatis.insert("orderManagementDAO.insertPoint",map);
+	}
+	public void deletePoint(String userId,int waitingPoint) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("point", waitingPoint);
+		mybatis.insert("orderManagementDAO.deletePoint",map);
+	}
+	
+	public OrderManagementVO getOrder(OrderManagementVO orderManagementVO) {
+		return mybatis.selectOne("orderManagementDAO.getOrder", orderManagementVO);
 	}
 
 	public Object selectOrder_start(OrderManagementVO orderManagementVO) {
@@ -30,25 +56,5 @@ public class OrderManagementDAO {
 		return mybatis.update("orderManagementDAO.selectOrder", orderManagementVO);
 	}
 
-	public List<OrderManagementVO> allSearch(OrderManagementVO orderManagementVO) {
-		return mybatis.selectList("orderManagementDAO.allSearch", orderManagementVO);
-	}
-
-	public List<OrderManagementVO> ordernoSearch(OrderManagementVO orderManagementVO) {
-		return mybatis.selectList("orderManagementDAO.ordernoSearch", orderManagementVO);
-	}
-
-	public List<OrderManagementVO> useridSearch(OrderManagementVO orderManagementVO) {
-		return mybatis.selectList("orderManagementDAO.useridSearch", orderManagementVO);
-	}
-
-	public List<OrderManagementVO> invoicenoSearch(OrderManagementVO orderManagementVO) {
-		return mybatis.selectList("orderManagementDAO.invoicenoSearch", orderManagementVO);
-	}
-
 	
-	
-
-	
-
 }
