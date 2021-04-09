@@ -44,10 +44,13 @@ public class OrderManagementDAO {
 		mybatis.insert("orderManagementDAO.deletePoint",map);
 	}
 	
-	public OrderManagementVO getOrder(OrderManagementVO orderManagementVO) {
-		return mybatis.selectOne("orderManagementDAO.getOrder", orderManagementVO);
+	public List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO) {
+		return mybatis.selectList("orderManagementDAO.getOrder", orderManagementVO);
 	}
 
+	public OrderManagementVO getOrderInfo(OrderManagementVO orderManagementVO) {
+		return mybatis.selectOne("orderManagementDAO.getOrderInfo",orderManagementVO);
+	}
 	public Object selectOrder_start(OrderManagementVO orderManagementVO) {
 		return mybatis.update("orderManagementDAO.selectOrder_start", orderManagementVO);
 	}

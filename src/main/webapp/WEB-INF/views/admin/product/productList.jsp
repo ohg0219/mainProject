@@ -130,8 +130,7 @@
                                 <div>	
 									<input type="text" id="search" placeholder="상품명" >
 									<button type="button" class="btn btn-dark" id="searchBtn">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										검색
+										<i class="fas fa-search fa-sm mr-2 text-gray-400"></i> 검색
 									</button>
 									
 									<button type="button" class="btn btn-dark" onclick="location.href='/admin/insertProduct.mdo'">

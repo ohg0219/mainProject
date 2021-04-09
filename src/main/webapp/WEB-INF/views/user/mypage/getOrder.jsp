@@ -319,7 +319,7 @@ $(document).ready(function () {
 								<a href="/mypage/modify.do">profile</a> 
 								<a href="/mypage/address.do">address book</a> 
 								<a href="/mypage/orderlist.do"><strong>orders</strong></a> 
-								<a href="/user/userPoint.do">point</a> 
+								<a href="/mypage/userPoint.do" >point</a>
 								<a href="/mypage/coupon.do">coupon</a>
 								</c:if>
 								<c:if test="${empty sessionScope.userId }">

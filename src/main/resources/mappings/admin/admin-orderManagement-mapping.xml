@@ -58,9 +58,12 @@
 		order_state
 		asc,invoice_no asc
 	</select>
+	<select id="getOrderInfo" resultType="orderManagementVO">
+		select * from order_table where order_no=#{order_no}
+	</select>
 
 	<update id="selectOrder_start">
-		update order_table set order_state=#{order_state}
+		update order_table set order_state=#{order_state},order_cancel=#{order_cancel}
 		where order_no = #{order_no}
 	</update>
 	

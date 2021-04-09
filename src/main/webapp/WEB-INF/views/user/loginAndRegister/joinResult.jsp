@@ -108,7 +108,7 @@
 								<br>
 								<ul>
 									<li>
-										<img alt="이미지를 불러올 수 없습니다" src="/resources/user/image/thisisthat_coupon.PNG" height="120" width="230">
+										<img alt="이미지를 불러올 수 없습니다" src="/resources/user/image/welcome_coupon.PNG" height="120" width="230">
 									</li>
 								</ul>
 							</div>

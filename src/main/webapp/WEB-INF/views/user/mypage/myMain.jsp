@@ -279,7 +279,7 @@ a.dual {
             			<li class="etc">
                 			<strong class="title">총 포인트</strong>
                 			<strong class="data"><fmt:formatNumber value="${info.totalPoint}" maxFractionDigits="3"></fmt:formatNumber>p</strong>
-                			<a href="/user/userPoint.do" class="dual">조회</a>
+                			<a href="/mypage/userPoint.do" class="dual">조회</a>
             			</li>
             			<li class="etc">
                 			<strong class="title">coupon</strong>

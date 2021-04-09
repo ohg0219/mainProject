@@ -124,8 +124,7 @@ a {
 										</select>
 										<input type="text" name="keyword">
 										<button type="submit" class="btn btn-dark" id="searchBtn">
-										<i class="fa fa-pencil fa-fw mr-2 text-gray-400"></i>
-										검색버튼
+										<i class="fas fa-search fa-sm mr-2 text-gray-400"></i> 검색
 									</button>
 									</form>
 									<br>

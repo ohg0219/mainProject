@@ -68,7 +68,7 @@ public class UserPointController {
 		List<UserPointVO> pointList = userPointService.pointList(userPointVO);
 		
 		model.addAttribute("article", pointList);
-		return "/user/userPoint/userPoint";
+		return "/user/mypage/userPoint";
 	}
 	
 	
