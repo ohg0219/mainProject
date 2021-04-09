@@ -2,6 +2,8 @@ package com.thisisthat.user.order.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -46,7 +48,14 @@ public class UserOrderController {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		}			
+		}else {
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -7);
+			Date date = calendar.getTime();
+			sDate = sdf.format(date);
+			date = new Date();
+			eDate = sdf.format(date);
+		}
 		String userId = (String) session.getAttribute("userId");
 		vo.setUserId(userId);
 		int orderCount = service.getOrderCount(vo);

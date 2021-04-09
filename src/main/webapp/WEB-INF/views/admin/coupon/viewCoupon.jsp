@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,28 +41,36 @@
 						 <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             	<tr>
-										<button type="submit" class="btn-check:checked pull-right" >
-											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
-											수정하기
-										</button>
-										<button type="button" class="btn-check:checked pull-right" id="deleteCoupon" >
-											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
-											삭제하기
-										</botton>
-										<button type="button" class="btn-check:checked pull-right" id="CouponList" >
-											<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
-											목록으로
-										</botton>
+									<button type="submit" class="btn-check:checked pull-right" >
+										<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
+										수정하기
+									</button>
+									<button type="button" class="btn-check:checked pull-right" id="deleteCoupon" >
+										<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
+										삭제하기
+									</button>
+									<button type="button" class="btn-check:checked pull-right" id="CouponList" >
+										<i class="fa fa-pencil fa-fw mr-2 text-dark-400 "></i>
+										목록으로
+									</button>
                             		<td colspan="2">
 										<div class="form-group">
-										<input type="text" value="${article.coupon_name }" class="form-control mt-4 mb-2"
-											placeholder="쿠폰 명" disabled>
-											<input type="text" value="${article.coupon_price }" class="form-control mt-4 mb-2"
-											placeholder="쿠폰 금액" disabled>
-											<input type="text" value="${article.coupon_first}" class="form-control mt-4 mb-2"
-											placeholder="시작일자" disabled>
-											<input type="text" value="${article.coupon_last}" class="form-control mt-4 mb-2"
-											placeholder="종료 일자" disabled>
+										<tr>
+											<td>쿠폰 명</td>
+											<td>${article.coupon_name }</td>
+										</tr>
+										<tr>
+											<td>쿠폰 금액</td>
+											<td><fmt:formatNumber maxFractionDigits="3" value="${article.coupon_price }"/> 원</td>
+										</tr>
+										<tr>
+											<td>시작 일자</td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${article.coupon_first}"/></td>
+										</tr>
+										<tr>
+											<td>종료 일자</td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${article.coupon_last}"/></td>
+										</tr>
 										</div>
 									</td>
                             	</tr>

@@ -104,24 +104,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		IMP.init('imp80941170');  // 가맹점 식별 코드
-		var total = $("#totalPrice").text();
-		var userPoint = $("#userPoint").val();
-		$("#usePoint").on("blur",function(){
-			var use = $("#usePoint").val();
-			if(parseInt(use) > parseInt(userPoint)){
-				$("#usePoint").val(0);
-				alert("사용가능포인트보다 많은 포인트는 입력할 수 없습니다.");
-				return false;
-			}else{
-				if(parseInt(use) > parseInt(total)){
-					$("#usePoint").val(0);
-					alert("결제금액보다 많은 포인트는 입력할 수 없습니다.");
-					return false;
-				}else{
-					$("#totalPrice").text(total-use);
-				}
-			}
-		});
 		var form = document.payform;
 		var product = $("#productList").val();
 		var email = $("input[name=orderEmail]").val();
@@ -362,7 +344,6 @@
 						</ul>
 						<hr>
 						<ul>
-							<li><span id="selectPayment">카카오페이</span></li>
 							<li>
 								<span class="leftItem">TOTAL</span>
 								<span class="rightItem">&#8361; <span id="totalPrice">${subTotal }</span></span>
