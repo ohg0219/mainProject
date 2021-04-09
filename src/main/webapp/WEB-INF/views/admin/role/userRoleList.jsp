@@ -94,8 +94,7 @@ a {
 											<c:forEach var="user" items="${userList}">
 												<tr>
 													<td width="85">${user.userId}</td>
-													<td width="95"><a id="${user.userId }" class="who"
-														data-target="#getUserModal" data-toggle="modal">${user.userName}</a></td>
+													<td width="95">${user.userName}</td>
 													<td width="85">${user.nickName}</td>
 													<td width="160">${user.userPhone}</td>
 													<td width="95"><fmt:formatDate value="${user.inDate}"
