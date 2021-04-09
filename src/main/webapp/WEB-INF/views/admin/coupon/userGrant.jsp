@@ -84,8 +84,8 @@
                                     	</form>
                                     	
                                     	<br>
-                                    	<input class="btn btn-dark" type="button" value="목록으로" onclick="history.back(-1);">
-                                    	
+                                    	<input class="btn btn-dark" type="button" value="뒤로가기" onclick="history.back(-1);">
+                                    	<input class="btn btn-dark" type="button" value="목록으로" onclick="location.href='grantCoupon.mdo'">
                                 <div>
 								</div>
                                 </div>
