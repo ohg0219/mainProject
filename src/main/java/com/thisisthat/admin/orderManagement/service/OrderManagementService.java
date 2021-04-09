@@ -9,8 +9,8 @@ public interface OrderManagementService {
 
 	int getOrderCount(String searchOption,String keyword);
 	List<OrderManagementVO> orderList(OrderManagementVO orderManagementVO,String searchOption,String keyword,PagingVO pagingVO);
-
-	OrderManagementVO getOrder(OrderManagementVO orderManagementVO);
+	OrderManagementVO getOrderInfo(OrderManagementVO orderManagementVO);
+	List<OrderManagementVO> getOrder(OrderManagementVO orderManagementVO);
 	void insertPoint(String userId,int waitingPoint);
 	void deletePoint(String userId,int waitingPoint);
 	Object selectOrder_start(OrderManagementVO orderManagementVO);

@@ -263,6 +263,22 @@ a.dual {
 #boxsize a {
 	text-decoration: none;
 }
+.pageBtn{
+		padding: 8px;
+		border: 1px solid black;
+		text-decoration: none;
+}
+.pageBtn:hover{
+	background-color: black;
+	color: white;
+}
+.nowpageBtn{
+	padding: 8px;
+	border: 1px solid black;
+	text-decoration: none;
+	background-color: black;
+	color: white;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -375,20 +391,20 @@ function getData(){
 								</table>
 								<div align="center" style="margin-top: 10px;">
 									<c:if test="${paging.startPage != 1 }">
-										<a href="/mypage/orderlist.do?nowPage=${paging.startPage - 1 }&sDate=${sDate}&eDate=${eDate}">&lt;</a>
+										<a class="pageBtn" href="/mypage/orderlist.do?nowPage=${paging.startPage - 1 }&sDate=${sDate}&eDate=${eDate}">&lt;</a>
 									</c:if>
 									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 										<c:choose>
 											<c:when test="${p == paging.nowPage }">
-												<b>${p }</b>
+												<b class="nowpageBtn">${p }</b>
 											</c:when>
 											<c:when test="${p != paging.nowPage }">
-												<a href="/mypage/orderlist.do?nowPage=${p }&sDate=${sDate}&eDate=${eDate}">${p }</a>
+												<a class="pageBtn" href="/mypage/orderlist.do?nowPage=${p }&sDate=${sDate}&eDate=${eDate}">${p }</a>
 											</c:when>
 										</c:choose>
 									</c:forEach>
 									<c:if test="${paging.endPage != paging.lastPage}">
-										<a href="/mypage/orderlist.do?nowPage=${paging.endPage+1 }&sDate=${sDate}&eDate=${eDate}">&gt;</a>
+										<a class="pageBtn" href="/mypage/orderlist.do?nowPage=${paging.endPage+1 }&sDate=${sDate}&eDate=${eDate}">&gt;</a>
 									</c:if>
 								</div>
 							</div>

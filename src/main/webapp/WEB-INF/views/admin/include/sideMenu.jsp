@@ -15,7 +15,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/main.mdo">
                     <i class="fas fa-fw fa-globe"></i>
                     <span>현황</span></a>
             </li>
@@ -57,7 +57,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">                    	
                         <a class="collapse-item" href="/admin/staffList.mdo">직원정보</a>
                         <a class="collapse-item" href="/admin/insertStaff.mdo">신규직원등록</a>
-                        <a class="collapse-item" href="utilities-border.html">직원정보수정</a>
                         <a class="collapse-item" href="/admin/userRoleList.mdo">권한관리</a>
                     </div>
                 </div>
@@ -120,7 +119,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-cog"></i>
                     <span>기타</span>
                 </a>
                 <div id="collapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
