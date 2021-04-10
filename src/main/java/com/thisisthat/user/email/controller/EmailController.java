@@ -60,18 +60,25 @@ public class EmailController {
 		
 		} else {
 			StringBuffer ms = new StringBuffer();
-			ms.append("<h1>" + name + "님 안녕하세요.</h1> \n회원님의 계정 아이디를 알려드립니다. \n회원님의 아이디는\n");
+			ms.append("<html><body>");
+			ms.append("<h1>thisisthat</h1><br>"); 
+			ms.append(name + "님, 안녕하세요.<br> 회원님의 계정 아이디를 알려드립니다. <br>회원님의 아이디는 ");
 			for(String id : userId) {
-				ms.append("[" + id + "]\n");
+				ms.append("<strong>[" + id + "] </strong>");
 			}
-			ms.append("입니다.\n\n 감사합니다.\n-thisisthat 계정팀-");
-			ms.append("</body>\\r\\n\\r\n</html>");
-			String realMs= ms.toString();
+			ms.append("입니다.<br> 감사합니다.<br><br>-thisisthat 계정팀-");
+			ms.append("</html></body>");
 			
-			this.email.setReceiver(email);
-			this.email.setContent(realMs); // 내용
-			this.email.setSubject(name + "님, 아이디가 도착했습니다."); // 제목
-			emailSender.SendEmail(mailSender, this.email); // 보내기!		
+			final MimeMessagePreparator preparator = new MimeMessagePreparator() { 
+				@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
+					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
+					helper.setTo(email);
+					helper.setSubject(email + "님 계정 암호 재설정");
+					helper.setText(ms.toString(), true);
+				}
+			};
+		
+			senderImpl.send(preparator); // 보내기!		
 
 			model.addAttribute("errType", "mailSendingComplete");
 			model.addAttribute("errMsg", email + " 로 요청하신 정보의 전송이 완료 되었습니다.");
