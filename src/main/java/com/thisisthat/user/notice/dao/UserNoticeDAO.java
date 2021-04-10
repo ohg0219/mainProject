@@ -35,10 +35,11 @@ public class UserNoticeDAO {
 		userNoticeTemplate.update("UserNoticeM.plusCnt", board_no);
 	}
 	
-	public int noticeCount(String searchOption, String keyword) {
+	public int noticeCount(String searchOption, String keyword,String group) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
+		map.put("group", group);
 		System.out.println((Integer)userNoticeTemplate.selectOne("UserNoticeM.noticeCount", map));
 		return userNoticeTemplate.selectOne("UserNoticeM.noticeCount", map);
 	}

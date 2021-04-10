@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -90,8 +93,8 @@ public class EmailController {
 	public String findPwEmail ( @RequestParam(value="email") String pwEmail,
 								@RequestParam(value="name") String name,
 								@RequestParam(value="id") String id,
-								HttpSession session,
-								Model model ) throws Exception {
+								Model model,
+								HttpServletResponse response) throws Exception {
 		
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("email", pwEmail);
@@ -102,7 +105,9 @@ public class EmailController {
 		int pw = (int)(Math.random()*100000000);
 		String bcryptPw =  BCrypt.hashpw(String.valueOf(pw), BCrypt.gensalt());
 		if (user_pw != null) {	
-			session.setAttribute(id , bcryptPw);
+			Cookie cookie = new Cookie(id, bcryptPw);
+			cookie.setMaxAge(60*60*24);
+			response.addCookie(cookie);
 			StringBuffer ms =  new StringBuffer();
 			String url = "http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/changePw.do?pw="+ bcryptPw + "&id=" + id;
 			ms.append("<html><body>");
@@ -140,24 +145,29 @@ public class EmailController {
 	@GetMapping("/changePw.do")
 	public String changePw(@RequestParam(value="pw") String bcryptPw,
 							@RequestParam(value="id") String id,
+							HttpServletRequest req,
 								Model model, HttpSession session) {	
-		if(session.getAttribute(id) != null) {
-			
-			if (session.getAttribute(id).equals(bcryptPw)) {
+		Cookie[] cookies = req.getCookies();
+		if(req.getCookies() != null) {
+			boolean flag = false;
+			for(Cookie cookie : cookies) {
+				if (cookie.getValue().equals(bcryptPw)) {
+					flag = true;
+				} 		
+			}
+			if(flag) {
 				model.addAttribute("id" , id);
 				return "/user/find/changePw";
-				
-			} else {
+			}else {
 				model.addAttribute("errType", "mailSendingComplete");
 				model.addAttribute("errMsg", "잘못된 요청입니다.");
 				return "/user/find/findFail";
-			}			
-			
+			}
 		} else {
 			model.addAttribute("errType", "mailSendingComplete");
 			model.addAttribute("errMsg", "잘못된 세션입니다.");
 			return "/user/find/findFail";
-		}		
+		}
 	}
 	
 	

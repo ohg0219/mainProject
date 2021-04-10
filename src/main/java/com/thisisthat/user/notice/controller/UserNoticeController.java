@@ -27,9 +27,10 @@ public class UserNoticeController {
 			@RequestParam(value = "searchOption" ,required = false, defaultValue = "all")String searchOption,
 			@RequestParam(value = "nowPage", required = false)Integer nowPage) {
 		if(nowPage == null) nowPage = 1; //처음들어오면 1페이지 
+		String group = "notice";
 		System.out.println(keyword);
 		System.out.println(searchOption);
-		PagingVO paging = new PagingVO(userNoticeService.noticeCount(searchOption, keyword),nowPage,15);
+		PagingVO paging = new PagingVO(userNoticeService.noticeCount(searchOption, keyword,group),nowPage,15);
 		List<UserNoticeVO> noticeList = userNoticeService.noticeList(paging, searchOption, keyword);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("keyword", keyword);
@@ -46,9 +47,10 @@ public class UserNoticeController {
 			@RequestParam(value = "searchOption" ,required = false, defaultValue = "all")String searchOption,
 			@RequestParam(value = "nowPage", required = false)Integer nowPage) {
 		if(nowPage == null) nowPage = 1;
+		String group = "event";
 		System.out.println(keyword);
 		System.out.println(searchOption);
-		PagingVO paging = new PagingVO(userNoticeService.noticeCount(searchOption, keyword),nowPage,15);
+		PagingVO paging = new PagingVO(userNoticeService.noticeCount(searchOption, keyword,group),nowPage,15);
 
 		List<UserNoticeVO> eventList = userNoticeService.eventList(paging, searchOption, keyword);
 		model.addAttribute("eventList", eventList);
