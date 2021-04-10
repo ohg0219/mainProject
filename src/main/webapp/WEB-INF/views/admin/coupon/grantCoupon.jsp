@@ -146,7 +146,7 @@
                                     <br>
                                     
                     
-                                    <button class="btn btn-dark" type="button" onclick="location.href='/admin/main.mdo' ">메인으로</button>
+                                    <button class="btn btn-dark" type="button" onclick="location.href='/admin/main.mdo'">메인으로</button>
                     				            
                                 <div>	
                                 
