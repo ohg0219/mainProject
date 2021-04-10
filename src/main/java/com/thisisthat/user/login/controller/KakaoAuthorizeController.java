@@ -26,7 +26,7 @@ public class KakaoAuthorizeController {
  
         postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
         postParams.add(new BasicNameValuePair("client_id", "7ff3d3c85953e4c8234ff377259bd06b")); // REST API KEY
-        postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/kakaologin.do")); // 리다이렉트 URI
+        postParams.add(new BasicNameValuePair("redirect_uri", "http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/kakaologin.do")); // 리다이렉트 URI
         postParams.add(new BasicNameValuePair("code", code)); // 로그인 과정중 얻은 code 값
  
         final HttpClient client = HttpClientBuilder.create().build();

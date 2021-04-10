@@ -21,7 +21,7 @@ public class UserSocialLoginOutController {
 	
 	@RequestMapping("/kakaoAccess.do")
 	public String kakaoAccess() {
-		return "redirect:https://kauth.kakao.com/oauth/authorize?client_id=7ff3d3c85953e4c8234ff377259bd06b&redirect_uri=http://localhost:8080/kakaologin.do&response_type=code";
+		return "redirect:https://kauth.kakao.com/oauth/authorize?client_id=7ff3d3c85953e4c8234ff377259bd06b&redirect_uri=http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/kakaologin.do&response_type=code";
 	}
 	
 	/**

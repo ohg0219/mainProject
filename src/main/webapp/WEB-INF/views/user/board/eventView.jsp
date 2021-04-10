@@ -64,7 +64,7 @@
 						<th>DATE &nbsp; <fmt:formatDate value="${event.reg_date}" pattern="yyyy-MM-dd "/><br>
 					</tr>
 					<tr>
-						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="30" readonly="readonly">${notice.board_content}</textarea></td>
+						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="30" readonly="readonly">${event.board_content}</textarea></td>
 					</tr>
 					<tr>
 						<td>

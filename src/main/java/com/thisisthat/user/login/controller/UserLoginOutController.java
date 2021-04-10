@@ -64,7 +64,7 @@ public class UserLoginOutController {
 		session.removeAttribute("userId");
 		session.removeAttribute("naverUserId");
 		if(session.getAttribute("kakaoUserId")!=null) {
-			return "redirect:https://kauth.kakao.com/oauth/logout?client_id=7ff3d3c85953e4c8234ff377259bd06b&logout_redirect_uri=http://localhost:8080/kakaologout.do";
+			return "redirect:https://kauth.kakao.com/oauth/logout?client_id=7ff3d3c85953e4c8234ff377259bd06b&logout_redirect_uri=http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/kakaologout.do";
 		}
 		return "redirect:/main.do";
 	}

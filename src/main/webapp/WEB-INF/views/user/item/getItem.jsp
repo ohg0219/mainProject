@@ -584,7 +584,6 @@ $(document).ready(function(){
 	              $.each(commentList, function(key, value) {
 	                 a += '<div class="comment_list">';
 					 a += '<div class="profile">';
-					 a += '<img alt="User Picture" class="profile profile_img" src="/resources/user/image/1234.jpg">'; 
 					 a += '<span>'+value.writer+'</span>';
 					 a += '</div>';
 					 a += '<div class="comment_content">'+value.content;

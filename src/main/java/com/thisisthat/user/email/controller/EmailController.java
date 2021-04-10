@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
@@ -73,7 +72,7 @@ public class EmailController {
 				@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
 					helper.setTo(email);
-					helper.setSubject(email + "님 계정 암호 재설정");
+					helper.setSubject(name + "님, 아이디가 도착했습니다.");
 					helper.setText(ms.toString(), true);
 				}
 			};
@@ -105,7 +104,7 @@ public class EmailController {
 		if (user_pw != null) {	
 			session.setAttribute(id , bcryptPw);
 			StringBuffer ms =  new StringBuffer();
-			String url = "http://localhost:8080/changePw.do?pw="+ bcryptPw + "&id=" + id;
+			String url = "http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/changePw.do?pw="+ bcryptPw + "&id=" + id;
 			ms.append("<html><body>");
 			ms.append("<img src='https://thisisthat.s3.ap-northeast-2.amazonaws.com/img/mainlogo.png' style='width:150px' alt='[thisisthat]'><br>");
 			ms.append("<br><strong>&nbsp;[비밀번호 재설정]</strong><br><br>");

@@ -25,7 +25,7 @@
 		var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "OfSXR45Si2nhF2qCVIOX",
-				callbackUrl: "http://localhost:8080/naverlogin.do",
+				callbackUrl: "http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/naverlogin.do",
 				isPopup: false,
 				callbackHandle: true
 				/* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */

@@ -50,21 +50,7 @@ public class GrantCouponController {
 		model.addAttribute("paging",paging);
 		return "/admin/coupon/grantCoupon";
 		
-		
-//		if(searchOption.equals("user_id")) {
-//			vo.setKeyword(keyword);
-//			List<CouponGrantVO> searchId = couponGrantService.IdCouponSearch(vo);
-//			model.addAttribute("userCouponList", searchId);
-//			return "/admin/coupon/grantCoupon";
-//		}else if(searchOption.equals("coupon_name")) {
-//			vo.setKeyword(keyword);
-//			List<CouponGrantVO> searchCoupon = couponGrantService.nameCouponSearch(vo);
-//			model.addAttribute("userCouponList", searchCoupon);
-//			return "/admin/coupon/grantCoupon";
-//		}
 	}
-	
-	
 	/**
 	 * 고객에게 쿠폰 부여 페이지로 이동
 	 * 쿠폰 부여 페이지로가는 요청
@@ -129,29 +115,6 @@ public class GrantCouponController {
 		return "/admin/coupon/userCouponView";
 	}
 	
-	
-	//쿠폰 검색하는 메서드
-	
-//	@GetMapping("couponSearch.mdo")
-//	public String couponSearch(Model model,
-//			@RequestParam("keyword")String keyword,
-//			@RequestParam("searchOption")String searchOption,
-//			CouponGrantVO vo) {
-//		System.out.println("searchOption : "+searchOption);
-//		System.out.println("keyword : "+keyword);
-//		if(searchOption.equals("user_id")) {
-//			vo.setKeyword(keyword);
-//			List<CouponGrantVO> searchId = couponGrantService.IdCouponSearch(vo);
-//			model.addAttribute("userCouponList", searchId);
-//			return "/admin/coupon/grantCoupon";
-//		}else if(searchOption.equals("coupon_name")) {
-//			vo.setKeyword(keyword);
-//			List<CouponGrantVO> searchCoupon = couponGrantService.nameCouponSearch(vo);
-//			model.addAttribute("userCouponList", searchCoupon);
-//			return "/admin/coupon/grantCoupon";
-//		}
-//		return null;
-//	}
 	
 	
 	//회원의 쿠폰 List에서 쿠폰선택 삭제를 할 수 있는 메서드

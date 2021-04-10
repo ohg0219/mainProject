@@ -55,7 +55,7 @@
 							    auth2.signOut().then(function () {
 							      console.log('User signed out.');
 							    });
-							    window.location.href="http://localhost:8080/googlelogout.do";
+							    window.location.href="http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/googlelogout.do";
 							  }
 							function onLoad() {
 							      gapi.load('auth2', function() {

@@ -109,7 +109,7 @@
 							</li>
 						</ul>
 							<div class="social_login">
-								<a href="https://kauth.kakao.com/oauth/authorize?client_id=7ff3d3c85953e4c8234ff377259bd06b&redirect_uri=http://localhost:8080/kakaologin.do&response_type=code">
+								<a href="https://kauth.kakao.com/oauth/authorize?client_id=7ff3d3c85953e4c8234ff377259bd06b&redirect_uri=http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/kakaologin.do&response_type=code">
 									<img style="width: 208px; height: 45px;" src="/resources/user/image/kakao_login_medium_narrow.png"/>
 								</a>
 								<div id="naverIdLogin"></div>
@@ -117,7 +117,7 @@
 									var naverLogin = new naver.LoginWithNaverId(
 										{
 											clientId: "OfSXR45Si2nhF2qCVIOX",
-											callbackUrl: "http://localhost:8080/naverLoginResult.do",
+											callbackUrl: "http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/naverLoginResult.do",
 											isPopup: false, /* 팝업을 통한 연동처리 여부 */
 											loginButton: {color: "green", type: 3, height: 45} /* 로그인 버튼의 타입을 지정 */
 										}
@@ -134,7 +134,7 @@
 										console.log('Name: ' + profile.getName());
 										console.log('Image URL: ' + profile.getImageUrl());
 										console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-										location.href="http://localhost:8080/googlelogin.do?id="+profile.getId()+"&name="+ profile.getName()+"&email="+profile.getEmail();
+										location.href="http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/googlelogin.do?id="+profile.getId()+"&name="+ profile.getName()+"&email="+profile.getEmail();
 									}
 								</script>
 							</div>
