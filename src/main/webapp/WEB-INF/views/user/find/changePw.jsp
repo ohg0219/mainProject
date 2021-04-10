@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="wrap">
-		<%@include file="include/header.jsp" %>
+		<%@include file="../include/header.jsp" %>
 		<div class="content">
 			<div class="register_wrap">
 			 	<div class="register" > 
@@ -47,7 +47,7 @@
 				
 			</div>
 		</div><!-- end Content -->
-		<%@include file="include/footer.jsp" %>
+		<%@include file="../include/footer.jsp" %>
 	</div>
 </body>
 </html>

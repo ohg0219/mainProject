@@ -35,9 +35,9 @@ public class UserNoticeController {
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchOption",searchOption);
 		model.addAttribute("paging", paging);
-		return "/user/notice";
+		return "/user/board/notice";
 	}
-
+	
 	//이벤트 페이지
 	@GetMapping("/event.do")
 	public String eventList(UserNoticeVO vo,
@@ -49,12 +49,13 @@ public class UserNoticeController {
 		System.out.println(keyword);
 		System.out.println(searchOption);
 		PagingVO paging = new PagingVO(userNoticeService.noticeCount(searchOption, keyword),nowPage,15);
+
 		List<UserNoticeVO> eventList = userNoticeService.eventList(paging, searchOption, keyword);
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchOption",searchOption);
 		model.addAttribute("paging", paging);
-		return "/user/event";
+		return "/user/board/event";
 	}
 	
 	//공지사항 글 상세보기
@@ -66,7 +67,7 @@ public class UserNoticeController {
 		//끝
 		UserNoticeVO noticeVO = userNoticeService.getNotice(vo);
 		model.addAttribute("notice", noticeVO);
-		return "/user/noticeView";
+		return "/user/board/noticeView";
 	}
 
 	//이벤트 글 상세보기
@@ -78,72 +79,7 @@ public class UserNoticeController {
 		//끝
 		UserNoticeVO noticeVO = userNoticeService.getEvent(vo);
 		model.addAttribute("event", noticeVO);
-		return "/user/eventView";
+		return "/user/board/eventView";
 	}
-	/*
-	//공지사항 글 검색
-	@RequestMapping("/noticesearch.do")
-	public String noticesearch(Model model, 
-			@RequestParam("searchOption")String searchOption , 
-			@RequestParam("keyword")String keyword ,
-			UserNoticeVO vo) {
-		if(searchOption.equals("all")) {
-			vo.setKeyword(keyword);
-			List<UserNoticeVO> noticeList = userNoticeService.allNotice(vo);
-			model.addAttribute("noticeList", noticeList);
-			return "/user/notice";
-		}else if(searchOption.equals("board_title")){
-			vo.setKeyword(keyword);
-			List<UserNoticeVO> noticeList = userNoticeService.titleNotice(vo);
-			for(UserNoticeVO sdf : noticeList) {
-				System.out.println(sdf.toString());
-			}
-			model.addAttribute("noticeList", noticeList);
-			return "/user/notice";
-		}else if(searchOption.equals("board_writer")) {
-			vo.setKeyword(keyword);
-			List<UserNoticeVO> noticeList = userNoticeService.writerNotice(vo);
-			model.addAttribute("noticeList", noticeList);
-			return "/user/notice";
-		}else if(searchOption.equals("board_content")) {
-			vo.setKeyword(keyword);
-			List<UserNoticeVO> noticeList = userNoticeService.contentNotice(vo);
-			model.addAttribute("noticeList", noticeList);
-			return "/user/notice";
-		}
-		return null;
-	}
-	
-	//이벤트글 검색 구현
-	@RequestMapping("/eventsearch.do")
-	public String eventsearch(Model model, 
-			@RequestParam("searchOption")String searchOption , 
-			@RequestParam("keyword")String keyword ,
-			UserNoticeVO vo) {
-		if(searchOption.equals("all")) {
-			vo.setKeyword(keyword);
-			List<UserNoticeVO> eventList = userNoticeService.allNotice(vo);
-			model.addAttribute("eventList", eventList);
-			return "/user/event";
-		}else if(searchOption.equals("board_title")){
-			vo.setKeyword(keyword);
-			List<UserNoticeVO> eventList = userNoticeService.titleNotice(vo);
-			model.addAttribute("eventList", eventList);
-			return "/user/event";
-		}else if(searchOption.equals("board_writer")) {
-			vo.setKeyword(keyword);
-			List<UserNoticeVO> eventList = userNoticeService.writerNotice(vo);
-			model.addAttribute("eventList", eventList);
-			return "/user/event";
-		}else if(searchOption.equals("board_content")) {
-			vo.setKeyword(keyword);
-			List<UserNoticeVO> eventList = userNoticeService.contentNotice(vo);
-			model.addAttribute("eventList", eventList);
-			return "/user/event";
-		}
-		return null;
-	}
-*/
-	
-	
+
 }

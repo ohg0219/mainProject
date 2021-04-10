@@ -15,8 +15,8 @@
 
 <title>thisisthat - Q&A</title>
 
-<%@include file="include/css.jsp"%>
-<%@include file="include/js.jsp"%>
+<%@include file="../include/css.jsp"%>
+<%@include file="../include/js.jsp"%>
 <!-- Custom fonts for this template-->
     <link href="/resources/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -51,7 +51,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@include file="include/sideMenu.jsp"%>
+		<%@include file="../include/sideMenu.jsp"%>
 
 		<!-- End of Sidebar -->
 
@@ -61,7 +61,7 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<%@include file="include/navbar.jsp"%>
+				<%@include file="../include/navbar.jsp"%>
 				<div class="container-fluid">
 
                     <!-- Page Heading -->

@@ -63,7 +63,7 @@ text-decoration: none;
 </head>
 <body>
 	<div class="wrap">
-		<%@include file="include/header.jsp" %>
+		<%@include file="../include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
 				<h4>EVENT</h4>
@@ -133,7 +133,7 @@ text-decoration: none;
 				
 			</div>
 		</div><!-- end Content -->
-		<%@include file="include/footer.jsp" %>
+		<%@include file="../include/footer.jsp" %>
 		<div class="don"></div>
 	</div>
 </body>

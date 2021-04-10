@@ -9,7 +9,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<%@include file="include/css.jsp"%>
+<%@include file="../include/css.jsp"%>
 <title>thisisthat - 게시글</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@include file="include/sideMenu.jsp"%>
+		<%@include file="../include/sideMenu.jsp"%>
 
 		<!-- End of Sidebar -->
 
@@ -29,7 +29,7 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<%@include file="include/navbar.jsp"%>
+				<%@include file="../include/navbar.jsp"%>
 				<div class="container-fluid">
 					<form action="updateGate.mdo?board_no=${article.board_no }" method="get">
 					<input type="hidden" name="board_no" value="${article.board_no }" >
@@ -63,7 +63,7 @@
 	<script>
 
 </script>
-	<%@include file="include/js.jsp"%>
+	<%@include file="../include/js.jsp"%>
 
 </body>
 </html>

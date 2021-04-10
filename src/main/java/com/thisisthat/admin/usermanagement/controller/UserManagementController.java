@@ -87,7 +87,7 @@ public class UserManagementController {
 
 		model.addAttribute("msg","login");
 		model.addAttribute("user", uservo);
-		return "/admin/getUser";
+		return "/admin/staff/getUser";
 	}
 
 	@PostMapping("/pwCheck.mdo")
@@ -161,7 +161,7 @@ public class UserManagementController {
 		model.addAttribute("userVO", vo);
 		model.addAttribute("paging",paging);
 		model.addAttribute("staffInfo", newUserList);
-		return "/admin/staffList";
+		return "/admin/staff/staffList";
 	}
 
 	@GetMapping("/getStaff.mdo")
@@ -180,7 +180,7 @@ public class UserManagementController {
 			uservo.setUserPhone(newPhone);
 		}
 		model.addAttribute("user", uservo);
-		return "/admin/getStaff";
+		return "/admin/staff/getStaff";
 	}
 
 	@GetMapping("/getUserUpdate.mdo")

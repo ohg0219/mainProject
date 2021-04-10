@@ -15,8 +15,8 @@
 
 <title>thisisthat - Q&A</title>
 
-<%@include file="include/css.jsp"%>
-<%@include file="include/js.jsp"%>
+<%@include file="../include/css.jsp"%>
+<%@include file="../include/js.jsp"%>
 <!-- Custom fonts for this template-->
     <link href="/resources/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -43,7 +43,7 @@ textarea {
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@include file="include/sideMenu.jsp"%>
+		<%@include file="../include/sideMenu.jsp"%>
 
 		<!-- End of Sidebar -->
 
@@ -53,7 +53,7 @@ textarea {
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<%@include file="include/navbar.jsp"%>
+				<%@include file="../include/navbar.jsp"%>
 				<div class="container-fluid">
 
                     <!-- Page Heading -->
@@ -67,34 +67,27 @@ textarea {
                         </div>
                         -->
                         <div class="card-body">
-                            <form action="/admin/updateReply.mdo" method="get">
-                            <input type="hidden" name="boardNo" value="${reply.boardNo}"> 
+                            <form action="/admin/insertReply.mdo" method="post">
+                            <input type="hidden" name="boardNo" value="${boardNo}"> 
+                            <input type="hidden" name="boardType" value="${boardType }">
 							 	<div class="table-responsive">
 	                           		<table class="table table-bordered" id="dataTable" >
-	                           			<tr>
-	                           				<td colspan="2">
-	                           					<input type="button" id="updateBt" class="btn btn-dark" value="수정하기">
-	                           					<input value="확인" id="submit" type="submit" class="btn btn-dark">
-	                           				</td> 
-	                           			</tr>
                     					<tr>
                     						<td width="200" align="right">제목</td>
-                    						<td><input type="text"  required="required" class="form-control" name="boardTitle" size="100%"
-                    						id="boardTitle" value="${reply.boardTitle }" readonly="readonly"></td>
+                    						<td><input type="text"  required="required" class="form-control" name="boardTitle" size="100%"></td>
                     					</tr>
                     					<tr>
                     						<td align="center" colspan="500"><strong>내용</strong></td>
                     					</tr>
                     					<tr>
-                    						<td colspan="2"><textarea name="boardContent" cols="193" rows="30" required="required"
-                    						id = "boardContent" readonly="readonly">${reply.boardContent }</textarea></td>
+                    						<td colspan="2"><textarea name="boardContent" cols="193" rows="30" required="required"></textarea></td>
                     					
                     					</tr>
                     					
                     					<tr>
                     						<td colspan="2" align="center">
 	                    						<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/answerBoardList.mdo'">
-	                    						<input value="삭제" id="deleteBt" type="button" class="btn btn-dark" >	                    						
+	                    						<input value="확인" type="submit" class="btn btn-dark">
                     						</td>
                     					</tr>
                     				</table>
@@ -108,37 +101,7 @@ textarea {
 		</div>
 	</div>
 	<!-- End of Page Wrapper -->
-	
-	<script type="text/javascript">
-	$("#submit").hide();
-	$(function(){
-		$("#updateBt").click(function(){
-			
-			if(document.getElementById('updateBt').value == '수정하기'){
-				document.getElementById('updateBt').value = "수정취소";
-				document.getElementById('boardContent').readOnly = false;
-				document.getElementById('boardTitle').readOnly = false;
-				$("#submit").show();
-			}else if(document.getElementById('updateBt').value == "수정취소"){
-				var title = '${reply.boardTitle}';
-				var content = '${reply.boardContent}';
-				document.getElementById('updateBt').value = "수정하기";
-				document.getElementById('boardContent').readOnly = true;
-				document.getElementById('boardTitle').readOnly = true;
-				document.getElementById('boardContent').value = content;
-				document.getElementById('boardTitle').value = title;
-				$("#submit").hide();
-			}
 
-		});
-		$("#deleteBt").click(function(){
-			if(confirm('정말로 삭제할까요?')){
-				location.href="/admin/deleteReply.mdo?boardNo="+'${reply.boardNo}';
-			}
-		});
-	});
-	</script>
-	
     <!-- Bootstrap core JavaScript-->
     <script src="/resources/admin/vendor/jquery/jquery.min.js"></script>
     <script src="/resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

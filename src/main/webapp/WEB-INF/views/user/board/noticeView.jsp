@@ -47,34 +47,34 @@
 </head>
 <body>
 	<div class="wrap">
-		<%@include file="include/header.jsp" %>
+		<%@include file="../include/header.jsp" %>
 		<div class="content">
 			<div class="contentWrap">
-				<h3>EVENT</h3>
+				<h3>NOTICE</h3>
 				<table align="left" class="noticeTable">
 					<tr>
-						<th>  ${event.board_no}</th>
-						<th>  ${event.board_title}</th>
+						<th>  ${notice.board_no}</th>
+						<th>  ${notice.board_title}</th>
 					</tr>
 					<tr>
-						<th>  ${event.board_writer}</th>
-						<th>HIT &nbsp; ${event.board_cnt}</th>
+						<th>  ${notice.board_writer}</th>
+						<th>HIT &nbsp; ${notice.board_cnt}</td>
 					</tr>
 					<tr>
-						<th>DATE &nbsp; <fmt:formatDate value="${event.reg_date}" pattern="yyyy-MM-dd "/><br>
+						<th>DATE &nbsp;  <fmt:formatDate value="${notice.reg_date}" pattern="yyyy-MM-dd "/><br>
 					</tr>
 					<tr>
-						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="10" readonly="readonly">${notice.board_content}</textarea></td>
+						<td align="left"><textarea style='resize: none; border: 1px solid white;' cols="50" rows="30" readonly="readonly">${notice.board_content}</textarea></td>
 					</tr>
 					<tr>
 						<td>
-							<a href="event.do"><strong>List</strong></a>
+							<a href="notice.do"><strong>List</strong></a>
 						</td>
 					</tr>
 				</table>
 			</div>
 		</div><!-- end Content -->
-		<%@include file="include/footer.jsp" %>
+		<%@include file="../include/footer.jsp" %>
 		<div class="don"></div>
 	</div>
 </body>

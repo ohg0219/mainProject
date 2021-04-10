@@ -72,7 +72,7 @@ public class BoardController {
 		model.addAttribute("answerList",answerList);
 		model.addAttribute("replyList",replyList);
 		model.addAttribute("search", search);
-		return "/admin/answerBoardList";
+		return "/admin/answer/answerBoardList";
 	}
 
 	@GetMapping("/getAnswer.mdo")
@@ -87,7 +87,7 @@ public class BoardController {
 		boardService.viewCheck(vo);
 
 		model.addAttribute("answer",vo);
-		return "/admin/getAnswer";
+		return "/admin/answer/getAnswer";
 	}
 	//답변화면 전환
 	@GetMapping("/insertReply.mdo")
@@ -100,7 +100,7 @@ public class BoardController {
 			rttr.addFlashAttribute("msg","msg");
 			return "redirect:getAnswer.mdo?no="+vo.getBoardNo();
 		}
-		return "/admin/insertReply";
+		return "/admin/answer/insertReply";
 	}
 	//답변insert
 	@PostMapping("/insertReply.mdo")
@@ -127,7 +127,7 @@ public class BoardController {
 		if(boardNo >0) {
 			AnswerBoardVO vo = boardService.getAnswer(boardNo);
 			model.addAttribute("reply",vo);
-			return "/admin/getReply";
+			return "/admin/answer/getReply";
 		}
 		rttr.addFlashAttribute("msg","잘못된 요청입니다");
 		return "redirect:answerBoardList.mdo";	

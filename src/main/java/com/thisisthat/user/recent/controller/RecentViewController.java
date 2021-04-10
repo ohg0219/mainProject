@@ -51,7 +51,7 @@ public class RecentViewController {
 		} else {
 			model.addAttribute("imgView", null);
 		}
-		return "/user/recentView";
+		return "/user/recent/recentView";
 	}
 
 	@RequestMapping("/deleteRecent.do")
@@ -90,13 +90,13 @@ public class RecentViewController {
 
 			if (flag == true) {
 				model.addAttribute("errMsg", "장바구니에 중복된 상품이 있습니다.");
-				return "/user/recentBasketFail";
+				return "/user/recent/recentBasketFail";
 
 			} else {
 				// 사이즈 선텍 확인
 				if (selectSize.equals("*")) {
 					model.addAttribute("errMsg", "사이즈를 선택해주세요");
-					return "user/recentSizeFail";
+					return "user/recent/recentSizeFail";
 				} else {
 					bo.setUserId(userId);
 					bo.setProductNo(productNo);
@@ -125,7 +125,7 @@ public class RecentViewController {
 			if(check != true) {
 				if(selectSize.equals("*")) {
 					model.addAttribute("errMsg", "사이즈를 선택해주세요");
-					return "user/recentSizeFail";
+					return "user/recent/recentSizeFail";
 					
 				} else {
 					UserBasketItemVO basketItem = new UserBasketItemVO();
@@ -159,7 +159,7 @@ public class RecentViewController {
 			
 			} else {
 				model.addAttribute("errMsg", "장바구니에 동일한 상품이 있습니다");
-				return "/user/recentBasketFail";
+				return "/user/recent/recentBasketFail";
 			}
 		}
 	}

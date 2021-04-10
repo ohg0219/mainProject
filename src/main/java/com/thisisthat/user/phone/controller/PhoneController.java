@@ -43,7 +43,7 @@ public class PhoneController {
 		if (userId.isEmpty()) {
 			model.addAttribute("errType", "mailSendingFail");
 			model.addAttribute("errMsg", "입력하신 정보로 가입된 회원은 존재하지 않습니다.");
-			return "/user/findFail";
+			return "/user/find/findFail";
 
 		} else {
 			param.put("from", "01030561121");
@@ -62,7 +62,7 @@ public class PhoneController {
 		}
 		model.addAttribute("errType", "mailSendingFail");
 		model.addAttribute("errMsg", "입력하신 휴대폰 번호로 아이디 정보가 전송되었습니다.");
-		return "/user/findView";
+		return "/user/find/findView";
 	}
 
 	
@@ -95,7 +95,7 @@ public class PhoneController {
 		} else {
 			model.addAttribute("errType", "mailSendingFail");
 			model.addAttribute("errMsg", "입력하신 정보로 가입된 회원이 존재하지 않습니다.");
-			return "/user/findFail";
+			return "/user/find/findFail";
 		}
 		
 		try {
@@ -109,7 +109,7 @@ public class PhoneController {
 		model.addAttribute("errMsg", "핸드폰번호로 임시 비밀번호를 발급하였습니다.");
 		model.addAttribute("id", id);
 		model.addAttribute("pass", pw);
-		return "/user/findPw";
+		return "/user/find/findPw";
 	}
 	
 
