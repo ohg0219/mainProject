@@ -492,13 +492,13 @@ $(document).ready(function(){
 				</div>
 			</div>
 				<div class="comment" id="cmt"></div>
-			<form action="/itemList/comment.do" method="post" enctype="multipart/form-data">
+			<form action="/itemList/comment.do" id="commentForm" name = "commentForm" method="post" enctype="multipart/form-data">
 				<input name="productNo" type="hidden" value="${itemInfo.productNo }">
 				<input name="category" type="hidden" value="${category }">
 				<div class="comment_list" id= "comment_store">
 					<div class="comment_store " onclick="isLogin()">
-						<input class="comment_btn" type="submit" value="댓글작성">
-						<textarea name="content" class="comment_area" id="text" required="required"></textarea>
+						<input class="comment_btn" type="button" id="sub" value="댓글작성">
+						<textarea name="content" class="comment_area" id="text" ></textarea>
 						<div class="img_area" id="img">
 						<img src="/resources/user/image/plus.png" onclick="fileClick()">
 						<input name="uploadFile" type="file" id="multiple" style= "display: none" multiple/>
@@ -520,6 +520,9 @@ $(document).ready(function(){
 </body>
 
 <script type="text/javascript">
+	
+	
+	
 	function delBtn(comment,boardNo){
 		if(confirm('정말로 삭제 하시겠습니까?')){
 			$.ajax({
@@ -584,7 +587,7 @@ $(document).ready(function(){
 	              $.each(commentList, function(key, value) {
 	                 a += '<div class="comment_list">';
 					 a += '<div class="profile">';
-					 a += '<img alt="User Picture" class="profile profile_img" src="/resources/user/image/1234.jpg">'; 
+					 //a += '<img alt="User Picture" class="profile profile_img" src="/resources/user/image/1234.jpg">'; 
 					 a += '<span>'+value.writer+'</span>';
 					 a += '</div>';
 					 a += '<div class="comment_content">'+value.content;
@@ -699,20 +702,27 @@ $(document).ready(function(){
 	    }
 	// file end
 	});
-	$(document).ready(
-		function(){
-			
-			$('.comment').css({
-				"background" : "#fff",
-				"border-top" : "0px solid #ddd"
-			});
-			$('.camera').css({
-				"background" : "#f3f3f3"
-			});
-				
-			
-		}	
-	)
+	$(document).ready(function(){
+		$('#commentForm').submit(function(event){
+			var comment = document.getElementById('text').value;
+			if(comment == ''){
+				alert("내용을 작성해 주세요.");	
+				event.preventDefault();
+				return false;
+			}
+		});
+		$("#sub").on('click',function(){
+			console.log('d');
+			$('#commentForm').submit();
+		});
+		$('.comment').css({
+			"background" : "#fff",
+			"border-top" : "0px solid #ddd"
+		});
+		$('.camera').css({
+			"background" : "#f3f3f3"
+		});
+	});
 	
 	$('.comment_btn_img').on('click',function(){
 		var img = $(this).attr('id');
