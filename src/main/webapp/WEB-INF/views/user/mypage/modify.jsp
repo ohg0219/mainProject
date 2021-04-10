@@ -26,7 +26,6 @@
 							<li>ID *</li>
 							<li class="input_li">
 								<input class="input" type="text" name="id" value="${modify.id }" readonly="readonly">
-								<span class="register_comment">영문 대,소문자/숫자, 4~16자</span>
 								<span id="idCheck"></span>
 							</li>
 							<li>PASSWORD *</li>
