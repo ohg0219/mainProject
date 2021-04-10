@@ -15,8 +15,8 @@
 
 <title>thisisthat - 직원목록</title>
 
-<%@include file="include/css.jsp"%>
-<%@include file="include/js.jsp"%>
+<%@include file="../include/css.jsp"%>
+<%@include file="../include/js.jsp"%>
 <style type="text/css">
 
 </style>
@@ -38,7 +38,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@include file="include/sideMenu.jsp"%>
+		<%@include file="../include/sideMenu.jsp"%>
 
 		<!-- End of Sidebar -->
 
@@ -48,7 +48,7 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<%@include file="include/navbar.jsp"%>
+				<%@include file="../include/navbar.jsp"%>
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
