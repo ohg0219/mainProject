@@ -11,7 +11,7 @@ public class FindController {
 	 */
 	@GetMapping("/findIdPassword.do")
 	public String FindIdPw() {
-		return "/user/findIdPassword";
+		return "/user/find/findIdPassword";
 	}
 	
 	

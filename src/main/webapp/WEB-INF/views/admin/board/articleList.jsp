@@ -14,8 +14,8 @@
 
 <title>thisisthat - ${where }</title>
 
-<%@include file="include/css.jsp"%>
-<%@include file="include/js.jsp"%>
+<%@include file="../include/css.jsp"%>
+<%@include file="../include/js.jsp"%>
 <style type="text/css">
  a:link { color: red; text-decoration: none;}
  a:visited { color: blue; text-decoration: none;}
@@ -31,7 +31,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@include file="include/sideMenu.jsp"%>
+		<%@include file="../include/sideMenu.jsp"%>
 
 		<!-- End of Sidebar -->
 
@@ -41,7 +41,7 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<%@include file="include/navbar.jsp"%>
+				<%@include file="../include/navbar.jsp"%>
 				<div class="container-fluid">
 
                     <!-- Page Heading -->

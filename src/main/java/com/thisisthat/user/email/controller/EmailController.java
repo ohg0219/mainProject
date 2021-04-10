@@ -56,7 +56,7 @@ public class EmailController {
 		if(userId.isEmpty()) { 
 			model.addAttribute("errType", "mailSendingFail");
 			model.addAttribute("errMsg", "입력하신 정보로 가입된 회원은 존재하지 않습니다.");
-			return "/user/findFail";
+			return "/user/find/findFail";
 		
 		} else {
 			StringBuffer ms = new StringBuffer();
@@ -82,7 +82,7 @@ public class EmailController {
 
 			model.addAttribute("errType", "mailSendingComplete");
 			model.addAttribute("errMsg", email + " 로 요청하신 정보의 전송이 완료 되었습니다.");
-			return "/user/findView";
+			return "/user/find/findView";
 		}	
 	}
 	
@@ -122,27 +122,19 @@ public class EmailController {
 					helper.setText(ms.toString(), true);
 					}
 				};
-		/*		
-			MimeMessageHelper helper = new MimeMessageHelper();
-			email.setContent(ms.toString()); // 내용
-			email.set
-			email.setReceiver(pwEmail); // 수신자
-			email.setSubject(pwEmail + "님 비밀번호 찾기 메일입니다."); // 제목
-			emailSender.SendEmail(mailSender, email); // 보내기!
-		 */
 			senderImpl.send(preparator); // 보내기!
 			
 			model.addAttribute("errType", "mailSendingComplete");
 			model.addAttribute("errMsg", pwEmail + " 로 새로운 비밀번호가 전송되었습니다.");
 			model.addAttribute("id", id);
 			model.addAttribute("pass", pw);
-			return "/user/findPw";
+			return "/user/find/findPw";
 			
 		} else {
 			// 메시지 띄우고 해당 페이지 그대로 놔두기
 			model.addAttribute("errType", "mailSendingFail");
 			model.addAttribute("errMsg", "입력하신 정보로 가입된 회원은 존재하지 않습니다.");
-			return "/user/findFail";
+			return "/user/find/findFail";
 		}
 	}
 	
@@ -154,18 +146,18 @@ public class EmailController {
 			
 			if (session.getAttribute(id).equals(bcryptPw)) {
 				model.addAttribute("id" , id);
-				return "/user/changePw";
+				return "/user/find/changePw";
 				
 			} else {
 				model.addAttribute("errType", "mailSendingComplete");
 				model.addAttribute("errMsg", "잘못된 요청입니다.");
-				return "/user/findFail";
+				return "/user/find/findFail";
 			}			
 			
 		} else {
 			model.addAttribute("errType", "mailSendingComplete");
 			model.addAttribute("errMsg", "잘못된 세션입니다.");
-			return "/user/findFail";
+			return "/user/find/findFail";
 		}		
 	}
 	

@@ -246,7 +246,7 @@ a {
 </head>
 <body>
 	<div class="wraped">
-		<%@include file="include/header.jsp"%>
+		<%@include file="../include/header.jsp"%>
 		<div id="wrap">
         	<div id="container">
  	           <div id="contents">
@@ -334,7 +334,7 @@ a {
 			   	</div><!-- inr.end -->
 		   	</div>
      	</div>
-		<%@include file="include/footer.jsp"%>
+		<%@include file="../include/footer.jsp"%>
 	</div>
 </div>
 </body> 

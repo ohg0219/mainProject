@@ -125,7 +125,7 @@ td {
 </head>
 <body>
 	<div class="wraped">
-		<%@include file="include/header.jsp"%>
+		<%@include file="../include/header.jsp"%>
 		<div id="wrap">
 			<div class="content">
 				<div class="title">
@@ -211,7 +211,7 @@ td {
 					</div>
 				</div>
 			</div>
-			<%@include file="include/footer.jsp"%>
+			<%@include file="../include/footer.jsp"%>
 		</div>
 	</div>
 <script type="text/javascript">
