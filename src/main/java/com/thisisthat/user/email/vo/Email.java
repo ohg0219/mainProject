@@ -1,4 +1,4 @@
-package com.thisisthat.user.email;
+package com.thisisthat.user.email.vo;
 
 public class Email {
 

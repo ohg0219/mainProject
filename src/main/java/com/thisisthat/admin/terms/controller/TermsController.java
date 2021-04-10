@@ -22,8 +22,8 @@ import com.thisisthat.admin.terms.service.TermsService;
 import com.thisisthat.admin.terms.vo.InformationVO;
 import com.thisisthat.admin.terms.vo.UtilizationVO;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
-import com.thisisthat.user.email.Email;
 import com.thisisthat.user.email.EmailSender;
+import com.thisisthat.user.email.vo.Email;
 import com.thisisthat.util.PagingVO;
 
 @Controller

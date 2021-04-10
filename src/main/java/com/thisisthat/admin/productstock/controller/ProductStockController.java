@@ -22,14 +22,19 @@ public class ProductStockController {
 
 
 	@RequestMapping("getStockList.mdo")
-	public String productStockList(Model model,@RequestParam(value="searchOption",defaultValue = "all")String searchOption,
-			@RequestParam(value="nowPage", required = false)Integer nowPage
-			,ProductStockVO productStockVO){
+	public String productStockList(Model model,
+			@RequestParam(value="searchOption",defaultValue = "all")String searchOption,
+			@RequestParam(value="nowPage", required = false)Integer nowPage,
+			ProductStockVO productStockVO){
 		if(nowPage == null) nowPage = 1;
-		productStockVO.setProduct_category(searchOption);
-		PagingVO paging = new PagingVO(productStockService.getCount(productStockVO), nowPage, 15);
-		List<ProductStockVO> prodcutStockList = productStockService.poductStockList(productStockVO, paging);
-		
+		if(searchOption.equals("product_name")) {
+			productStockVO.setProduct_category("all");
+		}else {
+			productStockVO.setProduct_category(searchOption);
+		}
+		PagingVO paging = new PagingVO(productStockService.getCount(productStockVO,searchOption), nowPage, 15);
+		List<ProductStockVO> prodcutStockList = productStockService.poductStockList(productStockVO,searchOption, paging);
+		model.addAttribute("keyword",productStockVO.getKeyword());
 		model.addAttribute("searchOption", searchOption);
 		model.addAttribute("paging",paging);
 		model.addAttribute("prodcutStockList", prodcutStockList);
@@ -59,11 +64,16 @@ public class ProductStockController {
 	}//상세보기
 
 	@RequestMapping("updateStock.mdo")
-	public String updateProductStock(@RequestParam(value="product_no")int product_no, @RequestParam(value="xs")int xs, @RequestParam(value="s")int s, @RequestParam(value="m")int m, @RequestParam(value="l")int l, @RequestParam(value="xl")int xl, ProductStockVO productStockVO) {
+	public String updateProductStock(
+			@RequestParam(value="product_no")int product_no, 
+			@RequestParam(value="xs",defaultValue = "0")int xs, 
+			@RequestParam(value="s",defaultValue = "0")int s, 
+			@RequestParam(value="m",defaultValue = "0")int m, 
+			@RequestParam(value="l",defaultValue = "0")int l, 
+			@RequestParam(value="xl",defaultValue = "0")int xl, 
+			ProductStockVO productStockVO) {
 		productStockService.updateStock(productStockVO);
-
-
-		return "redirect:productStockList.mdo";
+		return "redirect:/admin/getStockList.mdo";
 	}
 
 }// end class

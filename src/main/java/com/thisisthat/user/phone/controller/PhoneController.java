@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,6 +84,7 @@ public class PhoneController {
 		map.put("id", id);
 		map.put("name", name);
 		map.put("phone", phone1 + phone2 + phone3);
+		map.put("pass", BCrypt.hashpw(pw+"", BCrypt.gensalt()));
 		String pass = service.PwPhone(map);
 		if (pass != null) {
 
@@ -91,6 +93,7 @@ public class PhoneController {
 			param.put("type", "SMS");
 			param.put("text", "회원님의 임시 비밀번호는 " + pw + "입니다.\n감사합니다.\n-thisisthat-");
 			param.put("app_version", "test app 2.2");
+			service.PwUpdate(map);
 			
 		} else {
 			model.addAttribute("errType", "mailSendingFail");

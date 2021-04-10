@@ -61,7 +61,7 @@ a {
 					<form action="/admin/getStockList.mdo?searchOption=" method="get">
 					<select name="searchOption" aria-controls="example" >
 						<option value="all" id="update">ALL</option>
-						<option value="shirt" class="update">SHIRT</option>
+						<option value="shirts" class="update">SHIRTS</option>
 						<option value="tops" class="update">TOPS</option>
 						<option value="pants" class="update">PANTS</option>
 						<option value="jackets" class="update">JACKETS</option>
@@ -116,10 +116,8 @@ a {
 									</tbody>
 								</table>
 								<div>
-									<form action="getStockList.mdo" method="post">
+									<form action="getStockList.mdo" method="get">
 										<select name="searchOption" aria-controls="example" class="">
-											<option value="all">전체</option>
-											<option value="product_no">상품번호</option>
 											<option value="product_name">상품명</option>
 										</select>
 										<input type="text" name="keyword">
@@ -131,7 +129,7 @@ a {
 									<div style="display: block; text-align: center;">
 										<c:if test="${paging.startPage != 1 }">
 											<a
-												href="/admin/getStockList.mdo?nowPage=${paging.startPage - 1 }&searchOption=${searchOption}">&lt;</a>
+												href="/admin/getStockList.mdo?nowPage=${paging.startPage - 1 }&searchOption=${searchOption}&keyword=${keyword}">&lt;</a>
 										</c:if>
 										<c:forEach begin="${paging.startPage }"
 											end="${paging.endPage }" var="p">
@@ -141,13 +139,13 @@ a {
 												</c:when>
 												<c:when test="${p != paging.nowPage }">
 													<a
-														href="/admin/getStockList.mdo?nowPage=${p }&searchOption=${searchOption}">${p }</a>
+														href="/admin/getStockList.mdo?nowPage=${p }&searchOption=${searchOption}&keyword=${keyword}">${p }</a>
 												</c:when>
 											</c:choose>
 										</c:forEach>
 										<c:if test="${paging.endPage != paging.lastPage}">
 											<a
-												href="/admin/getStockList.mdo?nowPage=${paging.endPage+1}&searchOption=${searchOption}">&gt;</a>
+												href="/admin/getStockList.mdo?nowPage=${paging.endPage+1}&searchOption=${searchOption}&keyword=${keyword}">&gt;</a>
 										</c:if>
 									</div>
 								</div>

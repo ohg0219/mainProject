@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.admin.main.service.AdminService;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
-import com.thisisthat.user.email.Email;
 import com.thisisthat.user.email.EmailSender;
+import com.thisisthat.user.email.vo.Email;
 
 @Controller
 
