@@ -504,7 +504,7 @@ public class AdminSalesController {
 			response.setHeader("Content-Disposition","attachment;filename=" + URLEncoder.encode(fileName, "UTF-8") + ".pdf");
 			PdfWriter.getInstance(document, response.getOutputStream());
 			document.open();
-			BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/malgun.ttf",BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+			BaseFont baseFont = BaseFont.createFont("font/malgun.ttf",BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 			Font font = new Font(baseFont, 12);
 			PdfPTable table = new PdfPTable(6);
 			if(type.equals("category")) {

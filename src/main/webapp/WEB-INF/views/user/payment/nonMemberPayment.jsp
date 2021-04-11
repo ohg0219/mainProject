@@ -104,6 +104,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		IMP.init('imp80941170');  // 가맹점 식별 코드
+		var total = $("#totalPrice").text();
 		var form = document.payform;
 		var product = $("#productList").val();
 		var email = $("input[name=orderEmail]").val();
