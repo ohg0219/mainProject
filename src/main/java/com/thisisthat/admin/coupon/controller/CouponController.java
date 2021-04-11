@@ -81,15 +81,16 @@ public class CouponController {
 	}
 	
 	@RequestMapping("updateCouponGate.mdo")
-	public String updateGate(@RequestParam(value="board_no")Long board_no) {
+	public String updateGate(CouponVO couponVO, @RequestParam(value="board_no")Long board_no) throws Exception {
+		
 		return "redirect:updateArticle.mdo?board_no="+board_no;
 	}
 	
 	@RequestMapping("updateCoupon.mdo")
 	public String updateCoupon(Model model, @RequestParam(value="coupon_no")int coupon_no, CouponVO couponVO) {
-		CouponVO updateCoupon = couponService.viewCoupon(couponVO);
-		
-		model.addAttribute("article", updateCoupon);
+		CouponVO viewCoupon = couponService.viewCoupon(couponVO);
+
+		model.addAttribute("article", viewCoupon);
 		return "/admin/coupon/updateCoupon";
 	}
 	
