@@ -58,8 +58,8 @@ public class UserNoticeServiceImpl implements UserNoticeService{
 	}
 	*/
 	@Override
-	public int noticeCount(String searchOption, String keyword) {
-		return userNoticeDAO.noticeCount(searchOption, keyword);
+	public int noticeCount(String searchOption, String keyword,String group) {
+		return userNoticeDAO.noticeCount(searchOption, keyword, group);
 	}
 	
 	@Override

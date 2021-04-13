@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thisisthat.admin.main.service.AdminService;
 import com.thisisthat.admin.usermanagement.vo.UserVO;
-import com.thisisthat.user.email.Email;
 import com.thisisthat.user.email.EmailSender;
+import com.thisisthat.user.email.vo.Email;
 
 @Controller
 
@@ -101,7 +101,7 @@ public class AdminController {
 			String bcryptPw = BCrypt.hashpw(String.valueOf(pw), BCrypt.gensalt());
 			session.setAttribute(user.getUserId() , bcryptPw);
 			StringBuffer ms =  new StringBuffer();
-			String url = "http://localhost:8080/resetPassword.mdo?pw="+ bcryptPw + "&id=" + user.getUserId();
+			String url = "http://ec2-13-124-128-58.ap-northeast-2.compute.amazonaws.com/resetPassword.mdo?pw="+ bcryptPw + "&id=" + user.getUserId();
 			ms.append("<html><body>");
 			ms.append("<img src='https://thisisthat.s3.ap-northeast-2.amazonaws.com/img/mainlogo.png' style='width:150px' alt='[thisisthat]'><br>");
 			ms.append("<br><strong>&nbsp;[비밀번호 재설정]</strong><br><br>");

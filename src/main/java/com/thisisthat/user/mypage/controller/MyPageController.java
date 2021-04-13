@@ -76,18 +76,6 @@ public class MyPageController {
 		}
 	}
 	
-//	@RequestMapping("/mypage/mypage.do")
-//	public String mypageMain(HttpSession session, Model model) {
-//		String userId = null;
-//		if (session.getAttribute("userId") != null)
-//			userId = (String) session.getAttribute("userId");
-//		UserRegisterVO user = service.modifyView(userId);
-//		model.addAttribute("modify", user);
-//		model.addAttribute("userId", user.getId());
-		
-//		return "/user/mypage/myMain";
-//	}
-	
 	@RequestMapping("/mypage/mypage.do")
 	public String getMypageMain(HttpSession session, MyPageVO vo, Model model) {
  		String userId = (String) session.getAttribute("userId");

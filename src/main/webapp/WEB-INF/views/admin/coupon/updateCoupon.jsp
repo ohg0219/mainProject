@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,10 +52,10 @@
 											placeholder="쿠폰 명" >
 											<input type="text" name="coupon_price" value="${article.coupon_price }" class="form-control mt-4 mb-2"
 											placeholder="쿠폰 금액" >
-											<input type="date" name="coupon_first" value="${article.coupon_first}" class="form-control mt-4 mb-2"
-											placeholder="시작일자" >
-											<input type="date" name="coupon_last" value="${article.coupon_last}" class="form-control mt-4 mb-2"
-											placeholder="종료 일자" >
+											<input type="date" pattern="yyyy-MM-dd" name="coupon_first" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${article.coupon_first}"/>" class="form-control mt-4 mb-2"
+											>
+											<input type="date" name="coupon_last" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${article.coupon_last}"/>" pattern="yyyy-MM-dd "class="form-control mt-4 mb-2"
+											>
 										</div>
 									</td>
                             	</tr>
@@ -64,7 +66,7 @@
 			</div>
 		</div>
 	</div>
-<script>
+<script >
 
 </script>
 <%@include file="../include/js.jsp"%>

@@ -34,7 +34,7 @@ public interface UserNoticeService {
 	List<UserNoticeVO> contentNotice(UserNoticeVO vo);
 	*/
 	
-	public int noticeCount(String searchOption, String keyword);
+	public int noticeCount(String searchOption, String keyword,String group);
 	
 	public List<UserNoticeVO> noticeList(PagingVO paging, String searchOption, String keyword);
 	

@@ -59,7 +59,7 @@
 	</bean>
 
 	<!-- Email, EmailSender Bean 등록 -->
-	<bean id="email" class="com.thisisthat.user.email.Email"></bean>
+	<bean id="email" class="com.thisisthat.user.email.vo.Email"></bean>
 	<bean id="emailSender" class="com.thisisthat.user.email.EmailSender"></bean>
 
 </beans>

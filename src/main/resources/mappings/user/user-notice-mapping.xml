@@ -65,7 +65,7 @@
 	</select>
 	
 	<select id="noticeCount" resultType="Integer">
-		select count(*) from notice_board where
+		select count(*) from notice_board where board_group = #{group} and
 		<if test="searchOption == 'all'">
 			(board_title like '%'||#{keyword}||'%' or board_writer like '%'||#{keyword}||'%'
 			or board_content like '%'||#{keyword}||'%')

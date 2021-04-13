@@ -33,13 +33,13 @@ public class ProductStockServiceImpl implements ProductStockService {
 	}
 
 	@Override
-	public List<ProductStockVO> poductStockList(ProductStockVO productStockVO,PagingVO paging) {
-		return product_StockDAO.getProductStockList(productStockVO, paging);
+	public List<ProductStockVO> poductStockList(ProductStockVO productStockVO,String searchOption,PagingVO paging) {
+		return product_StockDAO.getProductStockList(productStockVO,searchOption, paging);
 	}
 
 	@Override
-	public int getCount(ProductStockVO productStockVO) {
-		return product_StockDAO.getCount(productStockVO);
+	public int getCount(ProductStockVO productStockVO,String searchOption) {
+		return product_StockDAO.getCount(productStockVO,searchOption);
 	}
 
 	@Override

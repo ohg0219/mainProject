@@ -88,7 +88,7 @@
                     					<tr>
                     						<td colspan="2" align="center">
                     							
-	                    						<input value="작성" type="submit" class="btn btn-dark" >
+	                    						<input value="작성하기" type="button" class="btn btn-dark" onclick="location.href='/admin/insertTerms.mdo?state=${state}'">
 	                    						<input value="목록" type="button" class="btn btn-dark" onclick="location.href='/admin/getTermsList.mdo'">
 	                    				
                     						</td>

@@ -74,7 +74,7 @@ public class noticeController {
 
 	@RequestMapping("insertArticle.mdo")
 	public String insertArticle() {
-		return "/admin/insertArticle";
+		return "/admin/board/insertArticle";
 	}
 
 	@RequestMapping("noticeGate.mdo")
@@ -88,7 +88,7 @@ public class noticeController {
 
 		model.addAttribute("article", article);
 		model.addAttribute("board_no", board_no);
-		return "/admin/article";
+		return "/admin/board/article";
 	}
 
 	@RequestMapping("updateGate.mdo")
@@ -102,7 +102,7 @@ public class noticeController {
 
 		model.addAttribute("article", article);
 		model.addAttribute("board_no", board_no);
-		return "/admin/updateArticle";
+		return "/admin/board/updateArticle";
 
 	}
 
@@ -153,7 +153,7 @@ public class noticeController {
 		model.addAttribute("search", search);
 		model.addAttribute("articleList", noticeList);
 		model.addAttribute("where", where);
-		return "/admin/articleList";
+		return "/admin/board/articleList";
 	}
 
 }// end class

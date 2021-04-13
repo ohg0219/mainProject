@@ -22,12 +22,18 @@
 		<if test="product_category != 'all'">
 			where product_category=#{product_category} 
 		</if>
+		<if test="searchOption == 'product_name'">
+			where product_name ilike '%'||#{keyword}||'%'
+		</if>
 		order by product_no desc offset #{start} limit #{cntPerPage}
 	</select>
 	<select id="getCount" resultType="Integer">
 		select count(*) from product_stock  left join product using(product_no) 
 		<if test="product_category != 'all'">
-			where product_category=#{product_category} 
+			where product_category=#{product_category}
+		</if>
+		<if test="searchOption == 'product_name'">
+			where product_name ilike '%'||#{keyword}||'%'
 		</if>
 	</select>
 	

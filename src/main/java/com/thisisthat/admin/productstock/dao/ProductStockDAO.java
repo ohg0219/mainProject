@@ -32,16 +32,21 @@ public class ProductStockDAO {
 		
 	}
 
-	public List<ProductStockVO> getProductStockList(ProductStockVO productStockVO, PagingVO paging) {
+	public List<ProductStockVO> getProductStockList(ProductStockVO productStockVO,String searchOption, PagingVO paging) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("product_category", productStockVO.getProduct_category());
 		map.put("start", paging.getStart());
 		map.put("cntPerPage", paging.getCntPerPage());
-		
+		map.put("keyword", productStockVO.getKeyword());
+		map.put("searchOption", searchOption);
 		return mybatis.selectList("Product_StockDAO.getProductStockList", map);
 	}
-	public int getCount(ProductStockVO productStockVO) {
-		return mybatis.selectOne("Product_StockDAO.getCount",productStockVO);
+	public int getCount(ProductStockVO productStockVO,String searchOption) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("product_category", productStockVO.getProduct_category());
+		map.put("keyword", productStockVO.getKeyword());
+		map.put("searchOption", searchOption);
+		return mybatis.selectOne("Product_StockDAO.getCount",map);
 	}
 
 	public List<ProductStockVO> allList(ProductStockVO productStockVO) {

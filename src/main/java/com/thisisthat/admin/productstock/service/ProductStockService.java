@@ -7,7 +7,7 @@ import com.thisisthat.util.PagingVO;
 
 public interface ProductStockService {
 	
-	int getCount(ProductStockVO productStockVO);
+	int getCount(ProductStockVO productStockVO,String searchOption);
 	
 	List<ProductStockVO> stockList(ProductStockVO productStockVO);
 
@@ -15,7 +15,7 @@ public interface ProductStockService {
 
 	void updateStock(ProductStockVO productStockVO);
 
-	List<ProductStockVO> poductStockList(ProductStockVO productStockVO, PagingVO paging);
+	List<ProductStockVO> poductStockList(ProductStockVO productStockVO,String searchOption, PagingVO paging);
 
 	List<ProductStockVO> allList(ProductStockVO productStockVO);
 
